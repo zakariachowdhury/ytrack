@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Google Contacts offline app</title>
+        <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+        <!-- GC -->
+        <!-- LIBS -->
+        <!-- ENDLIBS -->
+        <script type="text/javascript" src="lib/ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="lib/ext/ext-all.js">
+        </script>
+        <!-- Common Styles for the examples -->
+        <link rel="stylesheet" type="text/css" href="ext_sample.css" />
+		<script type="text/javascript" src="http://www.google.com/jsapi">
+        </script>
+		<script language="JavaScript" type="text/javascript">
+			google.load("gdata", "1.x");
+		</script>
+        <script type="text/javascript" src="gdata.js">
+        </script>
+        <script type="text/javascript" src="gears_init.js">
+        </script>
+        <script type="text/javascript" src="GContact.js">
+        </script>
+        <script type="text/javascript" src="GContactProxy.js">
+        </script>
+		<script type="text/javascript" src="GearsContactProxy.js">
+        </script>
+		<script type="text/javascript" src="go_offline.js">
+        </script>
+
+        <style type="text/css">
+            .i-login {
+                background-image: url(images/lock_go.png) !important;
+            }
+            
+            .i-logout {
+                background-image: url(images/lock.png) !important;
+            }
+			.i-offline {
+                background-image: url(shared/icons/fam/cog.png) !important;
+            }
+			.i-greenled {
+                background-image: url(images/greenled.png) !important;
+            }
+			.i-redled {
+                background-image: url(images/redled.png) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="http://fdewasmes.free.fr/wordpress/wp-content/zrtn-002n4f4bb20d-tn.jpg"/>
+		<div id="progressPanel">
+			
+		</div>
+    </body>
+</html>
