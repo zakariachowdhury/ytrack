@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,8 +270,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
-								<string>080E96DDFE201D6D7F000001</string>
-								<string>6B75F7ED11A408EE00B9D841</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
 								<string>E2644B35053B69B200211256</string>
@@ -283,11 +279,11 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>44</integer>
+									<integer>12</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 237}, {245, 664}}</string>
+							<string>{{0, 0}, {245, 664}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -632,14 +628,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>6BCBE95911AC247000465B23</string>
+				<string>6BCBE97211AC25D300465B23</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>6BCBE95A11AC247000465B23</string>
-				<string>6BCBE95B11AC247000465B23</string>
-				<string>6BCBE95C11AC247000465B23</string>
-				<string>6BCBE95D11AC247000465B23</string>
-				<string>6BCBE95E11AC247000465B23</string>
+				<string>6BCBE97311AC25D300465B23</string>
+				<string>6BCBE97411AC25D300465B23</string>
+				<string>6BCBE97511AC25D300465B23</string>
+				<string>6BCBE97611AC25D300465B23</string>
+				<string>6B75F76B11A3FCC100B9D841</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -673,6 +669,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>6BCBE97711AC25D300465B23</string>
+		<string>6BCBE97811AC25D300465B23</string>
 		<string>/Users/fdewasmes/RemoteHD/RemoteHD.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
