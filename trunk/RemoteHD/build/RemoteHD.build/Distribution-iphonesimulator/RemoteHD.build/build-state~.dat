@@ -1,1466 +1,0 @@
-TRemoteHD
-v7
-r0
-t296354821.692219
-cCheck dependencies
-cProcessInfoPlistFile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/Info.plist RemoteHD-Info.plist
-cCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib
-cCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib
-cCpResource build/Distribution-iphonesimulator/RemoteHD.app/icon.png icon.png
-cCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib
-cCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib
-cProcessPCH /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch.gch RemoteHD_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/main.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDAppDelegate.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MasterViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DetailViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/AsyncSocket.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPRequestReply.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponse.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseavdb.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecasp.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecmst.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemdcl.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlcl.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlid.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlit.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlog.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemsrv.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDData.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDNumber.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDRange.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HexDumpUtility.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPAuthenticationRequest.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPConnection.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPResponse.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPServer.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MyHTTPConnection.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteSpeaker.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/LibrariesViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PinCodeController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/URLParser.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/Library.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseaply.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabro.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabar.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PreferencesManager.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/SessionManager.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseadbs.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cLd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD normal i386
-cGenerateDSYMFile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app.dSYM /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD
-cTouch /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk
-c000000004BD767EE0000000000000110
-t1272408046
-s272
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
-c000000004B9F1D6800000000001255B0
-t1268718952
-s1201584
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CFNetwork.framework/Headers/CFNetwork.h
-c000000004B9F1D3B00000000000004CF
-t1268718907
-s1231
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004BA03AB3000000000026F020
-t1268791987
-s2551840
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004B9F1DE40000000000289C20
-t1268719076
-s2661408
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004B9F1DD60000000000001355
-t1268719062
-s4949
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h
-c000000004B9F1DD60000000000001998
-t1268719062
-s6552
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSValue.h
-c000000004B9F1DD70000000000000BDA
-t1268719063
-s3034
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004BA6CAEC000000000000098F
-t1269222124
-s2447
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004BA6CB31000000000214E400
-t1269222193
-s34923520
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/CommonCrypto/CommonDigest.h
-c000000004748A1090000000000002500
-t1195942153
-s9472
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/arpa/inet.h
-c00000000464386D70000000000001533
-t1178830551
-s5427
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/netdb.h
-c00000000464386E20000000000002F2B
-t1178830562
-s12075
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/netinet/in.h
-c00000000476344B700000000000052AA
-t1197687991
-s21162
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/sys/socket.h
-c00000000476344C000000000000055F1
-t1197688000
-s22001
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.h
-c0000000049E3BBDF00000000000042A9
-t1239661535
-s17065
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m
-c0000000049E3BBDF000000000001565E
-t1239661535
-s87646
-i"AsyncSocket.h"
-i<sys/socket.h>
-i<netinet/in.h>
-i<arpa/inet.h>
-i<netdb.h>
-i<CFNetwork/CFNetwork.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.h
-c000000004BF9C3DD0000000000000468
-t1274659805
-s1128
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m
-c000000004BF9C43700000000000041B1
-t1274659895
-s16817
-i"DAAPRequestReply.h"
-i"HexDumpUtility.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.h
-c000000004BF2FA380000000000000169
-t1274214968
-s361
-i<Foundation/Foundation.h>
-i"DAAPResponseDelegate.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m
-c000000004BF8D3870000000000000122
-t1274598279
-s290
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseDelegate.h
-c000000004BF8D372000000000000010D
-t1274598258
-s269
-i<UIKit/UIKit.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.h
-c000000004BF863450000000000000129
-t1274569541
-s297
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m
-c000000004BF8634F00000000000000EF
-t1274569551
-s239
-i"DAAPResponseabar.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.h
-c000000004BF8E4460000000000000242
-t1274602566
-s578
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m
-c000000004BF8E9D70000000000000290
-t1274603991
-s656
-i"DAAPResponseabro.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.h
-c000000004BF99DA30000000000000242
-t1274650019
-s578
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m
-c000000004BF9A0510000000000000341
-t1274650705
-s833
-i"DAAPResponseadbs.h"
-i"DAAPResponsemlit.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.h
-c000000004BF8E07F000000000000024D
-t1274601599
-s589
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m
-c000000004BF8E08B000000000000031B
-t1274601611
-s795
-i"DAAPResponseaply.h"
-i"DAAPResponsemlit.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.h
-c000000004BF9BCB00000000000000281
-t1274657968
-s641
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m
-c000000004BF9BCB7000000000000034C
-t1274657975
-s844
-i"DAAPResponseavdb.h"
-i"DAAPResponsemlit.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.h
-c000000004BF30122000000000000015E
-t1274216738
-s350
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m
-c000000004BF8D36500000000000001BD
-t1274598245
-s445
-i"DAAPResponsecasp.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.h
-c000000004BF392D10000000000000570
-t1274254033
-s1392
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m
-c000000004BF392C60000000000000221
-t1274254022
-s545
-i"DAAPResponsecmst.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.h
-c000000004BF2FE4F00000000000001AB
-t1274216015
-s427
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m
-c000000004BF2FE740000000000000115
-t1274216052
-s277
-i"DAAPResponsemdcl.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.h
-c000000004BF38EDA000000000000010C
-t1274253018
-s268
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m
-c000000004BF38EA300000000000000DE
-t1274252963
-s222
-i"DAAPResponsemlcl.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.h
-c000000004BF38CA5000000000000027F
-t1274252453
-s639
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m
-c000000004BF38CD4000000000000014B
-t1274252500
-s331
-i"DAAPResponsemlid.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.h
-c000000004BF9CA30000000000000043B
-t1274661424
-s1083
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m
-c000000004BF9CA4000000000000002FB
-t1274661440
-s763
-i"DAAPResponsemlit.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.h
-c000000004BF1C73E000000000000016B
-t1274136382
-s363
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m
-c000000004BF1C39200000000000000F6
-t1274135442
-s246
-i"DAAPResponsemlog.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.h
-c000000004BF2EB03000000000000074F
-t1274211075
-s1871
-i<Foundation/Foundation.h>
-i"DAAPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m
-c000000004BF1D35800000000000002A7
-t1274139480
-s679
-i"DAAPResponsemsrv.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.h
-c0000000049E23C5200000000000000CD
-t1239563346
-s205
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m
-c0000000049E23C5200000000000010BC
-t1239563346
-s4284
-i"DDData.h"
-i<CommonCrypto/CommonDigest.h>
-i"SSCrypto.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.h
-c0000000049E23C520000000000000155
-t1239563346
-s341
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m
-c0000000049E23C520000000000000504
-t1239563346
-s1284
-i"DDNumber.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.h
-c0000000049E23C5200000000000005E5
-t1239563346
-s1509
-i<Foundation/NSValue.h>
-i<Foundation/NSObjCRuntime.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m
-c0000000049E23C5200000000000006CD
-t1239563346
-s1741
-i"DDRange.h"
-i"DDNumber.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.h
-c000000004BF96723000000000000016A
-t1274636067
-s362
-i<UIKit/UIKit.h>
-i"DAAPRequestReply.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m
-c000000004BF9CBE60000000000001A5B
-t1274661862
-s6747
-i"DetailViewController.h"
-i"SessionManager.h"
-i"DAAPResponseadbs.h"
-i"DAAPResponsemlit.h"
-i"DAAPResponsemlog.h"
-i"DAAPResponseabro.h"
-i"DAAPResponseavdb.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.h
-c0000000049E23C5200000000000002E4
-t1239563346
-s740
-i<Foundation/Foundation.h>
-i<CFNetwork/CFNetwork.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m
-c0000000049E23C52000000000000196B
-t1239563346
-s6507
-i"HTTPAuthenticationRequest.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.h
-c0000000049ED38860000000000000686
-t1240283270
-s1670
-i<Foundation/Foundation.h>
-i<CFNetwork/CFNetwork.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m
-c0000000049ED3862000000000000C7F0
-t1240283234
-s51184
-i"AsyncSocket.h"
-i"HTTPServer.h"
-i"HTTPConnection.h"
-i"HTTPResponse.h"
-i"HTTPAuthenticationRequest.h"
-i"DDNumber.h"
-i"DDRange.h"
-i"DDData.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.h
-c0000000049E23C52000000000000026E
-t1239563346
-s622
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m
-c0000000049E23C520000000000000785
-t1239563346
-s1925
-i"HTTPResponse.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.h
-c000000004BF4ED8500000000000004DF
-t1274342789
-s1247
-i<Foundation/Foundation.h>
-i"MyHTTPConnection.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m
-c000000004BF4ED8A0000000000002507
-t1274342794
-s9479
-i"AsyncSocket.h"
-i"HTTPServer.h"
-i"HTTPConnection.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.h
-c000000004BEE81A0000000000000011A
-t1273921952
-s282
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m
-c000000004BEE823600000000000008A0
-t1273922102
-s2208
-i"HexDumpUtility.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.h
-c000000004BF92FCD000000000000041A
-t1274621901
-s1050
-i<UIKit/UIKit.h>
-i"PinCodeController.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m
-c000000004BF9979400000000000035AE
-t1274648468
-s13742
-i"LibrariesViewController.h"
-i"PreferencesManager.h"
-i"SessionManager.h"
-i"DAAPRequestReply.h"
-i"HexDumpUtility.h"
-i"Library.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib
-c000000004BF6EF7900000000000059FA
-t1274474361
-s23034
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.h
-c000000004BF7836C0000000000000126
-t1274512236
-s294
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m
-c000000004BF7837800000000000000DB
-t1274512248
-s219
-i"Library.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.h
-c000000004BF9670C000000000000016A
-t1274636044
-s362
-i<UIKit/UIKit.h>
-i"DAAPRequestReply.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m
-c000000004BF9BFC30000000000001775
-t1274658755
-s6005
-i"MasterViewController.h"
-i"DAAPResponsemlog.h"
-i"DAAPResponseaply.h"
-i"DAAPResponseavdb.h"
-i"DAAPResponsemlit.h"
-i"SessionManager.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.h
-c000000004BF83A5400000000000001EA
-t1274559060
-s490
-i<Foundation/Foundation.h>
-i"HTTPConnection.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m
-c000000004BF9BB190000000000002F7E
-t1274657561
-s12158
-i"MyHTTPConnection.h"
-i"HTTPServer.h"
-i"HTTPResponse.h"
-i"AsyncSocket.h"
-i"HexDumpUtility.h"
-i"URLParser.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.h
-c000000004BF84B4C0000000000000294
-t1274563404
-s660
-i<UIKit/UIKit.h>
-i"HTTPServer.h"
-i"MyHTTPConnection.h"
-i"DAAPRequestReply.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m
-c000000004BF9B4C60000000000000C46
-t1274655942
-s3142
-i"PinCodeController.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib
-c000000004BF4E55400000000000056B1
-t1274340692
-s22193
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.h
-c000000004BF96E3A0000000000000294
-t1274637882
-s660
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m
-c000000004BF96E2B00000000000009A6
-t1274637867
-s2470
-i"PreferencesManager.h"
-i"SynthesizeSingleton.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.h
-c000000004BF9294800000000000001EC
-t1274620232
-s492
-i<UIKit/UIKit.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m
-c000000004BF92EDB00000000000003BC
-t1274621659
-s956
-i"RemoteHDAppDelegate.h"
-i"RemoteHDViewController.h"
-i"PreferencesManager.h"
-i"SynthesizeSingleton.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.h
-c000000004BF98C240000000000000262
-t1274645540
-s610
-i<UIKit/UIKit.h>
-i"LibrariesViewController.h"
-i"MasterViewController.h"
-i"DetailViewController.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m
-c000000004BF992F7000000000000108D
-t1274647287
-s4237
-i"RemoteHDViewController.h"
-i"DAAPRequestReply.h"
-i"DAAPResponsemlog.h"
-i"DAAPResponsemsrv.h"
-i"DAAPResponsemdcl.h"
-i"PreferencesManager.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.h
-c000000004BF300A40000000000000100
-t1274216612
-s256
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m
-c000000004BF2FAEF00000000000000D5
-t1274215151
-s213
-i"RemoteSpeaker.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.h
-c000000004BF98C650000000000000209
-t1274645605
-s521
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m
-c000000004BF98CDA000000000000053D
-t1274645722
-s1341
-i"SessionManager.h"
-i"SynthesizeSingleton.h"
-i"DAAPRequestReply.h"
-i"DAAPResponsemlog.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SynthesizeSingleton.h
-c000000004B3B1BB200000000000004FA
-t1262164914
-s1274
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.h
-c000000004BF6E6F50000000000000181
-t1274472181
-s385
-i<Foundation/Foundation.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m
-c000000004BF6E70C00000000000004F3
-t1274472204
-s1267
-i"URLParser.h"
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib
-c000000004BF3CD900000000000005111
-t1274269072
-s20753
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib
-c000000004BF96C320000000000009D78
-t1274637362
-s40312
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHD_Prefix.pch
-c000000004BF3C53400000000000000B9
-t1274266932
-s185
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app
-t1274662021
-s340
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app.dSYM
-t1274662021
-s102
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/Info.plist
-t1274662016
-s837
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/LibrariesViewController.nib
-t1274662016
-s1477
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/MainWindow.nib
-t1274662016
-s1157
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/PinCodeController.nib
-t1274662016
-s1870
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/PkgInfo
-t1274662016
-s8
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD
-t1274662021
-s239824
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHDViewController.nib
-t1274662016
-s2909
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/icon.png
-t1274662016
-s6044
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/AsyncSocket.o
-t1274662019
-s119448
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPRequestReply.o
-t1274662018
-s35868
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponse.o
-t1274662018
-s7080
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabar.o
-t1274662021
-s6512
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabro.o
-t1274662021
-s11820
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseadbs.o
-t1274662021
-s12416
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseaply.o
-t1274662021
-s11940
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseavdb.o
-t1274662018
-s13132
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecasp.o
-t1274662018
-s7236
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecmst.o
-t1274662019
-s19012
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemdcl.o
-t1274662019
-s8076
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlcl.o
-t1274662019
-s4952
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlid.o
-t1274662019
-s10240
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlit.o
-t1274662019
-s16760
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlog.o
-t1274662019
-s7272
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemsrv.o
-t1274662019
-s24068
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDData.o
-t1274662020
-s11468
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDNumber.o
-t1274662019
-s7868
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDRange.o
-t1274662020
-s10280
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DetailViewController.o
-t1274662018
-s44056
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPAuthenticationRequest.o
-t1274662020
-s17676
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPConnection.o
-t1274662020
-s61064
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPResponse.o
-t1274662020
-s14232
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPServer.o
-t1274662020
-s26716
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HexDumpUtility.o
-t1274662020
-s8284
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/LibrariesViewController.o
-t1274662021
-s70928
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/Library.o
-t1274662021
-s6468
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MasterViewController.o
-t1274662018
-s42784
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MyHTTPConnection.o
-t1274662020
-s21224
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PinCodeController.o
-t1274662020
-s44660
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PreferencesManager.o
-t1274662021
-s19020
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHD.LinkFileList
-c000000004BF9CC800000000000001613
-t1274662016
-s5651
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDAppDelegate.o
-t1274662018
-s44280
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDViewController.o
-t1274662018
-s44500
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteSpeaker.o
-t1274662020
-s4984
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/SessionManager.o
-t1274662021
-s15352
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/URLParser.o
-t1274662021
-s11772
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/main.o
-t1274662018
-s5944
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/icon.png
-c000000004BF3DA0A000000000000179C
-t1274272266
-s6044
-
-N/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m
-c000000004BF3C534000000000000016F
-t1274266932
-s367
-i<UIKit/UIKit.h>
-
-N/var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch.gch
-t1274662017
-s13510544
-
-NRemoteHD-Info.plist
-c000000004BF3DA9B00000000000004B3
-t1274272411
-s1203
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies296354815#296354816#0(0"0(0#1#0"4300911832#0"0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/AsyncSocket.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.222203
-e296354819.925464
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/AsyncSocket.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@79"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m296354818#296354819#0(0"0(0#0#71"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m4300911832#2186"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/AsyncSocket.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/AsyncSocket.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPRequestReply.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.314537
-e296354818.673164
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPRequestReply.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m296354818#296354818#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPRequestReply.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPRequestReply.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponse.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.673266
-e296354818.745464
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponse.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@80"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m296354818#296354818#0(0"0(0#0#72"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m4300911832#2188"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponse.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponse.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabar.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.248916
-e296354821.333742
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabar.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m296354821#296354821#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabar.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabar.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabro.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.157977
-e296354821.248808
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabro.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m296354821#296354821#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseabro.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseabro.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseadbs.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.493294
-e296354821.578779
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseadbs.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m296354821#296354821#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseadbs.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseadbs.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseaply.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.138520
-e296354821.390988
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseaply.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m296354821#296354821#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseaply.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseaply.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseavdb.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.745574
-e296354818.857634
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseavdb.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m296354818#296354818#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponseavdb.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponseavdb.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecasp.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.857739
-e296354818.917955
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecasp.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m296354818#296354818#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecasp.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecasp.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecmst.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.918065
-e296354819.053312
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecmst.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m296354818#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsecmst.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsecmst.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemdcl.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.053416
-e296354819.112792
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemdcl.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemdcl.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemdcl.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlcl.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.112901
-e296354819.161149
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlcl.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlcl.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlcl.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlid.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.161257
-e296354819.243324
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlid.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlid.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlid.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlit.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.243435
-e296354819.381184
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlit.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlit.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlit.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlog.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.381361
-e296354819.561130
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlog.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemlog.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemlog.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemsrv.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.561270
-e296354819.848953
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemsrv.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m296354819#296354819#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DAAPResponsemsrv.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DAAPResponsemsrv.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDData.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.849061
-e296354820.014326
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDData.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m296354819#296354820#0(0"0(0#0#66"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m4300911832#2176"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDData.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDData.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDNumber.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.925579
-e296354819.990749
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDNumber.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@76"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m296354819#296354819#0(0"0(0#0#68"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m4300911832#2180"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDNumber.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDNumber.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDRange.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354819.990856
-e296354820.090296
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDRange.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@75"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m296354819#296354820#0(0"0(0#0#67"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m4300911832#2178"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DDRange.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DDRange.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DetailViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.156023
-e296354818.314428
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DetailViewController.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m296354818#296354818#0(0"0(0#0#80"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m4300911832#2204"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/DetailViewController.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/DetailViewController.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPAuthenticationRequest.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.090404
-e296354820.256452
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPAuthenticationRequest.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@93"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m296354820#296354820#0(0"0(0#0#85"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m4300911832#2214"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPAuthenticationRequest.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPAuthenticationRequest.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPConnection.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.107779
-e296354820.719396
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPConnection.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@82"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m296354820#296354820#0(0"0(0#0#74"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m4300911832#2192"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPConnection.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPConnection.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPResponse.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.256563
-e296354820.360724
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPResponse.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@80"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m296354820#296354820#0(0"0(0#0#72"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m4300911832#2188"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPResponse.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPResponse.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPServer.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.360821
-e296354820.568704
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPServer.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m296354820#296354820#0(0"0(0#0#70"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m4300911832#2184"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HTTPServer.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HTTPServer.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HexDumpUtility.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.014610
-e296354820.107683
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HexDumpUtility.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@82"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m296354820#296354820#0(0"0(0#0#74"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m4300911832#2192"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/HexDumpUtility.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/HexDumpUtility.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/LibrariesViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.765132
-e296354821.157872
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/LibrariesViewController.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@91"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m296354820#296354821#0(0"0(0#0#83"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m4300911832#2210"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/LibrariesViewController.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/Library.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.045790
-e296354821.138424
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/Library.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@75"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m296354821#296354821#0(0"0(0#0#67"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m4300911832#2178"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/Library.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/Library.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MasterViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.093492
-e296354818.222093
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MasterViewController.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@88"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m296354818#296354818#0(0"0(0#0#80"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m4300911832#2204"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MasterViewController.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MasterViewController.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MyHTTPConnection.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.568810
-e296354820.765013
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MyHTTPConnection.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m296354820#296354820#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m4300911832#2196"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/MyHTTPConnection.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/MyHTTPConnection.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PinCodeController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.775439
-e296354820.943244
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PinCodeController.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@85"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m296354820#296354820#0(0"0(0#0#77"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m4300911832#2198"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PinCodeController.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PreferencesManager.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.333845
-e296354821.493182
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PreferencesManager.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@86"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m296354821#296354821#0(0"0(0#0#78"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m4300911832#2200"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PreferencesManager.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/PreferencesManager.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDAppDelegate.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354817.822780
-e296354818.093387
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDAppDelegate.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@87"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m296354817#296354818#0(0"0(0#0#79"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m4300911832#2202"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDAppDelegate.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDAppDelegate.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDViewController.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354818.006900
-e296354818.155917
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDViewController.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@90"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m296354818#296354818#0(0"0(0#0#82"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m4300911832#2208"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteHDViewController.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHDViewController.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteSpeaker.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.719496
-e296354820.775332
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteSpeaker.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@81"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m296354820#296354820#0(0"0(0#0#73"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m4300911832#2190"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/RemoteSpeaker.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteSpeaker.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/SessionManager.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354821.391097
-e296354821.522492
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/SessionManager.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@82"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m296354821#296354821#0(0"0(0#0#74"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m4300911832#2192"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/SessionManager.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/SessionManager.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/URLParser.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354820.943415
-e296354821.045683
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/URLParser.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m296354820#296354821#0(0"0(0#0#69"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m4300911832#2182"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/URLParser.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/URLParser.o0#
-
-CCompileC build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/main.o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354817.821519
-e296354818.006792
-r1
-xCompileC
-xbuild/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/main.o
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m296354817#296354818#0(0"0(0#0#56"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m4300911832#2164"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -include /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/main.m -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/main.o0#
-
-CCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib
-s296354816.477484
-e296354816.836615
-r1
-xCompileXIB
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib
-lSLF07#2@46"CompileXIB Classes/LibrariesViewController.xib296354816#296354816#0(0"0(0#0#85"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib4300911832#617"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/LibrariesViewController.nib /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/LibrariesViewController.xib0#
-
-CCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib
-s296354816.564711
-e296354816.903932
-r1
-xCompileXIB
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib
-lSLF07#2@40"CompileXIB Classes/PinCodeController.xib296354816#296354816#0(0"0(0#0#79"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib4300911832#605"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/PinCodeController.nib /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/Classes/PinCodeController.xib0#
-
-CCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib
-s296354816.019950
-e296354816.476366
-r1
-xCompileXIB
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib
-lSLF07#2@25"CompileXIB MainWindow.xib296354816#296354816#0(0"0(0#0#64"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib4300911832#583"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/MainWindow.nib /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainWindow.xib0#
-
-CCompileXIB /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib
-s296354816.020701
-e296354816.564614
-r1
-xCompileXIB
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib
-lSLF07#2@37"CompileXIB RemoteHDViewController.xib296354816#296354816#0(0"0(0#0#76"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib4300911832#607"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHDViewController.nib /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHDViewController.xib0#
-
-CCpResource build/Distribution-iphonesimulator/RemoteHD.app/icon.png icon.png
-s296354816.476455
-e296354816.482935
-r1
-xCpResource
-xbuild/Distribution-iphonesimulator/RemoteHD.app/icon.png
-xicon.png
-lSLF07#2@13"Copy icon.png296354816#296354816#0(0"0(0#0#58"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/icon.png4300911832#576"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/icon.png /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app0#
-
-CGenerateDSYMFile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app.dSYM /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD
-s296354821.634897
-e296354821.688163
-r1
-xGenerateDSYMFile
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app.dSYM
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD
-lSLF07#2@126"GenerateDSYMFile build/Distribution-iphonesimulator/RemoteHD.app.dSYM build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD296354821#296354821#0(0"0(0#0#106"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD4300911832#495"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/dsymutil /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app.dSYM0#
-
-CLd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD normal i386
-s296354821.578886
-e296354821.634608
-r1
-xLd
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD
-xnormal
-xi386
-lSLF07#2@111"Link /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD296354821#296354821#0(0"0(0#0#0"4300911832#1033"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -filelist /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/Objects-normal/i386/RemoteHD.LinkFileList -mmacosx-version-min=10.5 -framework Foundation -framework UIKit -framework CoreGraphics -framework CFNetwork -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/RemoteHD0#
-
-CProcessInfoPlistFile /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/Info.plist RemoteHD-Info.plist
-s296354816.015906
-e296354816.019847
-r1
-xProcessInfoPlistFile
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/Info.plist
-xRemoteHD-Info.plist
-lSLF07#2@27"Process RemoteHD-Info.plist296354816#296354816#0(0"0(0#0#69"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHD-Info.plist4300911832#591"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-infoPlistUtility RemoteHD-Info.plist -genpkginfo /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app/Info.plist0#
-
-CProcessPCH /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch.gch RemoteHD_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-s296354816.904203
-e296354817.821226
-r1
-xProcessPCH
-x/var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch.gch
-xRemoteHD_Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@30"Precompile RemoteHD_Prefix.pch296354816#296354817#0(0"0(0#0#69"/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHD_Prefix.pch4300911832#2037"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-generated-files.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-own-target-headers.hmap -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-all-target-headers.hmap -iquote /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/RemoteHD-project-headers.hmap -F/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/include -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources/i386 -I/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/RemoteHD.build/Distribution-iphonesimulator/RemoteHD.build/DerivedSources -DNS_BLOCK_ASSERTIONS=1 -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHD_Prefix.pch -o /var/folders/sY/sYiHXMWmGt8ZfMTVqMnuek+++TM/-Caches-/com.apple.Xcode.502/SharedPrecompiledHeaders/RemoteHD_Prefix-fhkgrkgfhljgjmcgwdfjhbegwmsj/RemoteHD_Prefix.pch.gch0#
-
-CTouch /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app
-s296354821.688264
-e296354821.692167
-r1
-xTouch
-x/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app
-lSLF07#2@103"Touch /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app296354821#296354821#0(0"0(0#0#0"4300911832#370"    cd /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /usr/bin/touch -c /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/build/Distribution-iphonesimulator/RemoteHD.app0#
-
