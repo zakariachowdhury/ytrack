@@ -28,24 +28,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 
 - (NSString *) getHost{
 	if (currentLibrary != nil)
-		return [currentLibrary objectForKey:@"host"];
+		return currentLibrary.host;
 	else return nil;
 }
 - (NSString *) getPort{
 	if (currentLibrary != nil)
-		return [currentLibrary objectForKey:@"port"];
+		return currentLibrary.port;
 	else return nil;
 }
 
 
 - (void) open{
 	if (currentLibrary != nil) {
-		NSString *host = [self.currentLibrary objectForKey:@"host"];
-		NSString *portStr = [self.currentLibrary objectForKey:@"port"];
-		NSString* string = [[NSString alloc] initWithFormat:kRequestLogin,host,portStr,[self.currentLibrary objectForKey:@"pairingGUID"]];
-		
-		NSLog(@"%@",string);
-		DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string]];
+		NSString *host = self.currentLibrary.host;
+		NSString *portStr = self.currentLibrary.port;
+		NSString *pairingGuid = self.currentLibrary.pairingGUID;
+		NSString *loginURL = [[NSString alloc] initWithFormat:kRequestLogin,host,portStr,pairingGuid];
+		NSLog(@"%@",loginURL);
+		DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
 		sessionId = [[resp mlid] longValue];
 		self.currentServer = [[FDServer alloc] initWithHost:host port:portStr];
 		[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 

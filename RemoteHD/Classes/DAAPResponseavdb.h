@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
+#import "DAAPResponsemlcl.h"
 
 
 @interface DAAPResponseavdb : DAAPResponse {
@@ -15,15 +16,13 @@
 	NSNumber *muty;
 	NSNumber *mtco;
 	NSNumber *mrco;
-	NSNumber *mlcl;
-	NSArray *res;
+	DAAPResponsemlcl *mlcl;
 }
 
 @property (nonatomic, retain) NSNumber *mstt;
 @property (nonatomic, retain) NSNumber *muty;
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, retain) NSNumber *mlcl;
-@property (nonatomic, retain) NSArray *res;
+@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
 
 @end

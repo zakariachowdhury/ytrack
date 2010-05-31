@@ -29,6 +29,7 @@
 	BOOL _initialWaitOver;
 	NSString *_currentServiceName;
 	NSString *_currentGUID;
+	NSMutableArray *_availableServices;
 }
 
 @property (nonatomic, retain) id<LibraryDelegate> delegate;

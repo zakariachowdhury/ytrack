@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "FDServer.h"
+#import "Library.h"
 
 @interface SessionManager : NSObject {
-	NSDictionary *currentLibrary;
+	Library *currentLibrary;
 	FDServer *currentServer;
 @private
 	BOOL sessionEstablished;
 	int sessionId;
 }
 
-@property (nonatomic, retain) NSDictionary *currentLibrary;
+@property (nonatomic, retain) Library *currentLibrary;
 @property (nonatomic, retain) FDServer *currentServer;
 
 

@@ -8,19 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
+#import "DAAPResponsemlcl.h"
 
 @interface DAAPResponseaply : DAAPResponse {
 	NSNumber *mstt;
 	NSNumber *muty;
 	NSNumber *mtco;
 	NSNumber *mrco;
-	NSArray *playLists;
+	DAAPResponsemlcl *mlcl;
 }
 
 @property (nonatomic, retain) NSNumber *mstt;
 @property (nonatomic, retain) NSNumber *muty;
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, readonly) NSArray *playLists;
+@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
 
 @end

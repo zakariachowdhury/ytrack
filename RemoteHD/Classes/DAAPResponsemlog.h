@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DAAPResponse.h"
 
 
-@interface DAAPResponsemlog : NSObject {
+@interface DAAPResponsemlog : DAAPResponse {
 	NSNumber *mstt;
 	NSNumber *mlid;
 

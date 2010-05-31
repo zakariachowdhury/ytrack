@@ -17,20 +17,6 @@
 @synthesize mtco;
 @synthesize mrco;
 @synthesize mlcl;
-@synthesize res;
 
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	NSMutableArray *temp = [[NSMutableArray alloc] init];
-	NSDictionary * results = [[dict objectForKey:@"avdb"] objectForKey:@"mlcl"];
-	for (id key in results) {
-		if ([key hasPrefix:@"mlit"]) {
-			DAAPResponsemlit * db = [[DAAPResponsemlit alloc] init];
-			NSDictionary *rawDB = (NSDictionary *)[results objectForKey:key];
-			[db didFinishRawParsing:rawDB];
-			[temp addObject:db];
-		}
-	}
-	self.res = [NSArray arrayWithArray:temp];
-}
 
 @end

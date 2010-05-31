@@ -17,6 +17,7 @@
 @implementation DetailViewController
 
 @synthesize results;
+@synthesize delegate;
 
 
 #pragma mark -
@@ -43,6 +44,8 @@
     self.clearsSelectionOnViewWillAppear = NO;
 	
 	results = [[NSMutableArray alloc] init];
+	arrayOfCharacters = [[NSMutableArray alloc]init];
+	objectsForCharacter = [[NSMutableArray alloc]init];
 	
 	
  
@@ -83,16 +86,48 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+	return [arrayOfCharacters count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.results count];
+	
+	/*NSString *letter = [arrayOfCharacters objectAtIndex:section];
+	NSPredicate *letterPredicate;
+	if (![letter isEqualToString:@"#"]) {
+		letterPredicate = [NSPredicate predicateWithFormat:@"minm beginswith[c] %@",letter];
+	}
+	else {
+		letterPredicate = [NSPredicate predicateWithFormat:@"minm MATCHES '\\\\d.*'"];
+	}
+	NSArray *beginWithLetter = [self.results filteredArrayUsingPredicate:letterPredicate];
+	return [beginWithLetter count];*/
+	return [[objectsForCharacter objectAtIndex:section] count];
+//    return [self.results count];
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+	return arrayOfCharacters;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+	NSInteger count = 0;
+	for(NSString *character in arrayOfCharacters)
+	{
+		if([character isEqualToString:title])
+			return count;
+		count ++;
+	}
+	return 0;// in case of some eror donot crash d application
+	
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if([arrayOfCharacters count]==0)
+		return @"";
+	return [arrayOfCharacters objectAtIndex:section];
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,11 +136,17 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+	
+	NSArray *beginWithLetter = [objectsForCharacter objectAtIndex:indexPath.section];
+	
 	//cell.textLabel.text = [results objectAtIndex:indexPath.row];
-	cell.textLabel.text = [(DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row] minm];
+	cell.textLabel.text = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] minm];
+	NSString *album = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] asal];
+	NSString *artist = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] asar];
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",album, artist];
     
     return cell;
 }
@@ -155,15 +196,49 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
-	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:[song.miid intValue]];
-    
+	//DAAPResponsemlit *song = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[[objectsForCharacter objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	int i = [results indexOfObject:mlit];
+	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:i];
+    [delegate didSelectItem];
 }
 
-- (void) display{
-	self.results = [[[SessionManager sharedSessionManager] currentServer] getAllTracks];
-	[self.tableView reloadData];
+- (void) setupcharArray{
+	[arrayOfCharacters removeAllObjects];
+	[objectsForCharacter removeAllObjects];
+	NSArray *letters = [NSArray arrayWithArray:
+							 [@"A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|#"
+							  componentsSeparatedByString:@"|"]];
+	for (NSString *letter in letters) {
+		NSPredicate *letterPredicate;
+		if (![letter isEqualToString:@"#"]) {
+			letterPredicate = [NSPredicate predicateWithFormat:@"minm beginswith[c] %@",letter];
+		}
+		else {
+			letterPredicate = [NSPredicate predicateWithFormat:@"minm MATCHES '\\\\d.*'"];
+		}
+
+		NSArray *beginWithLetter = [self.results filteredArrayUsingPredicate:letterPredicate];
+		
+		if([beginWithLetter count] >0)
+		{
+			[arrayOfCharacters addObject:letter];
+			[objectsForCharacter addObject:beginWithLetter];
+		}
+	}
 }
+
+
+- (void) display{
+	NSLog(@"requesting ALL TRACKS");
+	self.results = [[[SessionManager sharedSessionManager] currentServer] getAllTracks];
+	NSLog(@"END requesting ALL TRACKS");
+	[self setupcharArray];
+	NSLog(@"END setup char array");
+	[self.tableView reloadData];
+	NSLog(@"end table reaload");
+}
+	 
 
 #pragma mark -
 #pragma mark Memory management
@@ -182,6 +257,8 @@
 
 
 - (void)dealloc {
+	[results release];
+	[arrayOfCharacters release];
     [super dealloc];
 }
 

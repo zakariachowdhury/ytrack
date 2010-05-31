@@ -16,18 +16,6 @@
 @synthesize muty;
 @synthesize mtco;
 @synthesize mrco;
-@synthesize playLists;
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	NSDictionary *pls = [[dict objectForKey:@"aply"] objectForKey:@"mlcl"];
-	NSMutableArray *temp = [[NSMutableArray alloc] init];
-	for (id key in pls) {
-		DAAPResponsemlit * playlist = [[DAAPResponsemlit alloc] init];
-		NSDictionary *rawPL = (NSDictionary *)[pls objectForKey:key];
-		[playlist didFinishRawParsing:rawPL];
-		[temp addObject:playlist];
-	}
-	playLists = [NSArray arrayWithArray:temp];
-}
+@synthesize mlcl;
 
 @end

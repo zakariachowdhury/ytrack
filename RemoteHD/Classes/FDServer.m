@@ -36,13 +36,13 @@
 		self.port = thePort;
 		SessionManager *sm = [SessionManager sharedSessionManager];
 		NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,[sm getHost],[sm getPort],[sm getSessionId]];
-		DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:databaseRequest]];
-		self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.res objectAtIndex:0] miid] intValue];
+		DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
+		self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.mlcl.list  objectAtIndex:0] miid] intValue];
 
 		NSString *string3 = [NSString stringWithFormat:kRequestPlayLists,[sm getHost],[sm getPort],databaseId,[sm getSessionId]];
 		NSLog(@"%@",string3);
-		DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string3] ];
-		for (DAAPResponsemlit *pl in response.playLists) {
+		DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
+		for (DAAPResponsemlit *pl in response.mlcl.list) {
 			if ([pl.minm isEqualToString:@"Music"])
 				self.musicLibraryId = [pl.miid intValue];
 		}
@@ -55,15 +55,16 @@
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,[sm getSessionId]];
 	NSLog(@"%@",string3);
-	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string3] ];
-	return response.playLists;
+	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
+	return response.mlcl.list;
 }
 
 - (NSArray *) getAllTracks{
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestAllTracks,self.host,self.port,databaseId,musicLibraryId, [sm getSessionId]];
-	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string3] ];
-	return response.res;
+	//DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string3] ];
+	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3]];
+	return response.mlcl.list;
 }
 
 - (void) playSongInLibrary:(int)songId{
@@ -72,14 +73,22 @@
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,[sm getSessionId]];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 	
-	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInLibrary,self.host,self.port,1,[sm getSessionId]];
+	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInLibrary,self.host,self.port,songId,[sm getSessionId]];
 	NSLog(@"%@",string2);
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
+/*- (UIImage *) getArtwork{
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,self.host,self.port,[sm getSessionId]];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+}*/
+
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port{
 	NSString* str = [[NSString alloc] initWithFormat:kRequestServerInfo,host,port];
-	(DAAPResponsemsrv *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:str]];
+	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
+	NSLog(@"%@",msrv.ceWM);
 	//NSString* str = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
 	//DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:str]];
 }

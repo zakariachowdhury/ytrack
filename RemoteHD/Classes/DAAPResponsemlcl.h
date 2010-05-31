@@ -11,7 +11,9 @@
 
 
 @interface DAAPResponsemlcl : DAAPResponse {
-	
+	NSMutableArray *list;
 }
+
+@property (nonatomic, retain) NSMutableArray *list;
 
 @end

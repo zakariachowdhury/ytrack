@@ -24,14 +24,7 @@
 #define kRequestAllTracks @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid&type=music&sort=name&include-sort-headers=1&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')"
 #define kRequestPlaySongInLibrary @"http://%@:%@/ctrl-int/1/cue?command=play&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')&index=%d&sort=name&session-id=%d"
 #define kRequestStopPlaying @"http://%@:%@/ctrl-int/1/cue?command=clear&session-id=%d"
-
-@protocol TagListener
-
-- (void) foundTag:(id)obj;
-
-@end
-
-
+#define kRequestNowPlayingArtwork @"http://%@:%@/ctrl-int/1/nowplayingartwork?mw=211&mh=211&session-id=%d"
 
 @interface DAAPRequestReply : NSObject {
 
@@ -39,18 +32,12 @@
 
 + (NSString *) parseString:(NSData *) data;
 
-+ (NSArray *) smartRequestAndParseResponse:(NSURL *) url;
-+ (void) smartParseResponse:(NSData *) data handle:(int)handle resp:(NSMutableArray *)dict;
-
-+ (NSDictionary *) requestAndParseResponse:(NSURL *) url listener:(id<TagListener>)listener;
-+ (void) parseResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict listener:(id<TagListener>)listener;
-
-+ (DAAPResponse *) requestAndParseResponse:(NSURL *) url;
-+ (void) parseResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict;
-
 + (DAAPResponse *) searchAndParseResponse:(NSURL *) url;
 + (void) parseSearchResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict;
 
 + (void) request:(NSURL *) url ;
+
++ (NSString *) parseCommandName:(NSData *) data atPosition:(int)position;
++ (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url ;
 
 @end

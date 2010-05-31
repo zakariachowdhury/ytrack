@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* RemoteHDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* RemoteHDViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* RemoteHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */; };
+		6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */; };
 		6B35D53511A71E6D00BC846C /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D53411A71E6D00BC846C /* URLParser.m */; };
 		6B35D77A11A7BACE00BC846C /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D77911A7BACE00BC846C /* Library.m */; };
 		6B35D91911A8932100BC846C /* DAAPResponseaply.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D91811A8932100BC846C /* DAAPResponseaply.m */; };
@@ -71,6 +72,8 @@
 		28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteHDViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* RemoteHD_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteHD_Prefix.pch; sourceTree = "<group>"; };
+		6B008C7011B31194008E2012 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		6B008C7111B31194008E2012 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		6B35D53311A71E6D00BC846C /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
 		6B35D53411A71E6D00BC846C /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
 		6B35D77811A7BACE00BC846C /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				6B7D940511A998C7002465AA /* SessionManager.m */,
 				6BE275EF11AB948600F1F600 /* FDServer.h */,
 				6BE275F011AB948600F1F600 /* FDServer.m */,
+				6B008C7011B31194008E2012 /* AsyncImageView.h */,
+				6B008C7111B31194008E2012 /* AsyncImageView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				6BE275F111AB948600F1F600 /* FDServer.m in Sources */,
 				6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */,
 				6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */,
+				6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
