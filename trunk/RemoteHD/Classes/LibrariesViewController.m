@@ -26,6 +26,7 @@
 @property (nonatomic, assign, readwrite) BOOL initialWaitOver;
 @property (nonatomic, copy, readwrite) NSString *currentServiceName;
 @property (nonatomic, copy, readwrite) NSString *currentGUID;
+@property (nonatomic, retain, readwrite) NSMutableArray *availableServices;
 
 - (void)stopCurrentResolve;
 - (void)initialWaitOver:(NSTimer*)timer;
@@ -44,6 +45,7 @@
 @synthesize initialWaitOver = _initialWaitOver;
 @synthesize currentServiceName = _currentServiceName;
 @synthesize currentGUID = _currentGUID;
+@synthesize availableServices = _availableServices;
 
 
 - (NSString *)searchingForServicesString {
@@ -90,8 +92,14 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.*/
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	_services = [[NSMutableArray alloc] init];
+	self.availableServices = [[NSMutableArray alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	if ([[[PreferencesManager sharedPreferencesManager] getAllLibraries] count] > 0) {
+		[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
+	}
 }
 
 
@@ -128,32 +136,28 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count])
+    if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]){
 		cell.textLabel.text = @"Ajouter une bibliothèque";
-	else {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	} else {
 		// Set up the text for the cell
-		//NSNetService* service = [self.prefs objectAtIndex:indexPath.row];
-		NSDictionary *lib = [[[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row] objectForKey:@"TXT"];
+		Library *lib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
 		
-		/*
-		NSDictionary* dict = [[NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]] retain];
-		for (id key in dict) {
-			NSData *obj = [dict objectForKey:key];
-			NSLog(@"%@",key);
-			[HexDumpUtility printHexDumpToConsole:obj];
+		NSData *obj = [lib.TXT objectForKey:@"CtlN"];
+		NSString * libraryName = [DAAPRequestReply parseString:obj];
+		NSString *serviceName = lib.servicename;
+		
+		cell.textLabel.text = libraryName;
+		cell.textLabel.textColor = [UIColor grayColor];
+		if ([self.availableServices indexOfObject:serviceName] != NSNotFound) {
+			cell.textLabel.textColor = [UIColor blackColor];
 		}
-		NSData *obj = [dict objectForKey:@"CtLN"];
-		NSString * servicename= [DAAPRequestReply parseString:obj];
-		NSLog(@"%@",servicename);*/
-		NSData *obj = [lib objectForKey:@"CtlN"];
-		NSString * servicename= [DAAPRequestReply parseString:obj];
 		
-		cell.textLabel.text = servicename;
-		cell.textLabel.textColor = [UIColor blackColor];
+		
 		cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
 		
 		// Note that the underlying array could have changed, and we want to show the activity indicator on the correct cell
-		if (self.needsActivityIndicator && self.currentResolve.name == servicename) {
+		if (self.needsActivityIndicator && self.currentResolve.name == serviceName) {
 			if (!cell.accessoryView) {
 				CGRect frame = CGRectMake(0.0, 0.0, kProgressIndicatorSize, kProgressIndicatorSize);
 				UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc] initWithFrame:frame];
@@ -170,9 +174,8 @@
 		} else if (cell.accessoryView) {
 			cell.accessoryView = nil;
 		}		
-		NSDictionary *hey = [[SessionManager sharedSessionManager] currentLibrary];
-		NSString *sn = [[[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row] objectForKey:@"servicename"];
-		if ([sn isEqualToString:[hey objectForKey:@"servicename"]]) {
+		Library *hey = [[SessionManager sharedSessionManager] currentLibrary];;
+		if ([serviceName isEqualToString:hey.servicename]) {
 			cell.accessoryType = UITableViewCellAccessoryCheckmark;
 		}
 		
@@ -222,16 +225,54 @@
  }
  */
 
-
+// If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
+- (void)showWaiting:(NSTimer*)timer {
+	if (timer == self.timer) {
+		NSNetService* service = (NSNetService*)[self.timer userInfo];
+		if (self.currentResolve == service) {
+			self.needsActivityIndicator = YES;
+			
+			NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[self.services indexOfObject:self.currentResolve] inSection:0];
+			if (indexPath.row != NSNotFound) {
+				[self.table reloadRowsAtIndexPaths:[NSArray	arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+				// Deselect the row since the activity indicator shows the user something is happening.
+				[self.table deselectRowAtIndexPath:indexPath animated:YES];
+			}
+		}
+	}
+}
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	PinCodeController *pincodeController = [[PinCodeController alloc] initWithNibName:@"PinCodeController" bundle:nil];
-	pincodeController.modalPresentationStyle = UIModalPresentationFullScreen;
-	pincodeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	pincodeController.delegate = self;
-	[self presentModalViewController:pincodeController animated:YES];
+	[self.currentResolve stop];
+	
+	// user selected add library
+	if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]) {
+		[self.netServiceBrowser stop];
+		PinCodeController *pincodeController = [[PinCodeController alloc] initWithNibName:@"PinCodeController" bundle:nil];
+		pincodeController.modalPresentationStyle = UIModalPresentationFullScreen;
+		pincodeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		pincodeController.delegate = self;
+		[self presentModalViewController:pincodeController animated:YES];
+	} 
+	// user selected a previously paired library, try to resolve service in case the host has changed
+	else {
+		Library *selectedLib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
+		self.currentServiceName = selectedLib.servicename;
+		self.currentGUID = selectedLib.pairingGUID;
+		NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedLib.servicename];
+		[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedLib.TXT]];
+		self.currentResolve = service;
+		[self.currentResolve setDelegate:self];
+		
+		// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
+		// choose to cancel the resolve by selecting another service in the table view.
+		[self.currentResolve resolveWithTimeout:0.0];
+		[self.services addObject:service];
+		self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showWaiting:) userInfo:self.currentResolve repeats:NO];
+	}
+
 }
 
 #pragma mark -
@@ -280,22 +321,7 @@
 	self.currentResolve = nil;
 }
 
-// If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
-- (void)showWaiting:(NSTimer*)timer {
-	if (timer == self.timer) {
-		NSNetService* service = (NSNetService*)[self.timer userInfo];
-		if (self.currentResolve == service) {
-			self.needsActivityIndicator = YES;
-			
-			NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[self.services indexOfObject:self.currentResolve] inSection:0];
-			if (indexPath.row != NSNotFound) {
-				[self.table reloadRowsAtIndexPaths:[NSArray	arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-				// Deselect the row since the activity indicator shows the user something is happening.
-				[self.table deselectRowAtIndexPath:indexPath animated:YES];
-			}
-		}
-	}
-}
+
 
 
 - (void)initialWaitOver:(NSTimer*)timer {
@@ -333,7 +359,13 @@
 		// choose to cancel the resolve by selecting another service in the table view.
 		[self.currentResolve resolveWithTimeout:0.0];
 		[self.services addObject:service];
+	} else {
+		
+		if ([self.availableServices indexOfObject:service.name] == NSNotFound) {
+			[self.availableServices addObject:service.name];
+		}
 	}
+
 	
 	if (!moreComing) {
 		[self.table reloadData];
@@ -347,41 +379,26 @@
 	[self.table reloadData];
 }
 
-
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
 	assert(service == self.currentResolve);
 	
 	[service retain];
 	
-	
-	NSMutableDictionary * serv = [[NSMutableDictionary alloc] init];
-	[serv setObject:self.currentGUID forKey:@"pairingGUID"];
 	NSString * host = [self.currentResolve hostName];
-	[serv setObject:host forKey:@"host"];
-	
-	
-	[serv setObject:self.currentServiceName forKey:@"servicename"];
-	
-	NSString* portStr = [[NSString alloc] initWithString:@""];
-	
 	// Note that [NSNetService port:] returns an NSInteger in host byte order
 	NSInteger port = [service port];
+	NSString* portStr = [[NSString alloc] initWithString:@""];
 	if (port != 0 && port != 80) {
 		portStr = [[NSString alloc] initWithFormat:@"%d",port];
-		[serv setObject:portStr forKey:@"port"];
-	}	
-	[self stopCurrentResolve];
-	NSDictionary* dict = [[NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]] retain];
-	for (id key in dict) {
-		NSData *obj = [dict objectForKey:key];
-		NSLog(@"%@",key);
-		[HexDumpUtility printHexDumpToConsole:obj];
 	}
-	NSString *obj = [dict objectForKey:@"CtLN"];
-	NSLog(@"%@",obj);
-	[serv setObject:dict forKey:@"TXT"];
-	[[PreferencesManager sharedPreferencesManager] addLibrary:serv];
-	[[SessionManager sharedSessionManager] setCurrentLibrary:serv];
+	NSDictionary* TXTDict = [[NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]] retain];
+	
+	Library *lib = [[Library alloc] initWithServiceName:self.currentServiceName pairingGUID:self.currentGUID  host:host port:portStr TXT:TXTDict];
+	
+	[self stopCurrentResolve];
+	
+	[[PreferencesManager sharedPreferencesManager] addLibrary:lib];
+	[[SessionManager sharedSessionManager] setCurrentLibrary:lib];
 	[[SessionManager sharedSessionManager] open];
 	
 	[FDServer getServerInfoForHost:host atPort:portStr];

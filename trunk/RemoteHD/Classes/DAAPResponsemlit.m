@@ -24,6 +24,8 @@
 @synthesize asai;
 @synthesize aeSI;
 @synthesize astn;
+@synthesize asal;
+@synthesize asar;
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
 	self.miid = [dict objectForKey:@"miid"];
@@ -32,6 +34,12 @@
 	self.asai = [dict objectForKey:@"asai"];
 	self.aeSI = [dict objectForKey:@"aeSI"];
 	self.astn = [dict objectForKey:@"astn"];
+	self.asal = [dict objectForKey:@"asal"];
+	self.asar = [dict objectForKey:@"asar"];
+}
+
+- (void) parse{
+	[self parse:self.data];
 }
 
 @end

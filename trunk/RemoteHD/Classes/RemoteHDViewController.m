@@ -34,8 +34,7 @@
 */
 
 - (void) libraryAvailable {
-	[masterViewController display];
-	[detailViewController display];
+	NSLog(@"------ library available -------");
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -46,7 +45,7 @@
 
 
 - (void) sampleRequests {
-	NSString *host = @"MBPFDE.local.";
+	/*NSString *host = @"MBPFDE.local.";
 	NSString *portStr = @":3689";
 	NSString* str = [[NSString alloc] initWithFormat:@"http://%@%@/server-info",host,portStr];
 	NSLog(@"%@",str);
@@ -74,7 +73,7 @@
 	
 	NSString *string3 = [NSString stringWithFormat:@"http://%@%@/ctrl-int/1/playstatusupdate?revision-number=1&session-id=%d",host,portStr,sessionId];
 	NSLog(@"%@",string3);
-	[DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:string3]];
+	[DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:string3]];*/
 }
 
 - (IBAction) buttonClicked:(id)sender{
@@ -86,11 +85,25 @@
 	[self presentModalViewController:libraries animated:YES]; 
 }
 
-- (void) didFinishEditingLibraries {
-	[self dismissModalViewControllerAnimated:YES];
+- (IBAction) playClicked:(id)sender{
+	SessionManager *sm = [SessionManager sharedSessionManager];
 	
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 }
 
+- (void) didFinishEditingLibraries {
+	[self dismissModalViewControllerAnimated:YES];
+	[masterViewController display];
+	[detailViewController display];
+}
+
+- (void) didSelectItem{
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+}
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

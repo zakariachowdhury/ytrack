@@ -32,23 +32,24 @@
 	return response;
 }
 
-+ (DAAPResponse *) requestAndParseResponse:(NSURL *) url {
-	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init]; 
+
+
++ (id) onTheFlyRequestAndParseResponse:(NSURL *) url {
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	NSLog(@"requesting %@",url);
 	NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	[HexDumpUtility printHexDumpToConsole:data];
-	[self parseResponse:data handle:[data length] resp:dict];
-	NSDictionary * retValue = [NSDictionary dictionaryWithDictionary:dict];
-	NSString *clazz;
-	for (id key in retValue) {
-		NSLog(@"%@",key);
-		clazz = [NSString stringWithFormat:@"DAAPResponse%@",key];
-	}
-	DAAPResponse *response = (DAAPResponse *)[[NSClassFromString(clazz) alloc] init];
-	[response didFinishRawParsing:retValue];
+	NSLog(@"END requesting %@",url);
+	//[HexDumpUtility printHexDumpToConsole:data];
+	NSLog(@"parsing %@",url);
+	NSString *command = [self parseCommandName:data atPosition:0];
+	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
+	
+	id response = [[NSClassFromString(clazz) alloc] initWithData:data];
+	[response performSelector:@selector(parse)];
+	NSLog(@"END Parsing %@",url);
 	return response;
 }
 
@@ -60,32 +61,6 @@
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	
-}
-
-+ (NSDictionary *) requestAndParseResponse:(NSURL *) url listener:(id<TagListener>)listener {
-	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] init] autorelease]; 
-	NSURLResponse * resp;
-	NSError *error;
-	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	[HexDumpUtility printHexDumpToConsole:data];
-	[self parseResponse:data handle:[data length] resp:dict listener:listener];
-	NSDictionary * retValue = [NSDictionary dictionaryWithDictionary:dict];
-	return retValue;
-}
-
-+ (NSArray *) smartRequestAndParseResponse:(NSURL *) url {
-	NSMutableArray *dict = [[[NSMutableArray alloc] init] autorelease]; 
-	NSURLResponse * resp;
-	NSError *error;
-	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	[HexDumpUtility printHexDumpToConsole:data];
-	[self smartParseResponse:data handle:[data length] resp:dict];
-	NSArray * retValue = [NSArray arrayWithArray:dict];
-	return retValue;
 }
 
 + (NSString *) parseCommandName:(NSData *) data atPosition:(int)position{
@@ -243,197 +218,5 @@
 		progress += 8 + length;
 	}
 }
-
-+ (void) parseResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict{
-	//DAAPResponse *response = [dict lastObject];
-	int progress = 0;
-	while (handle > 0) {
-		NSString *command = [self parseCommandName:data atPosition:progress];
-		
-		int length = [self parseLength:data atPosition:progress+4];
-		//NSLog(@"command (%d) : %@",length,command);
-		
-		handle -= 8 + length;
-		NSPredicate *branches = [NSPredicate
-								 predicateWithFormat:@"SELF MATCHES %@", @"cmst|mlog|agal|mlcl|mshl|abro|abar|apso|caci|avdb|cmgt|aply|adbs|msrv|casp|mdcl|mlit|mccr|gmlc"];
-		
-		
-		NSPredicate *strings = [NSPredicate
-								predicateWithFormat:@"SELF MATCHES %@", @"minm|cann|cana|cang|canl|asaa|asal|asar|ceWM|asdt|msts|mcna|ascm|asfm|mcnm"];
-		
-		if ([branches evaluateWithObject:(NSString *)command] == YES) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSMutableDictionary *subDict = [[NSMutableDictionary alloc] init];
-			if ([dict objectForKey:command] != nil) {
-				NSString *cmdKey = [NSString stringWithFormat:@"%@[%06d]",command,progress];
-				[dict setObject:subDict forKey:cmdKey];
-			}else
-				[dict setObject:subDict forKey:command];
-			[self parseResponse:block handle:length resp:subDict];
-			
-		} else if([strings evaluateWithObject:(NSString *)command] == YES){
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSString *str = [self parseString:block];
-			//NSLog(@"string : %@",str);
-			if (str != nil)
-				[dict setObject:str forKey:command];
-		} else if (length == 1 || length == 2 || length == 4 || length == 8) {
-			int pos = progress + 8;
-			NSData * val = [data subdataWithRange:NSMakeRange(pos, length)];
-			
-			switch (length) {
-				case 1:
-					[dict setObject:[NSNumber numberWithBool:[self parseBoolean:val]] forKey:command];
-					break;
-				case 2:
-					[dict setObject:[NSNumber numberWithShort:[self parseShort:val]] forKey:command];
-					break;
-				case 4:
-					[dict setObject:[NSNumber numberWithLong:[self parseLong:val]] forKey:command];
-					break;
-				case 8:
-					[dict setObject:[NSNumber numberWithLongLong:[self parseLongLong:val]] forKey:command];
-					break;
-					
-				default:
-					break;
-			}
-		} 
-		progress += 8 + length;
-	}
-}
-
-
-
-+ (void) parseResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict listener:(id<TagListener>) listener{
-	//DAAPResponse *response = [dict lastObject];
-	int progress = 0;
-	while (handle > 0) {
-		NSString *command = [self parseCommandName:data atPosition:progress];
-		
-		int length = [self parseLength:data atPosition:progress+4];
-		NSLog(@"command (%d) : %@",length,command);
-		
-		handle -= 8 + length;
-		NSPredicate *branches = [NSPredicate
-								 predicateWithFormat:@"SELF MATCHES %@", @"cmst|mlog|agal|mlcl|mshl|abro|abar|apso|caci|avdb|cmgt|aply|adbs|msrv|casp|mdcl"];
-		
-		
-		NSPredicate *strings = [NSPredicate
-								predicateWithFormat:@"SELF MATCHES %@", @"minm|cann|cana|cang|canl|asaa|asal|asar|ceWM|asdt|msts|mcna|ascm|asfm"];
-		
-		if ([command isEqualToString:@"mlit"]) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSString *str = [self parseString:block];
-			[listener foundTag:str];
-		} 
-		if ([branches evaluateWithObject:(NSString *)command] == YES) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSMutableDictionary *subDict = [[NSMutableDictionary alloc] init];
-			[dict setObject:subDict forKey:command];
-			[self parseResponse:block handle:length resp:subDict listener:listener];
-			
-		} else if([strings evaluateWithObject:(NSString *)command] == YES){
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSString *str = [self parseString:block];
-			NSLog(@"string : %@",str);
-			
-			/*NSString * com = [command stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[command substringToIndex:1] uppercaseString]];
-			[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:str];*/
-			if (str != nil)
-				[dict setObject:str forKey:command];
-		} else if (length == 1 || length == 2 || length == 4 || length == 8) {
-			int pos = progress + 8;
-			NSData * val = [data subdataWithRange:NSMakeRange(pos, length)];
-			
-			//NSString * com = [command stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[command substringToIndex:1] uppercaseString]];
-			
-			switch (length) {
-				case 1:
-					//[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithBool:[self parseBoolean:val]]];
-					[dict setObject:[NSNumber numberWithBool:[self parseBoolean:val]] forKey:command];
-					break;
-				case 2:
-					//[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithShort:[self parseShort:val]]];
-					[dict setObject:[NSNumber numberWithShort:[self parseShort:val]] forKey:command];
-					break;
-				case 4:
-					//[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithLong:[self parseLong:val]]];
-					[dict setObject:[NSNumber numberWithLong:[self parseLong:val]] forKey:command];
-					break;
-				case 8:
-					//[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithLongLong:[self parseLongLong:val]]];
-					[dict setObject:[NSNumber numberWithLongLong:[self parseLongLong:val]] forKey:command];
-					break;
-					
-				default:
-					break;
-			}
-		} 
-		progress += 8 + length;
-	}
-}
-
-
-+ (void) smartParseResponse:(NSData *) data handle:(int)handle resp:(NSMutableArray *)dict{
-	DAAPResponse *response = [dict lastObject];
-	int progress = 0;
-	while (handle > 0) {
-		NSString *command = [self parseCommandName:data atPosition:progress];
-		
-		int length = [self parseLength:data atPosition:progress+4];
-		NSLog(@"command (%d) : %@",length,command);
-		
-		handle -= 8 + length;
-		NSPredicate *branches = [NSPredicate
-								 predicateWithFormat:@"SELF MATCHES %@", @"cmst|mlog|agal|mlcl|mshl|mlit|abro|abar|apso|caci|avdb|cmgt|aply|adbs|msrv|casp|mdcl"];
-		
-		
-		NSPredicate *strings = [NSPredicate
-								predicateWithFormat:@"SELF MATCHES %@", @"minm|cann|cana|cang|canl|asaa|asal|asar|ceWM|asdt|msts|mcna|ascm|asfm"];
-		
-		
-		if ([branches evaluateWithObject:(NSString *)command] == YES) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
-			id object = [[NSClassFromString(clazz) alloc] init];
-			[dict addObject:object];
-			[self smartParseResponse:block handle:length resp:dict];
-			
-		} else if([strings evaluateWithObject:(NSString *)command] == YES){
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
-			NSString *str = [self parseString:block];
-			NSLog(@"string : %@",str);
-			NSString * com = [command stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[command substringToIndex:1] uppercaseString]];
-			[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:str];
-			//[dict setObject:str forKey:command];
-		} else if (length == 1 || length == 2 || length == 4 || length == 8) {
-			int pos = progress + 8;
-			NSData * val = [data subdataWithRange:NSMakeRange(pos, length)];
-			
-			NSString * com = [command stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[command substringToIndex:1] uppercaseString]];
-			
-			switch (length) {
-				case 1:
-					[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithBool:[self parseBoolean:val]]];
-					break;
-				case 2:
-					[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithShort:[self parseShort:val]]];
-					break;
-				case 4:
-					[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithLong:[self parseLong:val]]];
-					break;
-				case 8:
-					[response performSelector:NSSelectorFromString([NSString stringWithFormat:@"set%@:",com]) withObject:[NSNumber numberWithLongLong:[self parseLongLong:val]]];
-					break;
-
-				default:
-					break;
-			}
-		} 
-		progress += 8 + length;
-	}
-}
-
 
 @end

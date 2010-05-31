@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
+#import "DAAPResponsemlcl.h"
 
 @interface DAAPResponseapso : DAAPResponse {
 	NSArray *res;
+	DAAPResponsemlcl *mlcl;
 }
 
 @property (nonatomic, retain) NSArray *res;
+@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
 
 @end

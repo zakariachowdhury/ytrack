@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Library.h"
 
 #define kPrefLibrarykey @"libraries"
+#define kPrefLastUsedLibrary @"lastUsedLib"
 
 @interface PreferencesManager : NSObject {
 	NSMutableDictionary *preferences;
@@ -24,9 +26,9 @@
 
 - (void) loadPreferencesFromFile;
 - (NSArray *) getAllLibraries;
-- (NSDictionary *) getLastUsedLibrary;
+- (Library *) getLastUsedLibrary;
 - (void) persistPreferences;
-- (void) addLibrary:(NSDictionary *) lib;
+- (void) addLibrary:(Library *) newLib;
 
 
 

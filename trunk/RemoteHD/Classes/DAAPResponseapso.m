@@ -13,11 +13,15 @@
 @implementation DAAPResponseapso
 
 @synthesize res;
+@synthesize mlcl;
+
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
 	NSMutableArray *temp = [[NSMutableArray alloc] init];
 	NSDictionary * results = [[dict objectForKey:@"apso"] objectForKey:@"mlcl"];
-	for (id key in results) {
+	NSArray *keys = [results allKeys];
+	NSArray *sortedKeys =  [keys sortedArrayUsingSelector:@selector(compare:)];
+	for (id key in sortedKeys) {
 		if ([key hasPrefix:@"mlit"]) {
 			DAAPResponsemlit * song = [[DAAPResponsemlit alloc] init];
 			NSDictionary *rawSong = (NSDictionary *)[results objectForKey:key];
@@ -27,5 +31,7 @@
 	}
 	self.res = [NSArray arrayWithArray:temp];
 }
+
+
 
 @end

@@ -62,22 +62,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 		NSMutableArray *libraries = [[NSMutableArray alloc] init];
 		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
 	}
-	
-	return [NSArray arrayWithArray:[self.preferences objectForKey:kPrefLibrarykey]];
+	NSMutableArray *libs = [[NSMutableArray alloc] init];
+	for (NSDictionary *lib in [self.preferences objectForKey:kPrefLibrarykey]) {
+		[libs addObject:[[Library alloc] initWithDictionary:lib]];
+	}
+	return [NSArray arrayWithArray:libs];
 	
 }
-- (NSDictionary *) getLastUsedLibrary{
-	return nil;
+- (Library *) getLastUsedLibrary{
+	return [self.preferences objectForKey:kPrefLibrarykey];
 }
-- (void) addLibrary:(NSDictionary *) lib{
+- (void) addLibrary:(Library *) newLib{
 	NSMutableArray *libraries = [self.preferences objectForKey:kPrefLibrarykey];
 	if (libraries == nil){
 		libraries = [[NSMutableArray alloc] init];
+		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
+	}
+	int foundIndex = -1;
+	for (int i = 0; i<[libraries count];i++) {
+		NSString *libServiceName = [[libraries objectAtIndex:i] objectForKey:@"servicename"];
+		NSString *newlibServiceName = newLib.servicename;
+		if ([newlibServiceName isEqualToString:libServiceName]) {
+			foundIndex = i;
+			break;
+		}
+	}
+	if (foundIndex >=0) {
+		[libraries removeObjectAtIndex:foundIndex];
 	}
 	
-	[libraries addObject:lib];
-	[self.preferences setObject:libraries forKey:kPrefLibrarykey];
-	
+	[libraries addObject:[newLib getAsDictionary]];
+	[self.preferences setObject:[newLib getAsDictionary] forKey:kPrefLastUsedLibrary];
 }
 
 @end
