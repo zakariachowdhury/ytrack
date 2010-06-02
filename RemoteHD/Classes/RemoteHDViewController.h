@@ -13,18 +13,29 @@
 #import "AsyncImageView.h"
 #import "SessionManager.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
+	IBOutlet UIView *loadingView;
+	IBOutlet UIActivityIndicatorView *activityIndicator;
 	
 	IBOutlet MasterViewController *masterViewController;
 	IBOutlet DetailViewController *detailViewController;
 	
 	IBOutlet AsyncImageView *nowPlaying;
+	IBOutlet UIProgressView *progress;
+	IBOutlet UILabel *track;
+	IBOutlet UILabel *artist;
+	IBOutlet UILabel *album;
+	IBOutlet UIBarButtonItem *play;
+	IBOutlet UIBarButtonItem *pause;
 }
 
 - (IBAction) buttonClicked:(id)sender;
 - (IBAction) playClicked:(id)sender;
+- (IBAction) pauseClicked:(id)sender;
+- (IBAction) nextClicked:(id)sender;
+- (IBAction) previousClicked:(id)sender;
 - (void) libraryAvailable;
 
 @end

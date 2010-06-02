@@ -32,7 +32,7 @@
 	NSMutableArray *_availableServices;
 }
 
-@property (nonatomic, retain) id<LibraryDelegate> delegate;
+@property (nonatomic, assign) id<LibraryDelegate> delegate;
 @property (nonatomic, retain) UITableView *table;
 @property (nonatomic, copy) NSString* searchingForServicesString;
 

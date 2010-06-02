@@ -58,6 +58,6 @@
 
 - (uint)numberOfHTTPConnections;
 
-@property (nonatomic, retain) id<PairingServerDelegate> pairingDelegate;
+@property (nonatomic, assign) id<PairingServerDelegate> pairingDelegate;
 
 @end

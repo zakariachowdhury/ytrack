@@ -13,10 +13,12 @@
 #import "DAAPResponsemlog.h"
 #import "DAAPResponseabro.h"
 #import "DAAPResponseavdb.h"
+#import "DAAPResponsemlcl.h"
 
 @implementation DetailViewController
 
 @synthesize results;
+@synthesize indexedResults;
 @synthesize delegate;
 
 
@@ -45,9 +47,6 @@
 	
 	results = [[NSMutableArray alloc] init];
 	arrayOfCharacters = [[NSMutableArray alloc]init];
-	objectsForCharacter = [[NSMutableArray alloc]init];
-	
-	
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -92,19 +91,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	
-	/*NSString *letter = [arrayOfCharacters objectAtIndex:section];
-	NSPredicate *letterPredicate;
-	if (![letter isEqualToString:@"#"]) {
-		letterPredicate = [NSPredicate predicateWithFormat:@"minm beginswith[c] %@",letter];
-	}
-	else {
-		letterPredicate = [NSPredicate predicateWithFormat:@"minm MATCHES '\\\\d.*'"];
-	}
-	NSArray *beginWithLetter = [self.results filteredArrayUsingPredicate:letterPredicate];
-	return [beginWithLetter count];*/
-	return [[objectsForCharacter objectAtIndex:section] count];
-//    return [self.results count];
+	NSString *letter = [arrayOfCharacters objectAtIndex:section];
+	return [[indexedResults objectForKey:letter] count];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -139,8 +127,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	
-	NSArray *beginWithLetter = [objectsForCharacter objectAtIndex:indexPath.section];
+	NSString *letter = [arrayOfCharacters objectAtIndex:indexPath.section];
+	NSArray *beginWithLetter = [self.indexedResults objectForKey:letter];
 	
 	//cell.textLabel.text = [results objectAtIndex:indexPath.row];
 	cell.textLabel.text = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] minm];
@@ -197,33 +185,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	//DAAPResponsemlit *song = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[[objectsForCharacter objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	int i = [results indexOfObject:mlit];
+	NSString *letter = [arrayOfCharacters objectAtIndex:indexPath.section];
+	
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[[self.indexedResults objectForKey:letter] objectAtIndex:indexPath.row];
+	int i = [mlit index];
 	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:i];
     [delegate didSelectItem];
 }
 
 - (void) setupcharArray{
 	[arrayOfCharacters removeAllObjects];
-	[objectsForCharacter removeAllObjects];
 	NSArray *letters = [NSArray arrayWithArray:
 							 [@"A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|#"
 							  componentsSeparatedByString:@"|"]];
 	for (NSString *letter in letters) {
-		NSPredicate *letterPredicate;
-		if (![letter isEqualToString:@"#"]) {
-			letterPredicate = [NSPredicate predicateWithFormat:@"minm beginswith[c] %@",letter];
-		}
-		else {
-			letterPredicate = [NSPredicate predicateWithFormat:@"minm MATCHES '\\\\d.*'"];
-		}
-
-		NSArray *beginWithLetter = [self.results filteredArrayUsingPredicate:letterPredicate];
-		
-		if([beginWithLetter count] >0)
-		{
+		if ([self.indexedResults objectForKey:letter]) {
 			[arrayOfCharacters addObject:letter];
-			[objectsForCharacter addObject:beginWithLetter];
 		}
 	}
 }
@@ -231,12 +208,18 @@
 
 - (void) display{
 	NSLog(@"requesting ALL TRACKS");
-	self.results = [[[SessionManager sharedSessionManager] currentServer] getAllTracks];
-	NSLog(@"END requesting ALL TRACKS");
+	[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self];
+}
+
+#pragma mark -
+#pragma mark DAAPRequestDelegate methods
+
+- (void) didFinishLoading:(DAAPResponse *)response{
+	self.results = [[(DAAPResponseapso *)response mlcl] list];
+	self.indexedResults = [[(DAAPResponseapso *)response mlcl] indexedList];
 	[self setupcharArray];
-	NSLog(@"END setup char array");
 	[self.tableView reloadData];
-	NSLog(@"end table reaload");
+	[self.delegate didFinishLoading];
 }
 	 
 

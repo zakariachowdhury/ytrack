@@ -40,7 +40,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
+	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
 }
 
 
@@ -86,16 +86,55 @@
 }
 
 - (IBAction) playClicked:(id)sender{
-	SessionManager *sm = [SessionManager sharedSessionManager];
-	
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server playPause];
+}
+
+- (IBAction) pauseClicked:(id)sender{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server playPause];
+}
+
+- (IBAction) nextClicked:(id)sender{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server playNextItem];
+}
+
+- (IBAction) previousClicked:(id)sender{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server playPreviousItem];
+}
+
+- (void) statusUpdate:(DAAPResponsecmst *)cmst{
+	int doneTime = [cmst.cast intValue]-[cmst.cant intValue];
+	int totalTime = [cmst.cast intValue];
+	float pro = (float)doneTime/(float)totalTime;
+	progress.progress = pro;
+	track.text = cmst.cann;
+	artist.text = cmst.cana;
+	album.text = cmst.canl;
+	if ([cmst.caps shortValue] == 4) {
+		play.enabled = NO;
+		pause.enabled = YES;
+	} else if ([cmst.caps shortValue] == 3) {
+		play.enabled = YES;
+		pause.enabled = NO;
+	} 
 }
 
 - (void) didFinishEditingLibraries {
 	[self dismissModalViewControllerAnimated:YES];
+	loadingView.alpha = 1.0;
+	loadingView.hidden = NO;
+	[activityIndicator startAnimating];
 	[masterViewController display];
 	[detailViewController display];
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server monitorPlayStatus:self];
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 }
 
 - (void) didSelectItem{
@@ -103,6 +142,12 @@
 	
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
 	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+}
+
+- (void) didFinishLoading{
+	loadingView.alpha = 0.0;
+	loadingView.hidden = YES;
+	[activityIndicator stopAnimating];
 }
 
 // Override to allow orientations other than the default portrait orientation.

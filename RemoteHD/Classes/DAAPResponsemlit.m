@@ -26,6 +26,7 @@
 @synthesize astn;
 @synthesize asal;
 @synthesize asar;
+@synthesize index;
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
 	self.miid = [dict objectForKey:@"miid"];

@@ -14,7 +14,7 @@
 #define kRequestServerInfo @"http://%@:%@/server-info"
 #define kRequestDatabases @"http://%@:%@/databases?session-id=%d"
 #define kRequestControl @"http://%@:%@/crtl-int"
-#define kRequestPlayStatusUpdate @"http://%@:%@/ctrl-int/1/playstatusupdate?revision-number=1&session-id=%d"
+#define kRequestPlayStatusUpdate @"http://%@:%@/ctrl-int/1/playstatusupdate?revision-number=%d&session-id=%d"
 #define kRequestPropertyVolume @"http://%@:%@/ctrl-int/1/getproperty?properties=dmcp.volume&session-id=%d"
 #define kRequestPlayLists @"http://%@:%@/databases/%d/containers?session-id=%d&meta=dmap.itemname,dmap.itemcount,dmap.itemid,dmap.persistentid,daap.baseplaylist,com.apple.itunes.special-playlist,com.apple.itunes.smart-playlist,com.apple.itunes.saved-genius,dmap.parentcontainerid,dmap.editcommandssupported,com.apple.itunes.jukeboxcurrent,daap.songcontentdescription"
 #define kRequestGetSpeakers @"http://%@:%@/ctrl-int/1/getspeakers?session-id=%d"
@@ -25,10 +25,23 @@
 #define kRequestPlaySongInLibrary @"http://%@:%@/ctrl-int/1/cue?command=play&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')&index=%d&sort=name&session-id=%d"
 #define kRequestStopPlaying @"http://%@:%@/ctrl-int/1/cue?command=clear&session-id=%d"
 #define kRequestNowPlayingArtwork @"http://%@:%@/ctrl-int/1/nowplayingartwork?mw=211&mh=211&session-id=%d"
+#define kRequestPlayPause @"http://%@:%@/ctrl-int/1/playpause?session-id=%d"
+#define kRequestPlayNextItem @"http://%@:%@/ctrl-int/1/nextitem?session-id=%d"
+#define kRequestPlayPreviousItem @"http://%@:%@/ctrl-int/1/previtem?session-id=%d"
+
+@protocol DAAPRequestDelegate <NSObject>
+
+-(void)didFinishLoading:(DAAPResponse *)response;
+@end
+
 
 @interface DAAPRequestReply : NSObject {
-
+	NSURLConnection* connection;
+    NSMutableData* data;
+	id <DAAPRequestDelegate> delegate;
 }
+
+@property (nonatomic, assign) id <DAAPRequestDelegate> delegate;
 
 + (NSString *) parseString:(NSData *) data;
 
@@ -39,5 +52,9 @@
 
 + (NSString *) parseCommandName:(NSData *) data atPosition:(int)position;
 + (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url ;
+
+- (void) asyncRequestAndParse:(NSURL *)url;
+
+
 
 @end

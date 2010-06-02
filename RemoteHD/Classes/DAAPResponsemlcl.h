@@ -12,8 +12,10 @@
 
 @interface DAAPResponsemlcl : DAAPResponse {
 	NSMutableArray *list;
+	NSMutableDictionary *indexedList;
 }
 
 @property (nonatomic, retain) NSMutableArray *list;
+@property (nonatomic, retain) NSMutableDictionary *indexedList;
 
 @end

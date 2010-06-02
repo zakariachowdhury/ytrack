@@ -25,7 +25,7 @@
 	int GUID;
 }
 
-@property (nonatomic, retain) id<PincodeDelegate> delegate;
+@property (nonatomic, assign) id<PincodeDelegate> delegate;
 
 - (IBAction) cancelButtonPressed:(id)sender;
 

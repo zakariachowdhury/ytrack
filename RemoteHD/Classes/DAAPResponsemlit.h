@@ -25,6 +25,7 @@
 	NSNumber *astn;
 	NSString *asal;
 	NSString *asar;
+	int index;
 }
 
 @property (nonatomic, retain) NSNumber *miid;
@@ -42,5 +43,6 @@
 @property (nonatomic, retain) NSNumber *astn;
 @property (nonatomic, copy) NSString *asal;
 @property (nonatomic, copy) NSString *asar;
+@property (nonatomic) int index;
 
 @end
