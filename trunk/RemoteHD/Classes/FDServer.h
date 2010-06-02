@@ -8,24 +8,43 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPRequestReply.h"
+#import "DAAPResponseapso.h"
+#import "DAAPResponsecmst.h"
 
-@interface FDServer : NSObject {
+@protocol FDServerDelegate
+
+- (void) statusUpdate:(DAAPResponsecmst *)cmst;
+
+@end
+
+
+@interface FDServer : NSObject <DAAPRequestDelegate> {
 	NSString *host;
 	NSString *port;
 	NSInteger databaseId;
 	NSInteger musicLibraryId;
+	id<FDServerDelegate> delegate;
+	DAAPRequestReply *daap;
 }
 
 @property (nonatomic, copy) NSString *host;
 @property (nonatomic, copy) NSString *port;
 @property (nonatomic) NSInteger databaseId;
 @property (nonatomic) NSInteger musicLibraryId;
+@property (nonatomic, assign) id<FDServerDelegate> delegate;
+
 
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort;
 
 - (NSArray *) getPlayLists;
-- (NSArray *) getAllTracks;
+- (DAAPResponsemlcl *) getAllTracks;
+- (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
+- (void) playPreviousItem;
+- (void) playNextItem;
+- (void) playPause;
+- (void) playStatusUpdate;
+- (void) monitorPlayStatus:(id<FDServerDelegate>)aDelegate;
 
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port;
 

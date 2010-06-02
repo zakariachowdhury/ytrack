@@ -164,7 +164,7 @@
 }
 
 - (void) display {
-	self.results = [[[SessionManager sharedSessionManager] currentServer] getPlayLists];
+	//self.results = [[[SessionManager sharedSessionManager] currentServer] getPlayLists];
 	[self.tableView reloadData];
 }
 

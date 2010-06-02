@@ -12,20 +12,23 @@
 @protocol DetailDelegate
 
 - (void) didSelectItem;
+- (void) didFinishLoading;
 
 @end
 
 
-@interface DetailViewController : UITableViewController {
+@interface DetailViewController : UITableViewController <DAAPRequestDelegate> {
 	NSArray *results;
+	NSDictionary *indexedResults;
 	NSMutableArray *arrayOfCharacters;
-	NSMutableArray *objectsForCharacter;
 	id<DetailDelegate> delegate;
 }
 
 @property (nonatomic, retain) NSArray *results;
-@property (nonatomic, retain) id<DetailDelegate> delegate;
+@property (nonatomic, retain) NSDictionary *indexedResults;
+@property (nonatomic, assign) id<DetailDelegate> delegate;
 
 - (void) display;
+- (void) didFinishLoading:(DAAPResponse *)response;
 
 @end

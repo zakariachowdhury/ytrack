@@ -12,6 +12,8 @@
 
 @implementation DAAPRequestReply
 
+@synthesize delegate;
+
 + (DAAPResponse *) searchAndParseResponse:(NSURL *) url {
 	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] init] autorelease]; 
 	NSURLResponse * resp;
@@ -32,6 +34,67 @@
 	return response;
 }
 
++ (NSString *) parseCommandName:(NSData *) data atPosition:(int)position{
+	UInt8 *command;
+	[data getBytes:&command range:NSMakeRange(position,4)];
+	NSString * str = [[[NSString alloc] initWithBytes:&command length:4 encoding:NSISOLatin1StringEncoding] autorelease];
+	return str;
+}
+
+
+
+- (void) asyncRequestAndParse:(NSURL *)url{
+	if(url == nil) 
+		url = [NSURL URLWithString:@"error"];
+	
+    if (connection!=nil) { [connection release]; }
+    if (data!=nil) { [data release]; }
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
+														   cachePolicy:NSURLRequestUseProtocolCachePolicy
+													   timeoutInterval:60.0];
+	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+    connection = [[NSURLConnection alloc]
+				  initWithRequest:request delegate:self];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	NSLog(@"AsyncDAAPRequest - %@", [error localizedDescription]);
+}
+
+- (void)connection:(NSURLConnection *)theConnection
+	didReceiveData:(NSData *)incrementalData {
+    if (data==nil) {
+		data =
+		[[NSMutableData alloc] initWithCapacity:2048];
+    }
+    [data appendData:incrementalData];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
+	
+    [connection release];
+    connection=nil;
+		
+	//[HexDumpUtility printHexDumpToConsole:data];
+	
+	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
+	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
+	
+	id response = [[NSClassFromString(clazz) alloc] initWithData:data];
+	[response performSelector:@selector(parse)];
+	
+    [data release];
+    data=nil;
+	
+	if([delegate respondsToSelector:@selector(didFinishLoading:)])
+		[delegate didFinishLoading:response];
+	[response release];
+}
+
+//method used to cancel the connection when don't need anymore the AsyncImageView object
+- (void)cancelConnection {
+	[connection cancel];
+}
 
 
 + (id) onTheFlyRequestAndParseResponse:(NSURL *) url {
@@ -47,7 +110,7 @@
 	NSString *command = [self parseCommandName:data atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
 	
-	id response = [[NSClassFromString(clazz) alloc] initWithData:data];
+	id response = [[[NSClassFromString(clazz) alloc] initWithData:data] autorelease];
 	[response performSelector:@selector(parse)];
 	NSLog(@"END Parsing %@",url);
 	return response;
@@ -63,12 +126,7 @@
 	
 }
 
-+ (NSString *) parseCommandName:(NSData *) data atPosition:(int)position{
-	UInt8 *command;
-	[data getBytes:&command range:NSMakeRange(position,4)];
-	NSString * str = [[[NSString alloc] initWithBytes:&command length:4 encoding:NSISOLatin1StringEncoding] autorelease];
-	return str;
-}
+
 
 + (NSString *) parseString:(NSData *) data{
 	NSString * str = [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding] autorelease];
@@ -218,5 +276,14 @@
 		progress += 8 + length;
 	}
 }
+
+- (void)dealloc {
+    [connection cancel];
+    [connection release];
+    [data release];
+	[delegate release];
+    [super dealloc];
+}
+
 
 @end

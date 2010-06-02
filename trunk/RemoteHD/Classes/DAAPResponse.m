@@ -144,8 +144,8 @@
 - (BOOL) parseBoolean:(NSData *) theData{
 	Byte res[1];
 	[self getBytes:res fromData:theData length:1];
-	NSValue *hop = [NSValue value:res withObjCType:@encode(BOOL)];
-	BOOL test;
+	NSValue *hop = [NSValue value:res withObjCType:@encode(short)];
+	short test;
 	[hop getValue:&test];
 	/*	if (test) NSLog(@"TRUE");
 	 else NSLog(@"FALSE");*/
@@ -206,7 +206,7 @@
 	NSNumber *retValue;
 	switch (length) {
 		case 1:
-			retValue = [NSNumber numberWithBool:[self parseBoolean:theData]];
+			retValue = [NSNumber numberWithShort:[self parseBoolean:theData]];
 			break;
 		case 2:
 			retValue = [NSNumber numberWithShort:[self parseShort:theData]];
@@ -261,12 +261,10 @@
 
 
 - (void) parse{
-	NSLog(@"parsing RESPONSE");
 	// delegate method to heriting classes
 	int length = [self parseLength:self.data atPosition:4];
 	self.data = [self.data subdataWithRange:NSMakeRange(8, length)];
 	[self parse:self.data];
-	NSLog(@"END PARSING RESPONSE");
 }
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{

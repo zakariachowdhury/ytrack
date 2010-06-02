@@ -22,7 +22,7 @@
 	id<PairingServerDelegate> delegate;
 }
 
-@property (nonatomic, retain) id<PairingServerDelegate> delegate;
+@property (nonatomic, assign) id<PairingServerDelegate> delegate;
 
 
 
