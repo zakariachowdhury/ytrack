@@ -48,7 +48,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	NSLog(@"SessionManager-open");
 	if (currentLibrary != nil) {
 		NSLog(@"SessionManager-currentLibrary is not nil");
-		if (!currentServer.connected){
+		//if (!currentServer.connected){
 			NSLog(@"SessionManager-currentServer is not connected");
 			NSString *host = self.currentLibrary.host;
 			NSString *portStr = self.currentLibrary.port;
@@ -60,7 +60,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 			self.currentServer = [[FDServer alloc] initWithHost:host port:portStr];
 			self.currentServer.connected = YES;
 			[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
-		}
+		//}
 	}
 }
 

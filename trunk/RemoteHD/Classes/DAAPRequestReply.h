@@ -33,6 +33,8 @@
 @protocol DAAPRequestDelegate <NSObject>
 
 -(void)didFinishLoading:(DAAPResponse *)response;
+@optional
+- (void) connectionTimedOut;
 @end
 
 

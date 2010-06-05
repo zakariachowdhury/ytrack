@@ -89,6 +89,16 @@
 	[self.daap asyncRequestAndParse:[NSURL URLWithString:string3]];
 }
 
+- (void) connectionTimedOut{
+	
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	[sm open];
+	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,1,[sm getSessionId]];
+	NSLog(@"%@",string3);
+	[self.daap setDelegate:self];
+	[self.daap asyncRequestAndParse:[NSURL URLWithString:string3]];
+}
+
 - (void) didFinishLoading:(DAAPResponse *)response{
 	NSLog(@"FDServer-didFinishLoading");
 	if (response == nil){
@@ -99,11 +109,11 @@
 	[self.delegate statusUpdate:cmst];
 	
 	SessionManager *sm = [SessionManager sharedSessionManager];
-	long idReq = [[cmst cmsr] longValue];
-	if (idReq < 1) {
-		idReq = 1;
+	revNum = [[cmst cmsr] longValue];
+	if (revNum < 1) {
+		revNum = 1;
 	}
-	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,idReq,[sm getSessionId]];
+	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,revNum,[sm getSessionId]];
 	NSLog(@"%@",string3);
 	//[daap release];
 	//daap = [[DAAPRequestReply alloc] init] ;

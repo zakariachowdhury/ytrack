@@ -8,6 +8,7 @@
 
 #import "DAAPRequestReply.h"
 #import "HexDumpUtility.h"
+#import "SessionManager.h"
 
 
 @implementation DAAPRequestReply
@@ -49,11 +50,12 @@
 
 
 - (void) asyncRequestAndParse:(NSURL *)url{
+	NSLog(@"async requesting %@",url);
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
 	lastUrl = url;
 	if (self.connection!=nil) { 
-		[self.connection cancel];
+		//[self.connection cancel];
 		self.connection = nil;
 	}
 	if (self.data!=nil) { 
@@ -63,21 +65,21 @@
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
 														   cachePolicy:NSURLRequestUseProtocolCachePolicy
-													   timeoutInterval:60.0];
+													   timeoutInterval:20.0];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	//NSURLConnection *conn =[[NSURLConnection alloc]
-	//						initWithRequest:request delegate:self];
-    //self.connection = conn;
-	//[conn release];
-	self.connection = [[NSURLConnection alloc]
-					   initWithRequest:request delegate:self];
+	NSURLConnection *conn =[[NSURLConnection alloc]
+							initWithRequest:request delegate:self];
+    self.connection = conn;
+	[conn release];
+	//self.connection = [[NSURLConnection alloc]
+	//				   initWithRequest:request delegate:self];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
 	assert(theConnection == self.connection);
 	NSLog(@"AsyncDAAPRequest - %@", [error localizedDescription]);
-	NSLog(@"calling prev url :%@",lastUrl);
-	[self asyncRequestAndParse:lastUrl];
+	if([delegate respondsToSelector:@selector(connectionTimedOut)])
+		[delegate connectionTimedOut];
 }
 
 - (void)connection:(NSURLConnection *)theConnection
@@ -113,6 +115,7 @@
 
 //method used to cancel the connection when don't need anymore the AsyncImageView object
 - (void)cancelConnection {
+	NSLog(@"CANCEL CONNECTION");
     [self.connection cancel];
     self.connection = nil;
 
@@ -127,7 +130,7 @@
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	NSLog(@"requesting %@",url);
+	NSLog(@"sync requesting %@",url);
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	NSLog(@"END requesting %@",url);
 	[HexDumpUtility printHexDumpToConsole:dat];
@@ -143,6 +146,7 @@
 
 
 + (void) request:(NSURL *) url {
+	NSLog(@"sync requesting one way %@",url);
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
