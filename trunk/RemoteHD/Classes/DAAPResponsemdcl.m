@@ -15,4 +15,17 @@
 @synthesize minm;
 @synthesize msma;
 
+- (void) parse{
+	NSLog(@"PARSING MDCL");
+	[self parse:self.data];
+	NSLog(@"END PARSING MDCL");
+}
+
+- (void)dealloc {
+	[self.caia release];
+	[self.minm release];
+	[self.msma release];
+	[super dealloc];
+}
+
 @end

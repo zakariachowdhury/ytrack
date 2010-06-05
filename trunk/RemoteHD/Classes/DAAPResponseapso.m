@@ -12,6 +12,7 @@
 
 @implementation DAAPResponseapso
 
+@synthesize mstt;
 @synthesize res;
 @synthesize mlcl;
 
@@ -27,9 +28,19 @@
 			NSDictionary *rawSong = (NSDictionary *)[results objectForKey:key];
 			[song didFinishRawParsing:rawSong];
 			[temp addObject:song];
+			[song release];
 		}
 	}
-	self.res = [NSArray arrayWithArray:temp];
+	NSArray *immutableArray = [NSArray arrayWithArray:temp];
+	self.res = immutableArray;
+	[temp release];
+}
+
+- (void)dealloc {
+	[self.mstt release];
+    [self.res release];
+	[self.mlcl release];
+    [super dealloc];
 }
 
 

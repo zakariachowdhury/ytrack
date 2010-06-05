@@ -11,6 +11,13 @@
 
 @implementation DAAPResponseabar
 
+@synthesize mstt;
 @synthesize mlit;
+
+- (void)dealloc {
+	[self.mstt release];
+    [self.mlit release];
+    [super dealloc];
+}
 
 @end

@@ -17,6 +17,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 @synthesize delegate;
 @synthesize activityIndicator;
+@synthesize data;
+@synthesize connection;
 
 - (void)loadImageFromURL:(NSURL*)url  {
 	//self.backgroundColor = [UIColor whiteColor];
@@ -49,13 +51,13 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
 	
-    if (connection!=nil) { [connection release]; }
-    if (data!=nil) { [data release]; }
+    if (self.connection!=nil) { self.connection = nil; }
+    if (self.data!=nil) { self.data = nil; }
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
 										 timeoutInterval:60.0];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-    connection = [[NSURLConnection alloc]
+    self.connection = [[NSURLConnection alloc]
 				  initWithRequest:request delegate:self];
 }
 
@@ -64,8 +66,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     //[self addSubview:imageView];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
+	assert(theConnection == self.connection);
 	[self.activityIndicator stopAnimating];
 	//self.activityIndicator.hidden = YES;
 	loadingImageLabel.hidden = YES;
@@ -78,17 +80,24 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 - (void)connection:(NSURLConnection *)theConnection
 	didReceiveData:(NSData *)incrementalData {
-    if (data==nil) {
-		data =
-		[[NSMutableData alloc] initWithCapacity:2048];
-    }
-    [data appendData:incrementalData];
+	if (theConnection != self.connection) {
+		return;
+	}
+	assert(theConnection == self.connection);
+    if (self.data==nil) {
+		NSMutableData *temp = [[NSMutableData alloc] initWithCapacity:2048];
+		self.data = temp;
+		[temp release];
+	}
+    [self.data appendData:incrementalData];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
-	
-    [connection release];
-    connection=nil;
+	if (theConnection != self.connection) {
+		return;
+	}
+	assert(theConnection == self.connection);
+    self.connection=nil;
 	
    /* if ([[self subviews] count]>0) {
         [[[self subviews] objectAtIndex:0] removeFromSuperview];
@@ -97,7 +106,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	//UIImage *img = [[[UIImage alloc] initWithData:data] autorelease];
 	
 	
-    UIImageView* imageView = [[[UIImageView alloc] initWithImage:[[[UIImage alloc] initWithData:data] autorelease]] autorelease];
+	UIImage * image = [[UIImage alloc] initWithData:self.data];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+	[image release];
 	imageView.opaque = NO;
 	
 	
@@ -126,9 +137,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	imageView.alpha = 1.0;
 	
 	[UIView commitAnimations];
+	[imageView release];
 	
-    [data release];
-    data=nil;
+    self.data = nil;
 	
 	if([delegate respondsToSelector:@selector(didFinishLoading)])
 		[delegate didFinishLoading];
@@ -136,7 +147,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 //method used to cancel the connection when don't need anymore the AsyncImageView object
 - (void)cancelConnection {
-	[connection cancel];
+	[self.connection cancel];
+	self.connection = nil;
 }
 
 - (UIImage*) image {
@@ -146,9 +158,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 - (void)dealloc {
 	[self.activityIndicator release];
-    [connection cancel];
-    [connection release];
-    [data release];
+    [self.connection cancel];
+    [self.connection release];
+    [self.data release];
     [super dealloc];
 }
 

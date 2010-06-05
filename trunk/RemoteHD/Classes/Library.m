@@ -52,5 +52,15 @@
 	return self.encodedForm;
 }
 
+- (void)dealloc {
+    [self.servicename release];
+    [self.pairingGUID release];
+    [self.host release];
+	[self.port release];
+	[self.TXT release];
+    [super dealloc];
+}
+
+
 
 @end

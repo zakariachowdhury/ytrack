@@ -18,14 +18,18 @@
 
 - (void) setMlit:(DAAPResponsemlit *)mlit{
 	if (list == nil) {
-		self.list = [[NSMutableArray alloc] init];
+		NSMutableArray *temp = [[NSMutableArray alloc] init];
+		self.list = temp;
+		[temp release];
 	}
 	[self.list addObject:mlit];
 	int position = [self.list count] - 1;
 	mlit.index = position;
 	NSString * firstLetter = [[mlit.minm substringToIndex:1] uppercaseString];
 	if (indexedList == nil) {
-		self.indexedList = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+		self.indexedList = temp;
+		[temp release];
 	}
 	if ([firstLetter intValue] != 0) {
 		firstLetter = @"#";
@@ -34,15 +38,23 @@
 	if (charTable == nil) {
 		charTable = [[NSMutableArray alloc] init];
 		[indexedList setObject:charTable forKey:firstLetter];
-	} 
-	
-	[charTable addObject:mlit];
+		[charTable release];
+	} else {
+		[charTable addObject:mlit];
+	}
+
 }
 
 - (void) parse{
 	NSLog(@"PARSING MLCL");
 	[self parse:self.data];
 	NSLog(@"END PARSING MLCL");
+}
+
+- (void)dealloc {
+    [self.list release];
+	[self.indexedList release];
+    [super dealloc];
 }
 
 @end

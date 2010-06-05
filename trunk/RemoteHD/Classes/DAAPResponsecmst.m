@@ -28,4 +28,27 @@
 @synthesize ceGS;
 @synthesize cant;
 @synthesize cast;
+
+- (void)dealloc {
+	[self.mstt release];
+	[self.cmsr release];
+	[self.caps release];
+	[self.cash release];
+	[self.carp release];
+	[self.cavc release];
+	[self.caas release];
+	[self.caar release];
+	[self.canp release];
+	[self.cann release];
+	[self.cana release];
+	[self.canl release];
+    [self.cang release];
+	[self.asai release];
+	[self.cmmk release];
+	[self.ceGS release];
+	[self.cant release];
+	[self.cast release];
+    [super dealloc];
+}
+
 @end

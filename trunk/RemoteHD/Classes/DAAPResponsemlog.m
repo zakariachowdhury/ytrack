@@ -19,4 +19,10 @@
 	self.mstt = [[dict objectForKey:@"mlog"] objectForKey:@"mstt"];
 }
 
+- (void)dealloc {
+    [self.mstt release];
+    [self.mlid release];
+    [super dealloc];
+}
+
 @end

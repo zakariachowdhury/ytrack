@@ -10,9 +10,11 @@
 #import "DAAPResponse.h"
 
 @interface DAAPResponsemccr : DAAPResponse {
+	NSNumber *mstt;
 	NSArray *tags;
 }
 
+@property (nonatomic, retain) NSNumber *mstt;
 @property (nonatomic, retain) NSArray *tags;
 
 @end

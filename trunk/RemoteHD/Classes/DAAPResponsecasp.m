@@ -12,14 +12,21 @@
 @implementation DAAPResponsecasp
 
 @synthesize mstt;
+@synthesize speakers;
 
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	
-	/*NSMutableArray *temp = [[NSMutableArray alloc] init];
+- (void) setMdcl:(DAAPResponsemdcl *)mdcl{
+	if (speakers == nil) {
+		NSMutableArray *temp = [[NSMutableArray alloc] init];
+		self.speakers = temp;
+		[temp release];
+	}
+	[self.speakers addObject:mdcl];	
+}
 
-	for (int i = 1; i < [dict count]; i++){
-		[temp addObject:[dict objectAtIndex:i]]; 
-	}*/
+- (void)dealloc {
+    [self.mstt release];
+	[self.speakers release];
+    [super dealloc];
 }
 
 @end

@@ -19,10 +19,10 @@
 	NSArray *res;
 }
 
-@property (nonatomic, retain) NSNumber *mstt;
-@property (nonatomic, retain) NSNumber *muty;
-@property (nonatomic, retain) NSNumber *mtco;
-@property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, retain) NSArray *res;
+@property (nonatomic, assign) NSNumber *mstt;
+@property (nonatomic, assign) NSNumber *muty;
+@property (nonatomic, assign) NSNumber *mtco;
+@property (nonatomic, assign) NSNumber *mrco;
+@property (nonatomic, assign) NSArray *res;
 
 @end

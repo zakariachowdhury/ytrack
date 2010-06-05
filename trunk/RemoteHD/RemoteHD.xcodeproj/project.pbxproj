@@ -54,6 +54,8 @@
 		6BA2F9FC11A4E63B00427C2F /* LibrariesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA2F9FA11A4E63B00427C2F /* LibrariesViewController.xib */; };
 		6BA2FAED11A513CF00427C2F /* PinCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2FAEB11A513CF00427C2F /* PinCodeController.m */; };
 		6BA2FAEE11A513CF00427C2F /* PinCodeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA2FAEC11A513CF00427C2F /* PinCodeController.xib */; };
+		6BCDA5AA11B7A19800A3ED01 /* DAAPResponsemupd.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */; };
+		6BCDA63111B7B84A00A3ED01 /* DAAPResponsecmgt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */; };
 		6BE275F111AB948600F1F600 /* FDServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE275F011AB948600F1F600 /* FDServer.m */; };
 		6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */; };
 		6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA820811ABD04500426E9E /* DAAPResponseapso.m */; };
@@ -148,6 +150,10 @@
 		6BA2FAEA11A513CF00427C2F /* PinCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeController.h; sourceTree = "<group>"; };
 		6BA2FAEB11A513CF00427C2F /* PinCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeController.m; sourceTree = "<group>"; };
 		6BA2FAEC11A513CF00427C2F /* PinCodeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeController.xib; sourceTree = "<group>"; };
+		6BCDA5A811B7A19800A3ED01 /* DAAPResponsemupd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemupd.h; sourceTree = "<group>"; };
+		6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemupd.m; sourceTree = "<group>"; };
+		6BCDA62F11B7B84A00A3ED01 /* DAAPResponsecmgt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsecmgt.h; sourceTree = "<group>"; };
+		6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsecmgt.m; sourceTree = "<group>"; };
 		6BE275EF11AB948600F1F600 /* FDServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDServer.h; sourceTree = "<group>"; };
 		6BE275F011AB948600F1F600 /* FDServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDServer.m; sourceTree = "<group>"; };
 		6BE2765A11ABA40100F1F600 /* DAAPResponsemccr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemccr.h; sourceTree = "<group>"; };
@@ -342,6 +348,10 @@
 				6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */,
 				6BEA820711ABD04500426E9E /* DAAPResponseapso.h */,
 				6BEA820811ABD04500426E9E /* DAAPResponseapso.m */,
+				6BCDA5A811B7A19800A3ED01 /* DAAPResponsemupd.h */,
+				6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */,
+				6BCDA62F11B7B84A00A3ED01 /* DAAPResponsecmgt.h */,
+				6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */,
 			);
 			name = DAAPMessages;
 			sourceTree = "<group>";
@@ -444,6 +454,8 @@
 				6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */,
 				6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */,
 				6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */,
+				6BCDA5AA11B7A19800A3ED01 /* DAAPResponsemupd.m in Sources */,
+				6BCDA63111B7B84A00A3ED01 /* DAAPResponsecmgt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

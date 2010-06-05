@@ -10,6 +10,7 @@
 #import "SynthesizeSingleton.h"
 #import "DAAPRequestReply.h"
 #import "DAAPResponsemlog.h"
+#import "DAAPResponsemdcl.h"
 
 @implementation SessionManager
 
@@ -19,6 +20,11 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 
 - (BOOL) isSessionEstablished {
+	if (self.currentServer != nil) {
+		if (self.currentServer.connected) {
+			return YES;
+		}
+	}
 	return NO;
 }
 
@@ -39,16 +45,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 
 
 - (void) open{
+	NSLog(@"SessionManager-open");
 	if (currentLibrary != nil) {
-		NSString *host = self.currentLibrary.host;
-		NSString *portStr = self.currentLibrary.port;
-		NSString *pairingGuid = self.currentLibrary.pairingGUID;
-		NSString *loginURL = [[NSString alloc] initWithFormat:kRequestLogin,host,portStr,pairingGuid];
-		NSLog(@"%@",loginURL);
-		DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
-		sessionId = [[resp mlid] longValue];
-		self.currentServer = [[FDServer alloc] initWithHost:host port:portStr];
-		[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
+		NSLog(@"SessionManager-currentLibrary is not nil");
+		if (!currentServer.connected){
+			NSLog(@"SessionManager-currentServer is not connected");
+			NSString *host = self.currentLibrary.host;
+			NSString *portStr = self.currentLibrary.port;
+			NSString *pairingGuid = self.currentLibrary.pairingGUID;
+			NSString *loginURL = [NSString stringWithFormat:kRequestLogin,host,portStr,pairingGuid];
+			NSLog(@"%@",loginURL);
+			DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
+			sessionId = [[resp mlid] longValue];
+			self.currentServer = [[FDServer alloc] initWithHost:host port:portStr];
+			self.currentServer.connected = YES;
+			[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
+		}
 	}
 }
 

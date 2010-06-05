@@ -26,5 +26,15 @@
 		
 	}
 	self.res = [NSArray arrayWithArray:temp];
+	[temp release];
+}
+
+- (void)dealloc {
+	[self.mstt release];
+	[self.muty release];
+	[self.mtco release];
+	[self.mrco release];
+    [self.res release];
+    [super dealloc];
 }
 @end

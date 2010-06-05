@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
+#import "DAAPResponsemdcl.h"
 
 
 @interface DAAPResponsecasp : DAAPResponse {
 	NSNumber *mstt;
-	NSArray *speakers;
+	NSMutableArray *speakers;
 }
 
 @property (nonatomic, retain) NSNumber *mstt;
+@property (nonatomic, retain) NSMutableArray *speakers;
 
 @end

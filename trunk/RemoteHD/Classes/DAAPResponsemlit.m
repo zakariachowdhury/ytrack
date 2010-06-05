@@ -43,4 +43,23 @@
 	[self parse:self.data];
 }
 
+- (void)dealloc {
+	[self.miid release];
+	[self.mper release];
+	[self.mimc release];
+	[self.mctc release];
+	[self.meds release];
+	[self.abpl release];
+	[self.mpco release];
+	[self.aeSP release];
+	[self.aePS release];
+	[self.asai release];
+	[self.aeSI release];
+	[self.astn release];
+    [self.minm release];
+	[self.asal release];
+	[self.asar release];
+    [super dealloc];
+}
+
 @end

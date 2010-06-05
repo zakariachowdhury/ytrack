@@ -10,9 +10,11 @@
 
 
 @interface DAAPResponseabar : NSObject {
+	NSNumber *mstt;
 	NSString *mlit;
 }
 
+@property (nonatomic, retain) NSNumber *mstt;
 @property (nonatomic, copy) NSString *mlit;
 
 @end

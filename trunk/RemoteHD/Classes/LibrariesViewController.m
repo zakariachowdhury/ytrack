@@ -13,11 +13,13 @@
 #import "HexDumpUtility.h"
 #import "Library.h"
 #import "FDServer.h"
+#import "DAAPResponsemdcl.h"
 
 #define kProgressIndicatorSize 20.0
 
 
 @interface LibrariesViewController()
+@property (nonatomic, retain, readwrite) NSArray* speakers;
 @property (nonatomic, retain, readwrite) NSMutableArray* services;
 @property (nonatomic, retain, readwrite) NSNetServiceBrowser* netServiceBrowser;
 @property (nonatomic, retain, readwrite) NSNetService* currentResolve;
@@ -30,6 +32,7 @@
 
 - (void)stopCurrentResolve;
 - (void)initialWaitOver:(NSTimer*)timer;
+- (void)didChangeSpeakerValue:(id)sender;
 @end
 
 @implementation LibrariesViewController
@@ -39,6 +42,7 @@
 
 @synthesize currentResolve = _currentResolve;
 @synthesize netServiceBrowser = _netServiceBrowser;
+@synthesize speakers = _speakers;
 @synthesize services = _services;
 @synthesize needsActivityIndicator = _needsActivityIndicator;
 @dynamic timer;
@@ -114,15 +118,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
+	if ((self.speakers != nil) && ([self.speakers count] > 1)){
+		return 2;
+	}
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // If there are no services and searchingForServicesString is set, show one row to tell the user.
-	NSUInteger count = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count];
-		
-	return count + 1;
+	if (section == 0) {
+		NSUInteger count = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count];
+		return count + 1;
+	} 
+	return [self.speakers count];
 }
 
 
@@ -135,54 +144,77 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]){
-		cell.textLabel.text = @"Ajouter une bibliothèque";
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	} else {
-		// Set up the text for the cell
-		Library *lib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
-		
-		NSData *obj = [lib.TXT objectForKey:@"CtlN"];
-		NSString * libraryName = [DAAPRequestReply parseString:obj];
-		NSString *serviceName = lib.servicename;
-		
-		cell.textLabel.text = libraryName;
-		cell.textLabel.textColor = [UIColor grayColor];
-		if ([self.availableServices indexOfObject:serviceName] != NSNotFound) {
-			cell.textLabel.textColor = [UIColor blackColor];
+	if (indexPath.section == 1) {
+		DAAPResponsemdcl * sp = (DAAPResponsemdcl *)[self.speakers objectAtIndex:indexPath.row];
+		cell.textLabel.text = [sp minm];
+		UISwitch *sw = [[UISwitch alloc] init];
+		if ([sp.caia shortValue] == 1) {
+			sw.on = YES;
+		} else {
+			sw.on = NO;
 		}
-		
-		
-		cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
-		
-		// Note that the underlying array could have changed, and we want to show the activity indicator on the correct cell
-		if (self.needsActivityIndicator && self.currentResolve.name == serviceName) {
-			if (!cell.accessoryView) {
-				CGRect frame = CGRectMake(0.0, 0.0, kProgressIndicatorSize, kProgressIndicatorSize);
-				UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc] initWithFrame:frame];
-				[spinner startAnimating];
-				spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-				[spinner sizeToFit];
-				spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
-											UIViewAutoresizingFlexibleRightMargin |
-											UIViewAutoresizingFlexibleTopMargin |
-											UIViewAutoresizingFlexibleBottomMargin);
-				cell.accessoryView = spinner;
-				[spinner release];
+		sw.tag = 10+indexPath.row;
+		[sw addTarget:self action:@selector(didChangeSpeakerValue:) forControlEvents:UIControlEventValueChanged];
+		cell.accessoryView = sw;
+		[sw release];
+    } else if (indexPath.section == 0) {
+		if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]){
+			cell.textLabel.text = @"Ajouter une bibliothèque";
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		} else {
+			// Set up the text for the cell
+			Library *lib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
+			
+			NSData *obj = [lib.TXT objectForKey:@"CtlN"];
+			NSString * libraryName = [DAAPRequestReply parseString:obj];
+			NSString *serviceName = lib.servicename;
+			
+			cell.textLabel.text = libraryName;
+			cell.textLabel.textColor = [UIColor grayColor];
+			if ([self.availableServices indexOfObject:serviceName] != NSNotFound) {
+				cell.textLabel.textColor = [UIColor blackColor];
 			}
-		} else if (cell.accessoryView) {
-			cell.accessoryView = nil;
-		}		
-		Library *hey = [[SessionManager sharedSessionManager] currentLibrary];;
-		if ([serviceName isEqualToString:hey.servicename]) {
-			cell.accessoryType = UITableViewCellAccessoryCheckmark;
+			
+			
+			cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+			
+			// Note that the underlying array could have changed, and we want to show the activity indicator on the correct cell
+			if (self.needsActivityIndicator && self.currentResolve.name == serviceName) {
+				if (!cell.accessoryView) {
+					CGRect frame = CGRectMake(0.0, 0.0, kProgressIndicatorSize, kProgressIndicatorSize);
+					UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+					[spinner startAnimating];
+					spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+					[spinner sizeToFit];
+					spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
+												UIViewAutoresizingFlexibleRightMargin |
+												UIViewAutoresizingFlexibleTopMargin |
+												UIViewAutoresizingFlexibleBottomMargin);
+					cell.accessoryView = spinner;
+					[spinner release];
+				}
+			} else if (cell.accessoryView) {
+				cell.accessoryView = nil;
+			}		
+			Library *hey = [[SessionManager sharedSessionManager] currentLibrary];;
+			if ([serviceName isEqualToString:hey.servicename]) {
+				cell.accessoryType = UITableViewCellAccessoryCheckmark;
+			}
+			
 		}
-		
 	}
-
     
     return cell;
+}
+
+- (void)didChangeSpeakerValue:(id)sender{
+	UISwitch *sw = (UISwitch *)sender;
+	if (sw.on)
+	NSLog(@"value of %d changed to YES ",sw.tag);
+	else {
+		NSLog(@"value of %d changed to NO ",sw.tag);
+	}
+
 }
 
 
@@ -387,11 +419,14 @@
 	NSString * host = [self.currentResolve hostName];
 	// Note that [NSNetService port:] returns an NSInteger in host byte order
 	NSInteger port = [service port];
-	NSString* portStr = [[NSString alloc] initWithString:@""];
+	NSString *portStr;
 	if (port != 0 && port != 80) {
-		portStr = [[NSString alloc] initWithFormat:@"%d",port];
+		portStr = [NSString  stringWithFormat:@"%d",port];
+	} else {
+		portStr = @"";
 	}
-	NSDictionary* TXTDict = [[NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]] retain];
+
+	NSDictionary* TXTDict = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 	
 	Library *lib = [[Library alloc] initWithServiceName:self.currentServiceName pairingGUID:self.currentGUID  host:host port:portStr TXT:TXTDict];
 	
@@ -400,6 +435,8 @@
 	[[PreferencesManager sharedPreferencesManager] addLibrary:lib];
 	[[SessionManager sharedSessionManager] setCurrentLibrary:lib];
 	[[SessionManager sharedSessionManager] open];
+	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];
+	[lib release];
 	
 	[FDServer getServerInfoForHost:host atPort:portStr];
 	

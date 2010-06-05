@@ -248,6 +248,7 @@
 			DAAPResponse *subCommand = (DAAPResponse *)[[NSClassFromString(clazz) alloc] initWithData:block];
 			[subCommand parse];
 			[self performSelector:NSSelectorFromString(commandSetter) withObject:subCommand];
+			[subCommand release];
 		} else if([self isString:command]){			
 			NSString *str = [self parseString:block];
 			//NSLog(@"string : %@",str);
@@ -255,6 +256,7 @@
 		} else if ([self isNumber:length]) {
 			[self performSelector:NSSelectorFromString(commandSetter) withObject:[self parseNumber:block length:length]];
 		} 
+		//[block release];
 		progress += 8 + length;
 	}
 }
@@ -269,6 +271,12 @@
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
 	// delegate method to heriting classes
+}
+
+- (void)dealloc {
+	[self.data release];
+	[self.commandName release];
+    [super dealloc];
 }
 
 @end
