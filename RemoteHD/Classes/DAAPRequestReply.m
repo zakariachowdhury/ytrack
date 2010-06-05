@@ -13,6 +13,8 @@
 @implementation DAAPRequestReply
 
 @synthesize delegate;
+@synthesize data;
+@synthesize connection;
 
 + (DAAPResponse *) searchAndParseResponse:(NSURL *) url {
 	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] init] autorelease]; 
@@ -20,23 +22,26 @@
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	[HexDumpUtility printHexDumpToConsole:data];
-	[self parseSearchResponse:data handle:[data length] resp:dict];
+	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
+	[HexDumpUtility printHexDumpToConsole:dat];
+	[self parseSearchResponse:dat handle:[dat length] resp:dict];
 	NSDictionary * retValue = [NSDictionary dictionaryWithDictionary:dict];
 	NSString *clazz;
 	for (id key in retValue) {
 		NSLog(@"%@",key);
 		clazz = [NSString stringWithFormat:@"DAAPResponse%@",key];
 	}
-	DAAPResponse *response = (DAAPResponse *)[[NSClassFromString(clazz) alloc] init];
+	DAAPResponse *response = (DAAPResponse *)[[[NSClassFromString(clazz) alloc] init] autorelease];
 	[response didFinishRawParsing:retValue];
 	return response;
 }
 
-+ (NSString *) parseCommandName:(NSData *) data atPosition:(int)position{
++ (NSString *) parseCommandName:(NSData *) theData atPosition:(int)position{
 	UInt8 *command;
-	[data getBytes:&command range:NSMakeRange(position,4)];
+	if ([theData length] < (position + 4)) {
+		return nil;
+	}
+	[theData getBytes:&command range:NSMakeRange(position,4)];
 	NSString * str = [[[NSString alloc] initWithBytes:&command length:4 encoding:NSISOLatin1StringEncoding] autorelease];
 	return str;
 }
@@ -46,35 +51,50 @@
 - (void) asyncRequestAndParse:(NSURL *)url{
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
-	
-    if (connection!=nil) { [connection release]; }
-    if (data!=nil) { [data release]; }
+	lastUrl = url;
+	if (self.connection!=nil) { 
+		[self.connection cancel];
+		self.connection = nil;
+	}
+	if (self.data!=nil) { 
+		self.data = nil; 
+	}
+   
+    
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
 														   cachePolicy:NSURLRequestUseProtocolCachePolicy
 													   timeoutInterval:60.0];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-    connection = [[NSURLConnection alloc]
-				  initWithRequest:request delegate:self];
+	//NSURLConnection *conn =[[NSURLConnection alloc]
+	//						initWithRequest:request delegate:self];
+    //self.connection = conn;
+	//[conn release];
+	self.connection = [[NSURLConnection alloc]
+					   initWithRequest:request delegate:self];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
+	assert(theConnection == self.connection);
 	NSLog(@"AsyncDAAPRequest - %@", [error localizedDescription]);
+	NSLog(@"calling prev url :%@",lastUrl);
+	[self asyncRequestAndParse:lastUrl];
 }
 
 - (void)connection:(NSURLConnection *)theConnection
 	didReceiveData:(NSData *)incrementalData {
-    if (data==nil) {
-		data =
-		[[NSMutableData alloc] initWithCapacity:2048];
+	NSLog(@"%@",lastUrl);
+	NSLog(@"%@",theConnection);
+	assert(theConnection == self.connection);
+    if (self.data==nil) {
+		NSMutableData *temp = [[NSMutableData alloc] initWithCapacity:2048];
+		self.data = temp;
+		[temp release];
     }
-    [data appendData:incrementalData];
+    [self.data appendData:incrementalData];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
-	
-    [connection release];
-    connection=nil;
-		
+	assert(theConnection == self.connection);
 	//[HexDumpUtility printHexDumpToConsole:data];
 	
 	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
@@ -83,34 +103,39 @@
 	id response = [[NSClassFromString(clazz) alloc] initWithData:data];
 	[response performSelector:@selector(parse)];
 	
-    [data release];
-    data=nil;
-	
+    self.data = nil;
+	self.connection = nil;
 	if([delegate respondsToSelector:@selector(didFinishLoading:)])
 		[delegate didFinishLoading:response];
+	
 	[response release];
 }
 
 //method used to cancel the connection when don't need anymore the AsyncImageView object
 - (void)cancelConnection {
-	[connection cancel];
+    [self.connection cancel];
+    self.connection = nil;
+
+	if (self.data!=nil) { 
+		self.data = nil; 
+	}
 }
 
 
-+ (id) onTheFlyRequestAndParseResponse:(NSURL *) url {
++ (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url {
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	NSLog(@"requesting %@",url);
-	NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
+	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	NSLog(@"END requesting %@",url);
-	//[HexDumpUtility printHexDumpToConsole:data];
+	[HexDumpUtility printHexDumpToConsole:dat];
 	NSLog(@"parsing %@",url);
-	NSString *command = [self parseCommandName:data atPosition:0];
+	NSString *command = [self parseCommandName:dat atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
 	
-	id response = [[[NSClassFromString(clazz) alloc] initWithData:data] autorelease];
+	DAAPResponse *response = [[[NSClassFromString(clazz) alloc] initWithData:dat] autorelease];
 	[response performSelector:@selector(parse)];
 	NSLog(@"END Parsing %@",url);
 	return response;
@@ -123,30 +148,27 @@
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	
 }
 
-
-
-+ (NSString *) parseString:(NSData *) data{
-	NSString * str = [[[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding] autorelease];
-	//[HexDumpUtility printHexDumpToConsole:data];
++ (NSString *) parseString:(NSData *) theData{
+	NSString * str = [[[NSString alloc] initWithBytes:[theData bytes] length:[theData length] encoding:NSUTF8StringEncoding] autorelease];
+	//[HexDumpUtility printHexDumpToConsole:theData];
 	return str;
 }
 
-+ (void) getBytes:(Byte *)buffer fromData:(NSData *)data length:(int)length{
++ (void) getBytes:(Byte *)buffer fromData:(NSData *)theData length:(int)length{
 	//[HexDumpUtility printHexDumpToConsole:data];
 	Byte value[length];
-	[data getBytes:&value range:NSMakeRange(0, length)];
+	[theData getBytes:&value range:NSMakeRange(0, length)];
 	
 	for (int i = 0; i < length ; i ++) {
 		buffer[i] = value[length - i - 1];
 	}
 	
 }
-+ (BOOL) parseBoolean:(NSData *) data{
++ (BOOL) parseBoolean:(NSData *) theData{
 	Byte res[1];
-	[self getBytes:res fromData:data length:1];
+	[self getBytes:res fromData:theData length:1];
 	NSValue *hop = [NSValue value:res withObjCType:@encode(BOOL)];
 	BOOL test;
 	[hop getValue:&test];
@@ -156,9 +178,9 @@
 }
 
 
-+ (short) parseShort:(NSData *) data{
++ (short) parseShort:(NSData *) theData{
 	Byte res[2];
-	[self getBytes:res fromData:data length:2];
+	[self getBytes:res fromData:theData length:2];
 	NSValue *hop = [NSValue value:res withObjCType:@encode(short)];
 	short test;
 	[hop getValue:&test];
@@ -166,9 +188,9 @@
 	return test;
 }
 
-+ (long) parseLong:(NSData *) data {
++ (long) parseLong:(NSData *) theData {
 	Byte res[4];
-	[self getBytes:res fromData:data length:4];
+	[self getBytes:res fromData:theData length:4];
 	NSValue *hop = [NSValue value:res withObjCType:@encode(long)];
 	long test;
 	[hop getValue:&test];
@@ -176,9 +198,9 @@
 	return test;
 }
 
-+ (long long) parseLongLong:(NSData *)data{
++ (long long) parseLongLong:(NSData *)theData{
 	Byte res[8];
-	[self getBytes:res fromData:data length:8];
+	[self getBytes:res fromData:theData length:8];
 	NSValue *hop = [NSValue value:res withObjCType:@encode(long long)];
 	long long test;
 	[hop getValue:&test];
@@ -186,12 +208,12 @@
 	return test;
 }
 
-+ (int) parseLength:(NSData *) data atPosition:(int)pos{
++ (int) parseLength:(NSData *) theData atPosition:(int)pos{
 	Byte value[4];
 	Byte finalValue[4];
 	int test;
 	int length = 4;
-	[data getBytes:&value range:NSMakeRange(pos, length)];
+	[theData getBytes:&value range:NSMakeRange(pos, length)];
 	
 	// we have to revert endianness
 	for (int i = 0; i < length ; i ++) {
@@ -205,13 +227,13 @@
 }
 
 
-+ (void) parseSearchResponse:(NSData *) data handle:(int)handle resp:(NSMutableDictionary *)dict{
++ (void) parseSearchResponse:(NSData *) theData handle:(int)handle resp:(NSMutableDictionary *)dict{
 	//DAAPResponse *response = [dict lastObject];
 	int progress = 0;
 	while (handle > 0) {
-		NSString *command = [self parseCommandName:data atPosition:progress];
+		NSString *command = [self parseCommandName:theData atPosition:progress];
 		
-		int length = [self parseLength:data atPosition:progress+4];
+		int length = [self parseLength:theData atPosition:progress+4];
 		NSLog(@"command (%d) : %@",length,command);
 		
 		handle -= 8 + length;
@@ -223,7 +245,7 @@
 								predicateWithFormat:@"SELF MATCHES %@", @"minm|cann|cana|cang|canl|asaa|asal|asar|ceWM|asdt|msts|mcna|ascm|asfm"];
 		
 		if ([command isEqualToString:@"mlit"]) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
+			NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 			NSString *str = [self parseString:block];
 			NSString *cmdKey = [NSString stringWithFormat:@"%@[%06d]",command,progress];
 			NSLog(@"%@ : %@",cmdKey,str);
@@ -236,7 +258,7 @@
 
 		}
 		else if ([branches evaluateWithObject:(NSString *)command] == YES) {
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
+			NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 			NSMutableDictionary *subDict = [[NSMutableDictionary alloc] init];
 			if ([dict objectForKey:command] != nil) {
 				NSString *cmdKey = [NSString stringWithFormat:@"%@[%06d]",command,progress];
@@ -246,14 +268,14 @@
 			[self parseSearchResponse:block handle:length resp:subDict];
 			
 		} else if([strings evaluateWithObject:(NSString *)command] == YES){
-			NSData *block = [data subdataWithRange:NSMakeRange(progress+8, length)];
+			NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 			NSString *str = [self parseString:block];
 			NSLog(@"string : %@",str);
 			if (str != nil)
 				[dict setObject:str forKey:command];
 		} else if (length == 1 || length == 2 || length == 4 || length == 8) {
 			int pos = progress + 8;
-			NSData * val = [data subdataWithRange:NSMakeRange(pos, length)];
+			NSData * val = [theData subdataWithRange:NSMakeRange(pos, length)];
 			
 			switch (length) {
 				case 1:

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DAAPResponse.h"
 
-
-@interface DAAPResponsemdcl : NSObject {
+@interface DAAPResponsemdcl : DAAPResponse {
 	NSNumber *caia;
 	NSString *minm;
 	NSNumber *msma;

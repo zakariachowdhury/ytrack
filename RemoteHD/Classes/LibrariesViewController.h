@@ -21,6 +21,7 @@
 	IBOutlet UITableView *table;
 @private 
 	NSString* _searchingForServicesString;
+	NSArray *_speakers;
 	NSMutableArray* _services;
 	NSNetServiceBrowser* _netServiceBrowser;
 	NSNetService* _currentResolve;

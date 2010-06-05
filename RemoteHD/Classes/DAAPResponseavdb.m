@@ -18,5 +18,14 @@
 @synthesize mrco;
 @synthesize mlcl;
 
+- (void)dealloc {
+    [self.mstt release];
+	[self.muty release];
+	[self.mtco release];
+	[self.mrco release];
+	[self.mlcl release];
+    [super dealloc];
+}
+
 
 @end

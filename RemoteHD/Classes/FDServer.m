@@ -14,7 +14,9 @@
 #import "DAAPResponseaply.h"
 #import "DAAPResponsemlit.h"
 #import "DAAPResponsecmst.h"
-
+#import "DAAPResponsemupd.h"
+#import "DAAPResponsecmgt.h"
+#import "DAAPResponsecasp.h"
 
 @implementation FDServer
 
@@ -23,6 +25,8 @@
 @synthesize databaseId;
 @synthesize musicLibraryId;
 @synthesize delegate;
+@synthesize daap;
+@synthesize connected;
 
 
 - (id) init {
@@ -40,7 +44,6 @@
 		NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,[sm getHost],[sm getPort],[sm getSessionId]];
 		DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
 		self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.mlcl.list  objectAtIndex:0] miid] intValue];
-
 		NSString *string3 = [NSString stringWithFormat:kRequestPlayLists,[sm getHost],[sm getPort],databaseId,[sm getSessionId]];
 		NSLog(@"%@",string3);
 		DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
@@ -48,56 +51,114 @@
 			if ([pl.minm isEqualToString:@"Music"])
 				self.musicLibraryId = [pl.miid intValue];
 		}
+
 		NSLog(@"done");
+		musr = 1;
     }
     return self;
 }
 
 - (NSArray *) getPlayLists{
+	NSLog(@"FDServer-getPlayLists");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,[sm getSessionId]];
 	NSLog(@"%@",string3);
 	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
-	return response.mlcl.list;
+	NSArray *list = [NSArray arrayWithArray:response.mlcl.list];
+	return list;
 }
 
 - (void) monitorPlayStatus:(id<FDServerDelegate>)aDelegate{
+	NSLog(@"FDServer-monitorPlayStatus");
 	self.delegate = aDelegate;
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,1,[sm getSessionId]];
-	daap = [[DAAPRequestReply alloc] init] ;
-	[daap setDelegate:self];
-	[daap asyncRequestAndParse:[NSURL URLWithString:string3]];
+	if (self.daap != nil) {
+		//[self.daap cancelConnection];
+		//self.daap = nil;
+		return;
+	}
+	if (self.daap == nil) {
+		/*DAAPRequestReply *temp = [[DAAPRequestReply alloc] init];
+		self.daap = temp;
+		[temp release];*/
+		self.daap = [[DAAPRequestReply alloc] init];
+	}
+	
+	[self.daap setDelegate:self];
+	[self.daap asyncRequestAndParse:[NSURL URLWithString:string3]];
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
+	NSLog(@"FDServer-didFinishLoading");
+	if (response == nil){
+		NSLog(@"---PLAYSTATUSUPDATE RESPONSE IS NIL, ABANDONING UPDATES FROM SERVER---");
+		return;
+	}
 	DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
 	[self.delegate statusUpdate:cmst];
+	
 	SessionManager *sm = [SessionManager sharedSessionManager];
-	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,cmst.cmsr,[sm getSessionId]];
-
-	daap = [[DAAPRequestReply alloc] init] ;
-	[daap setDelegate:self];
-	[daap asyncRequestAndParse:[NSURL URLWithString:string3]];
+	long idReq = [[cmst cmsr] longValue];
+	if (idReq < 1) {
+		idReq = 1;
+	}
+	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,idReq,[sm getSessionId]];
+	NSLog(@"%@",string3);
+	//[daap release];
+	//daap = [[DAAPRequestReply alloc] init] ;
+	[self.daap setDelegate:self];
+	[self.daap asyncRequestAndParse:[NSURL URLWithString:string3]];
 }
 
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getAllTracks with delegate");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestAllTracks,self.host,self.port,databaseId,musicLibraryId, [sm getSessionId]];
-	daap = [[DAAPRequestReply alloc] init];
-	[daap setDelegate:aDelegate];
-	[daap asyncRequestAndParse:[NSURL URLWithString:string3]];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	// FIXME : we should release the request but data are not properly retained in tableview
+	//[daapreq release];
 }
 
 - (DAAPResponsemlcl *) getAllTracks{
+	NSLog(@"FDServer-getAllTracks");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	NSString *string3 = [NSString stringWithFormat:kRequestAllTracks,self.host,self.port,databaseId,musicLibraryId, [sm getSessionId]];
-	//DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:string3] ];
 	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3]];
-	return response.mlcl;
+	DAAPResponsemlcl *resp = [response.mlcl copy];
+	return resp;
+}
+
+- (NSArray *) getSpeakers{
+	NSLog(@"FDServer-getSpeakers");
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	NSString *string3 = [NSString stringWithFormat:kRequestGetSpeakers,self.host,self.port, [sm getSessionId]];
+	DAAPResponsecasp *casp = (DAAPResponsecasp *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3]];
+	
+	return casp.speakers;
+}
+
+- (long) getVolume{
+	NSLog(@"FDServer-getVolume");
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	NSString *string3 = [NSString stringWithFormat:kRequestPropertyVolume,self.host,self.port, [sm getSessionId]];
+	DAAPResponsecmgt * response = (DAAPResponsecmgt *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3]];
+	return [response.cmvo longValue];
+	
+}
+
+- (void) setVolume:(long) volume{
+	NSLog(@"FDServer-setVolume");
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	
+	NSString *string = [NSString stringWithFormat:kRequestChangePropertyVolume,self.host,self.port,volume,[sm getSessionId]];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (void) playSongInLibrary:(int)songId{
+	NSLog(@"FDServer-playSongInLibrary");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,[sm getSessionId]];
@@ -109,6 +170,7 @@
 }
 
 - (void) playPreviousItem{
+	NSLog(@"FDServer-playPreviousItem");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	
 	NSString *string = [NSString stringWithFormat:kRequestPlayPreviousItem,self.host,self.port,[sm getSessionId]];
@@ -116,6 +178,7 @@
 }
 
 - (void) playPause{
+	NSLog(@"FDServer-playPause");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	
 	NSString *string = [NSString stringWithFormat:kRequestPlayPause,self.host,self.port,[sm getSessionId]];
@@ -123,34 +186,48 @@
 }
 
 - (void) playNextItem{
+	NSLog(@"FDServer-playNextItem");
 	SessionManager *sm = [SessionManager sharedSessionManager];
 	
 	NSString *string = [NSString stringWithFormat:kRequestPlayNextItem,self.host,self.port,[sm getSessionId]];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
-- (void) playStatusUpdate{
+- (void) playStatusUpdate:(NSTimer *)timer{
+	NSLog(@"FDServer-playStatusUpdate");
 	SessionManager *sm = [SessionManager sharedSessionManager];
+	NSNumber *idReq = [timer userInfo];
+	NSString *string3 = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,[idReq longValue],[sm getSessionId]];
 	
-	NSString *string = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,[sm getSessionId]];
-	DAAPResponsecmst * response = (DAAPResponsecmst *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string]];
-	NSLog(@"cana:%@",response.cana);
-	NSLog(@"cant:%d",response.cant);
+	daap = [[DAAPRequestReply alloc] init] ;
+	[daap setDelegate:self];
+	[daap asyncRequestAndParse:[NSURL URLWithString:string3]];
+	
 }
 
-/*- (UIImage *) getArtwork{
+- (void) updateStatus{
+	NSLog(@"FDServer-updateStatus");
 	SessionManager *sm = [SessionManager sharedSessionManager];
-	
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,self.host,self.port,[sm getSessionId]];
-	[DAAPRequestReply request:[NSURL URLWithString:string]];
-}*/
+	NSString* str = [NSString stringWithFormat:kRequestUpdate,host,port,[sm getSessionId],musr];
+	DAAPResponsemupd *mupd = (DAAPResponsemupd *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
+	musr = [mupd.musr intValue];
+}
 
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port{
-	NSString* str = [[NSString alloc] initWithFormat:kRequestServerInfo,host,port];
+	NSLog(@"FDServer-getServerInfoForHost");
+	NSString* str = [NSString stringWithFormat:kRequestServerInfo,host,port];
 	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
 	NSLog(@"%@",msrv.ceWM);
+	//[msrv release];
 	//NSString* str = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
 	//DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:str]];
+}
+
+- (void)dealloc {
+	[self.daap release];
+	[self.host release];
+	[self.port release];
+    [super dealloc];
 }
 
 @end

@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) id <AsyncImageViewDelegate> delegate;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, retain) NSMutableData *data;
+@property (nonatomic, retain) NSURLConnection *connection;
 
 - (void)loadImageFromURL:(NSURL*)url;
 - (void)loadImageNotAvailable;

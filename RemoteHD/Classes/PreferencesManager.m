@@ -44,9 +44,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsPath = [paths objectAtIndex:0];
 	NSString * prefDocPath = [documentsPath stringByAppendingString:@"/prefs.plist"];
-	self.preferences = [NSMutableDictionary dictionaryWithContentsOfFile:prefDocPath]; 
+	if (self.preferences != nil) {
+		[self.preferences release];
+	}
+	NSMutableDictionary *temp = [NSMutableDictionary dictionaryWithContentsOfFile:prefDocPath];
+	self.preferences = temp; 
 	if (self.preferences == nil) {
-		self.preferences = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+		self.preferences = temp;
+		[temp release];
 	}
 	
 	self.prefPath = prefDocPath;
@@ -61,12 +67,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	if ([self.preferences objectForKey:kPrefLibrarykey] == nil){
 		NSMutableArray *libraries = [[NSMutableArray alloc] init];
 		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
+		[libraries release];
 	}
 	NSMutableArray *libs = [[NSMutableArray alloc] init];
 	for (NSDictionary *lib in [self.preferences objectForKey:kPrefLibrarykey]) {
-		[libs addObject:[[Library alloc] initWithDictionary:lib]];
+		Library *newLib = [[Library alloc] initWithDictionary:lib];
+		[libs addObject:newLib];
+		[newLib release];
 	}
-	return [NSArray arrayWithArray:libs];
+	NSArray *immutableArray= [NSArray arrayWithArray:libs];
+	[libs release];
+	return immutableArray;
 	
 }
 - (Library *) getLastUsedLibrary{
@@ -75,8 +86,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 - (void) addLibrary:(Library *) newLib{
 	NSMutableArray *libraries = [self.preferences objectForKey:kPrefLibrarykey];
 	if (libraries == nil){
-		libraries = [[NSMutableArray alloc] init];
+		NSMutableArray *newlibraries = [[NSMutableArray alloc] init];
 		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
+		[newlibraries release];
 	}
 	int foundIndex = -1;
 	for (int i = 0; i<[libraries count];i++) {
@@ -94,5 +106,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	[libraries addObject:[newLib getAsDictionary]];
 	[self.preferences setObject:[newLib getAsDictionary] forKey:kPrefLastUsedLibrary];
 }
+
+- (void)dealloc {
+    [self.preferences release];
+    [super dealloc];
+}
+
 
 @end

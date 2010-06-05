@@ -21,6 +21,7 @@
 	
 	IBOutlet MasterViewController *masterViewController;
 	IBOutlet DetailViewController *detailViewController;
+	LibrariesViewController *librariesViewController;
 	
 	IBOutlet AsyncImageView *nowPlaying;
 	IBOutlet UIProgressView *progress;
@@ -29,6 +30,7 @@
 	IBOutlet UILabel *album;
 	IBOutlet UIBarButtonItem *play;
 	IBOutlet UIBarButtonItem *pause;
+	IBOutlet UISlider *volumeSlider;
 }
 
 - (IBAction) buttonClicked:(id)sender;
@@ -36,6 +38,7 @@
 - (IBAction) pauseClicked:(id)sender;
 - (IBAction) nextClicked:(id)sender;
 - (IBAction) previousClicked:(id)sender;
+- (IBAction) volumeChanged:(id)sender;
 - (void) libraryAvailable;
 
 @end

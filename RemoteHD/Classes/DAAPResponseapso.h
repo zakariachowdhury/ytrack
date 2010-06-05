@@ -11,11 +11,13 @@
 #import "DAAPResponsemlcl.h"
 
 @interface DAAPResponseapso : DAAPResponse {
+	NSNumber *mstt;
 	NSArray *res;
 	DAAPResponsemlcl *mlcl;
 }
 
-@property (nonatomic, retain) NSArray *res;
+@property (nonatomic, retain) NSNumber *mstt;
+@property (nonatomic, assign) NSArray *res;
 @property (nonatomic, retain) DAAPResponsemlcl *mlcl;
 
 @end

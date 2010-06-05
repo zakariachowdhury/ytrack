@@ -11,6 +11,7 @@
 
 @implementation DAAPResponsemccr
 
+@synthesize mstt;
 @synthesize tags;
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
@@ -21,8 +22,15 @@
 			[temp addObject:[results objectForKey:key]];
 		}
 	}
-	self.tags = [NSArray arrayWithArray:temp];
+	NSArray *immutableArray = [NSArray arrayWithArray:temp];
+	self.tags = immutableArray;
+	[temp release];
 }
 
+- (void)dealloc {
+	[self.mstt release];
+    [self.tags release];
+    [super dealloc];
+}
 
 @end

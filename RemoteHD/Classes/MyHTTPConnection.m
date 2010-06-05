@@ -197,7 +197,7 @@
 	// write the pairing id and return it
 	char retval[33];
 	snprintf( retval, sizeof(retval), "%08X%08X%08X%08X", a, b, c, d );
-	NSString * str = [[NSString alloc] initWithBytes:&retval length:32 encoding:NSISOLatin1StringEncoding];
+	NSString * str = [[[NSString alloc] initWithBytes:&retval length:32 encoding:NSISOLatin1StringEncoding] autorelease];
 	return str;
 }
 
@@ -256,6 +256,7 @@
 	URLParser * urlParser = [[URLParser alloc] initWithURLString:path];
 	NSString *iTunesPairingCode = [urlParser valueForVariable:@"pairingcode"];
 	NSString *serviceName = [urlParser valueForVariable:@"servicename"];
+	[urlParser release];
 /*	NSRange pos = [path rangeOfString:@"pairingcode="];
 	NSString *iTunesPairingCode = [path substringWithRange:NSMakeRange(pos.location + pos.length, 32)]; */
 	NSLog(@"itunespairingcode = %@",iTunesPairingCode);

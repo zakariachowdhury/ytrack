@@ -13,6 +13,12 @@
 #import "DAAPResponsemdcl.h"
 #import "PreferencesManager.h"
 
+@interface RemoteHDViewController()
+
+- (void) _updateVolume;
+
+@end
+
 
 @implementation RemoteHDViewController
 
@@ -77,12 +83,14 @@
 }
 
 - (IBAction) buttonClicked:(id)sender{
-		LibrariesViewController *libraries = [[LibrariesViewController alloc ] initWithNibName:@"LibrariesViewController" bundle:nil];
-	//libraries.view.frame
-	libraries.modalPresentationStyle = UIModalPresentationFormSheet;
-	[libraries setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-	[libraries setDelegate:self];
-	[self presentModalViewController:libraries animated:YES]; 
+	if (librariesViewController == nil) {
+		librariesViewController = [[LibrariesViewController alloc ] initWithNibName:@"LibrariesViewController" bundle:nil];
+		librariesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+		[librariesViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+		[librariesViewController setDelegate:self];
+	}
+	
+	[self presentModalViewController:librariesViewController animated:YES]; 
 }
 
 - (IBAction) playClicked:(id)sender{
@@ -105,6 +113,12 @@
 	[server playPreviousItem];
 }
 
+- (IBAction) volumeChanged:(id)sender{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server setVolume:volumeSlider.value];
+	[self _updateVolume];
+}
+
 - (void) statusUpdate:(DAAPResponsecmst *)cmst{
 	int doneTime = [cmst.cast intValue]-[cmst.cant intValue];
 	int totalTime = [cmst.cast intValue];
@@ -120,6 +134,10 @@
 		play.enabled = YES;
 		pause.enabled = NO;
 	} 
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 }
 
 - (void) didFinishEditingLibraries {
@@ -135,6 +153,13 @@
 	
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
 	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	[self _updateVolume];
+}
+
+- (void) _updateVolume{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	long v = [server getVolume];
+	volumeSlider.value = v;
 }
 
 - (void) didSelectItem{
