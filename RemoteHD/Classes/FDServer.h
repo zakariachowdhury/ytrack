@@ -28,6 +28,7 @@
 	id<FDServerDelegate> delegate;
 	DAAPRequestReply *daap;
 	int musr;
+	long revNum;
 	BOOL connected;
 }
 
@@ -38,6 +39,7 @@
 @property (nonatomic, assign) id<FDServerDelegate> delegate;
 @property (nonatomic, retain) DAAPRequestReply *daap;
 @property (nonatomic) BOOL connected;
+
 
 
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort;
@@ -57,6 +59,7 @@
 - (NSArray *) getSpeakers;
 
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port;
+- (void) connectionTimedOut;
 
 
 @end
