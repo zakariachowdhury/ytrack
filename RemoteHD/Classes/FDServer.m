@@ -150,6 +150,35 @@
 	return casp.speakers;
 }
 
+- (void) setSpeakers:(NSArray *)speakers{
+	NSLog(@"FDServer-setSpeakers");
+	if ([speakers count] < 1) return;
+	SessionManager *sm = [SessionManager sharedSessionManager];
+	NSString *speakerList = @"";
+	for (int i = 0 ;i < [speakers count] - 1 ;i++) {
+		long long val = [[speakers objectAtIndex:i] longLongValue];
+		NSLog(@"0x%qX",val);
+		if (val == 0) {
+			speakerList = [speakerList stringByAppendingFormat:@"0,",val];
+		} else {
+			speakerList = [speakerList stringByAppendingFormat:@"0x%qX,",val];
+		}
+
+	}
+	long long val = [[speakers lastObject] longLongValue];
+	NSLog(@"0x%qX",val);
+	if (val == 0) {
+		speakerList = [speakerList stringByAppendingFormat:@"0",val];
+	} else {
+		speakerList = [speakerList stringByAppendingFormat:@"0x%qX",val];
+	}
+	NSLog(@"%@",speakerList);
+
+	NSString *string = [NSString stringWithFormat:kRequestSetSpeakers,self.host,self.port,speakerList,[sm getSessionId]];
+	NSLog(@"%@",string);
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
 - (long) getVolume{
 	NSLog(@"FDServer-getVolume");
 	SessionManager *sm = [SessionManager sharedSessionManager];

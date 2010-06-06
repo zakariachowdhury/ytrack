@@ -11,7 +11,12 @@
 
 @interface RemoteSpeaker : NSObject {
 	NSString *speakerName;
-
+	BOOL on;
+	NSNumber *spId;
 }
+
+@property (nonatomic, copy) NSString *speakerName;
+@property (nonatomic) BOOL on;
+@property (nonatomic, retain) NSNumber *spId;
 
 @end

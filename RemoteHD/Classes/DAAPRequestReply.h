@@ -21,7 +21,7 @@
 #define kRequestGetSpeakers @"http://%@:%@/ctrl-int/1/getspeakers?session-id=%d"
 #define kRequestAlbumList @"http://%@:%@/databases/%d/containers/8015/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid,daap.songuserrating,daap.songtime&type=music&sort=album&query='daap.songalbumid:12420311323912340483'"
 #define kRequestUpdate @"http://%@:%@/update?session-id=%d&revision-number=%d"
-#define kRequestSetSpeakers @"http://%@%:@/ctrl-int/1/setspeakers?speaker-id=0,0x%qX&session-id=%d"
+#define kRequestSetSpeakers @"http://%@:%@/ctrl-int/1/setspeakers?speaker-id=%@&session-id=%d"
 #define kRequestAllTracks @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid&type=music&sort=name&include-sort-headers=1&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')"
 #define kRequestPlaySongInLibrary @"http://%@:%@/ctrl-int/1/cue?command=play&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')&index=%d&sort=name&session-id=%d"
 #define kRequestStopPlaying @"http://%@:%@/ctrl-int/1/cue?command=clear&session-id=%d"
