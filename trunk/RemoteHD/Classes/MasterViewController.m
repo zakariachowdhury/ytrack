@@ -3,7 +3,8 @@
 //  RemoteHD
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  fabrice.dewasmes@gmail.com
+//  Copyright Fabrice Dewasmes 2010. All rights reserved.
 //
 
 #import "MasterViewController.h"
