@@ -7,6 +7,7 @@
 //
 
 #import "DAAPResponsecasp.h"
+#import "RemoteSpeaker.h"
 
 
 @implementation DAAPResponsecasp
@@ -20,7 +21,16 @@
 		self.speakers = temp;
 		[temp release];
 	}
-	[self.speakers addObject:mdcl];	
+	RemoteSpeaker *sp = [[RemoteSpeaker alloc] init];
+	sp.speakerName = mdcl.minm;
+	if ([mdcl.caia shortValue] == 1) {
+		sp.on = YES;
+	} else {
+		sp.on = NO;
+	}
+	sp.spId = mdcl.msma;
+	[self.speakers addObject:sp];
+	[sp release];
 }
 
 - (void)dealloc {

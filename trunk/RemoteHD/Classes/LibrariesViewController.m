@@ -14,6 +14,7 @@
 #import "Library.h"
 #import "FDServer.h"
 #import "DAAPResponsemdcl.h"
+#import "RemoteSpeaker.h"
 
 #define kProgressIndicatorSize 20.0
 
@@ -145,10 +146,10 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	if (indexPath.section == 1) {
-		DAAPResponsemdcl * sp = (DAAPResponsemdcl *)[self.speakers objectAtIndex:indexPath.row];
-		cell.textLabel.text = [sp minm];
+		RemoteSpeaker * sp = (RemoteSpeaker *)[self.speakers objectAtIndex:indexPath.row];
+		cell.textLabel.text = sp.speakerName;
 		UISwitch *sw = [[UISwitch alloc] init];
-		if ([sp.caia shortValue] == 1) {
+		if (sp.on) {
 			sw.on = YES;
 		} else {
 			sw.on = NO;
@@ -208,13 +209,26 @@
 }
 
 - (void)didChangeSpeakerValue:(id)sender{
+	NSMutableArray *spList = [[NSMutableArray alloc] init];
+	for (RemoteSpeaker *sp in self.speakers){
+		if (sp.on) {
+			[spList addObject:sp.spId];
+		}
+	}
 	UISwitch *sw = (UISwitch *)sender;
-	if (sw.on)
-	NSLog(@"value of %d changed to YES ",sw.tag);
+	int rowNum = sw.tag - 10;
+	NSNumber * num = [[self.speakers objectAtIndex:rowNum] spId];
+	if (sw.on) {
+		[spList addObject:num];
+		NSLog(@"value of %d changed to YES ",sw.tag);
+	}
 	else {
+		[spList removeObjectIdenticalTo:num];
 		NSLog(@"value of %d changed to NO ",sw.tag);
 	}
-
+	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
+	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];
+	[self.table reloadData];
 }
 
 

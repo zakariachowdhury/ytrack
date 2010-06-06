@@ -10,5 +10,14 @@
 
 
 @implementation RemoteSpeaker
+@synthesize speakerName;
+@synthesize on;
+@synthesize spId;
+
+- (void) dealloc {
+	[self.speakerName release];
+	[self.spId release];
+	[super dealloc];
+}
 
 @end

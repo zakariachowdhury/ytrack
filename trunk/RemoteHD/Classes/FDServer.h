@@ -57,6 +57,7 @@
 - (long) getVolume;
 - (void) setVolume:(long) volume;
 - (NSArray *) getSpeakers;
+- (void) setSpeakers:(NSArray *)speakers;
 
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port;
 - (void) connectionTimedOut;
