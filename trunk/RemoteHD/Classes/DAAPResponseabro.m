@@ -14,27 +14,16 @@
 @synthesize muty;
 @synthesize mtco;
 @synthesize mrco;
-@synthesize res;
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	NSMutableArray *temp = [[NSMutableArray alloc] init];
-	NSDictionary * results = [[dict objectForKey:@"abro"] objectForKey:@"abar"];
-	for (id key in results) {
-		if ([key hasPrefix:@"mlit"]) {
-			[temp addObject:[results objectForKey:key]];
-		}
-		
-	}
-	self.res = [NSArray arrayWithArray:temp];
-	[temp release];
-}
+@synthesize abar;
+@synthesize mshl;
 
 - (void)dealloc {
 	[self.mstt release];
 	[self.muty release];
 	[self.mtco release];
 	[self.mrco release];
-    [self.res release];
+    [self.abar release];
+    [self.mshl release];
     [super dealloc];
 }
 @end

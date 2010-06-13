@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DAAPRequestReply.h"
+#import "ArtistDatasource.h"
 
 @protocol DetailDelegate
 
@@ -20,16 +21,23 @@
 
 @interface DetailViewController : UITableViewController <DAAPRequestDelegate> {
 	NSArray *results;
-	NSDictionary *indexedResults;
+	NSArray *indexList;
 	NSMutableArray *arrayOfCharacters;
+	NSString *currentTrack;
+	ArtistDatasource *artistDatasource;
 	id<DetailDelegate> delegate;
 }
 
 @property (nonatomic, retain) NSArray *results;
-@property (nonatomic, retain) NSDictionary *indexedResults;
+@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) id<DetailDelegate> delegate;
+@property (nonatomic, copy) NSString *currentTrack;
+@property (nonatomic, retain) ArtistDatasource *artistDatasource;
 
 - (void) display;
 - (void) didFinishLoading:(DAAPResponse *)response;
+- (void) changeToArtistView;
+- (void) changeToAlbumView;
+//- (void) nowPlayingTrack:(NSString *)track album:(NSString *)album artist:(NSString *)artist;
 
 @end

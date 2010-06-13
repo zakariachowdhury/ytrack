@@ -15,7 +15,7 @@
 @synthesize mstt;
 @synthesize res;
 @synthesize mlcl;
-
+@synthesize mshl;
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
 	NSMutableArray *temp = [[NSMutableArray alloc] init];
@@ -40,6 +40,7 @@
 	[self.mstt release];
     [self.res release];
 	[self.mlcl release];
+	[self.mshl release];
     [super dealloc];
 }
 

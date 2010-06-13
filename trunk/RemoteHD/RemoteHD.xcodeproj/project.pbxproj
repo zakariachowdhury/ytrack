@@ -16,8 +16,9 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* RemoteHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */; };
 		6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */; };
+		6B056B2711C04114008EF26B /* DAAPResponsemshl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B056B2611C04113008EF26B /* DAAPResponsemshl.m */; };
+		6B12EB4D11C1A6550051958A /* ArtistDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B12EB4C11C1A6550051958A /* ArtistDatasource.m */; };
 		6B35D53511A71E6D00BC846C /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D53411A71E6D00BC846C /* URLParser.m */; };
-		6B35D77A11A7BACE00BC846C /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D77911A7BACE00BC846C /* Library.m */; };
 		6B35D91911A8932100BC846C /* DAAPResponseaply.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D91811A8932100BC846C /* DAAPResponseaply.m */; };
 		6B35D9C311A89A0600BC846C /* DAAPResponseabro.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9C211A89A0600BC846C /* DAAPResponseabro.m */; };
 		6B35D9D411A89A6D00BC846C /* DAAPResponseabar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9D311A89A6D00BC846C /* DAAPResponseabar.m */; };
@@ -54,10 +55,17 @@
 		6BA2F9FC11A4E63B00427C2F /* LibrariesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA2F9FA11A4E63B00427C2F /* LibrariesViewController.xib */; };
 		6BA2FAED11A513CF00427C2F /* PinCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2FAEB11A513CF00427C2F /* PinCodeController.m */; };
 		6BA2FAEE11A513CF00427C2F /* PinCodeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA2FAEC11A513CF00427C2F /* PinCodeController.xib */; };
+		6BA5FAA111C2B2F60009921E /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA5FAA011C2B2F60009921E /* Detail.xib */; };
+		6BA5FB1511C2BDFB0009921E /* AlbumsOfArtistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA5FB1411C2BDFB0009921E /* AlbumsOfArtistController.m */; };
+		6BA5FB4311C2C2AA0009921E /* DAAPResponseagal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA5FB4211C2C2AA0009921E /* DAAPResponseagal.m */; };
+		6BA5FC1D11C2D0E20009921E /* TracksForAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA5FC1C11C2D0E20009921E /* TracksForAlbumController.m */; };
 		6BCDA5AA11B7A19800A3ED01 /* DAAPResponsemupd.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */; };
 		6BCDA63111B7B84A00A3ED01 /* DAAPResponsecmgt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */; };
+		6BD18E9711C4A2AB00612A33 /* defaultAlbumArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */; };
+		6BD18EB011C4A80700612A33 /* AsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */; };
 		6BE275F111AB948600F1F600 /* FDServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE275F011AB948600F1F600 /* FDServer.m */; };
 		6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */; };
+		6BE2B34111C05EA000EE6AC7 /* DAAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */; };
 		6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA820811ABD04500426E9E /* DAAPResponseapso.m */; };
 /* End PBXBuildFile section */
 
@@ -76,10 +84,12 @@
 		32CA4F630368D1EE00C91783 /* RemoteHD_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteHD_Prefix.pch; sourceTree = "<group>"; };
 		6B008C7011B31194008E2012 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		6B008C7111B31194008E2012 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		6B056B2511C04113008EF26B /* DAAPResponsemshl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemshl.h; sourceTree = "<group>"; };
+		6B056B2611C04113008EF26B /* DAAPResponsemshl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemshl.m; sourceTree = "<group>"; };
+		6B12EB4B11C1A6550051958A /* ArtistDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistDatasource.h; sourceTree = "<group>"; };
+		6B12EB4C11C1A6550051958A /* ArtistDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistDatasource.m; sourceTree = "<group>"; };
 		6B35D53311A71E6D00BC846C /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
 		6B35D53411A71E6D00BC846C /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
-		6B35D77811A7BACE00BC846C /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
-		6B35D77911A7BACE00BC846C /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		6B35D91711A8932100BC846C /* DAAPResponseaply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseaply.h; sourceTree = "<group>"; };
 		6B35D91811A8932100BC846C /* DAAPResponseaply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseaply.m; sourceTree = "<group>"; };
 		6B35D9C111A89A0600BC846C /* DAAPResponseabro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseabro.h; sourceTree = "<group>"; };
@@ -150,14 +160,26 @@
 		6BA2FAEA11A513CF00427C2F /* PinCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeController.h; sourceTree = "<group>"; };
 		6BA2FAEB11A513CF00427C2F /* PinCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeController.m; sourceTree = "<group>"; };
 		6BA2FAEC11A513CF00427C2F /* PinCodeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeController.xib; sourceTree = "<group>"; };
+		6BA5FAA011C2B2F60009921E /* Detail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
+		6BA5FB1311C2BDFB0009921E /* AlbumsOfArtistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumsOfArtistController.h; sourceTree = "<group>"; };
+		6BA5FB1411C2BDFB0009921E /* AlbumsOfArtistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumsOfArtistController.m; sourceTree = "<group>"; };
+		6BA5FB4111C2C2AA0009921E /* DAAPResponseagal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseagal.h; sourceTree = "<group>"; };
+		6BA5FB4211C2C2AA0009921E /* DAAPResponseagal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseagal.m; sourceTree = "<group>"; };
+		6BA5FC1B11C2D0E20009921E /* TracksForAlbumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksForAlbumController.h; sourceTree = "<group>"; };
+		6BA5FC1C11C2D0E20009921E /* TracksForAlbumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksForAlbumController.m; sourceTree = "<group>"; };
 		6BCDA5A811B7A19800A3ED01 /* DAAPResponsemupd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemupd.h; sourceTree = "<group>"; };
 		6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemupd.m; sourceTree = "<group>"; };
 		6BCDA62F11B7B84A00A3ED01 /* DAAPResponsecmgt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsecmgt.h; sourceTree = "<group>"; };
 		6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsecmgt.m; sourceTree = "<group>"; };
+		6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultAlbumArtwork.png; sourceTree = "<group>"; };
+		6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageLoader.h; sourceTree = "<group>"; };
+		6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageLoader.m; sourceTree = "<group>"; };
 		6BE275EF11AB948600F1F600 /* FDServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDServer.h; sourceTree = "<group>"; };
 		6BE275F011AB948600F1F600 /* FDServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDServer.m; sourceTree = "<group>"; };
 		6BE2765A11ABA40100F1F600 /* DAAPResponsemccr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemccr.h; sourceTree = "<group>"; };
 		6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemccr.m; sourceTree = "<group>"; };
+		6BE2B33F11C05EA000EE6AC7 /* DAAPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPRequest.h; sourceTree = "<group>"; };
+		6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPRequest.m; sourceTree = "<group>"; };
 		6BEA820711ABD04500426E9E /* DAAPResponseapso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseapso.h; sourceTree = "<group>"; };
 		6BEA820811ABD04500426E9E /* DAAPResponseapso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseapso.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RemoteHD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RemoteHD-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -197,8 +219,6 @@
 				6BA2FAEA11A513CF00427C2F /* PinCodeController.h */,
 				6BA2FAEB11A513CF00427C2F /* PinCodeController.m */,
 				6BA2FAEC11A513CF00427C2F /* PinCodeController.xib */,
-				6B35D77811A7BACE00BC846C /* Library.h */,
-				6B35D77911A7BACE00BC846C /* Library.m */,
 				6B43AD9511A95C8500DBD74E /* PreferencesManager.h */,
 				6B43AD9611A95C8500DBD74E /* PreferencesManager.m */,
 				6B7D940411A998C7002465AA /* SessionManager.h */,
@@ -207,6 +227,14 @@
 				6BE275F011AB948600F1F600 /* FDServer.m */,
 				6B008C7011B31194008E2012 /* AsyncImageView.h */,
 				6B008C7111B31194008E2012 /* AsyncImageView.m */,
+				6B12EB4B11C1A6550051958A /* ArtistDatasource.h */,
+				6B12EB4C11C1A6550051958A /* ArtistDatasource.m */,
+				6BA5FB1311C2BDFB0009921E /* AlbumsOfArtistController.h */,
+				6BA5FB1411C2BDFB0009921E /* AlbumsOfArtistController.m */,
+				6BA5FC1B11C2D0E20009921E /* TracksForAlbumController.h */,
+				6BA5FC1C11C2D0E20009921E /* TracksForAlbumController.m */,
+				6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */,
+				6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -243,10 +271,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */,
 				6B75F8C911A411B100B9D841 /* icon.png */,
 				2899E5210DE3E06400AC0155 /* RemoteHDViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* RemoteHD-Info.plist */,
+				6BA5FAA011C2B2F60009921E /* Detail.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -273,6 +303,8 @@
 				6B75F82211A4094100B9D841 /* RemoteSpeaker.h */,
 				6B75F82311A4094100B9D841 /* RemoteSpeaker.m */,
 				6B75F7EE11A4090200B9D841 /* HTTP */,
+				6BE2B33F11C05EA000EE6AC7 /* DAAPRequest.h */,
+				6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */,
 			);
 			name = DAAP;
 			sourceTree = "<group>";
@@ -352,6 +384,10 @@
 				6BCDA5A911B7A19800A3ED01 /* DAAPResponsemupd.m */,
 				6BCDA62F11B7B84A00A3ED01 /* DAAPResponsecmgt.h */,
 				6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */,
+				6B056B2511C04113008EF26B /* DAAPResponsemshl.h */,
+				6B056B2611C04113008EF26B /* DAAPResponsemshl.m */,
+				6BA5FB4111C2C2AA0009921E /* DAAPResponseagal.h */,
+				6BA5FB4211C2C2AA0009921E /* DAAPResponseagal.m */,
 			);
 			name = DAAPMessages;
 			sourceTree = "<group>";
@@ -403,6 +439,8 @@
 				6B75F8CA11A411B100B9D841 /* icon.png in Resources */,
 				6BA2F9FC11A4E63B00427C2F /* LibrariesViewController.xib in Resources */,
 				6BA2FAEE11A513CF00427C2F /* PinCodeController.xib in Resources */,
+				6BA5FAA111C2B2F60009921E /* Detail.xib in Resources */,
+				6BD18E9711C4A2AB00612A33 /* defaultAlbumArtwork.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +481,6 @@
 				6BA2F9FB11A4E63B00427C2F /* LibrariesViewController.m in Sources */,
 				6BA2FAED11A513CF00427C2F /* PinCodeController.m in Sources */,
 				6B35D53511A71E6D00BC846C /* URLParser.m in Sources */,
-				6B35D77A11A7BACE00BC846C /* Library.m in Sources */,
 				6B35D91911A8932100BC846C /* DAAPResponseaply.m in Sources */,
 				6B35D9C311A89A0600BC846C /* DAAPResponseabro.m in Sources */,
 				6B35D9D411A89A6D00BC846C /* DAAPResponseabar.m in Sources */,
@@ -456,6 +493,13 @@
 				6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */,
 				6BCDA5AA11B7A19800A3ED01 /* DAAPResponsemupd.m in Sources */,
 				6BCDA63111B7B84A00A3ED01 /* DAAPResponsecmgt.m in Sources */,
+				6B056B2711C04114008EF26B /* DAAPResponsemshl.m in Sources */,
+				6BE2B34111C05EA000EE6AC7 /* DAAPRequest.m in Sources */,
+				6B12EB4D11C1A6550051958A /* ArtistDatasource.m in Sources */,
+				6BA5FB1511C2BDFB0009921E /* AlbumsOfArtistController.m in Sources */,
+				6BA5FB4311C2C2AA0009921E /* DAAPResponseagal.m in Sources */,
+				6BA5FC1D11C2D0E20009921E /* TracksForAlbumController.m in Sources */,
+				6BD18EB011C4A80700612A33 /* AsyncImageLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

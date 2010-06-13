@@ -8,26 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "FDServer.h"
-#import "Library.h"
 
 @interface SessionManager : NSObject {
-	Library *currentLibrary;
-	FDServer *currentServer;
 @private
 	BOOL sessionEstablished;
-	int sessionId;
+	NSMutableArray *_servers;
 }
-
-@property (nonatomic, retain) Library *currentLibrary;
-@property (nonatomic, retain) FDServer *currentServer;
 
 
 + (id) sharedSessionManager;
 
 - (BOOL) isSessionEstablished;
-- (int) getSessionId;
-- (NSString *) getHost;
-- (NSString *) getPort;
-- (void) open;
+- (void) foundNewServer:(FDServer *)server;
+- (NSArray *) getServers;
+- (FDServer *) currentServer;
+- (void) openLastUsedServer;
 
 @end

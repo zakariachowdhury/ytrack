@@ -11,7 +11,6 @@
 #import "SessionManager.h"
 #import "DAAPRequestReply.h"
 #import "HexDumpUtility.h"
-#import "Library.h"
 #import "FDServer.h"
 #import "DAAPResponsemdcl.h"
 #import "RemoteSpeaker.h"
@@ -102,7 +101,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-	if ([[[PreferencesManager sharedPreferencesManager] getAllLibraries] count] > 0) {
+	if ([[[SessionManager sharedSessionManager] getServers] count] > 0) {
 		[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
 	}
 }
@@ -129,7 +128,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // If there are no services and searchingForServicesString is set, show one row to tell the user.
 	if (section == 0) {
-		NSUInteger count = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count];
+		NSUInteger count = [[[SessionManager sharedSessionManager] getServers] count];
 		return count + 1;
 	} 
 	return [self.speakers count];
@@ -159,16 +158,16 @@
 		cell.accessoryView = sw;
 		[sw release];
     } else if (indexPath.section == 0) {
-		if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]){
+		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
 			cell.textLabel.text = @"Ajouter une bibliothèque";
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		} else {
 			// Set up the text for the cell
-			Library *lib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
+			FDServer *server = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
 			
-			NSData *obj = [lib.TXT objectForKey:@"CtlN"];
+			NSData *obj = [server.TXT objectForKey:@"CtlN"];
 			NSString * libraryName = [DAAPRequestReply parseString:obj];
-			NSString *serviceName = lib.servicename;
+			NSString *serviceName = server.servicename;
 			
 			cell.textLabel.text = libraryName;
 			cell.textLabel.textColor = [UIColor grayColor];
@@ -197,8 +196,8 @@
 			} else if (cell.accessoryView) {
 				cell.accessoryView = nil;
 			}		
-			Library *hey = [[SessionManager sharedSessionManager] currentLibrary];;
-			if ([serviceName isEqualToString:hey.servicename]) {
+			FDServer *currentServer = [[SessionManager sharedSessionManager] currentServer];
+			if ([serviceName isEqualToString:currentServer.servicename]) {
 				cell.accessoryType = UITableViewCellAccessoryCheckmark;
 			}
 			
@@ -231,6 +230,13 @@
 	[self.table reloadData];
 }
 
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+	if (section == 0) {
+		return @"iTunes libraries";
+	} 
+	return @"Speakers";
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -294,7 +300,7 @@
 	[self.currentResolve stop];
 	
 	// user selected add library
-	if (indexPath.row == [[[PreferencesManager sharedPreferencesManager] getAllLibraries] count]) {
+	if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]) {
 		[self.netServiceBrowser stop];
 		PinCodeController *pincodeController = [[PinCodeController alloc] initWithNibName:@"PinCodeController" bundle:nil];
 		pincodeController.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -304,11 +310,11 @@
 	} 
 	// user selected a previously paired library, try to resolve service in case the host has changed
 	else {
-		Library *selectedLib = [[[PreferencesManager sharedPreferencesManager] getAllLibraries] objectAtIndex:indexPath.row];
-		self.currentServiceName = selectedLib.servicename;
-		self.currentGUID = selectedLib.pairingGUID;
-		NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedLib.servicename];
-		[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedLib.TXT]];
+		FDServer *selectedServer = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
+		self.currentServiceName = selectedServer.servicename;
+		self.currentGUID = selectedServer.pairingGUID;
+		NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedServer.servicename];
+		[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedServer.TXT]];
 		self.currentResolve = service;
 		[self.currentResolve setDelegate:self];
 		
@@ -358,7 +364,6 @@
 	return YES;
 }
 	 
-	 
 - (void)stopCurrentResolve {
 	self.needsActivityIndicator = NO;
 	self.timer = nil;
@@ -366,9 +371,6 @@
 	[self.currentResolve stop];
 	self.currentResolve = nil;
 }
-
-
-
 
 - (void)initialWaitOver:(NSTimer*)timer {
 	self.initialWaitOver= YES;
@@ -442,17 +444,17 @@
 
 	NSDictionary* TXTDict = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 	
-	Library *lib = [[Library alloc] initWithServiceName:self.currentServiceName pairingGUID:self.currentGUID  host:host port:portStr TXT:TXTDict];
-	
 	[self stopCurrentResolve];
+
+	if (![service.name isEqualToString:[[[SessionManager sharedSessionManager] currentServer] servicename]]) {
+		FDServer *server = [[FDServer alloc] initWithHost:host port:portStr pairingGUID:self.currentGUID serviceName:self.currentServiceName TXT:TXTDict];
+		[server open];
+		[[SessionManager sharedSessionManager] foundNewServer:server];
+		self.speakers = [server getSpeakers];
+		
+		[server release];
+	}
 	
-	[[PreferencesManager sharedPreferencesManager] addLibrary:lib];
-	[[SessionManager sharedSessionManager] setCurrentLibrary:lib];
-	[[SessionManager sharedSessionManager] open];
-	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];
-	[lib release];
-	
-	[FDServer getServerInfoForHost:host atPort:portStr];
 	
 	[service release];
 	[self.table reloadData];

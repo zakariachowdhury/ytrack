@@ -20,9 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
-	    // Override point for customization after app launch  
+	// Override point for customization after app launch  
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 

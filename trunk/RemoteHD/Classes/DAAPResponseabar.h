@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DAAPResponse.h"
+#import "DAAPResponsemlit.h"
 
-
-@interface DAAPResponseabar : NSObject {
+@interface DAAPResponseabar : DAAPResponse {
 	NSNumber *mstt;
-	NSString *mlit;
+	NSMutableArray *list;
 }
 
+@property (nonatomic, retain) NSMutableArray *list;
 @property (nonatomic, retain) NSNumber *mstt;
-@property (nonatomic, copy) NSString *mlit;
 
 @end

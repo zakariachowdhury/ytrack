@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Library.h"
+#import "FDServer.h"
 
 #define kPrefLibrarykey @"libraries"
 #define kPrefLastUsedLibrary @"lastUsedLib"
@@ -25,10 +25,10 @@
 + (id) sharedPreferencesManager;
 
 - (void) loadPreferencesFromFile;
-- (NSArray *) getAllLibraries;
-- (Library *) getLastUsedLibrary;
+- (NSArray *) getAllStoredServers;
+- (FDServer *) lastUsedServer;
 - (void) persistPreferences;
-- (void) addLibrary:(Library *) newLib;
+- (void) addServer:(FDServer *) newServer;
 
 
 

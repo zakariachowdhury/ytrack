@@ -55,6 +55,8 @@
 		return YES;
 	} else if ([command isEqualToString:@"mcnm"]) {
 		return YES;
+	} else if ([command isEqualToString:@"mshc"]) {
+		return YES;
 	} 
 	return NO;
 }
@@ -232,6 +234,7 @@
 		
 		int length = [self parseLength:theData atPosition:progress+4];
 		//NSLog(@"command (%d) : %@",length,command);
+		
 		
 		// is current object interested in that command
 		if (![self respondsToSelector:NSSelectorFromString(commandSetter)]){
