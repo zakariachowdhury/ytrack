@@ -32,7 +32,10 @@
 	IBOutlet UIBarButtonItem *play;
 	IBOutlet UIBarButtonItem *pause;
 	IBOutlet UISlider *volumeSlider;
+	UINavigationController *navigationController;
 }
+
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 - (IBAction) buttonClicked:(id)sender;
 - (IBAction) playClicked:(id)sender;
@@ -40,6 +43,7 @@
 - (IBAction) nextClicked:(id)sender;
 - (IBAction) previousClicked:(id)sender;
 - (IBAction) volumeChanged:(id)sender;
+- (IBAction) buttonSelected:(id)sender;
 - (void) libraryAvailable;
 
 @end

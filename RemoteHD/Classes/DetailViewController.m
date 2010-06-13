@@ -18,8 +18,10 @@
 @implementation DetailViewController
 
 @synthesize results;
-@synthesize indexedResults;
+@synthesize indexList;
 @synthesize delegate;
+@synthesize currentTrack;
+@synthesize artistDatasource;
 
 
 #pragma mark -
@@ -42,41 +44,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
 	
 	results = [[NSMutableArray alloc] init];
-	arrayOfCharacters = [[NSMutableArray alloc]init];
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUp:) name:@"statusUpdate" object:nil];
 }
-
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Override to allow orientations other than the default portrait orientation.
     return YES;
 }
 
@@ -85,36 +60,53 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [arrayOfCharacters count];
+	return [self.indexList count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	NSString *letter = [arrayOfCharacters objectAtIndex:section];
-	return [[indexedResults objectForKey:letter] count];
+	//NSString *letter = [arrayOfCharacters objectAtIndex:section];
+	//return [[indexedResults objectForKey:letter] count];
+	long res = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:section] mshn] longValue];
+	
+	return res;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-	return arrayOfCharacters;
+	NSMutableArray *chars = [[[NSMutableArray alloc] init] autorelease];
+	for (DAAPResponsemlit *mlit in self.indexList) {
+		[chars addObject:[mlit mshc]];
+	}
+	//return arrayOfCharacters;
+	return chars;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-	NSInteger count = 0;
+	/*NSInteger count = 0;
 	for(NSString *character in arrayOfCharacters)
 	{
 		if([character isEqualToString:title])
 			return count;
 		count ++;
 	}
-	return 0;// in case of some eror donot crash d application
+	return 0;// in case of some eror donot crash d application*/
+	NSInteger count = 0;
+	for(DAAPResponsemlit *mlit in self.indexList)
+	{
+		if([mlit.mshc isEqualToString:title])
+			return count;
+		count ++;
+	}
+	return 0;
 	
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if([arrayOfCharacters count]==0)
+	/*if([arrayOfCharacters count]==0)
 		return @"";
-	return [arrayOfCharacters objectAtIndex:section];
+	return [arrayOfCharacters objectAtIndex:section];*/
+	return [(DAAPResponsemlit *)[self.indexList objectAtIndex:section] mshc];
 }
 
 // Customize the appearance of table view cells.
@@ -127,82 +119,44 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	NSString *letter = [arrayOfCharacters objectAtIndex:indexPath.section];
-	NSArray *beginWithLetter = [self.indexedResults objectForKey:letter];
+	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
+	DAAPResponsemlit *track = [self.results objectAtIndex:(offset + indexPath.row)];
 	
-	//cell.textLabel.text = [results objectAtIndex:indexPath.row];
-	cell.textLabel.text = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] minm];
-	NSString *album = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] asal];
-	NSString *artist = [(DAAPResponsemlit *)[beginWithLetter objectAtIndex:indexPath.row] asar];
+	cell.textLabel.text = track.minm;
+	NSString *album = track.asal;
+	NSString *artist = track.asar;
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",album, artist];
+	if ([cell.textLabel.text isEqualToString:self.currentTrack]) {
+		//NSLog(@"%@-%@",cell.textLabel.text,self.currentTrack);
+		cell.textLabel.textColor = [UIColor blueColor];
+	} else {
+		//NSLog(@"%@-%@",cell.textLabel.text,self.currentTrack);
+		cell.textLabel.textColor = [UIColor blackColor];
+	}
     
     return cell;
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	//DAAPResponsemlit *song = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
-	NSString *letter = [arrayOfCharacters objectAtIndex:indexPath.section];
-	
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[[self.indexedResults objectForKey:letter] objectAtIndex:indexPath.row];
-	int i = [mlit index];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section];
+	long offset = [mlit.mshi longValue];
+	long i = offset + indexPath.row;
 	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:i];
     [delegate didSelectItem];
 }
 
-- (void) setupcharArray{
-	[arrayOfCharacters removeAllObjects];
-	NSArray *letters = [NSArray arrayWithArray:
-							 [@"A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|#"
-							  componentsSeparatedByString:@"|"]];
-	for (NSString *letter in letters) {
-		if ([self.indexedResults objectForKey:letter]) {
-			[arrayOfCharacters addObject:letter];
-		}
-	}
+// Used to update nowPlaying in the table
+- (void) statusUp:(NSNotification *)notification{
+	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+	self.currentTrack = cmst.cann;
+
+	/*[NSIndexPath indexPathForRow:<#(NSUInteger)row#> inSection:<#(NSUInteger)section#>
+	[self.tableView scrollToRowAtIndexPath:[reloadTracks objectAtIndex:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];*/
+
+	[self.tableView reloadData];
 }
 
 
@@ -216,10 +170,26 @@
 
 - (void) didFinishLoading:(DAAPResponse *)response{
 	self.results = [[(DAAPResponseapso *)response mlcl] list];
-	self.indexedResults = [[(DAAPResponseapso *)response mlcl] indexedList];
-	[self setupcharArray];
+	self.indexList = [[(DAAPResponseapso *)response mshl] indexList];
 	[self.tableView reloadData];
 	[self.delegate didFinishLoading];
+}
+
+- (void) changeToArtistView{
+	if (self.artistDatasource == nil) {
+		ArtistDatasource *d = [[ArtistDatasource alloc] init];
+		self.artistDatasource = d;
+		self.artistDatasource.navigationController = self.navigationController;
+		[d release];
+	}
+	self.tableView.dataSource = self.artistDatasource;
+	self.tableView.delegate = self.artistDatasource;
+	 
+	[self.tableView reloadData];
+}
+
+- (void) changeToAlbumView{
+	
 }
 	 
 
@@ -241,7 +211,9 @@
 
 - (void)dealloc {
 	[results release];
-	[arrayOfCharacters release];
+	[indexList release];
+	[currentTrack release];
+	[artistDatasource release];
     [super dealloc];
 }
 

@@ -51,14 +51,16 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
 	
-    if (self.connection!=nil) { self.connection = nil; }
+    if (self.connection!=nil) { [self cancelConnection];}
     if (self.data!=nil) { self.data = nil; }
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
 										 timeoutInterval:60.0];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-    self.connection = [[NSURLConnection alloc]
-				  initWithRequest:request delegate:self];
+	NSURLConnection *conn =[[NSURLConnection alloc]
+							initWithRequest:request delegate:self];
+    self.connection = conn;
+	[conn release];
 }
 
 - (void)loadImageNotAvailable {
@@ -80,9 +82,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 - (void)connection:(NSURLConnection *)theConnection
 	didReceiveData:(NSData *)incrementalData {
-	if (theConnection != self.connection) {
-		return;
-	}
 	assert(theConnection == self.connection);
     if (self.data==nil) {
 		NSMutableData *temp = [[NSMutableData alloc] initWithCapacity:2048];
@@ -93,9 +92,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
-	if (theConnection != self.connection) {
-		return;
-	}
 	assert(theConnection == self.connection);
     self.connection=nil;
 	

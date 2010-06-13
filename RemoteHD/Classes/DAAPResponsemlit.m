@@ -26,6 +26,11 @@
 @synthesize astn;
 @synthesize asal;
 @synthesize asar;
+@synthesize asaa;
+@synthesize mshc;
+@synthesize mshi;
+@synthesize mshn;
+@synthesize mcti;
 @synthesize index;
 
 - (void) didFinishRawParsing:(NSDictionary *)dict{
@@ -59,6 +64,11 @@
     [self.minm release];
 	[self.asal release];
 	[self.asar release];
+	[self.asaa release];
+	[self.mshc release];
+	[self.mshi release];
+	[self.mshn release];
+	[self.mcti release];
     [super dealloc];
 }
 

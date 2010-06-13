@@ -25,6 +25,11 @@
 	NSNumber *astn;
 	NSString *asal;
 	NSString *asar;
+	NSString *asaa;
+	NSString *mshc;
+	NSNumber *mshi;
+	NSNumber *mshn;
+	NSNumber *mcti;
 	int index;
 }
 
@@ -43,6 +48,11 @@
 @property (nonatomic, retain) NSNumber *astn;
 @property (nonatomic, copy) NSString *asal;
 @property (nonatomic, copy) NSString *asar;
+@property (nonatomic, copy) NSString *asaa;
+@property (nonatomic, copy) NSString *mshc;
+@property (nonatomic, retain) NSNumber *mshi;
+@property (nonatomic, retain) NSNumber *mshn;
+@property (nonatomic, retain) NSNumber *mcti;
 @property (nonatomic) int index;
 
 @end

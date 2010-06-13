@@ -63,48 +63,57 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	[self writeApplicationPlist:self.preferences toFile:@"prefs.plist"];
 }
 
-- (NSArray *) getAllLibraries {
+- (NSArray *) getAllStoredServers {
 	if ([self.preferences objectForKey:kPrefLibrarykey] == nil){
-		NSMutableArray *libraries = [[NSMutableArray alloc] init];
-		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
-		[libraries release];
+		NSMutableArray *servers = [[NSMutableArray alloc] init];
+		[self.preferences setObject:servers forKey:kPrefLibrarykey];
+		[servers release];
 	}
-	NSMutableArray *libs = [[NSMutableArray alloc] init];
-	for (NSDictionary *lib in [self.preferences objectForKey:kPrefLibrarykey]) {
-		Library *newLib = [[Library alloc] initWithDictionary:lib];
-		[libs addObject:newLib];
-		[newLib release];
+	NSMutableArray *servers = [[NSMutableArray alloc] init];
+	for (NSDictionary *server in [self.preferences objectForKey:kPrefLibrarykey]) {
+		FDServer *newServer = [[FDServer alloc] initWithDictionary:server];
+		[servers addObject:newServer];
+		[newServer release];
 	}
-	NSArray *immutableArray= [NSArray arrayWithArray:libs];
-	[libs release];
+	NSArray *immutableArray= [NSArray arrayWithArray:servers];
+	[servers release];
 	return immutableArray;
 	
 }
-- (Library *) getLastUsedLibrary{
-	return [self.preferences objectForKey:kPrefLibrarykey];
+- (FDServer *) lastUsedServer{
+	NSDictionary *dict = [self.preferences objectForKey:kPrefLastUsedLibrary];
+	FDServer *server = [[[FDServer alloc] initWithDictionary:dict] autorelease];
+	return server;
 }
-- (void) addLibrary:(Library *) newLib{
-	NSMutableArray *libraries = [self.preferences objectForKey:kPrefLibrarykey];
-	if (libraries == nil){
-		NSMutableArray *newlibraries = [[NSMutableArray alloc] init];
-		[self.preferences setObject:libraries forKey:kPrefLibrarykey];
-		[newlibraries release];
+
+- (void) setLastUsedServer:(FDServer *)server{
+	[self.preferences setObject:[server getAsDictionary] forKey:kPrefLastUsedLibrary];
+}
+
+- (void) addServer:(FDServer *) newServer{
+	NSMutableArray *servers = [self.preferences objectForKey:kPrefLibrarykey];
+	if (servers == nil){
+		NSMutableArray *newServers = [[NSMutableArray alloc] init];
+		[self.preferences setObject:newServers forKey:kPrefLibrarykey];
+		[newServers release];
 	}
+	servers = [self.preferences objectForKey:kPrefLibrarykey];
+	
 	int foundIndex = -1;
-	for (int i = 0; i<[libraries count];i++) {
-		NSString *libServiceName = [[libraries objectAtIndex:i] objectForKey:@"servicename"];
-		NSString *newlibServiceName = newLib.servicename;
-		if ([newlibServiceName isEqualToString:libServiceName]) {
+	for (int i = 0; i<[servers count];i++) {
+		NSString *serverServiceName = [[servers objectAtIndex:i] objectForKey:kLibraryServicenameKey];
+		NSString *newserverServiceName = newServer.servicename;
+		if ([newserverServiceName isEqualToString:serverServiceName]) {
 			foundIndex = i;
 			break;
 		}
 	}
 	if (foundIndex >=0) {
-		[libraries removeObjectAtIndex:foundIndex];
-	}
+		[servers removeObjectAtIndex:foundIndex];
+	} 
 	
-	[libraries addObject:[newLib getAsDictionary]];
-	[self.preferences setObject:[newLib getAsDictionary] forKey:kPrefLastUsedLibrary];
+	[servers addObject:[newServer getAsDictionary]];
+	[self.preferences setObject:[newServer getAsDictionary] forKey:kPrefLastUsedLibrary];
 }
 
 - (void)dealloc {

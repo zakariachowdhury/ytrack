@@ -46,9 +46,7 @@
 }
 
 - (void) parse{
-	NSLog(@"PARSING MLCL");
 	[self parse:self.data];
-	NSLog(@"END PARSING MLCL");
 }
 
 - (void)dealloc {

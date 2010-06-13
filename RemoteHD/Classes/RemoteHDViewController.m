@@ -13,6 +13,7 @@
 #import "DAAPResponsemsrv.h"
 #import "DAAPResponsemdcl.h"
 #import "PreferencesManager.h"
+#import "DAAPResponsemlit.h"
 
 @interface RemoteHDViewController()
 
@@ -22,65 +23,33 @@
 
 
 @implementation RemoteHDViewController
+@synthesize navigationController;
 
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
 
 - (void) libraryAvailable {
 	NSLog(@"------ library available -------");
+	loadingView.alpha = 1.0;
+	loadingView.hidden = NO;
+	[activityIndicator startAnimating];
+	[masterViewController display];
+	[detailViewController display];
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	[self _updateVolume];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
-}
-
-
-- (void) sampleRequests {
-	/*NSString *host = @"MBPFDE.local.";
-	NSString *portStr = @":3689";
-	NSString* str = [[NSString alloc] initWithFormat:@"http://%@%@/server-info",host,portStr];
-	NSLog(@"%@",str);
-	NSArray *dictoA = [DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:str]];
+	navigationController.view.frame = CGRectMake(243, 44, 525, 916);
+	[self.view addSubview:navigationController.view];
+	[self.view bringSubviewToFront:loadingView];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUp:) name:@"statusUpdate" object:nil];
+	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
+	[[SessionManager sharedSessionManager] openLastUsedServer];
 	
-	NSLog(@"briwsing : %@",[(DAAPResponsemsrv *)[dictoA objectAtIndex:0] minm]);
-	
-	int sessionId = 1;
-	
-	NSString* strspeaker = [[NSString alloc] initWithFormat:@"http://%@%@/getspeakers?session-id=%d",host,portStr,sessionId];
-	NSLog(@"%@",strspeaker);
-	NSArray *dictospeaker = [DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:strspeaker]];
-	long long speakerId = [[(DAAPResponsemdcl *)[dictospeaker objectAtIndex:1] msma] longLongValue];
-	
-	NSString* strsetspeaker = [[NSString alloc] initWithFormat:@"http://%@%@/ctrl-int/1/setspeakers?speaker-id=0,0x%qX&session-id=%d",host,portStr,speakerId,sessionId];
-	NSLog(@"%@",strsetspeaker);
-	[DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:strsetspeaker]];
-	
-	
-	//	NSString *string2 = [NSString stringWithFormat:@"http://192.168.0.9:3689/ctrl-int/1/playstatusupdate?revision-number=1&session-id=%d",sessionId];
-	NSString *string2 = [NSString stringWithFormat:@"http://%@%@/databases?session-id=%d",host,portStr,sessionId];
-	NSLog(@"%@",string2);
-	[DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:string2]];
-	
-	
-	NSString *string3 = [NSString stringWithFormat:@"http://%@%@/ctrl-int/1/playstatusupdate?revision-number=1&session-id=%d",host,portStr,sessionId];
-	NSLog(@"%@",string3);
-	[DAAPRequestReply smartRequestAndParseResponse:[NSURL URLWithString:string3]];*/
 }
 
 - (IBAction) buttonClicked:(id)sender{
@@ -111,6 +80,7 @@
 
 - (IBAction) previousClicked:(id)sender{
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	
 	[server playPreviousItem];
 }
 
@@ -120,11 +90,28 @@
 	[self _updateVolume];
 }
 
+- (IBAction) buttonSelected:(id)sender{
+	NSLog(@"value Changed !");
+	UISegmentedControl *control = (UISegmentedControl *)sender;
+	switch (control.selectedSegmentIndex) {
+		case 1:
+			[detailViewController changeToArtistView];
+			break;
+		case 2:
+			[detailViewController changeToAlbumView];
+			break;
+		default:
+			break;
+	}
+}
+
 - (void) statusUpdate:(DAAPResponsecmst *)cmst{
 	int doneTime = [cmst.cast intValue]-[cmst.cant intValue];
 	int totalTime = [cmst.cast intValue];
 	float pro = (float)doneTime/(float)totalTime;
 	progress.progress = pro;
+	BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+
 	track.text = cmst.cann;
 	artist.text = cmst.cana;
 	album.text = cmst.canl;
@@ -135,11 +122,38 @@
 		play.enabled = YES;
 		pause.enabled = NO;
 	} 
-	SessionManager *sm = [SessionManager sharedSessionManager];
-	
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	if (trackChanged) {
+		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+		[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	}
 }
+
+- (void) statusUp:(NSNotification *)notification{
+	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+	int doneTime = [cmst.cast intValue]-[cmst.cant intValue];
+	int totalTime = [cmst.cast intValue];
+	float pro = (float)doneTime/(float)totalTime;
+	progress.progress = pro;
+	BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+	
+	track.text = cmst.cann;
+	artist.text = cmst.cana;
+	album.text = cmst.canl;
+	if ([cmst.caps shortValue] == 4) {
+		play.enabled = NO;
+		pause.enabled = YES;
+	} else if ([cmst.caps shortValue] == 3) {
+		play.enabled = YES;
+		pause.enabled = NO;
+	} 
+	if (trackChanged) {
+		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+		[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	}
+}
+
 
 - (void) didFinishEditingLibraries {
 	[self dismissModalViewControllerAnimated:YES];
@@ -149,11 +163,10 @@
 	[masterViewController display];
 	[detailViewController display];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	[server monitorPlayStatus:self];
-	SessionManager *sm = [SessionManager sharedSessionManager];
-	
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	//TODO monitoring should be started after connect and not by main controller
+	//[server monitorPlayStatus:self];
+	/*NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];*/
 	[self _updateVolume];
 }
 
@@ -163,11 +176,7 @@
 	volumeSlider.value = v;
 }
 
-- (void) didSelectItem{
-	SessionManager *sm = [SessionManager sharedSessionManager];
-	
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,[sm getHost],[sm getPort],[sm getSessionId]];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+- (void) didSelectItem{	
 }
 
 - (void) didFinishLoading{

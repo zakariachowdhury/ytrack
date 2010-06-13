@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
-
+#import "DAAPResponseabar.h"
+#import "DAAPResponsemshl.h"
 
 @interface DAAPResponseabro : DAAPResponse {
 	
@@ -16,13 +17,15 @@
 	NSNumber *muty;
 	NSNumber *mtco;
 	NSNumber *mrco;
-	NSArray *res;
+	DAAPResponseabar *abar;
+	DAAPResponsemshl *mshl;
 }
 
-@property (nonatomic, assign) NSNumber *mstt;
-@property (nonatomic, assign) NSNumber *muty;
-@property (nonatomic, assign) NSNumber *mtco;
-@property (nonatomic, assign) NSNumber *mrco;
-@property (nonatomic, assign) NSArray *res;
+@property (nonatomic, retain) NSNumber *mstt;
+@property (nonatomic, retain) NSNumber *muty;
+@property (nonatomic, retain) NSNumber *mtco;
+@property (nonatomic, retain) NSNumber *mrco;
+@property (nonatomic, retain) DAAPResponseabar *abar;
+@property (nonatomic, retain) DAAPResponsemshl *mshl;
 
 @end
