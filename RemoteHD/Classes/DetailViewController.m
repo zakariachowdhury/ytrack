@@ -14,6 +14,7 @@
 #import "DAAPResponseabro.h"
 #import "DAAPResponseavdb.h"
 #import "DAAPResponsemlcl.h"
+#import "AlbumsOfArtistController.h"
 
 @implementation DetailViewController
 
@@ -49,6 +50,10 @@
 	results = [[NSMutableArray alloc] init];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUp:) name:@"statusUpdate" object:nil];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -175,6 +180,13 @@
 	[self.delegate didFinishLoading];
 }
 
+- (void) changeToTrackView{
+	self.tableView.dataSource = self;
+	self.tableView.delegate = self;
+	
+	[self.tableView reloadData];
+}
+
 - (void) changeToArtistView{
 	if (self.artistDatasource == nil) {
 		ArtistDatasource *d = [[ArtistDatasource alloc] init];
@@ -189,7 +201,15 @@
 }
 
 - (void) changeToAlbumView{
+	DAAPResponseagal * resp = [[[SessionManager sharedSessionManager] currentServer] getAllAlbums];
+	AlbumsOfArtistController * c = [[AlbumsOfArtistController alloc] init];
+	c.agal = resp;
+	[self.navigationController setNavigationBarHidden:NO animated:NO];
+	[c setTitle:@"Albums"];
+	[self.navigationController pushViewController:c animated:YES];
+	[c release];
 	
+	[self.tableView reloadData];
 }
 	 
 

@@ -11,10 +11,12 @@
 
 @interface ArtistDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>{
 	NSArray *list;
+	NSArray *indexList;
 	UINavigationController *navigationController;
 }
 
 @property (nonatomic, retain) NSArray *list;
+@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) UINavigationController *navigationController;
 
 @end

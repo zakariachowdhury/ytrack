@@ -42,7 +42,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	navigationController.navigationBarHidden = YES;
 	navigationController.view.frame = CGRectMake(243, 44, 525, 916);
+	navigationController.delegate = self;
 	[self.view addSubview:navigationController.view];
 	[self.view bringSubviewToFront:loadingView];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
@@ -93,7 +95,11 @@
 - (IBAction) buttonSelected:(id)sender{
 	NSLog(@"value Changed !");
 	UISegmentedControl *control = (UISegmentedControl *)sender;
+	
 	switch (control.selectedSegmentIndex) {
+		case 0:
+			[detailViewController changeToTrackView];
+			break;
 		case 1:
 			[detailViewController changeToArtistView];
 			break;
@@ -102,6 +108,12 @@
 			break;
 		default:
 			break;
+	}
+}
+
+- (void)navigationController:(UINavigationController *)theNavigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+	if ([self.navigationController.viewControllers objectAtIndex:0] == self.navigationController.visibleViewController) {
+		[self.navigationController setNavigationBarHidden:YES animated:NO];
 	}
 }
 

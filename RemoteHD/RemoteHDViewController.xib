@@ -309,7 +309,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIActivityIndicatorView" id="524948985">
 								<reference key="NSNextResponder" ref="936948415"/>
-								<int key="NSvFlags">293</int>
+								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{252, 448}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="936948415"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -323,7 +323,7 @@
 							</object>
 							<object class="IBUILabel" id="574594147">
 								<reference key="NSNextResponder" ref="936948415"/>
-								<int key="NSvFlags">293</int>
+								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{197, 500}, {131, 21}}</string>
 								<reference key="NSSuperview" ref="936948415"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -383,13 +383,13 @@
 				<bool key="IBUIHorizontal">NO</bool>
 				<object class="IBUINavigationBar" key="IBUINavigationBar" id="656285962">
 					<nil key="NSNextResponder"/>
-					<int key="NSvFlags">256</int>
+					<int key="NSvFlags">301</int>
 					<string key="NSFrameSize">{0, 0}</string>
 					<bool key="IBUIClipsSubviews">YES</bool>
 					<bool key="IBUIMultipleTouchEnabled">YES</bool>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
-				<object class="NSArray" key="IBUIViewControllers">
+				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUITableViewController" id="990002939">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="666057673">
@@ -408,7 +408,6 @@
 						<bool key="IBUIHorizontal">NO</bool>
 					</object>
 				</object>
-				<bool key="IBUINavigationBarHidden">YES</bool>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -949,7 +948,7 @@
 					<string>MasterViewController</string>
 					<string>{{202, -7}, {783, 756}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{249, 0}, {863, 756}}</string>
+					<string>{{249, 0}, {783, 756}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>DetailViewController</string>

@@ -38,6 +38,7 @@
 - (void) didFinishLoading:(DAAPResponse *)response;
 - (void) changeToArtistView;
 - (void) changeToAlbumView;
+- (void) changeToTrackView;
 //- (void) nowPlayingTrack:(NSString *)track album:(NSString *)album artist:(NSString *)artist;
 
 @end

@@ -54,14 +54,40 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+	return [self.agal.mshl.indexList count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [self.agal.mlcl.list count];
+	long res = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshn] longValue];
+	
+	return res;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+	NSMutableArray *chars = [[[NSMutableArray alloc] init] autorelease];
+	for (DAAPResponsemlit *mlit in self.agal.mshl.indexList) {
+		[chars addObject:[mlit mshc]];
+	}
+	//return arrayOfCharacters;
+	return chars;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+	NSInteger count = 0;
+	for(DAAPResponsemlit *mlit in self.agal.mshl.indexList)
+	{
+		if([mlit.mshc isEqualToString:title])
+			return count;
+		count ++;
+	}
+	return 0;
+	
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+
+	return [(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshc];
 }
 
 -(void)didFinishLoading:(UIImage *)image forAlbumId:(NSNumber *)albumId{
@@ -94,7 +120,9 @@
     }
     
     // Configure the cell...
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:indexPath.row];
+	long offset = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section] mshi] longValue];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:(offset + indexPath.row)];
+	
     cell.textLabel.text = mlit.minm;
 	cell.imageView.image = [self artworkForAlbum:mlit.miid];
 	if ([cellId objectForKey:mlit.miid] == nil) {
@@ -103,57 +131,21 @@
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	long long albumId = [[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:indexPath.row] mper] longLongValue];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section];
+	long offset = [mlit.mshi longValue];
+	long i = offset + indexPath.row;
+	long long albumId = [[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] mper] longLongValue];
 	NSLog(@"%qi");
+
 	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 	c.tracks = resp.mlcl.list;
-
+	c.albumName = [(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm];
+	[c setTitle:[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm]];
 	[self.navigationController pushViewController:c animated:YES];
 	[c release];
 }
@@ -176,6 +168,9 @@
 
 
 - (void)dealloc {
+	[self.agal release];
+	[artworks release];
+	[cellId release];
     [super dealloc];
 }
 
