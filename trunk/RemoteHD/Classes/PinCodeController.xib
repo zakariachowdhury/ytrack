@@ -44,7 +44,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUILabel" id="386969443">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">319</int>
+						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{250, 435}, {268, 134}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -79,7 +79,7 @@
 					</object>
 					<object class="IBUIButton" id="823773184">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">293</int>
+						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{348, 591}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<bool key="IBUIOpaque">NO</bool>

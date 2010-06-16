@@ -108,13 +108,14 @@
 	return list;
 }
 
-- (NSArray *) getArtists{
+- (NSDictionary *) getArtists{
 	NSLog(@"FDServer-getArtists");
 	NSString *string3 = [NSString stringWithFormat:kRequestArtists,self.host,self.port,databaseId,sessionId];
 	NSLog(@"%@",string3);
 	DAAPResponseabro * response = (DAAPResponseabro *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
-	NSArray *list = [NSArray arrayWithArray:response.abar.list];
-	return list;
+	NSDictionary *retVal = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithArray:response.abar.list],@"list",[NSArray arrayWithArray:response.mshl.indexList],@"index",nil];
+	
+	return retVal;
 }
 
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist{
@@ -127,6 +128,14 @@
 																				   (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
 																				   kCFStringEncodingUTF8 );
 	NSString *string3 = [NSString stringWithFormat:kRequestAlbumsForArtist,self.host,self.port,databaseId,sessionId,a];
+	NSLog(@"%@",string3);
+	DAAPResponseagal * response = (DAAPResponseagal *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
+	return response;
+}
+
+- (DAAPResponseagal *) getAllAlbums{
+	NSLog(@"FDServer-getAllAlbums");
+	NSString *string3 = [NSString stringWithFormat:kRequestAllAlbums,self.host,self.port,databaseId,sessionId];
 	NSLog(@"%@",string3);
 	DAAPResponseagal * response = (DAAPResponseagal *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
 	return response;
@@ -274,6 +283,32 @@
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 	
 	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInLibrary,self.host,self.port,songId,sessionId];
+	NSLog(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
+- (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId{
+	NSLog(@"FDServer-playSongIndex:inAlbum:");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayTracksInAlbum,self.host,self.port,[albumId longLongValue], songIndex, sessionId];
+	NSLog(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
+- (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex{
+	NSLog(@"FDServer-playAllTracksForArtist");
+	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+																	   NULL,
+																	   (CFStringRef)artist,
+																	   NULL,
+																	   (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+																	   kCFStringEncodingUTF8 );
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayAllTracksForArtist,self.host,self.port,a, songIndex, sessionId];
 	NSLog(@"%@",string2);
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }

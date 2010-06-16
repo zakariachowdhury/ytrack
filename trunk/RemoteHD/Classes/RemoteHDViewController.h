@@ -14,7 +14,7 @@
 #import "AsyncImageView.h"
 #import "SessionManager.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;

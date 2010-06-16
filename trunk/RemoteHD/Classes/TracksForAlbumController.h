@@ -7,12 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SessionManager.h"
 
 
 @interface TracksForAlbumController : UITableViewController {
 	NSArray *tracks;
+	BOOL shouldPlayAllTracks;
+	NSString *albumName;
 }
 
 @property (nonatomic, retain) NSArray *tracks;
+@property (nonatomic) BOOL shouldPlayAllTracks;
+@property (nonatomic, copy) NSString *albumName;
 
 @end

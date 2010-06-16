@@ -82,13 +82,16 @@
 - (void) open;
 
 - (NSArray *) getPlayLists;
-- (NSArray *) getArtists;
+- (NSDictionary *) getArtists;
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist;
+- (DAAPResponseagal *) getAllAlbums;
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (void) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
+- (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;
+- (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex;
 - (void) playPreviousItem;
 - (void) playNextItem;
 - (void) playPause;
