@@ -42,6 +42,7 @@
  
 	artworks = [[NSMutableDictionary alloc] init];
 	cellId = [[NSMutableDictionary alloc] init];
+	loaders = [[NSMutableDictionary alloc] init];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -95,14 +96,18 @@
 		return;
 	}
 	[artworks setObject:image forKey:albumId];
+	[loaders removeObjectForKey:albumId];
 	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
 	[[[self.tableView cellForRowAtIndexPath:[cellId objectForKey:albumId]] imageView] setImage:image];
 }
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		[[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
-		return [UIImage imageNamed:@"defaultAlbumArtwork.png"];
+		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
+		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
+		[artworks setObject:defaultImage forKey:albumId];
+		[loaders setObject:loader forKey:albumId];
+		return defaultImage;
 	} else {
 		return [artworks objectForKey:albumId];
 	}
@@ -150,6 +155,15 @@
 	[c release];
 }
 
+- (void) cleanJobs{
+	NSEnumerator *enumerator = [loaders objectEnumerator];
+	id value;
+	
+	while ((value = [enumerator nextObject])) {
+		[(AsyncImageLoader *)value cancelConnection];
+	}
+}
+
 
 #pragma mark -
 #pragma mark Memory management
@@ -168,9 +182,11 @@
 
 
 - (void)dealloc {
+	[self cleanJobs];
 	[self.agal release];
 	[artworks release];
 	[cellId release];
+	[loaders release];
     [super dealloc];
 }
 

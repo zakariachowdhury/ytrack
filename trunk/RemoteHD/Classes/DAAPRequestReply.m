@@ -66,8 +66,10 @@
 	
     self.data = nil;
 	self.connection = nil;
-	if([delegate respondsToSelector:@selector(didFinishLoading:)])
-		[delegate didFinishLoading:response];
+	if (delegate != nil) {
+		if([delegate respondsToSelector:@selector(didFinishLoading:)])
+			[delegate didFinishLoading:response];
+	}
 	
 	[response release];
 }

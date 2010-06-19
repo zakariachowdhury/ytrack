@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	navigationController.navigationBarHidden = YES;
-	navigationController.view.frame = CGRectMake(243, 44, 525, 916);
+	navigationController.view.frame = CGRectMake(243, 70, 525, 890);
 	navigationController.delegate = self;
 	[self.view addSubview:navigationController.view];
 	[self.view bringSubviewToFront:loadingView];
@@ -174,11 +174,6 @@
 	[activityIndicator startAnimating];
 	[masterViewController display];
 	[detailViewController display];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	//TODO monitoring should be started after connect and not by main controller
-	//[server monitorPlayStatus:self];
-	/*NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];*/
 	[self _updateVolume];
 }
 

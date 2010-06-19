@@ -23,5 +23,6 @@
 - (NSArray *) getServers;
 - (FDServer *) currentServer;
 - (void) openLastUsedServer;
+- (void) deleteServerAtIndex:(int)index;
 
 @end

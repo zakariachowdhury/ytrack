@@ -16,6 +16,8 @@
 #import "RemoteSpeaker.h"
 
 #define kProgressIndicatorSize 20.0
+#define kLocalizedEdit     NSLocalizedString(@"Edit","pause taking samples")
+#define kLocalizedDone    NSLocalizedString(@"Done","resume taking samples")
 
 
 @interface LibrariesViewController()
@@ -98,11 +100,14 @@
     [super viewDidLoad];
 	_services = [[NSMutableArray alloc] init];
 	self.availableServices = [[NSMutableArray alloc] init];
+	editButton.possibleTitles = [NSSet setWithObjects:kLocalizedEdit, kLocalizedDone, nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 	if ([[[SessionManager sharedSessionManager] getServers] count] > 0) {
 		[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
+		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+		self.speakers = [server getSpeakers];
 	}
 }
 
@@ -238,44 +243,29 @@
 	return @"Speakers";
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		return NO;
+	} else if (indexPath.section == 0) {
+		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
+			return NO;
+		} else {
+			return YES;
+		}
 
+	}
+	return NO;
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- 
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
-
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	 if (editingStyle == UITableViewCellEditingStyleDelete) {
+		 // Delete the row from the data source
+		 [[SessionManager sharedSessionManager] deleteServerAtIndex:indexPath.row];
+		 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	 } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+		 // Do nothing
+	 }   
+}
 
 // If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
 - (void)showWaiting:(NSTimer*)timer {
@@ -331,6 +321,18 @@
 #pragma mark actions
 - (IBAction) doneButtonPressed:(id)sender{
 	[delegate didFinishEditingLibraries];
+}
+
+- (IBAction) editButtonPressed:(id)sender{
+	if (!self.table.editing){
+		//FIXME changing button title doesn't work. Don't know why...
+		editButton.title = kLocalizedDone;
+		[self.table setEditing:YES animated:YES];
+	} else {
+		editButton.title = kLocalizedEdit;
+		[self.table setEditing:NO animated:YES];
+	}
+
 }
 
 - (void)didFinishWithPinCode:(NSString *)serviceName guid:(NSString *)guid{
