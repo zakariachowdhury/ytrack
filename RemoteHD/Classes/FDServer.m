@@ -31,11 +31,11 @@
 @synthesize TXT;
 @synthesize databaseId;
 @synthesize musicLibraryId;
-//@synthesize delegate;
 @synthesize connected;
 @synthesize currentTrack;
 @synthesize currentAlbum;
 @synthesize currentArtist;
+@synthesize daapReqRep;
 
 
 - (id) init {
@@ -51,6 +51,7 @@
 	NSLog(@"%@",loginURL);
 	DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
 	sessionId = [[resp mlid] longValue];
+	// TODO check value of login request
 	self.connected = YES;
 	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
 	DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
@@ -64,9 +65,16 @@
 			break;
 		}
 	}
-	//TODO monitoring should be started after connect and not by main controller
 	[self monitorPlayStatus];
 	[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
+}
+
+- (void) logout{
+	NSLog(@"FDServer-logout");
+	[self.daapReqRep cancelConnection];
+	[self.daapReqRep release];
+	NSString *string = [NSString stringWithFormat:kRequestLogout,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT{
@@ -121,14 +129,14 @@
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist{
 	NSLog(@"FDServer-getAlbumsForArtist");
 	//NSString *a = [FDServer urlencode:artist];
-	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(
-																				   NULL,
-																				   (CFStringRef)artist,
-																				   NULL,
-																				   (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
-																				   kCFStringEncodingUTF8 );
+	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+																	(CFStringRef)artist,
+																	NULL,
+																	(CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+																	kCFStringEncodingUTF8 );
 	NSString *string3 = [NSString stringWithFormat:kRequestAlbumsForArtist,self.host,self.port,databaseId,sessionId,a];
 	NSLog(@"%@",string3);
+	[a release];
 	DAAPResponseagal * response = (DAAPResponseagal *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
 	return response;
 }
@@ -162,14 +170,15 @@
 	return response;
 }
 
-- (void) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate{
+- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate{
 	NSLog(@"FDServer-getArtworkForAlbum");
 	NSString *string3 = [NSString stringWithFormat:kRequestAlbumArtwork,self.host,self.port,databaseId,[albumId intValue], sessionId];
 	NSLog(@"%@",string3);
-	AsyncImageLoader *loader = [[AsyncImageLoader alloc] init];
+	AsyncImageLoader *loader = [[[AsyncImageLoader alloc] init] autorelease];
 	loader.delegate = aDelegate;
 	[loader loadImageFromURL:[NSURL URLWithString:string3] withId:albumId];
-	[loader release];
+	//[loader release];
+	return loader;
 }
 
 - (void) monitorPlayStatus{
@@ -180,6 +189,7 @@
 	
 	[daapReq setDelegate:self];
 	[daapReq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	self.daapReqRep = daapReq;
 	[daapReq release];
 }
 
@@ -211,6 +221,7 @@
 	
 	[daapReq setDelegate:self];
 	[daapReq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	self.daapReqRep = daapReq;
 	[daapReq release];
 }
 

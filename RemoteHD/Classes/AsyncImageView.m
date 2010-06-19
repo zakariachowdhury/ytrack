@@ -13,6 +13,12 @@
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
+@interface AsyncImageView() 
+- (UIImageView *) _newImageWithShadowFromImage:(UIImage *)image;
+
+@end
+
+
 @implementation AsyncImageView
 
 @synthesize delegate;
@@ -91,30 +97,13 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     [self.data appendData:incrementalData];
 }
 
+
+
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	assert(theConnection == self.connection);
     self.connection=nil;
-	
-   /* if ([[self subviews] count]>0) {
-        [[[self subviews] objectAtIndex:0] removeFromSuperview];
-    }*/
-	
-	//UIImage *img = [[[UIImage alloc] initWithData:data] autorelease];
-	
-	
-	UIImage * image = [[UIImage alloc] initWithData:self.data];
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-	[image release];
-	imageView.opaque = NO;
-	
-	
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth || UIViewAutoresizingFlexibleHeight );
-	//imageView.backgroundColor = [UIColor whiteColor];
-	//self.backgroundColor = [UIColor whiteColor];
-	
+		
 	[self.activityIndicator stopAnimating];
-	//self.activityIndicator.hidden = YES;
 	loadingImageLabel.hidden = YES;
 	for (UIView *v in [self subviews]) {
 		if (v != self.activityIndicator) {
@@ -122,10 +111,15 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 		}
 		
 	}
+	
+	UIImage * image = [[UIImage alloc] initWithData:self.data];
+
+	UIImageView *imageView = [self _newImageWithShadowFromImage:image];
+	[image release];
+	
 	imageView.alpha = 0.0;
+	
     [self addSubview:imageView];
-    imageView.frame = self.bounds;
-    [imageView setNeedsLayout];
     [self setNeedsLayout];
 	[UIView beginAnimations:@"loadCover" context:nil];
 	[UIView setAnimationBeginsFromCurrentState:YES];
@@ -151,6 +145,30 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     UIImageView* iv = [[self subviews] objectAtIndex:0];
     return [iv image];
 }
+
+#pragma mark -
+#pragma mark private methods
+
+- (UIImageView *) _newImageWithShadowFromImage:(UIImage *)image{
+	UIGraphicsBeginImageContext(CGSizeMake(150, 150));
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextClearRect(context, CGRectMake(0, 0, 150, 150));
+	CGContextSetAllowsAntialiasing(context, true);
+	CGContextSetShouldAntialias(context, true);
+	CGSize myShadowOffset = CGSizeMake (0, 0);// 2
+	CGContextSetShadow (context, myShadowOffset, 10); // 7
+	
+	[image drawInRect:CGRectMake(10, 10, 130, 130)];
+	
+	UIImage * shadowedImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	UIImageView* imageView = [[UIImageView alloc] initWithImage:shadowedImage];
+	imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth || UIViewAutoresizingFlexibleHeight );
+	return imageView;
+}
+
 
 - (void)dealloc {
 	[self.activityIndicator release];

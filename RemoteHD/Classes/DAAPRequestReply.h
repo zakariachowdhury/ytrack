@@ -27,7 +27,7 @@
 #define kRequestAllTracks @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid&type=music&sort=name&include-sort-headers=1&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')"
 #define kRequestPlaySongInLibrary @"http://%@:%@/ctrl-int/1/cue?command=play&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')&index=%d&sort=name&session-id=%d"
 #define kRequestStopPlaying @"http://%@:%@/ctrl-int/1/cue?command=clear&session-id=%d"
-#define kRequestNowPlayingArtwork @"http://%@:%@/ctrl-int/1/nowplayingartwork?mw=211&mh=211&session-id=%d"
+#define kRequestNowPlayingArtwork @"http://%@:%@/ctrl-int/1/nowplayingartwork?mw=130&mh=130&session-id=%d"
 #define kRequestPlayPause @"http://%@:%@/ctrl-int/1/playpause?session-id=%d"
 #define kRequestPlayNextItem @"http://%@:%@/ctrl-int/1/nextitem?session-id=%d"
 #define kRequestPlayPreviousItem @"http://%@:%@/ctrl-int/1/previtem?session-id=%d"

@@ -23,6 +23,9 @@
 		6B35D9C311A89A0600BC846C /* DAAPResponseabro.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9C211A89A0600BC846C /* DAAPResponseabro.m */; };
 		6B35D9D411A89A6D00BC846C /* DAAPResponseabar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9D311A89A6D00BC846C /* DAAPResponseabar.m */; };
 		6B43AD9711A95C8500DBD74E /* PreferencesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B43AD9611A95C8500DBD74E /* PreferencesManager.m */; };
+		6B6C747111CABBA700AAED4F /* iTunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6C747011CABBA700AAED4F /* iTunes.png */; };
+		6B6C74E711CAC02C00AAED4F /* TrackCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B6C74E611CAC02C00AAED4F /* TrackCustomCell.xib */; };
+		6B6C74EC11CAC2CC00AAED4F /* TrackCustomCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6C74EB11CAC2CC00AAED4F /* TrackCustomCellClass.m */; };
 		6B75F7B111A4063300B9D841 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B75F7B011A4063300B9D841 /* MasterViewController.m */; };
 		6B75F7B411A406B500B9D841 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */; };
 		6B75F82411A4094100B9D841 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B75F7F611A4094100B9D841 /* AsyncSocket.m */; };
@@ -66,6 +69,8 @@
 		6BE275F111AB948600F1F600 /* FDServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE275F011AB948600F1F600 /* FDServer.m */; };
 		6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */; };
 		6BE2B34111C05EA000EE6AC7 /* DAAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */; };
+		6BEA595111CD10FA00E419EC /* AlbumsDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA595011CD10FA00E419EC /* AlbumsDatasource.m */; };
+		6BEA59E411CD280900E419EC /* ToolbarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEA59E311CD280900E419EC /* ToolbarBackground.png */; };
 		6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA820811ABD04500426E9E /* DAAPResponseapso.m */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +104,10 @@
 		6B43AD9411A95C6C00DBD74E /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		6B43AD9511A95C8500DBD74E /* PreferencesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesManager.h; sourceTree = "<group>"; };
 		6B43AD9611A95C8500DBD74E /* PreferencesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesManager.m; sourceTree = "<group>"; };
+		6B6C747011CABBA700AAED4F /* iTunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunes.png; sourceTree = "<group>"; };
+		6B6C74E611CAC02C00AAED4F /* TrackCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackCustomCell.xib; sourceTree = "<group>"; };
+		6B6C74EA11CAC2CC00AAED4F /* TrackCustomCellClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCustomCellClass.h; sourceTree = "<group>"; };
+		6B6C74EB11CAC2CC00AAED4F /* TrackCustomCellClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCustomCellClass.m; sourceTree = "<group>"; };
 		6B75F7AF11A4063300B9D841 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		6B75F7B011A4063300B9D841 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		6B75F7B211A406B500B9D841 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -180,6 +189,9 @@
 		6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemccr.m; sourceTree = "<group>"; };
 		6BE2B33F11C05EA000EE6AC7 /* DAAPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPRequest.h; sourceTree = "<group>"; };
 		6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPRequest.m; sourceTree = "<group>"; };
+		6BEA594F11CD10FA00E419EC /* AlbumsDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumsDatasource.h; sourceTree = "<group>"; };
+		6BEA595011CD10FA00E419EC /* AlbumsDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumsDatasource.m; sourceTree = "<group>"; };
+		6BEA59E311CD280900E419EC /* ToolbarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarBackground.png; sourceTree = "<group>"; };
 		6BEA820711ABD04500426E9E /* DAAPResponseapso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseapso.h; sourceTree = "<group>"; };
 		6BEA820811ABD04500426E9E /* DAAPResponseapso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseapso.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RemoteHD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RemoteHD-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -235,6 +247,11 @@
 				6BA5FC1C11C2D0E20009921E /* TracksForAlbumController.m */,
 				6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */,
 				6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */,
+				6B6C74E611CAC02C00AAED4F /* TrackCustomCell.xib */,
+				6B6C74EA11CAC2CC00AAED4F /* TrackCustomCellClass.h */,
+				6B6C74EB11CAC2CC00AAED4F /* TrackCustomCellClass.m */,
+				6BEA594F11CD10FA00E419EC /* AlbumsDatasource.h */,
+				6BEA595011CD10FA00E419EC /* AlbumsDatasource.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -271,6 +288,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6BEA59E311CD280900E419EC /* ToolbarBackground.png */,
+				6B6C747011CABBA700AAED4F /* iTunes.png */,
 				6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */,
 				6B75F8C911A411B100B9D841 /* icon.png */,
 				2899E5210DE3E06400AC0155 /* RemoteHDViewController.xib */,
@@ -441,6 +460,9 @@
 				6BA2FAEE11A513CF00427C2F /* PinCodeController.xib in Resources */,
 				6BA5FAA111C2B2F60009921E /* Detail.xib in Resources */,
 				6BD18E9711C4A2AB00612A33 /* defaultAlbumArtwork.png in Resources */,
+				6B6C747111CABBA700AAED4F /* iTunes.png in Resources */,
+				6B6C74E711CAC02C00AAED4F /* TrackCustomCell.xib in Resources */,
+				6BEA59E411CD280900E419EC /* ToolbarBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +522,8 @@
 				6BA5FB4311C2C2AA0009921E /* DAAPResponseagal.m in Sources */,
 				6BA5FC1D11C2D0E20009921E /* TracksForAlbumController.m in Sources */,
 				6BD18EB011C4A80700612A33 /* AsyncImageLoader.m in Sources */,
+				6B6C74EC11CAC2CC00AAED4F /* TrackCustomCellClass.m in Sources */,
+				6BEA595111CD10FA00E419EC /* AlbumsDatasource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

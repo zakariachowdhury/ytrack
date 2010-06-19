@@ -19,6 +19,7 @@
 @interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate>{
 	id<LibraryDelegate> delegate;
 	IBOutlet UITableView *table;
+	IBOutlet UIBarButtonItem *editButton;
 @private 
 	NSString* _searchingForServicesString;
 	NSArray *_speakers;
@@ -38,6 +39,7 @@
 @property (nonatomic, copy) NSString* searchingForServicesString;
 
 - (IBAction) doneButtonPressed:(id)sender;
+- (IBAction) editButtonPressed:(id)sender;
 
 - (BOOL)searchForServicesOfType:(NSString *)type inDomain:(NSString *)domain;
 

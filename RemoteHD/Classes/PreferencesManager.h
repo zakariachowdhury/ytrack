@@ -29,6 +29,7 @@
 - (FDServer *) lastUsedServer;
 - (void) persistPreferences;
 - (void) addServer:(FDServer *) newServer;
+- (void) deleteServerAtIndex:(int)index;
 
 
 

@@ -16,6 +16,8 @@
 #import "DAAPResponsemlcl.h"
 #import "AlbumsOfArtistController.h"
 
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+
 @implementation DetailViewController
 
 @synthesize results;
@@ -117,11 +119,13 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"TrackCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	TrackCustomCellClass *cell = (TrackCustomCellClass *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[NSBundle mainBundle] loadNibNamed: @"TrackCustomCell" owner: self options: nil] objectAtIndex: 0];
     }
     
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
@@ -131,13 +135,19 @@
 	NSString *album = track.asal;
 	NSString *artist = track.asar;
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",album, artist];
+	
 	if ([cell.textLabel.text isEqualToString:self.currentTrack]) {
-		//NSLog(@"%@-%@",cell.textLabel.text,self.currentTrack);
 		cell.textLabel.textColor = [UIColor blueColor];
 	} else {
-		//NSLog(@"%@-%@",cell.textLabel.text,self.currentTrack);
 		cell.textLabel.textColor = [UIColor blackColor];
 	}
+	int res = indexPath.row % 2;
+	if (res != 0){
+		cell.background.backgroundColor = RGBCOLOR(236,246,255);
+	} else {
+		cell.background.backgroundColor = [UIColor whiteColor];
+	}
+
     
     return cell;
 }

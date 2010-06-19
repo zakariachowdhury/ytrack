@@ -15,6 +15,7 @@
 	@private
 	NSMutableDictionary *artworks;
 	NSMutableDictionary *cellId;
+	NSMutableDictionary *loaders;
 }
 
 @property (nonatomic, retain) DAAPResponseagal *agal;

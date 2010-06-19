@@ -51,13 +51,13 @@
 	int sessionId;
 	NSInteger databaseId;
 	NSInteger musicLibraryId;
-//	id<FDServerDelegate> delegate;
 	int musr;
 	long revNum;
 	BOOL connected;
 	NSString *currentTrack;
 	NSString *currentAlbum;
 	NSString *currentArtist;
+	DAAPRequestReply *daapReqRep;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -68,7 +68,7 @@
 @property (nonatomic) int sessionId;
 @property (nonatomic) NSInteger databaseId;
 @property (nonatomic) NSInteger musicLibraryId;
-//@property (nonatomic, assign) id<FDServerDelegate> delegate;
+@property (nonatomic, retain) DAAPRequestReply *daapReqRep;
 
 @property (nonatomic) BOOL connected;
 @property (nonatomic, copy) NSString *currentTrack;
@@ -80,6 +80,7 @@
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT;
 - (id) initWithDictionary:(NSDictionary *)dict;
 - (void) open;
+- (void) logout;
 
 - (NSArray *) getPlayLists;
 - (NSDictionary *) getArtists;
@@ -87,7 +88,7 @@
 - (DAAPResponseagal *) getAllAlbums;
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
-- (void) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
+- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
 - (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;

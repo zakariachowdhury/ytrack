@@ -29,8 +29,8 @@
 	IBOutlet UILabel *track;
 	IBOutlet UILabel *artist;
 	IBOutlet UILabel *album;
-	IBOutlet UIBarButtonItem *play;
-	IBOutlet UIBarButtonItem *pause;
+	IBOutlet UIButton *play;
+	IBOutlet UIButton *pause;
 	IBOutlet UISlider *volumeSlider;
 	UINavigationController *navigationController;
 }

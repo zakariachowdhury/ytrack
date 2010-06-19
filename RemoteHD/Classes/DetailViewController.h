@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "DAAPRequestReply.h"
 #import "ArtistDatasource.h"
+#import "TrackCustomCellClass.h"
 
 @protocol DetailDelegate
 

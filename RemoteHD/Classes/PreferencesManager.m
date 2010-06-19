@@ -116,6 +116,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	[self.preferences setObject:[newServer getAsDictionary] forKey:kPrefLastUsedLibrary];
 }
 
+- (void) deleteServerAtIndex:(int)index{
+	NSMutableArray *servers = [self.preferences objectForKey:kPrefLibrarykey];
+	NSString *serverServiceName = [[servers objectAtIndex:index] objectForKey:kLibraryServicenameKey];
+	[servers removeObjectAtIndex:index];
+	
+	// clear last used library from prefs file if deleted library is the last used one
+	NSDictionary * currentServer = [self.preferences objectForKey:kPrefLastUsedLibrary];
+	if ([[currentServer objectForKey:kLibraryServicenameKey] isEqualToString:serverServiceName]) {
+		[self.preferences removeObjectForKey:kPrefLastUsedLibrary];
+	}
+}
+
 - (void)dealloc {
     [self.preferences release];
     [super dealloc];

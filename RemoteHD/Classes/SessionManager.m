@@ -97,7 +97,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		[server open];
 		[self foundNewServer:server];
 	}
+}
 
+// FIXME : MMmmmh SessionManager should not be responsible for that
+// for now this is a quick and dirty way to get it working
+- (void) deleteServerAtIndex:(int)index{
+	[(FDServer *)[self.servers objectAtIndex:index] logout];
+	[self.servers removeObjectAtIndex:index];
+	[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:index];
 }
 
 @end
