@@ -111,8 +111,13 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 		}
 		
 	}
-	
-	UIImage * image = [[UIImage alloc] initWithData:self.data];
+	UIImage * image;
+	if (self.data.length > 0) {
+		image = [[UIImage alloc] initWithData:self.data];
+	} else {
+		image = [UIImage imageNamed:@"defaultCover.png"];
+	}
+
 
 	UIImageView *imageView = [self _newImageWithShadowFromImage:image];
 	[image release];
@@ -150,15 +155,16 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 #pragma mark private methods
 
 - (UIImageView *) _newImageWithShadowFromImage:(UIImage *)image{
-	UIGraphicsBeginImageContext(CGSizeMake(150, 150));
+	
+	UIGraphicsBeginImageContext(CGSizeMake(image.size.width+20, image.size.height+20));
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextClearRect(context, CGRectMake(0, 0, 150, 150));
+	CGContextClearRect(context, CGRectMake(0, 0, image.size.width+20, image.size.height+20));
 	CGContextSetAllowsAntialiasing(context, true);
 	CGContextSetShouldAntialias(context, true);
 	CGSize myShadowOffset = CGSizeMake (0, 0);// 2
 	CGContextSetShadow (context, myShadowOffset, 10); // 7
 	
-	[image drawInRect:CGRectMake(10, 10, 130, 130)];
+	[image drawInRect:CGRectMake(10, 10, image.size.width, image.size.height)];
 	
 	UIImage * shadowedImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();

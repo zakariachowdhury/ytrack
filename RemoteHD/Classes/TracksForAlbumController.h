@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SessionManager.h"
+#import "TrackCustomCellClass.h"
 
 
 @interface TracksForAlbumController : UITableViewController {

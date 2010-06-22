@@ -79,7 +79,7 @@
 
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT;
 - (id) initWithDictionary:(NSDictionary *)dict;
-- (void) open;
+- (BOOL) open;
 - (void) logout;
 
 - (NSArray *) getPlayLists;

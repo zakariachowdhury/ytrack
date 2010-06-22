@@ -49,6 +49,11 @@
 	
 }
 
+/*
+- (void) viewDidAppear:(BOOL)animated{
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+}*/
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
     return YES;
@@ -83,7 +88,17 @@
     // Configure the cell...
 	//cell.textLabel.text = [(DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row] minm];
 	cell.textLabel.text = @"Musique";
-	cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+	
+	if (cell.selected){
+		cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
+		cell.textLabel.shadowColor = [UIColor grayColor];
+		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+	} else {
+		cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+		cell.textLabel.shadowColor = [UIColor whiteColor];
+		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+	}
+
     
     return cell;
 }
@@ -92,6 +107,11 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
+	cell.textLabel.shadowColor = [UIColor grayColor];
+	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+
     // Navigation logic may go here. Create and push another view controller.
 	/*
 	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

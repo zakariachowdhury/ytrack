@@ -23,6 +23,8 @@
 	NSNumber *asai;
 	NSNumber *aeSI;
 	NSNumber *astn;
+	NSNumber *astm;
+	NSNumber *assp;
 	NSString *asal;
 	NSString *asar;
 	NSString *asaa;
@@ -46,6 +48,8 @@
 @property (nonatomic, retain) NSNumber *asai;
 @property (nonatomic, retain) NSNumber *aeSI;
 @property (nonatomic, retain) NSNumber *astn;
+@property (nonatomic, retain) NSNumber *astm;
+@property (nonatomic, retain) NSNumber *assp;
 @property (nonatomic, copy) NSString *asal;
 @property (nonatomic, copy) NSString *asar;
 @property (nonatomic, copy) NSString *asaa;

@@ -14,10 +14,11 @@
 #import "AsyncImageView.h"
 #import "SessionManager.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;
+	IBOutlet UIView *nolibView;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
 	
 	IBOutlet MasterViewController *masterViewController;
@@ -25,17 +26,29 @@
 	LibrariesViewController *librariesViewController;
 	
 	IBOutlet AsyncImageView *nowPlaying;
-	IBOutlet UIProgressView *progress;
+	IBOutlet UISlider *progress;
 	IBOutlet UILabel *track;
 	IBOutlet UILabel *artist;
 	IBOutlet UILabel *album;
 	IBOutlet UIButton *play;
 	IBOutlet UIButton *pause;
 	IBOutlet UISlider *volumeSlider;
+	IBOutlet UILabel *donePlayingTime;
+	IBOutlet UILabel *remainingPlayingTime;
 	UINavigationController *navigationController;
+	UIPopoverController *popOver;
+	
+	NSTimer *timer;
+@private 
+	int doneTime;
+	int totalTime;
+	BOOL playing;
+
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) UIPopoverController *popOver;
+@property (nonatomic, retain) NSTimer *timer;
 
 - (IBAction) buttonClicked:(id)sender;
 - (IBAction) playClicked:(id)sender;
@@ -44,6 +57,7 @@
 - (IBAction) previousClicked:(id)sender;
 - (IBAction) volumeChanged:(id)sender;
 - (IBAction) buttonSelected:(id)sender;
+- (IBAction) speakerSelectorClicked:(id)sender;
 - (void) libraryAvailable;
 
 @end

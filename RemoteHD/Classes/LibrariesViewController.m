@@ -204,6 +204,7 @@
 			FDServer *currentServer = [[SessionManager sharedSessionManager] currentServer];
 			if ([serviceName isEqualToString:currentServer.servicename]) {
 				cell.accessoryType = UITableViewCellAccessoryCheckmark;
+				cell.textLabel.textColor = [UIColor blackColor];
 			}
 			
 		}
@@ -259,12 +260,18 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	 if (editingStyle == UITableViewCellEditingStyleDelete) {
-		 // Delete the row from the data source
-		 [[SessionManager sharedSessionManager] deleteServerAtIndex:indexPath.row];
+		 FDServer *server = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
+		 [[SessionManager sharedSessionManager] deleteServerWithPairingGUID:server.pairingGUID];
 		 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 	 } else if (editingStyle == UITableViewCellEditingStyleInsert) {
 		 // Do nothing
-	 }   
+	 }  
+	if ([[[SessionManager sharedSessionManager] getServers] count] == 0) {
+		doneButton.enabled = YES;
+		editButton.title = kLocalizedEdit;
+		editButton.style = UIBarButtonItemStyleBordered;
+		[self.table setEditing:NO animated:YES];
+	}
 }
 
 // If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
@@ -324,12 +331,22 @@
 }
 
 - (IBAction) editButtonPressed:(id)sender{
+	if ([[[SessionManager sharedSessionManager] getServers] count] == 0) {
+		doneButton.enabled = YES;
+		editButton.title = kLocalizedEdit;
+		editButton.style = UIBarButtonItemStyleBordered;
+		[self.table setEditing:NO animated:NO];
+		return;
+	}
 	if (!self.table.editing){
-		//FIXME changing button title doesn't work. Don't know why...
 		editButton.title = kLocalizedDone;
+		editButton.style = UIBarButtonItemStyleDone;
+		doneButton.enabled = NO;
 		[self.table setEditing:YES animated:YES];
 	} else {
+		doneButton.enabled = YES;
 		editButton.title = kLocalizedEdit;
+		editButton.style = UIBarButtonItemStyleBordered;
 		[self.table setEditing:NO animated:YES];
 	}
 
@@ -391,6 +408,9 @@
 		[self stopCurrentResolve];
 	}
 	[self.services removeObject:service];
+	if ([self.availableServices indexOfObject:service.name] != NSNotFound) {
+		[self.availableServices removeObject:service.name];
+	}
 	if (!moreComing) {
 		[self.table reloadData];
 	}
@@ -449,10 +469,12 @@
 	[self stopCurrentResolve];
 
 	if (![service.name isEqualToString:[[[SessionManager sharedSessionManager] currentServer] servicename]]) {
+		[[[SessionManager sharedSessionManager] currentServer] logout];
 		FDServer *server = [[FDServer alloc] initWithHost:host port:portStr pairingGUID:self.currentGUID serviceName:self.currentServiceName TXT:TXTDict];
-		[server open];
-		[[SessionManager sharedSessionManager] foundNewServer:server];
-		self.speakers = [server getSpeakers];
+		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
+		if ([serv open]){
+			self.speakers = [serv getSpeakers];
+		}
 		
 		[server release];
 	}

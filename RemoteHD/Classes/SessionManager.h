@@ -19,10 +19,10 @@
 + (id) sharedSessionManager;
 
 - (BOOL) isSessionEstablished;
-- (void) foundNewServer:(FDServer *)server;
+- (FDServer *) foundNewServer:(FDServer *)server;
 - (NSArray *) getServers;
 - (FDServer *) currentServer;
 - (void) openLastUsedServer;
-- (void) deleteServerAtIndex:(int)index;
+- (void) deleteServerWithPairingGUID:(NSString *)pairingGUID;
 
 @end

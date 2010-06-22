@@ -20,6 +20,7 @@
 	id<LibraryDelegate> delegate;
 	IBOutlet UITableView *table;
 	IBOutlet UIBarButtonItem *editButton;
+	IBOutlet UIBarButtonItem *doneButton;
 @private 
 	NSString* _searchingForServicesString;
 	NSArray *_speakers;

@@ -19,6 +19,8 @@
 #import "DAAPResponsemlog.h"
 #import "DAAPResponseabro.h"
 #import "DAAPResponseagal.h"
+#import "DAAPResponseerror.h"
+#import "SessionManager.h"
 
 
 @implementation FDServer
@@ -45,13 +47,24 @@
     return self;
 }
 
-- (void) open{
+- (BOOL) open{
 	NSLog(@"FDServer-open, pairingGUID:%@",pairingGUID);
 	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
 	NSLog(@"%@",loginURL);
-	DAAPResponsemlog * resp = (DAAPResponsemlog *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
-	sessionId = [[resp mlid] longValue];
-	// TODO check value of login request
+	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
+	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
+		if (resp.data.length == 3) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Telecommande rejetée" message:@"Votre télécommande n'est plus acceptée par le serveur" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			[alert show];
+			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
+			return NO;
+		}
+	} else {
+		sessionId = [[(DAAPResponsemlog *)resp mlid] longValue];
+	}
+	if (sessionId == 0) {
+		return NO;
+	}
 	self.connected = YES;
 	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
 	DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
@@ -67,14 +80,18 @@
 	}
 	[self monitorPlayStatus];
 	[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
+	return YES;
 }
 
 - (void) logout{
 	NSLog(@"FDServer-logout");
-	[self.daapReqRep cancelConnection];
-	[self.daapReqRep release];
+	if (self.daapReqRep != nil) {
+		[self.daapReqRep cancelConnection];
+		self.daapReqRep = nil;
+	}
 	NSString *string = [NSString stringWithFormat:kRequestLogout,self.host,self.port,sessionId];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	self.connected = NO;
 }
 
 - (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT{
@@ -196,6 +213,12 @@
 - (void) connectionTimedOut{
 	NSLog(@"FDServer-connectionTimedOut");
 	[self monitorPlayStatus];
+}
+
+- (void) cantConnect{
+	NSLog(@"FDServer-cantConnect");
+	self.connected = NO;
+	[[NSNotificationCenter defaultCenter ]postNotificationName:@"connectionLost" object:nil];
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
@@ -376,6 +399,10 @@
 	[self.pairingGUID release];
 	[self.servicename release];
 	[self.TXT release];
+	[self.daapReqRep release];
+	[self.currentAlbum release];
+	[self.currentTrack release];
+	[self.currentArtist release];
     [super dealloc];
 }
 
