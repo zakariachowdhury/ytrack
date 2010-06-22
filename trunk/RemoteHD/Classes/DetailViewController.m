@@ -16,14 +16,14 @@
 #import "DAAPResponsemlcl.h"
 #import "AlbumsOfArtistController.h"
 
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
-
 @implementation DetailViewController
 
 @synthesize results;
 @synthesize indexList;
 @synthesize delegate;
 @synthesize currentTrack;
+@synthesize currentAlbum;
+@synthesize currentArtist;
 @synthesize artistDatasource;
 
 
@@ -122,28 +122,37 @@
     static NSString *CellIdentifier = @"TrackCell";
     
 	TrackCustomCellClass *cell = (TrackCustomCellClass *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 		cell = [[[NSBundle mainBundle] loadNibNamed: @"TrackCustomCell" owner: self options: nil] objectAtIndex: 0];
     }
     
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *track = [self.results objectAtIndex:(offset + indexPath.row)];
 	
-	cell.textLabel.text = track.minm;
+	cell.trackName.text = track.minm;
 	NSString *album = track.asal;
 	NSString *artist = track.asar;
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",album, artist];
+	cell.artistName.text = artist;
+	cell.albumName.text = album;
 	
-	if ([cell.textLabel.text isEqualToString:self.currentTrack]) {
-		cell.textLabel.textColor = [UIColor blueColor];
+	int timeMillis = [track.astm intValue];
+	int timeSec = timeMillis / 1000;
+	
+	int totalDays = timeSec / 86400;
+    int totalHours = (timeSec / 3600) - (totalDays * 24);
+    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
+    int totalSeconds = timeSec % 60;
+		
+	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+	
+	if ([cell.trackName.text isEqualToString:self.currentTrack] && [cell.artistName.text isEqualToString:self.currentArtist] && [cell.albumName.text isEqualToString:self.currentAlbum]) {
+		cell.trackName.textColor = [UIColor blueColor];
 	} else {
-		cell.textLabel.textColor = [UIColor blackColor];
+		cell.trackName.textColor = [UIColor blackColor];
 	}
 	int res = indexPath.row % 2;
 	if (res != 0){
-		cell.background.backgroundColor = RGBCOLOR(236,246,255);
+		cell.background.backgroundColor = cellColoredBackground;
 	} else {
 		cell.background.backgroundColor = [UIColor whiteColor];
 	}
@@ -167,6 +176,8 @@
 - (void) statusUp:(NSNotification *)notification{
 	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	self.currentTrack = cmst.cann;
+	self.currentArtist = cmst.cana;
+	self.currentAlbum = cmst.canl;
 
 	/*[NSIndexPath indexPathForRow:<#(NSUInteger)row#> inSection:<#(NSUInteger)section#>
 	[self.tableView scrollToRowAtIndexPath:[reloadTracks objectAtIndex:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];*/
@@ -191,6 +202,7 @@
 }
 
 - (void) changeToTrackView{
+	[self.navigationController popToRootViewControllerAnimated:NO];
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	
@@ -198,6 +210,7 @@
 }
 
 - (void) changeToArtistView{
+	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.artistDatasource == nil) {
 		ArtistDatasource *d = [[ArtistDatasource alloc] init];
 		self.artistDatasource = d;
@@ -211,6 +224,7 @@
 }
 
 - (void) changeToAlbumView{
+	[self.navigationController popToRootViewControllerAnimated:NO];
 	DAAPResponseagal * resp = [[[SessionManager sharedSessionManager] currentServer] getAllAlbums];
 	AlbumsOfArtistController * c = [[AlbumsOfArtistController alloc] init];
 	c.agal = resp;
@@ -243,6 +257,8 @@
 	[results release];
 	[indexList release];
 	[currentTrack release];
+	[currentAlbum release];
+	[currentArtist release];
 	[artistDatasource release];
     [super dealloc];
 }

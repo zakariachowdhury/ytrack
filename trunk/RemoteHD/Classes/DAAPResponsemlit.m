@@ -24,6 +24,8 @@
 @synthesize asai;
 @synthesize aeSI;
 @synthesize astn;
+@synthesize astm;
+@synthesize assp;
 @synthesize asal;
 @synthesize asar;
 @synthesize asaa;
@@ -61,6 +63,8 @@
 	[self.asai release];
 	[self.aeSI release];
 	[self.astn release];
+	[self.astm release];
+	[self.assp release];
     [self.minm release];
 	[self.asal release];
 	[self.asar release];

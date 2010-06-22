@@ -9,6 +9,7 @@
 #import "DAAPRequestReply.h"
 #import "HexDumpUtility.h"
 #import "SessionManager.h"
+#import "DAAPResponseerror.h"
 
 
 @implementation DAAPRequestReply
@@ -34,11 +35,16 @@
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
 	assert(theConnection == self.connection);
-	NSLog(@"AsyncDAAPRequestReply - %@", [error localizedDescription]);
+	NSLog(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 	[self.connection cancel];
 	self.connection = nil;
-	if([delegate respondsToSelector:@selector(connectionTimedOut)])
-		[delegate connectionTimedOut];
+	if (error.code == NSURLErrorCannotConnectToHost) {
+		if([delegate respondsToSelector:@selector(cantConnect)])
+			[delegate cantConnect];
+	} else if (error.code == NSURLErrorTimedOut) {
+		if([delegate respondsToSelector:@selector(connectionTimedOut)])
+			[delegate connectionTimedOut];
+	}
 }
 
 - (void)connection:(NSURLConnection *)theConnection
@@ -80,17 +86,18 @@
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
-	NSLog(@"sync requesting %@",url);
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	NSLog(@"END requesting %@",url);
-	[HexDumpUtility printHexDumpToConsole:dat];
+	//[HexDumpUtility printHexDumpToConsole:dat];
 
 	NSString *command = [self parseCommandName:dat atPosition:0];
+	if (command == nil) {
+		return [[DAAPResponseerror alloc] initWithData:dat];
+	}
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
+	
 	
 	DAAPResponse *response = [[[NSClassFromString(clazz) alloc] initWithData:dat] autorelease];
 	[response performSelector:@selector(parse)];
-	NSLog(@"END Parsing %@",url);
 	return response;
 }
 

@@ -10,6 +10,8 @@
 #import "DAAPResponsemlit.h"
 
 
+
+
 @implementation TracksForAlbumController
 @synthesize tracks;
 @synthesize shouldPlayAllTracks;
@@ -89,15 +91,35 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+	static NSString *CellIdentifier = @"TrackCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	TrackCustomCellClass *cell = (TrackCustomCellClass *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[NSBundle mainBundle] loadNibNamed: @"TrackCustomCell" owner: self options: nil] objectAtIndex: 0];
     }
     
     // Configure the cell...
-    cell.textLabel.text = [(DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row] minm];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
+    cell.trackName.text = mlit.minm;
+	cell.artistName.text = mlit.asar;
+	cell.albumName.text = mlit.asal;
+	int timeMillis = [mlit.astm intValue];
+	int timeSec = timeMillis / 1000;
+	
+	int totalDays = timeSec / 86400;
+    int totalHours = (timeSec / 3600) - (totalDays * 24);
+    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
+    int totalSeconds = timeSec % 60;
+	NSLog(@"%d",timeSec);
+	NSLog(@"%d:%d:%d:%d",totalDays,totalHours,totalMinutes,totalSeconds);
+
+	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+	int res = indexPath.row % 2;
+	if (res != 0){
+		cell.background.backgroundColor = cellColoredBackground;
+	} else {
+		cell.background.backgroundColor = [UIColor whiteColor];
+	}
     return cell;
 }
 

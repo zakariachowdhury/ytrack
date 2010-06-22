@@ -52,7 +52,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
 	pin = arc4random() % (10000);
-	pinCode.text = [NSString stringWithFormat:@"%04d",pin];
+	NSString *pinStr = [NSString stringWithFormat:@"%04d",pin];
+	pinCode1.text = [pinStr substringToIndex:1];
+	pinCode2.text = [pinStr substringWithRange:NSMakeRange(1, 1)];
+	pinCode3.text = [pinStr substringWithRange:NSMakeRange(2, 1)];
+	pinCode4.text = [pinStr substringWithRange:NSMakeRange(3, 1)];
 }
 
 - (void) tryClosingServer:(NSTimer *)theTimer{

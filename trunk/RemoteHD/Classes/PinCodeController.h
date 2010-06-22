@@ -20,7 +20,10 @@
 @interface PinCodeController : UIViewController <PairingServerDelegate>{
 	id<PincodeDelegate> delegate;
 	HTTPServer *httpServer;
-	IBOutlet UILabel *pinCode;
+	IBOutlet UILabel *pinCode1;
+	IBOutlet UILabel *pinCode2;
+	IBOutlet UILabel *pinCode3;
+	IBOutlet UILabel *pinCode4;
 	int pin;
 	int GUID;
 }

@@ -25,6 +25,8 @@
 	NSArray *indexList;
 	NSMutableArray *arrayOfCharacters;
 	NSString *currentTrack;
+	NSString *currentArtist;
+	NSString *currentAlbum;
 	ArtistDatasource *artistDatasource;
 	id<DetailDelegate> delegate;
 }
@@ -33,6 +35,8 @@
 @property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) id<DetailDelegate> delegate;
 @property (nonatomic, copy) NSString *currentTrack;
+@property (nonatomic, copy) NSString *currentAlbum;
+@property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, retain) ArtistDatasource *artistDatasource;
 
 - (void) display;

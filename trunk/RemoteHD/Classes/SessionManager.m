@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	return NO;
 }
 
-- (void) foundNewServer:(FDServer *)server{
+- (FDServer *) foundNewServer:(FDServer *)server{
 	int foundIndex = -1;
 	for (int i = 0; i<[self.servers count];i++) {
 		NSString *serverServiceName = [[self.servers objectAtIndex:i] servicename];
@@ -62,10 +62,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		oldServer.currentAlbum = server.currentAlbum;
 		oldServer.currentTrack = server.currentTrack;
 		oldServer.currentArtist = server.currentArtist;
+		[[PreferencesManager sharedPreferencesManager] addServer:server];
+		return oldServer;
 	} else {
 		[self.servers addObject:server];
+		[[PreferencesManager sharedPreferencesManager] addServer:server];
+		return server;
 	}
-	[[PreferencesManager sharedPreferencesManager] addServer:server];
+	
 }
 
 - (FDServer *) currentServer{
@@ -94,17 +98,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	}
 	if (foundIndex >=0) {
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
-		[server open];
-		[self foundNewServer:server];
+		if ([server open]){
+			[self foundNewServer:server];
+		}
 	}
 }
 
-// FIXME : MMmmmh SessionManager should not be responsible for that
-// for now this is a quick and dirty way to get it working
-- (void) deleteServerAtIndex:(int)index{
-	[(FDServer *)[self.servers objectAtIndex:index] logout];
-	[self.servers removeObjectAtIndex:index];
-	[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:index];
+- (void) deleteServerWithPairingGUID:(NSString *)pairingGUID{
+	int foundIndex = -1;
+	for (int i = 0; i<[self.servers count];i++) {
+		if ([pairingGUID isEqualToString:[[self.servers objectAtIndex:i] pairingGUID]]) {
+			foundIndex = i;
+			break;
+		}
+	}
+	if (foundIndex >=0) {
+		FDServer *server = [self.servers objectAtIndex:foundIndex];
+		[server logout];
+		[self.servers removeObjectAtIndex:foundIndex];
+		[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:foundIndex];
+	}
+	
+	
 }
 
 @end
