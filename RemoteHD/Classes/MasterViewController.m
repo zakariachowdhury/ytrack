@@ -71,7 +71,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //return [self.results count];
-	return 1;
+	return 3;
 }
 
 
@@ -87,18 +87,43 @@
     
     // Configure the cell...
 	//cell.textLabel.text = [(DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row] minm];
-	cell.textLabel.text = @"Musique";
-	
-	if (cell.selected){
-		cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-		cell.textLabel.shadowColor = [UIColor grayColor];
-		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-	} else {
-		cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
-		cell.textLabel.shadowColor = [UIColor whiteColor];
-		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+	if (indexPath.row == 0) {
+		cell.textLabel.text = @"Musique";
+		
+		if (cell.selected){
+			cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
+			cell.textLabel.shadowColor = [UIColor grayColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		} else {
+			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+			cell.textLabel.shadowColor = [UIColor whiteColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		}
+	} else if (indexPath.row == 1) {
+		cell.textLabel.text = @"Books";
+		
+		if (cell.selected){
+			cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
+			cell.textLabel.shadowColor = [UIColor grayColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		} else {
+			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+			cell.textLabel.shadowColor = [UIColor whiteColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		}
+	} else if (indexPath.row == 2) {
+		cell.textLabel.text = @"Podcasts";
+		
+		if (cell.selected){
+			cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
+			cell.textLabel.shadowColor = [UIColor grayColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		} else {
+			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+			cell.textLabel.shadowColor = [UIColor whiteColor];
+			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		}
 	}
-
     
     return cell;
 }
@@ -111,6 +136,12 @@
 	cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
 	cell.textLabel.shadowColor = [UIColor grayColor];
 	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+	
+	if (indexPath.row == 0) {
+		[detailViewController changeToTrackView];
+	} else if (indexPath.row == 1) {
+		[detailViewController changeToBookView];
+	}
 
     // Navigation logic may go here. Create and push another view controller.
 	/*

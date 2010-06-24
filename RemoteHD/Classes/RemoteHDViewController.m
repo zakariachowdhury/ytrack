@@ -22,6 +22,8 @@
 - (void) _displayNoLib;
 - (NSString *) _computePrintableTime:(int)milliseconds;
 - (void) _updateTime:(NSTimer *)timer;
+- (void) _statusUpdate:(NSNotification *)notification;
+- (void) _libraryAvailable;
 @end
 
 
@@ -30,38 +32,30 @@
 @synthesize popOver;
 @synthesize timer;
 
-- (void) _displayNoLib{
-	nolibView.alpha = 1.0;
-}
-
-- (void) libraryAvailable {
-	NSLog(@"------ library available -------");
-	nolibView.alpha = 0.0;
-	loadingView.alpha = 1.0;
-	loadingView.hidden = NO;
-	[activityIndicator startAnimating];
-	[masterViewController display];
-	[detailViewController display];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
-	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
-	[self _updateVolume];
-}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	// init navigation controller
 	navigationController.navigationBarHidden = YES;
 	navigationController.view.frame = CGRectMake(244, 70, 524, 890);
 	navigationController.delegate = self;
 	[self.view addSubview:navigationController.view];
+	
+	// init 'hiding views'
 	[self.view bringSubviewToFront:loadingView];
 	[self.view bringSubviewToFront:nolibView];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryAvailable) name:@"connected" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:@"connectionLost" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUp:) name:@"statusUpdate" object:nil];
+	
+	// register observers for notifications
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_libraryAvailable) name:kNotificationConnected object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:kNotificationConnectionLost object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
+	
+	// load preferences file and try to connect to the last used server
 	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
 	[[SessionManager sharedSessionManager] openLastUsedServer];
+	
+	// customize sliders
 	volumeSlider.backgroundColor = [UIColor clearColor];	
 	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"slider1.png"]
 								stretchableImageWithLeftCapWidth:15.0 topCapHeight:0.0];
@@ -82,15 +76,20 @@
 	[progress setThumbImage: [UIImage imageNamed:@"timeSliderPin.png"] forState:UIControlStateSelected];
 	[progress setThumbImage: [UIImage imageNamed:@"timeSliderPin.png"] forState:UIControlStateHighlighted];
 	[progress setMinimumTrackImage:stetchLeftTrack2 forState:UIControlStateNormal];
-	[progress setMinimumTrackImage:stetchLeftTrack2 forState:UIControlStateSelected];
-	[progress setMinimumTrackImage:stetchLeftTrack2 forState:UIControlStateHighlighted];
 	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateNormal];
-	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateSelected];
-	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateHighlighted];
+
+	// hide most part of the UI if we cannot connect to last used server
 	if ([[SessionManager sharedSessionManager] currentServer] == nil) {
 		[self _displayNoLib];
 	}
+	
+	// init the editing playing time state
+	_editingPlayingTime = NO;
 }
+
+
+#pragma mark -
+#pragma mark Actions
 
 - (IBAction) buttonClicked:(id)sender{
 	if (librariesViewController == nil) {
@@ -120,14 +119,27 @@
 
 - (IBAction) previousClicked:(id)sender{
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	
 	[server playPreviousItem];
 }
 
+// user did change volume
 - (IBAction) volumeChanged:(id)sender{
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	[server setVolume:volumeSlider.value];
 	[self _updateVolume];
+}
+
+// called when user start changing the playing time slider
+// used to avoid the timer to try top update slide state while user is editing value
+- (IBAction) startingPlaytimeEdit:(id)sender{
+	_editingPlayingTime = YES;
+}
+
+- (IBAction) playingTimeChanged:(id)sender{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server changePlayingTime:progress.value];
+	doneTime = progress.value;
+	_editingPlayingTime = NO;
 }
 
 - (IBAction) buttonSelected:(id)sender{
@@ -163,7 +175,10 @@
 		self.popOver = aPopover;
 		[aPopover release];
 	}
-	if (self.popOver.popoverVisible) return;
+	if (self.popOver.popoverVisible) {
+		[self.popOver dismissPopoverAnimated:YES];
+		return;
+	}
 	[self.popOver presentPopoverFromBarButtonItem:sender
 								   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
@@ -174,35 +189,74 @@
 	}
 }
 
-- (void) statusUpdate:(DAAPResponsecmst *)cmst{
-	
-	doneTime = [cmst.cast intValue]-[cmst.cant intValue];
-	totalTime = [cmst.cast intValue];
-	progress.maximumValue = totalTime;
-	progress.minimumValue = 0;
-	progress.value = doneTime;
-//	float pro = (float)doneTime/(float)totalTime;
-//	progress.progress = pro;
-	BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+#pragma mark -
+# pragma mark LibraryDelegate methods
 
-	track.text = cmst.cann;
-	artist.text = cmst.cana;
-	album.text = cmst.canl;
-	if ([cmst.caps shortValue] == 4) {
-		play.alpha = 0.0;
-		pause.alpha = 1.0;
-	} else if ([cmst.caps shortValue] == 3) {
-		play.alpha = 1.0;
-		pause.alpha = 0.0;
-	} 
-	if (trackChanged) {
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
-		[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+- (void) didFinishEditingLibraries {
+	[self dismissModalViewControllerAnimated:YES];
+	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
+		loadingView.alpha = 1.0;
+		loadingView.hidden = NO;
+		[activityIndicator startAnimating];
+		[masterViewController display];
+		[detailViewController display];
+		[self _updateVolume];
+	} else {
+		[self _displayNoLib];
+	}
+
+}
+
+#pragma mark -
+#pragma mark DetailDelegate methods
+
+- (void) didSelectItem{	
+}
+
+- (void) didFinishLoading{
+	loadingView.alpha = 0.0;
+	loadingView.hidden = YES;
+	[activityIndicator stopAnimating];
+}
+
+#pragma mark -
+#pragma mark private methods
+
+- (void) _updateVolume{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	long v = [server getVolume];
+	volumeSlider.value = v;
+}
+
+
+- (void) _updateTime:(NSTimer *)timer{
+	if (playing) {
+		doneTime += 1000;
+		if (!_editingPlayingTime) {
+			progress.maximumValue = totalTime;
+			progress.minimumValue = 0;
+			progress.value = doneTime;
+			
+			int remainingTime = totalTime - doneTime;
+			donePlayingTime.text = [self _computePrintableTime:doneTime];
+			remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
+		}
 	}
 }
 
-- (void) statusUp:(NSNotification *)notification{
+- (NSString *) _computePrintableTime:(int)milliseconds{
+	int timeSec = milliseconds / 1000;
+	
+	int totalDays = timeSec / 86400;
+    int totalHours = (timeSec / 3600) - (totalDays * 24);
+    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
+    int totalSeconds = timeSec % 60;
+	return [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+}
+
+#pragma mark notification handling methods
+
+- (void) _statusUpdate:(NSNotification *)notification{
 	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	doneTime = [cmst.cast intValue]-[cmst.cant intValue];
 	totalTime = [cmst.cast intValue];
@@ -231,62 +285,28 @@
 	
 	donePlayingTime.text = [self _computePrintableTime:doneTime];
 	[self.timer invalidate];
-//	[self.timer release];
+	//	[self.timer release];
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTime:) userInfo:nil repeats:YES];
 }
 
-
-- (void) didFinishEditingLibraries {
-	[self dismissModalViewControllerAnimated:YES];
-	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
-		loadingView.alpha = 1.0;
-		loadingView.hidden = NO;
-		[activityIndicator startAnimating];
-		[masterViewController display];
-		[detailViewController display];
-		[self _updateVolume];
-	} else {
-		[self _displayNoLib];
-	}
-
+- (void) _displayNoLib{
+	nolibView.alpha = 1.0;
 }
 
-- (void) _updateVolume{
+- (void) _libraryAvailable {
+	nolibView.alpha = 0.0;
+	loadingView.alpha = 1.0;
+	loadingView.hidden = NO;
+	[activityIndicator startAnimating];
+	[masterViewController display];
+	[detailViewController display];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	long v = [server getVolume];
-	volumeSlider.value = v;
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
+	[self _updateVolume];
 }
 
-- (NSString *) _computePrintableTime:(int)milliseconds{
-	int timeSec = milliseconds / 1000;
-	
-	int totalDays = timeSec / 86400;
-    int totalHours = (timeSec / 3600) - (totalDays * 24);
-    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
-    int totalSeconds = timeSec % 60;
-	return [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
-}
 
-- (void) _updateTime:(NSTimer *)timer{
-	if (playing) {
-		doneTime += 1000;
-		progress.maximumValue = totalTime;
-		progress.minimumValue = 0;
-		progress.value = doneTime;
-		int remainingTime = totalTime - doneTime;
-		donePlayingTime.text = [self _computePrintableTime:doneTime];
-		remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
-	}
-}
-
-- (void) didSelectItem{	
-}
-
-- (void) didFinishLoading{
-	loadingView.alpha = 0.0;
-	loadingView.hidden = YES;
-	[activityIndicator stopAnimating];
-}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
 	//[self.popOver release];
@@ -298,19 +318,15 @@
 }
 
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
+	[self.timer invalidate];
 	[self.popOver release];
     [super dealloc];
 }

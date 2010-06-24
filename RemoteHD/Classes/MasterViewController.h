@@ -9,10 +9,12 @@
 
 #import <UIKit/UIKit.h>
 #import "DAAPRequestReply.h"
+#import "DetailViewController.h"
 
 
 @interface MasterViewController : UITableViewController {
 	NSArray *results;
+	IBOutlet DetailViewController *detailViewController;
 }
 
 @property (nonatomic, retain) NSArray *results;
