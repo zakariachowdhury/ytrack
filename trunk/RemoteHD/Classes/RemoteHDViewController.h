@@ -43,7 +43,7 @@
 	int doneTime;
 	int totalTime;
 	BOOL playing;
-
+	BOOL _editingPlayingTime;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
@@ -56,9 +56,10 @@
 - (IBAction) nextClicked:(id)sender;
 - (IBAction) previousClicked:(id)sender;
 - (IBAction) volumeChanged:(id)sender;
+- (IBAction) playingTimeChanged:(id)sender;
+- (IBAction) startingPlaytimeEdit:(id)sender;
 - (IBAction) buttonSelected:(id)sender;
 - (IBAction) speakerSelectorClicked:(id)sender;
-- (void) libraryAvailable;
 
 @end
 

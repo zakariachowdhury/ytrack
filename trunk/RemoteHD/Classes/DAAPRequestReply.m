@@ -62,7 +62,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	assert(theConnection == self.connection);
-	//[HexDumpUtility printHexDumpToConsole:data];
+	[HexDumpUtility printHexDumpToConsole:data];
 	
 	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];

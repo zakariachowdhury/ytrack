@@ -35,7 +35,6 @@
 
 @protocol FDServerDelegate
 
-- (void) statusUpdate:(DAAPResponsecmst *)cmst;
 @optional
 - (void) didFindSpeakers:(NSArray *)speakers;
 
@@ -51,6 +50,8 @@
 	int sessionId;
 	NSInteger databaseId;
 	NSInteger musicLibraryId;
+	NSInteger podcastsLibraryId;
+	NSInteger booksLibraryId;
 	int musr;
 	long revNum;
 	BOOL connected;
@@ -68,6 +69,8 @@
 @property (nonatomic) int sessionId;
 @property (nonatomic) NSInteger databaseId;
 @property (nonatomic) NSInteger musicLibraryId;
+@property (nonatomic) NSInteger podcastsLibraryId;
+@property (nonatomic) NSInteger booksLibraryId;
 @property (nonatomic, retain) DAAPRequestReply *daapReqRep;
 
 @property (nonatomic) BOOL connected;
@@ -90,7 +93,9 @@
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
+- (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
+- (void) playBookInLibrary:(int)bookId;
 - (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;
 - (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex;
 - (void) playPreviousItem;
@@ -100,6 +105,7 @@
 - (void) updateStatus;
 - (long) getVolume;
 - (void) setVolume:(long) volume;
+- (void) changePlayingTime:(int)position;
 - (NSArray *) getSpeakers;
 - (void) setSpeakers:(NSArray *)speakers;
 - (NSDictionary *) getAsDictionary;

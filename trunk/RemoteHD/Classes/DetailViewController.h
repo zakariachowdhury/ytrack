@@ -11,6 +11,9 @@
 #import "DAAPRequestReply.h"
 #import "ArtistDatasource.h"
 #import "TrackCustomCellClass.h"
+#import "DAAPDatasource.h"
+#import "TracksDatasource.h"
+#import "BooksDatasource.h"
 
 @protocol DetailDelegate
 
@@ -20,7 +23,7 @@
 @end
 
 
-@interface DetailViewController : UITableViewController <DAAPRequestDelegate> {
+@interface DetailViewController : UITableViewController <DAAPRequestDelegate, DAAPDatasourceDelegate> {
 	NSArray *results;
 	NSArray *indexList;
 	NSMutableArray *arrayOfCharacters;
@@ -28,6 +31,8 @@
 	NSString *currentArtist;
 	NSString *currentAlbum;
 	ArtistDatasource *artistDatasource;
+	TracksDatasource *tracksDatasource;
+	BooksDatasource *booksDatasource;
 	id<DetailDelegate> delegate;
 }
 
@@ -38,12 +43,14 @@
 @property (nonatomic, copy) NSString *currentAlbum;
 @property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, retain) ArtistDatasource *artistDatasource;
+@property (nonatomic, retain) TracksDatasource *tracksDatasource;
+@property (nonatomic, retain) BooksDatasource *booksDatasource;
 
 - (void) display;
 - (void) didFinishLoading:(DAAPResponse *)response;
 - (void) changeToArtistView;
 - (void) changeToAlbumView;
 - (void) changeToTrackView;
-//- (void) nowPlayingTrack:(NSString *)track album:(NSString *)album artist:(NSString *)artist;
+- (void) changeToBookView;
 
 @end

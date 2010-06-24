@@ -33,6 +33,8 @@
 @synthesize TXT;
 @synthesize databaseId;
 @synthesize musicLibraryId;
+@synthesize booksLibraryId;
+@synthesize podcastsLibraryId;
 @synthesize connected;
 @synthesize currentTrack;
 @synthesize currentAlbum;
@@ -75,11 +77,14 @@
 	for (DAAPResponsemlit *pl in response.mlcl.list) {
 		if ([pl.aePS shortValue] == kServerMusicLibraryAEPS){
 			self.musicLibraryId = [pl.miid intValue];
-			break;
+		} else if ([pl.aePS shortValue] == kServerPodcastsLibraryAEPS){
+			self.podcastsLibraryId = [pl.miid intValue];
+		} else if ([pl.aePS shortValue] == kServerBooksLibraryAEPS){
+			self.booksLibraryId = [pl.miid intValue];
 		}
 	}
 	[self monitorPlayStatus];
-	[[NSNotificationCenter defaultCenter ]postNotificationName:@"connected" object:nil]; 
+	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnected object:nil]; 
 	return YES;
 }
 
@@ -218,7 +223,7 @@
 - (void) cantConnect{
 	NSLog(@"FDServer-cantConnect");
 	self.connected = NO;
-	[[NSNotificationCenter defaultCenter ]postNotificationName:@"connectionLost" object:nil];
+	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnectionLost object:nil];
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
@@ -229,7 +234,7 @@
 		return;
 	}
 	DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
-	[[NSNotificationCenter defaultCenter ]postNotificationName:@"statusUpdate" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
+	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
 	self.currentTrack = cmst.cann;
 	self.currentAlbum = cmst.canl;
 	self.currentArtist = cmst.cana;
@@ -251,6 +256,15 @@
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate{
 	NSLog(@"FDServer-getAllTracks with delegate");
 	NSString *string3 = [NSString stringWithFormat:kRequestAllTracks,self.host,self.port,databaseId,musicLibraryId, sessionId];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	[daapreq release];
+}
+
+- (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getAllBooks with delegate");
+	NSString *string3 = [NSString stringWithFormat:kRequestAllBooks,self.host,self.port,databaseId,sessionId];
 	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
 	[daapreq setDelegate:aDelegate];
 	[daapreq asyncRequestAndParse:[NSURL URLWithString:string3]];
@@ -311,12 +325,31 @@
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
+- (void) changePlayingTime:(int)position{
+	NSLog(@"FDServer-changePlayingTime");
+	NSString *string = [NSString stringWithFormat:kRequestSetPlayingTime,self.host,self.port,position,sessionId];
+	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
+	[daapReq asyncRequest:[NSURL URLWithString:string]];
+	[daapReq release];
+	//[DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
 - (void) playSongInLibrary:(int)songId{
 	NSLog(@"FDServer-playSongInLibrary");
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 	
 	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInLibrary,self.host,self.port,songId,sessionId];
+	NSLog(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
+- (void) playBookInLibrary:(int)bookId{
+	NSLog(@"FDServer-playBookInLibrary");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayBookInLibrary,self.host,self.port,bookId,sessionId];
 	NSLog(@"%@",string2);
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
