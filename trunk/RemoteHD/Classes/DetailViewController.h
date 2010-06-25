@@ -14,6 +14,7 @@
 #import "DAAPDatasource.h"
 #import "TracksDatasource.h"
 #import "BooksDatasource.h"
+#import "AlbumsDatasource.h"
 
 @protocol DetailDelegate
 
@@ -33,6 +34,7 @@
 	ArtistDatasource *artistDatasource;
 	TracksDatasource *tracksDatasource;
 	BooksDatasource *booksDatasource;
+	AlbumsDatasource *albumsDatasource;
 	id<DetailDelegate> delegate;
 }
 
@@ -44,6 +46,7 @@
 @property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, retain) ArtistDatasource *artistDatasource;
 @property (nonatomic, retain) TracksDatasource *tracksDatasource;
+@property (nonatomic, retain) AlbumsDatasource *albumsDatasource;
 @property (nonatomic, retain) BooksDatasource *booksDatasource;
 
 - (void) display;

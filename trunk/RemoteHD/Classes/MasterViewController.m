@@ -49,10 +49,11 @@
 	
 }
 
-/*
+
 - (void) viewDidAppear:(BOOL)animated{
-	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-}*/
+	[super viewDidAppear:animated];
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
@@ -71,7 +72,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //return [self.results count];
-	return 3;
+	return 1;
 }
 
 
@@ -88,17 +89,17 @@
     // Configure the cell...
 	//cell.textLabel.text = [(DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row] minm];
 	if (indexPath.row == 0) {
-		cell.textLabel.text = @"Musique";
+		cell.textLabel.text = NSLocalizedString(@"music", @"Musique");
 		
-		if (cell.selected){
+		//if (cell.selected){
 			cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
 			cell.textLabel.shadowColor = [UIColor grayColor];
 			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-		} else {
+		/*} else {
 			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
 			cell.textLabel.shadowColor = [UIColor whiteColor];
 			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-		}
+		}*/
 	} else if (indexPath.row == 1) {
 		cell.textLabel.text = @"Books";
 		
@@ -124,7 +125,8 @@
 			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
 		}
 	}
-    
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+
     return cell;
 }
 
@@ -136,21 +138,12 @@
 	cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
 	cell.textLabel.shadowColor = [UIColor grayColor];
 	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-	
+	/*
 	if (indexPath.row == 0) {
 		[detailViewController changeToTrackView];
 	} else if (indexPath.row == 1) {
 		[detailViewController changeToBookView];
-	}
-
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+	}*/
 }
 
 - (void) display {

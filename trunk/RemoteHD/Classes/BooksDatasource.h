@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DAAPRequestReply.h"
 #import "DAAPDatasource.h"
+#import "TrackCustomCellClass.h"
 
 @interface BooksDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate>{
 	NSArray *list;

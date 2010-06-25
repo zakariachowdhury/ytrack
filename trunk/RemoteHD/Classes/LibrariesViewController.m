@@ -16,8 +16,8 @@
 #import "RemoteSpeaker.h"
 
 #define kProgressIndicatorSize 20.0
-#define kLocalizedEdit     NSLocalizedString(@"Edit","pause taking samples")
-#define kLocalizedDone    NSLocalizedString(@"Done","resume taking samples")
+#define kLocalizedEdit     NSLocalizedString(@"Edit","Modifier")
+#define kLocalizedDone    NSLocalizedString(@"Done","OK")
 
 
 @interface LibrariesViewController()
@@ -101,6 +101,7 @@
 	_services = [[NSMutableArray alloc] init];
 	self.availableServices = [[NSMutableArray alloc] init];
 	editButton.possibleTitles = [NSSet setWithObjects:kLocalizedEdit, kLocalizedDone, nil];
+	editButton.title = kLocalizedEdit;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -164,7 +165,7 @@
 		[sw release];
     } else if (indexPath.section == 0) {
 		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
-			cell.textLabel.text = @"Ajouter une bibliothèque";
+			cell.textLabel.text = NSLocalizedString(@"addLibrary",@"Ajouter une bibliothèque");
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		} else {
 			// Set up the text for the cell
@@ -239,9 +240,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 	if (section == 0) {
-		return @"iTunes libraries";
+		return NSLocalizedString(@"iTunesLibraries",@"Bibliothèques de musique");
 	} 
-	return @"Speakers";
+	return NSLocalizedString(@"remoteSpeakers",@"Haut parleurs");
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -43,7 +43,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 		loadingImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, self.frame.size.height/2 + 20, 160.0, 20.0)];
 		loadingImageLabel.text = [[NSBundle mainBundle] localizedStringForKey:@"loadingImage" 
 																		value:@"Loading image" 
-																		table:@"Localizations"];
+																		table:@"Localizable"];
 		loadingImageLabel.textAlignment = UITextAlignmentCenter;
 		loadingImageLabel.font = [UIFont systemFontOfSize:12];
 		loadingImageLabel.textColor = [UIColor whiteColor];

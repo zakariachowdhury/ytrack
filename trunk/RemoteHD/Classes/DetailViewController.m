@@ -26,6 +26,7 @@
 @synthesize currentArtist;
 @synthesize artistDatasource;
 @synthesize tracksDatasource;
+@synthesize albumsDatasource;
 @synthesize booksDatasource;
 
 
@@ -48,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	self.title = NSLocalizedString(@"BackLabel",@"Retour");
     self.clearsSelectionOnViewWillAppear = NO;
 	
 	results = [[NSMutableArray alloc] init];
@@ -110,6 +111,10 @@
 	[self.tableView reloadData];
 }
 
+- (void) updateImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath{
+	[[[self.tableView cellForRowAtIndexPath:indexPath] imageView] setImage:image];
+}
+
 - (void) changeToTrackView{
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.tracksDatasource == nil) {
@@ -125,10 +130,12 @@
 		self.tableView.dataSource = self.tracksDatasource;
 		self.tableView.delegate = self.tracksDatasource;
 		[self.tableView reloadData];
+		[self.delegate didFinishLoading];
 	}
 }
 
 - (void) changeToArtistView{
+	//TODO change to async data loading
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.artistDatasource == nil) {
 		ArtistDatasource *d = [[ArtistDatasource alloc] init];
@@ -140,19 +147,26 @@
 	self.tableView.delegate = self.artistDatasource;
 	 
 	[self.tableView reloadData];
+
 }
 
 - (void) changeToAlbumView{
 	[self.navigationController popToRootViewControllerAnimated:NO];
-	DAAPResponseagal * resp = [[[SessionManager sharedSessionManager] currentServer] getAllAlbums];
-	AlbumsOfArtistController * c = [[AlbumsOfArtistController alloc] init];
-	c.agal = resp;
-	[self.navigationController setNavigationBarHidden:NO animated:NO];
-	[c setTitle:@"Albums"];
-	[self.navigationController pushViewController:c animated:YES];
-	[c release];
-	
-	[self.tableView reloadData];
+	if (self.albumsDatasource == nil) {
+		AlbumsDatasource *d = [[AlbumsDatasource alloc] init];
+		self.albumsDatasource = d;
+		self.albumsDatasource.navigationController = self.navigationController;
+		self.albumsDatasource.delegate = self;
+		[[[SessionManager sharedSessionManager] currentServer] getAllAlbums:self.albumsDatasource];
+		[d release];
+		self.tableView.dataSource = self.albumsDatasource;
+		self.tableView.delegate = self.albumsDatasource;
+		
+	} else {
+		self.tableView.dataSource = self.albumsDatasource;
+		self.tableView.delegate = self.albumsDatasource;
+		[self.tableView reloadData];
+	}	
 }
 
 - (void) changeToBookView{

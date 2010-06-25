@@ -36,6 +36,14 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// i18n
+	loadingMessageLabel.text = NSLocalizedString(@"loading",@"Chargement en cours...");
+	[segmentedControl setTitle:NSLocalizedString(@"Tracks",@"Morceaux") forSegmentAtIndex:0];
+	[segmentedControl setTitle:NSLocalizedString(@"Artists",@"Albums") forSegmentAtIndex:1];
+	[segmentedControl setTitle:NSLocalizedString(@"Albums",@"Artistes") forSegmentAtIndex:2];
+	nowPlayingLabel.text = NSLocalizedString(@"nowPlaying",@"A l'écoute");
+	
 	// init navigation controller
 	navigationController.navigationBarHidden = YES;
 	navigationController.view.frame = CGRectMake(244, 70, 524, 890);
@@ -290,6 +298,10 @@
 }
 
 - (void) _displayNoLib{
+	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"notConnected" 
+																		  value:@"Vous n'êtes pas connecté" 
+																		  table:@"Localizable"];
+	noLibViewMessage.text = notConnectedMessage;
 	nolibView.alpha = 1.0;
 }
 

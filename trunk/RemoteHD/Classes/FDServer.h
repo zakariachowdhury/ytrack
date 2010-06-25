@@ -92,6 +92,7 @@
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
+- (void) getAllAlbums:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;

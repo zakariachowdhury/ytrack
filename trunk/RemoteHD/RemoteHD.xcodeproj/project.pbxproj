@@ -99,6 +99,9 @@
 		6BEA5C3F11CD841500E419EC /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEA5C3E11CD841500E419EC /* speaker.png */; };
 		6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA820811ABD04500426E9E /* DAAPResponseapso.m */; };
 		6BF38A4011CFB4E800226FED /* connect.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF38A3F11CFB4E800226FED /* connect.png */; };
+		6BF6614111D41A5A00B1E47B /* DetailedTrackCustomCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF6614011D41A5A00B1E47B /* DetailedTrackCustomCellClass.m */; };
+		6BF6614511D41B4C00B1E47B /* DetailedTrackCustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BF6614411D41B4C00B1E47B /* DetailedTrackCustomCellView.xib */; };
+		6BF662C811D430DA00B1E47B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BF662C711D430DA00B1E47B /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +256,11 @@
 		6BEA820711ABD04500426E9E /* DAAPResponseapso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseapso.h; sourceTree = "<group>"; };
 		6BEA820811ABD04500426E9E /* DAAPResponseapso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseapso.m; sourceTree = "<group>"; };
 		6BF38A3F11CFB4E800226FED /* connect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect.png; sourceTree = "<group>"; };
+		6BF6613F11D41A5A00B1E47B /* DetailedTrackCustomCellClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedTrackCustomCellClass.h; sourceTree = "<group>"; };
+		6BF6614011D41A5A00B1E47B /* DetailedTrackCustomCellClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedTrackCustomCellClass.m; sourceTree = "<group>"; };
+		6BF6614411D41B4C00B1E47B /* DetailedTrackCustomCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedTrackCustomCellView.xib; sourceTree = "<group>"; };
+		6BF662C511D430CA00B1E47B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6BF662C911D430E300B1E47B /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RemoteHD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RemoteHD-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -306,6 +314,9 @@
 				6B6C74EB11CAC2CC00AAED4F /* TrackCustomCellClass.m */,
 				6BEA5B9A11CD7EFE00E419EC /* SpeakersViewController.h */,
 				6BEA5B9B11CD7EFE00E419EC /* SpeakersViewController.m */,
+				6BF6613F11D41A5A00B1E47B /* DetailedTrackCustomCellClass.h */,
+				6BF6614011D41A5A00B1E47B /* DetailedTrackCustomCellClass.m */,
+				6BF6614411D41B4C00B1E47B /* DetailedTrackCustomCellView.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -372,6 +383,7 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* RemoteHD-Info.plist */,
 				6BA5FAA011C2B2F60009921E /* Detail.xib */,
+				6BF662C711D430DA00B1E47B /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -584,6 +596,8 @@
 				6B4F18A911D0E5F7009D0A42 /* pinBg.png in Resources */,
 				6B4F18C311D0EBA0009D0A42 /* buttonBg.png in Resources */,
 				6BA8F10911D33F0400A621C6 /* nowPlayingspeaker.png in Resources */,
+				6BF6614511D41B4C00B1E47B /* DetailedTrackCustomCellView.xib in Resources */,
+				6BF662C811D430DA00B1E47B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,10 +664,23 @@
 				6BA8F0B411D2C2A800A621C6 /* BooksDatasource.m in Sources */,
 				6BA8F12211D3418900A621C6 /* TracksDatasource.m in Sources */,
 				6BA8F13911D3818400A621C6 /* DAAPDatasource.m in Sources */,
+				6BF6614111D41A5A00B1E47B /* DetailedTrackCustomCellClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6BF662C711D430DA00B1E47B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BF662C511D430CA00B1E47B /* English */,
+				6BF662C911D430E300B1E47B /* French */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

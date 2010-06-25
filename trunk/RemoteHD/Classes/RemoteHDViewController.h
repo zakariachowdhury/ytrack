@@ -19,7 +19,11 @@
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;
 	IBOutlet UIView *nolibView;
+	IBOutlet UILabel *noLibViewMessage;
+	IBOutlet UILabel *loadingMessageLabel;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
+	IBOutlet UISegmentedControl *segmentedControl;
+	IBOutlet UILabel *nowPlayingLabel;
 	
 	IBOutlet MasterViewController *masterViewController;
 	IBOutlet DetailViewController *detailViewController;
