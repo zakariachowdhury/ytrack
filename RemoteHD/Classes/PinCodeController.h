@@ -24,6 +24,8 @@
 	IBOutlet UILabel *pinCode2;
 	IBOutlet UILabel *pinCode3;
 	IBOutlet UILabel *pinCode4;
+	IBOutlet UILabel *pincodeTip;
+	IBOutlet UIButton *cancelButton;
 	int pin;
 	int GUID;
 }

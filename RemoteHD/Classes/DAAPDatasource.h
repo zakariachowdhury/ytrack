@@ -12,6 +12,8 @@
 
 - (void) refreshTableView;
 - (void) didFinishLoading;
+@optional
+- (void) updateImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

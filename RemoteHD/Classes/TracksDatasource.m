@@ -86,11 +86,9 @@
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
 	
 	if ([cell.trackName.text isEqualToString:self.currentTrack] && [cell.artistName.text isEqualToString:self.currentArtist] && [cell.albumName.text isEqualToString:self.currentAlbum]) {
-		//cell.trackName.textColor = [UIColor blueColor];
-		cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nowPlayingSpeaker.png"]];
+		cell.nowPlaying = YES;
 	} else {
-		//cell.trackName.textColor = [UIColor blackColor];
-		cell.accessoryView = nil;
+		cell.nowPlaying = NO;
 	}
 	int res = indexPath.row % 2;
 	if (res != 0){

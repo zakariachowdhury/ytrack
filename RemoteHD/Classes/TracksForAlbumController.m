@@ -16,6 +16,9 @@
 @synthesize tracks;
 @synthesize shouldPlayAllTracks;
 @synthesize albumName;
+@synthesize currentTrack;
+@synthesize currentAlbum;
+@synthesize currentArtist;
 
 #pragma mark -
 #pragma mark Initialization
@@ -39,32 +42,10 @@
  
  // Uncomment the following line to preserve selection between presentations.
  self.clearsSelectionOnViewWillAppear = NO;
- 
- // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
- // self.navigationItem.rightBarButtonItem = self.editButtonItem;
- }
- 
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUpdate:) name:kNotificationStatusUpdate object:nil];
 
-/*
- - (void)viewWillAppear:(BOOL)animated {
- [super viewWillAppear:animated];
  }
- */
-/*
- - (void)viewDidAppear:(BOOL)animated {
- [super viewDidAppear:animated];
- }
- */
-/*
- - (void)viewWillDisappear:(BOOL)animated {
- [super viewWillDisappear:animated];
- }
- */
-/*
- - (void)viewDidDisappear:(BOOL)animated {
- [super viewDidDisappear:animated];
- }
- */
+ 
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -91,18 +72,16 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	static NSString *CellIdentifier = @"TrackCell";
+	static NSString *CellIdentifier = @"DetailedTrack";
     
-	TrackCustomCellClass *cell = (TrackCustomCellClass *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	DetailedTrackCustomCellClass *cell = (DetailedTrackCustomCellClass *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed: @"TrackCustomCell" owner: self options: nil] objectAtIndex: 0];
+        cell = [[[NSBundle mainBundle] loadNibNamed: @"DetailedTrackCustomCellView" owner: self options: nil] objectAtIndex: 0];
     }
     
     // Configure the cell...
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
     cell.trackName.text = mlit.minm;
-	cell.artistName.text = mlit.asar;
-	cell.albumName.text = mlit.asal;
 	int timeMillis = [mlit.astm intValue];
 	int timeSec = timeMillis / 1000;
 	
@@ -110,10 +89,26 @@
     int totalHours = (timeSec / 3600) - (totalDays * 24);
     int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
     int totalSeconds = timeSec % 60;
-	NSLog(@"%d",timeSec);
-	NSLog(@"%d:%d:%d:%d",totalDays,totalHours,totalMinutes,totalSeconds);
 
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+	cell.trackNumber.text = [NSString stringWithFormat:@"%d.",indexPath.row+1];
+	NSLog(@"%@",self.title);
+	if ([cell.trackName.text isEqualToString:self.currentTrack] && [mlit.asar isEqualToString:self.currentArtist]){
+		if (self.shouldPlayAllTracks) {
+			cell.nowPlaying = YES;
+		} else {
+			if ([self.title isEqualToString:self.currentAlbum]) {
+				cell.nowPlaying = YES;
+			} else {
+				cell.nowPlaying = NO;
+			}
+
+		}
+
+	} else {
+		cell.nowPlaying = NO;
+	}
+	
 	int res = indexPath.row % 2;
 	if (res != 0){
 		cell.background.backgroundColor = cellColoredBackground;
@@ -123,51 +118,11 @@
     return cell;
 }
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- 
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
-
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
 	if (self.shouldPlayAllTracks) {
 		[[[SessionManager sharedSessionManager] currentServer] playAllTracksForArtist:mlit.asar index:indexPath.row];
@@ -177,6 +132,15 @@
 	
 }
 
+// Used to update nowPlaying in the table
+- (void) statusUpdate:(NSNotification *)notification{
+	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+	self.currentTrack = cmst.cann;
+	self.currentArtist = cmst.cana;
+	self.currentAlbum = cmst.canl;
+	
+	[self.tableView reloadData];
+}
 
 #pragma mark -
 #pragma mark Memory management
@@ -197,6 +161,9 @@
 - (void)dealloc {
 	[self.tracks release];
 	[self.albumName release];
+	[self.currentTrack release];
+	[self.currentAlbum release];
+	[self.currentArtist release];
     [super dealloc];
 }
 

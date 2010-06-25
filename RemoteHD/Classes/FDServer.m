@@ -56,7 +56,13 @@
 	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
 	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
 		if (resp.data.length == 3) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Telecommande rejetée" message:@"Votre télécommande n'est plus acceptée par le serveur" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			NSString *rejectedAlertTitle = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertTitle" 
+												   value:@"Telecommande rejetée" 
+												   table:@"Localizable"];
+			NSString *rejectedAlertContent = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertContent" 
+																				  value:@"Votre télécommande n'est plus acceptée par le serveur" 
+																				  table:@"Localizable"];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:rejectedAlertTitle message:rejectedAlertContent delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
 			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
 			return NO;
@@ -151,10 +157,11 @@
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist{
 	NSLog(@"FDServer-getAlbumsForArtist");
 	//NSString *a = [FDServer urlencode:artist];
+	NSString *escapedString = [artist stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
 	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-																	(CFStringRef)artist,
+																	(CFStringRef)escapedString,
 																	NULL,
-																	(CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+																	(CFStringRef)@"!*();:@&=+$,/?%#[]-\\",
 																	kCFStringEncodingUTF8 );
 	NSString *string3 = [NSString stringWithFormat:kRequestAlbumsForArtist,self.host,self.port,databaseId,sessionId,a];
 	NSLog(@"%@",string3);
@@ -173,11 +180,12 @@
 
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist{
 	NSLog(@"FDServer-getAllTracksForArtist");
+	NSString *escapedString = [artist stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
 	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(
 																	   NULL,
-																	   (CFStringRef)artist,
+																	   (CFStringRef)escapedString,
 																	   NULL,
-																	   (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+																	   (CFStringRef)@"!*();:@&=+$,/?%#[]-\\",
 																	   kCFStringEncodingUTF8 );
 	NSString *string3 = [NSString stringWithFormat:kRequestAllTracksForArtist,self.host,self.port,databaseId,musicLibraryId, sessionId,a];
 	NSLog(@"%@",string3);
@@ -251,6 +259,15 @@
 	[daapReq asyncRequestAndParse:[NSURL URLWithString:string3]];
 	self.daapReqRep = daapReq;
 	[daapReq release];
+}
+
+- (void) getAllAlbums:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getAllAlbums");
+	NSString *string3 = [NSString stringWithFormat:kRequestAllAlbums,self.host,self.port,databaseId,sessionId];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	[daapreq release];
 }
 
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate{
@@ -366,11 +383,12 @@
 
 - (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex{
 	NSLog(@"FDServer-playAllTracksForArtist");
+	NSString *escapedString = [artist stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
 	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(
 																	   NULL,
-																	   (CFStringRef)artist,
+																	   (CFStringRef)escapedString,
 																	   NULL,
-																	   (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+																	   (CFStringRef)@"!*();:@&=+$,/?%#[]-\\",
 																	   kCFStringEncodingUTF8 );
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];

@@ -88,6 +88,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 
 - (void) setLastUsedServer:(FDServer *)server{
 	[self.preferences setObject:[server getAsDictionary] forKey:kPrefLastUsedLibrary];
+	[self persistPreferences];
 }
 
 - (void) addServer:(FDServer *) newServer{
@@ -114,6 +115,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	
 	[servers addObject:[newServer getAsDictionary]];
 	[self.preferences setObject:[newServer getAsDictionary] forKey:kPrefLastUsedLibrary];
+	[self persistPreferences];
 }
 
 - (void) deleteServerAtIndex:(int)index{
@@ -126,6 +128,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	if ([[currentServer objectForKey:kLibraryServicenameKey] isEqualToString:serverServiceName]) {
 		[self.preferences removeObjectForKey:kPrefLastUsedLibrary];
 	}
+	[self persistPreferences];
 }
 
 - (void)dealloc {

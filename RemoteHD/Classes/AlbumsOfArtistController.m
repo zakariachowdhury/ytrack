@@ -180,7 +180,6 @@
     // For example: self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
 	[self cleanJobs];
 	[self.agal release];

@@ -27,6 +27,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	pincodeTip.text = NSLocalizedString(@"pincodeTip",@"Pour ajouter une bibliothèque iTunes, ouvrez iTunes puis sélectionnez votre iPad dans la liste d'appareils.");
+	[cancelButton setTitle:NSLocalizedString(@"cancelButton",@"Annuler") forState:UIControlStateNormal];
+	[cancelButton setTitle:NSLocalizedString(@"cancelButton",@"Annuler") forState:UIControlStateHighlighted];
+	
 	GUID = arc4random() % ((unsigned)RAND_MAX + 1);
 	NSString * randomPairCode = [NSString stringWithFormat:@"%08X%08X",GUID,GUID];
 

@@ -98,7 +98,7 @@
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 		c.tracks = resp2.mlcl.list;
 		[self.navigationController setNavigationBarHidden:NO animated:NO];
-		[c setTitle:@"Pistes"];
+		[c setTitle:NSLocalizedString(@"TracksDefaultName",@"Pistes")];
 		c.shouldPlayAllTracks = YES;
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="108"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -629,14 +629,12 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUITableViewController" id="365738973">
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
-					<int key="IBUIStatusBarStyle">2</int>
-				</object>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
+				<bool key="IBUIClearsSelectionOnViewWillAppear">NO</bool>
 			</object>
 			<object class="IBUINavigationController" id="925859806">
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -951,6 +949,38 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 						<reference key="destination" ref="990002939"/>
 					</object>
 					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">noLibViewMessage</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="142107246"/>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">loadingMessageLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="574594147"/>
+					</object>
+					<int key="connectionID">149</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">segmentedControl</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="618219977"/>
+					</object>
+					<int key="connectionID">150</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nowPlayingLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="829058697"/>
+					</object>
+					<int key="connectionID">151</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1302,7 +1332,7 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 					<string>MasterViewController</string>
 					<string>{{202, -7}, {783, 756}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{310, 0}, {783, 756}}</string>
+					<string>{{341, 0}, {783, 756}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>DetailViewController</string>
@@ -1343,7 +1373,7 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">146</int>
+			<int key="maxID">151</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1433,15 +1463,19 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 							<string>bottomToolbar</string>
 							<string>detailViewController</string>
 							<string>donePlayingTime</string>
+							<string>loadingMessageLabel</string>
 							<string>loadingView</string>
 							<string>masterViewController</string>
 							<string>navigationController</string>
+							<string>noLibViewMessage</string>
 							<string>nolibView</string>
 							<string>nowPlaying</string>
+							<string>nowPlayingLabel</string>
 							<string>pause</string>
 							<string>play</string>
 							<string>progress</string>
 							<string>remainingPlayingTime</string>
+							<string>segmentedControl</string>
 							<string>topToolbar</string>
 							<string>track</string>
 							<string>volumeSlider</string>
@@ -1454,15 +1488,19 @@ b25uZXIgbGUgYm91dG9uIGVuIGhhdXQgw6AgZ2F1Y2hlIGRlIGwnw6ljcmFuCg</string>
 							<string>UIToolbar</string>
 							<string>DetailViewController</string>
 							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UIView</string>
 							<string>MasterViewController</string>
 							<string>UINavigationController</string>
+							<string>UILabel</string>
 							<string>UIView</string>
 							<string>AsyncImageView</string>
+							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UISlider</string>
 							<string>UILabel</string>
+							<string>UISegmentedControl</string>
 							<string>UIToolbar</string>
 							<string>UILabel</string>
 							<string>UISlider</string>

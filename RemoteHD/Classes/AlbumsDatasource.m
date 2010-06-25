@@ -14,26 +14,37 @@
 
 
 @implementation AlbumsDatasource
-@synthesize agal;
+@synthesize list;
+@synthesize indexList;
+@synthesize navigationController;
 
-/*
+- (id) init{
+	if ((self = [super init])) {
+		artworks = [[NSMutableDictionary alloc] init];
+		cellId = [[NSMutableDictionary alloc] init];
+		loaders = [[NSMutableDictionary alloc] init];		
+    }
+    return self;
+}
+
+
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [self.agal.mshl.indexList count];
+	return [self.indexList count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	long res = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshn] longValue];
+	long res = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:section] mshn] longValue];
 	
 	return res;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
 	NSMutableArray *chars = [[[NSMutableArray alloc] init] autorelease];
-	for (DAAPResponsemlit *mlit in self.agal.mshl.indexList) {
+	for (DAAPResponsemlit *mlit in self.indexList) {
 		[chars addObject:[mlit mshc]];
 	}
 	//return arrayOfCharacters;
@@ -42,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
 	NSInteger count = 0;
-	for(DAAPResponsemlit *mlit in self.agal.mshl.indexList)
+	for(DAAPResponsemlit *mlit in self.indexList)
 	{
 		if([mlit.mshc isEqualToString:title])
 			return count;
@@ -54,7 +65,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	
-	return [(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshc];
+	return [(DAAPResponsemlit *)[self.indexList objectAtIndex:section] mshc];
 }
 
 -(void)didFinishLoading:(UIImage *)image forAlbumId:(NSNumber *)albumId{
@@ -62,15 +73,17 @@
 		return;
 	}
 	[artworks setObject:image forKey:albumId];
+	[loaders removeObjectForKey:albumId];
 	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
-	[[[self.tableView cellForRowAtIndexPath:[cellId objectForKey:albumId]] imageView] setImage:image];
+	[self.delegate  updateImage:image forIndexPath:[cellId objectForKey:albumId]];
 }
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		[[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
+		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
+		[loaders setObject:loader forKey:albumId];
 		return defaultImage;
 	} else {
 		return [artworks objectForKey:albumId];
@@ -89,8 +102,8 @@
     }
     
     // Configure the cell...
-	long offset = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section] mshi] longValue];
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:(offset + indexPath.row)];
+	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.list objectAtIndex:(offset + indexPath.row)];
 	
     cell.textLabel.text = mlit.minm;
 	cell.imageView.image = [self artworkForAlbum:mlit.miid];
@@ -104,20 +117,48 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	long long albumId = [[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] mper] longLongValue];
+	long long albumId = [[(DAAPResponsemlit *)[self.list objectAtIndex:i] mper] longLongValue];
 	NSLog(@"%qi");
 	
 	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 	c.tracks = resp.mlcl.list;
-	c.albumName = [(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm];
-	[c setTitle:[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm]];
+	c.albumName = [(DAAPResponsemlit *)[self.list objectAtIndex:i] minm];
+	[c setTitle:[(DAAPResponsemlit *)[self.list objectAtIndex:i] minm]];
 	[self.navigationController pushViewController:c animated:YES];
+	[self.navigationController setNavigationBarHidden:NO animated:NO];
 	[c release];
-}*/
+}
+
+- (void) didFinishLoading:(DAAPResponse *)response{
+	self.list = [[(DAAPResponseagal *)response mlcl] list];
+	self.indexList = [[(DAAPResponseagal *)response mshl] indexList];
+	
+	[self.delegate refreshTableView];
+	[self.delegate didFinishLoading];
+}
+
+- (void) cleanJobs{
+	NSEnumerator *enumerator = [loaders objectEnumerator];
+	id value;
+	
+	while ((value = [enumerator nextObject])) {
+		[(AsyncImageLoader *)value cancelConnection];
+	}
+}
+
+- (void)dealloc {
+	[self cleanJobs];
+	[self.list release];
+	[self.indexList release];
+	[artworks release];
+	[cellId release];
+	[loaders release];
+    [super dealloc];
+}
 
 
 @end
