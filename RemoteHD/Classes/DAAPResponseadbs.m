@@ -3,7 +3,7 @@
 //  RemoteHD
 //
 //  Created by Fabrice Dewasmes on 23/05/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Fabrice Dewasmes. All rights reserved.
 //
 
 #import "DAAPResponseadbs.h"

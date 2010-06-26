@@ -3,7 +3,7 @@
 //  NSScannerTest
 //
 //  Created by Dimitris on 09/02/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Fabrice Dewasmes. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

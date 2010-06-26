@@ -3,7 +3,7 @@
 //  RemoteHD
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Fabrice Dewasmes 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
