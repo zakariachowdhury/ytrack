@@ -14,8 +14,6 @@
 
 
 @implementation AlbumsDatasource
-@synthesize list;
-@synthesize indexList;
 @synthesize navigationController;
 
 - (id) init{
@@ -74,7 +72,7 @@
 	}
 	[artworks setObject:image forKey:albumId];
 	[loaders removeObjectForKey:albumId];
-	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
+	//NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
 	[self.delegate  updateImage:image forIndexPath:[cellId objectForKey:albumId]];
 }
 
@@ -121,7 +119,6 @@
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
 	long long albumId = [[(DAAPResponsemlit *)[self.list objectAtIndex:i] mper] longLongValue];
-	NSLog(@"%qi");
 	
 	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
@@ -134,6 +131,7 @@
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
+	[super didFinishLoading:response];
 	self.list = [[(DAAPResponseagal *)response mlcl] list];
 	self.indexList = [[(DAAPResponseagal *)response mshl] indexList];
 	
@@ -152,8 +150,6 @@
 
 - (void)dealloc {
 	[self cleanJobs];
-	[self.list release];
-	[self.indexList release];
 	[artworks release];
 	[cellId release];
 	[loaders release];

@@ -92,7 +92,6 @@
 
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
 	cell.trackNumber.text = [NSString stringWithFormat:@"%d.",indexPath.row+1];
-	NSLog(@"%@",self.title);
 	if ([cell.trackName.text isEqualToString:self.currentTrack] && [mlit.asar isEqualToString:self.currentArtist]){
 		if (self.shouldPlayAllTracks) {
 			cell.nowPlaying = YES;

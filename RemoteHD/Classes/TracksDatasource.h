@@ -14,14 +14,9 @@
 
 
 @interface TracksDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate>{
-	NSArray *results;
-	NSArray *indexList;
-
 	UINavigationController *navigationController;
 }
 
-@property (nonatomic, retain) NSArray *results;
-@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) UINavigationController *navigationController;
 
 @end

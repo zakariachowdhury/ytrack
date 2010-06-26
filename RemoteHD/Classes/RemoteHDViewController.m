@@ -152,9 +152,8 @@
 
 - (IBAction) buttonSelected:(id)sender{
 	NSLog(@"value Changed !");
-	UISegmentedControl *control = (UISegmentedControl *)sender;
 	
-	switch (control.selectedSegmentIndex) {
+	switch (segmentedControl.selectedSegmentIndex) {
 		case 0:
 			[detailViewController changeToTrackView];
 			break;
@@ -203,11 +202,10 @@
 - (void) didFinishEditingLibraries {
 	[self dismissModalViewControllerAnimated:YES];
 	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
-		loadingView.alpha = 1.0;
-		loadingView.hidden = NO;
-		[activityIndicator startAnimating];
+		[self startLoading];
 		[masterViewController display];
-		[detailViewController display];
+		//[detailViewController display];
+		[self buttonSelected:nil];
 		[self _updateVolume];
 	} else {
 		[self _displayNoLib];
@@ -225,6 +223,12 @@
 	loadingView.alpha = 0.0;
 	loadingView.hidden = YES;
 	[activityIndicator stopAnimating];
+}
+
+- (void) startLoading{
+	loadingView.alpha = 1.0;
+	loadingView.hidden = NO;
+	[activityIndicator startAnimating];
 }
 
 #pragma mark -
@@ -249,7 +253,15 @@
 			donePlayingTime.text = [self _computePrintableTime:doneTime];
 			remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
 		}
+	} else {
+		progress.maximumValue = totalTime;
+		progress.minimumValue = 0;
+		progress.value = doneTime;
+		int remainingTime = totalTime - doneTime;
+		donePlayingTime.text = [self _computePrintableTime:doneTime];
+		remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
 	}
+
 }
 
 - (NSString *) _computePrintableTime:(int)milliseconds{
@@ -276,11 +288,12 @@
 	track.text = cmst.cann;
 	artist.text = cmst.cana;
 	album.text = cmst.canl;
+	NSLog(@"%d",[cmst.caps shortValue]);
 	if ([cmst.caps shortValue] == 4) {
 		playing = YES;
 		play.alpha = 0.0;
 		pause.alpha = 1.0;
-	} else if ([cmst.caps shortValue] == 3) {
+	} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
 		playing = NO;
 		play.alpha = 1.0;
 		pause.alpha = 0.0;
@@ -307,11 +320,11 @@
 
 - (void) _libraryAvailable {
 	nolibView.alpha = 0.0;
-	loadingView.alpha = 1.0;
-	loadingView.hidden = NO;
-	[activityIndicator startAnimating];
+	[self startLoading];
 	[masterViewController display];
-	[detailViewController display];
+	//[detailViewController display];
+	[detailViewController didChangeLibrary];
+	[self buttonSelected:nil];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
 	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];

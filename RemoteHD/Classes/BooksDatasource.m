@@ -14,8 +14,6 @@
 
 @implementation BooksDatasource
 
-@synthesize list;
-@synthesize indexList;
 @synthesize navigationController;
 
 
@@ -131,6 +129,7 @@
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
+	[super didFinishLoading:response];
 	self.list = [[(DAAPResponseapso *)response mlcl] list];
 	self.indexList = [[(DAAPResponseapso *)response mshl] indexList];
 	
@@ -139,8 +138,6 @@
 }
 
 - (void)dealloc {
-	[self.list release];
-	[self.indexList release];
     [super dealloc];
 }
 

@@ -174,10 +174,10 @@
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 										<float key="IBUIMinimumFontSize">10</float>
 									</object>
-									<object class="IBUIImageView" id="909022711">
+									<object class="IBUIImageView" id="349487545">
 										<reference key="NSNextResponder" ref="881843771"/>
 										<int key="NSvFlags">289</int>
-										<string key="NSFrame">{{650, 14}, {16, 16}}</string>
+										<string key="NSFrame">{{756, 14}, {16, 16}}</string>
 										<reference key="NSSuperview" ref="881843771"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -282,7 +282,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">nowPlayingIndicator</string>
 						<reference key="source" ref="720314728"/>
-						<reference key="destination" ref="909022711"/>
+						<reference key="destination" ref="349487545"/>
 					</object>
 					<int key="connectionID">26</int>
 				</object>
@@ -328,7 +328,7 @@
 							<reference ref="948943699"/>
 							<reference ref="679155041"/>
 							<reference ref="822524575"/>
-							<reference ref="909022711"/>
+							<reference ref="349487545"/>
 						</object>
 						<reference key="parent" ref="720314728"/>
 					</object>
@@ -369,7 +369,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="909022711"/>
+						<reference key="object" ref="349487545"/>
 						<reference key="parent" ref="881843771"/>
 					</object>
 				</object>

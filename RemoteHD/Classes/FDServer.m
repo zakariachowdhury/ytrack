@@ -64,6 +64,7 @@
 																				  table:@"Localizable"];
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:rejectedAlertTitle message:rejectedAlertContent delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
+			[alert release];
 			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
 			return NO;
 		}
@@ -144,19 +145,17 @@
 	return list;
 }
 
-- (NSDictionary *) getArtists{
+- (void) getArtists:(id<DAAPRequestDelegate>)aDelegate{
 	NSLog(@"FDServer-getArtists");
 	NSString *string3 = [NSString stringWithFormat:kRequestArtists,self.host,self.port,databaseId,sessionId];
-	NSLog(@"%@",string3);
-	DAAPResponseabro * response = (DAAPResponseabro *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
-	NSDictionary *retVal = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithArray:response.abar.list],@"list",[NSArray arrayWithArray:response.mshl.indexList],@"index",nil];
-	
-	return retVal;
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:string3]];
+	[daapreq release];
 }
 
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist{
 	NSLog(@"FDServer-getAlbumsForArtist");
-	//NSString *a = [FDServer urlencode:artist];
 	NSString *escapedString = [artist stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
 	NSString * a = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
 																	(CFStringRef)escapedString,
@@ -166,14 +165,6 @@
 	NSString *string3 = [NSString stringWithFormat:kRequestAlbumsForArtist,self.host,self.port,databaseId,sessionId,a];
 	NSLog(@"%@",string3);
 	[a release];
-	DAAPResponseagal * response = (DAAPResponseagal *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
-	return response;
-}
-
-- (DAAPResponseagal *) getAllAlbums{
-	NSLog(@"FDServer-getAllAlbums");
-	NSString *string3 = [NSString stringWithFormat:kRequestAllAlbums,self.host,self.port,databaseId,sessionId];
-	NSLog(@"%@",string3);
 	DAAPResponseagal * response = (DAAPResponseagal *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:string3] ];
 	return response;
 }
@@ -228,6 +219,7 @@
 	[self monitorPlayStatus];
 }
 
+// if user can't connect to host, simply give up and don't try to reconnect automatically
 - (void) cantConnect{
 	NSLog(@"FDServer-cantConnect");
 	self.connected = NO;
@@ -302,7 +294,6 @@
 	NSString *speakerList = @"";
 	for (int i = 0 ;i < [speakers count] - 1 ;i++) {
 		long long val = [[speakers objectAtIndex:i] longLongValue];
-		NSLog(@"0x%qX",val);
 		if (val == 0) {
 			speakerList = [speakerList stringByAppendingFormat:@"0,",val];
 		} else {
@@ -311,7 +302,6 @@
 
 	}
 	long long val = [[speakers lastObject] longLongValue];
-	NSLog(@"0x%qX",val);
 	if (val == 0) {
 		speakerList = [speakerList stringByAppendingFormat:@"0",val];
 	} else {
@@ -401,30 +391,30 @@
 - (void) playPreviousItem{
 	NSLog(@"FDServer-playPreviousItem");
 	NSString *string = [NSString stringWithFormat:kRequestPlayPreviousItem,self.host,self.port,sessionId];
-/*	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
+	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
 	
 	[daapReq asyncRequest:[NSURL URLWithString:string]];
-	[daapReq release];*/
-	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	[daapReq release];
+	//[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (void) playPause{
 	NSLog(@"FDServer-playPause");
 	NSString *string = [NSString stringWithFormat:kRequestPlayPause,self.host,self.port,sessionId];
-	/*DAAPRequest *daapReq = [[DAAPRequest alloc] init];	
+	DAAPRequest *daapReq = [[DAAPRequest alloc] init];	
 	[daapReq asyncRequest:[NSURL URLWithString:string]];
-	[daapReq release];*/
-	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	[daapReq release];
+	//[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (void) playNextItem{
 	NSLog(@"FDServer-playNextItem");
 	NSString *string = [NSString stringWithFormat:kRequestPlayNextItem,self.host,self.port,sessionId];
-	/*DAAPRequest *daapReq = [[DAAPRequest alloc] init];
+	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
 	
 	[daapReq asyncRequest:[NSURL URLWithString:string]];
-	[daapReq release];*/
-	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	[daapReq release];
+	//[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (void) updateStatus{
@@ -436,9 +426,8 @@
 
 + (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port{
 	NSLog(@"FDServer-getServerInfoForHost");
-	NSString* str = [NSString stringWithFormat:kRequestServerInfo,host,port];
-	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
-	NSLog(@"%@",msrv.ceWM);
+	//NSString* str = [NSString stringWithFormat:kRequestServerInfo,host,port];
+	//DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
 	//[msrv release];
 	//NSString* str = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
 	//DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:str]];
