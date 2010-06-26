@@ -12,13 +12,9 @@
 #import "TrackCustomCellClass.h"
 
 @interface BooksDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate>{
-	NSArray *list;
-	NSArray *indexList;
 	UINavigationController *navigationController;
 }
 
-@property (nonatomic, retain) NSArray *list;
-@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) UINavigationController *navigationController;
 
 @end

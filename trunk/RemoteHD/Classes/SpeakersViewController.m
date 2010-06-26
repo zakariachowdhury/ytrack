@@ -128,11 +128,9 @@
 	NSNumber * num = [[self.speakers objectAtIndex:rowNum] spId];
 	if (sw.on) {
 		[spList addObject:num];
-		NSLog(@"value of %d changed to YES ",sw.tag);
 	}
 	else {
 		[spList removeObjectIdenticalTo:num];
-		NSLog(@"value of %d changed to NO ",sw.tag);
 	}
 	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
 	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];

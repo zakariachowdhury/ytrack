@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DAAPDatasource.h"
+#import "DAAPRequestReply.h"
 
 
-@interface ArtistDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>{
-	NSArray *list;
-	NSArray *indexList;
+@interface ArtistDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate>{
+
 	UINavigationController *navigationController;
 }
 
-@property (nonatomic, retain) NSArray *list;
-@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) UINavigationController *navigationController;
 
 @end

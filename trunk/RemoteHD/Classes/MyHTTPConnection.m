@@ -217,17 +217,14 @@
 	
 	NSString *requestStr = [[[NSString alloc] initWithData:requestData encoding:NSASCIIStringEncoding] autorelease];
 	NSLog(@"\n=== Request ====================\n%@\n================================", requestStr);
-	//int rand = arc4random() % ((unsigned)RAND_MAX + 1);
 	
 	int pinCode = [delegate obtainPinCode];
 	NSString *pinCodeStr = [NSString stringWithFormat:@"%04d",pinCode];
-	//pinCodeStr = @"0000";
 	NSLog(@"expected pin code : %@",pinCodeStr);
 	
 	int rand = [delegate obtainGUID];
 	
 	NSString * randomPairCode = [NSString stringWithFormat:@"%08X%08X",rand,rand];
-	//randomPairCode = @"0000000000000001";
 	NSLog(@"random pairing code : %@",randomPairCode);
 	
 	NSString *str = [self getPairingCode:pinCodeStr pair:randomPairCode];

@@ -16,8 +16,6 @@
 #import "DAAPResponsemlcl.h"
 
 @implementation TracksDatasource
-@synthesize results;
-@synthesize indexList;
 
 @synthesize navigationController;
 
@@ -67,7 +65,7 @@
     }
     
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
-	DAAPResponsemlit *track = [self.results objectAtIndex:(offset + indexPath.row)];
+	DAAPResponsemlit *track = [self.list objectAtIndex:(offset + indexPath.row)];
 	
 	cell.trackName.text = track.minm;
 	NSString *album = track.asal;
@@ -113,7 +111,8 @@
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
-	self.results = [[(DAAPResponseapso *)response mlcl] list];
+	[super didFinishLoading:response];
+	self.list = [[(DAAPResponseapso *)response mlcl] list];
 	self.indexList = [[(DAAPResponseapso *)response mshl] indexList];
 	
 	[self.delegate refreshTableView];

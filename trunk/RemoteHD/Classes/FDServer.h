@@ -86,9 +86,8 @@
 - (void) logout;
 
 - (NSArray *) getPlayLists;
-- (NSDictionary *) getArtists;
+- (void) getArtists:(id<DAAPRequestDelegate>)aDelegate;
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist;
-- (DAAPResponseagal *) getAllAlbums;
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;

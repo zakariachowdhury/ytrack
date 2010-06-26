@@ -14,8 +14,6 @@
 
 @interface AlbumsDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate, AsyncImageLoaderDelegate>
 {
-	NSArray *list;
-	NSArray *indexList;
 	UINavigationController *navigationController;
 	@private
 		NSMutableDictionary *artworks;
@@ -23,8 +21,6 @@
 		NSMutableDictionary *loaders;
 }
 
-@property (nonatomic, retain) NSArray *list;
-@property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) UINavigationController *navigationController;
 
 @end

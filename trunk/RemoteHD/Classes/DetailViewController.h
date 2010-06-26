@@ -19,6 +19,7 @@
 @protocol DetailDelegate
 
 - (void) didSelectItem;
+- (void) startLoading;
 - (void) didFinishLoading;
 
 @end
@@ -55,5 +56,6 @@
 - (void) changeToAlbumView;
 - (void) changeToTrackView;
 - (void) changeToBookView;
+- (void) didChangeLibrary;
 
 @end

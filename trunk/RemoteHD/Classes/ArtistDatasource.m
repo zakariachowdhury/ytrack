@@ -11,23 +11,11 @@
 #import "DAAPResponsemlit.h"
 #import "AlbumsOfArtistController.h"
 #import "TracksForAlbumController.h"
+#import "DAAPResponseabro.h"
 
 
 @implementation ArtistDatasource
-@synthesize list;
-@synthesize indexList;
 @synthesize navigationController;
-
-
-
-- (id) init{
-	if ((self = [super init])) {
-        NSDictionary *result = [[[SessionManager sharedSessionManager] currentServer] getArtists];
-		self.list = [result objectForKey:@"list"];
-		self.indexList = [result objectForKey:@"index"];
-    }
-    return self;
-}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -105,13 +93,12 @@
 		
 	} else if ([resp.mlcl.list count] == 1) {
 		long long albumId = [[(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] mper] longLongValue];
-		NSLog(@"%qi");
 		DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 		c.tracks = resp.mlcl.list;
 		c.shouldPlayAllTracks = NO;
 		[self.navigationController setNavigationBarHidden:NO animated:NO];
-		[c setTitle:[(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] minm]];
+		[c setTitle:[(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] asal]];
 		c.albumName = [(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] minm];
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
@@ -127,9 +114,18 @@
 	}
 }
 
+- (void) didFinishLoading:(DAAPResponse *)response{
+	[super didFinishLoading:response];
+	DAAPResponseabro * resp = (DAAPResponseabro *)response;
+
+	self.list = resp.abar.list;
+	self.indexList = resp.mshl.indexList;
+	
+	[self.delegate refreshTableView];
+	[self.delegate didFinishLoading];
+}
+
 - (void)dealloc {
-	[self.list release];
-	[self.indexList release];
     [super dealloc];
 }
 

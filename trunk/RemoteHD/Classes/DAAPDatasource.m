@@ -12,13 +12,17 @@
 
 @implementation DAAPDatasource
 @synthesize delegate;
+@synthesize list;
+@synthesize indexList;
 @synthesize currentTrack;
 @synthesize currentAlbum;
 @synthesize currentArtist;
+@synthesize needsRefresh;
 
 - (id) init{
 	if ((self = [super init])) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUpdate:) name:kNotificationStatusUpdate object:nil];
+		needsRefresh = YES;
     }
     return self;
 }
@@ -34,7 +38,19 @@
 	[self.delegate refreshTableView];
 }
 
+- (void) clearDatas{
+	self.list = nil;
+	self.indexList = nil;
+	needsRefresh = YES;
+}
+
+- (void) didFinishLoading:(DAAPResponse *)response{
+	needsRefresh = NO;
+}
+
 - (void) dealloc{
+	[self.list release];
+	[self.indexList release];
 	[currentTrack release];
 	[currentAlbum release];
 	[currentArtist release];

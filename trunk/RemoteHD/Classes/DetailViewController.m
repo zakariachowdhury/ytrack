@@ -127,26 +127,49 @@
 		self.tableView.dataSource = self.tracksDatasource;
 		self.tableView.delegate = self.tracksDatasource;
 	} else {
-		self.tableView.dataSource = self.tracksDatasource;
-		self.tableView.delegate = self.tracksDatasource;
-		[self.tableView reloadData];
-		[self.delegate didFinishLoading];
+		if (tracksDatasource.needsRefresh) {
+			[self.delegate startLoading];
+			[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self.tracksDatasource];
+			self.tableView.dataSource = self.tracksDatasource;
+			self.tableView.delegate = self.tracksDatasource;
+		} else {
+			self.tableView.dataSource = self.tracksDatasource;
+			self.tableView.delegate = self.tracksDatasource;
+			[self.tableView reloadData];
+			[self.delegate didFinishLoading];
+		}
+
+		
 	}
 }
 
 - (void) changeToArtistView{
-	//TODO change to async data loading
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.artistDatasource == nil) {
 		ArtistDatasource *d = [[ArtistDatasource alloc] init];
 		self.artistDatasource = d;
 		self.artistDatasource.navigationController = self.navigationController;
+		self.artistDatasource.delegate = self;
+		[[[SessionManager sharedSessionManager] currentServer] getArtists:self.artistDatasource];
 		[d release];
-	}
-	self.tableView.dataSource = self.artistDatasource;
-	self.tableView.delegate = self.artistDatasource;
-	 
-	[self.tableView reloadData];
+		self.tableView.dataSource = self.artistDatasource;
+		self.tableView.delegate = self.artistDatasource;
+		
+	} else {
+		if (artistDatasource.needsRefresh) {
+			[self.delegate startLoading];
+			[[[SessionManager sharedSessionManager] currentServer] getArtists:self.artistDatasource];
+			self.tableView.dataSource = self.artistDatasource;
+			self.tableView.delegate = self.artistDatasource;
+		} else {
+			self.tableView.dataSource = self.artistDatasource;
+			self.tableView.delegate = self.artistDatasource;
+			[self.tableView reloadData];
+			[self.delegate didFinishLoading];
+		}
+
+		
+	}	
 
 }
 
@@ -163,9 +186,19 @@
 		self.tableView.delegate = self.albumsDatasource;
 		
 	} else {
-		self.tableView.dataSource = self.albumsDatasource;
-		self.tableView.delegate = self.albumsDatasource;
-		[self.tableView reloadData];
+		if (albumsDatasource.needsRefresh) {
+			[self.delegate startLoading];
+			[[[SessionManager sharedSessionManager] currentServer] getAllAlbums:self.albumsDatasource];
+			self.tableView.dataSource = self.albumsDatasource;
+			self.tableView.delegate = self.albumsDatasource;
+		} else {
+			self.tableView.dataSource = self.albumsDatasource;
+			self.tableView.delegate = self.albumsDatasource;
+			[self.tableView reloadData];
+			[self.delegate didFinishLoading];
+		}
+
+		
 	}	
 }
 
@@ -184,7 +217,13 @@
 	[[[SessionManager sharedSessionManager] currentServer] getAllBooks:self.booksDatasource];
 	
 }
-	 
+
+- (void) didChangeLibrary{
+	[self.tracksDatasource clearDatas];
+	[self.artistDatasource clearDatas];
+	[self.albumsDatasource clearDatas];
+	[self.booksDatasource clearDatas];
+}
 
 #pragma mark -
 #pragma mark Memory management

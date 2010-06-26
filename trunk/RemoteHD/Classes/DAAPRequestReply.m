@@ -49,7 +49,6 @@
 
 - (void)connection:(NSURLConnection *)theConnection
 	didReceiveData:(NSData *)incrementalData {
-	NSLog(@"%@",lastUrl);
 	NSLog(@"%@",theConnection);
 	assert(theConnection == self.connection);
     if (self.data==nil) {
@@ -62,7 +61,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	assert(theConnection == self.connection);
-	[HexDumpUtility printHexDumpToConsole:data];
+	//[HexDumpUtility printHexDumpToConsole:data];
 	
 	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
@@ -91,7 +90,7 @@
 
 	NSString *command = [self parseCommandName:dat atPosition:0];
 	if (command == nil) {
-		return [[DAAPResponseerror alloc] initWithData:dat];
+		return [[[DAAPResponseerror alloc] initWithData:dat] autorelease];
 	}
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
 	
@@ -145,11 +144,9 @@
 			NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 			NSString *str = [self parseString:block];
 			NSString *cmdKey = [NSString stringWithFormat:@"%@[%06d]",command,progress];
-			NSLog(@"%@ : %@",cmdKey,str);
 			if (str != nil)
 				[dict setObject:str forKey:cmdKey];
 			else {
-				NSLog(@"----------");
 				[HexDumpUtility printHexDumpToConsole:block];
 			}
 
@@ -167,7 +164,6 @@
 		} else if([strings evaluateWithObject:(NSString *)command] == YES){
 			NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 			NSString *str = [self parseString:block];
-			NSLog(@"string : %@",str);
 			if (str != nil)
 				[dict setObject:str forKey:command];
 		} else if (length == 1 || length == 2 || length == 4 || length == 8) {
@@ -208,7 +204,6 @@
 	NSDictionary * retValue = [NSDictionary dictionaryWithDictionary:dict];
 	NSString *clazz;
 	for (id key in retValue) {
-		NSLog(@"%@",key);
 		clazz = [NSString stringWithFormat:@"DAAPResponse%@",key];
 	}
 	DAAPResponse *response = (DAAPResponse *)[[[NSClassFromString(clazz) alloc] init] autorelease];
