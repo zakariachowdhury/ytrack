@@ -347,14 +347,11 @@
 	return [response.cmvo longValue];
 }
 
-
+// this call cannot be made asynchronously as we re-read state from server immediately after chnging the volume value
 - (void) setVolume:(long) volume{
 	NSLog(@"FDServer-setVolume");
 	NSString *string = [NSString stringWithFormat:kRequestChangePropertyVolume,self.host,self.port,volume,sessionId];
-	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
-	
-	[daapReq asyncRequest:[NSURL URLWithString:string]];
-	[daapReq release];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
 - (void) changePlayingTime:(int)position{

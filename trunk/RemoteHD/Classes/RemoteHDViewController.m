@@ -16,7 +16,7 @@
 #import "DAAPResponsemlit.h"
 #import "SpeakersViewController.h"
 
-@interface RemoteHDViewController()
+@interface RemoteHDViewController(PrivateMethods)
 
 - (void) _updateVolume;
 - (void) _displayNoLib;
@@ -42,6 +42,7 @@
 	[segmentedControl setTitle:NSLocalizedString(@"Tracks",@"Morceaux") forSegmentAtIndex:0];
 	[segmentedControl setTitle:NSLocalizedString(@"Artists",@"Albums") forSegmentAtIndex:1];
 	[segmentedControl setTitle:NSLocalizedString(@"Albums",@"Artistes") forSegmentAtIndex:2];
+	[settingsButton setTitle:NSLocalizedString(@"settings",@"Réglages")];
 	nowPlayingLabel.text = NSLocalizedString(@"nowPlaying",@"A l'écoute");
 	
 	// init navigation controller
@@ -66,9 +67,9 @@
 	// customize sliders
 	volumeSlider.backgroundColor = [UIColor clearColor];	
 	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"slider1.png"]
-								stretchableImageWithLeftCapWidth:15.0 topCapHeight:0.0];
+								stretchableImageWithLeftCapWidth:19.0 topCapHeight:0.0];
 	UIImage *stetchRightTrack = [[UIImage imageNamed:@"slider2.png"]
-								 stretchableImageWithLeftCapWidth:15.0 topCapHeight:0.0];
+								 stretchableImageWithLeftCapWidth:19.0 topCapHeight:0.0];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateNormal];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateSelected];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateHighlighted];
@@ -197,13 +198,12 @@
 }
 
 #pragma mark -
-# pragma mark LibraryDelegate methods
+#pragma mark LibraryDelegate methods
 
 - (void) didFinishEditingLibraries {
 	[self dismissModalViewControllerAnimated:YES];
 	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
 		[self startLoading];
-		[masterViewController display];
 		//[detailViewController display];
 		[self buttonSelected:nil];
 		[self _updateVolume];
@@ -311,6 +311,12 @@
 }
 
 - (void) _displayNoLib{
+	[self.timer invalidate];
+	donePlayingTime.text = @"00:00";
+	remainingPlayingTime.text = @"00:00";
+	progress.enabled = NO;
+	volumeSlider.value = 0;
+	volumeSlider.enabled = NO;
 	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"notConnected" 
 																		  value:@"Vous n'êtes pas connecté" 
 																		  table:@"Localizable"];
@@ -320,9 +326,9 @@
 
 - (void) _libraryAvailable {
 	nolibView.alpha = 0.0;
+	progress.enabled = YES;
+	volumeSlider.enabled = YES;
 	[self startLoading];
-	[masterViewController display];
-	//[detailViewController display];
 	[detailViewController didChangeLibrary];
 	[self buttonSelected:nil];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];

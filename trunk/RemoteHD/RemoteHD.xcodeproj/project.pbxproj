@@ -18,6 +18,8 @@
 		6B008C7211B31194008E2012 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */; };
 		6B056B2711C04114008EF26B /* DAAPResponsemshl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B056B2611C04113008EF26B /* DAAPResponsemshl.m */; };
 		6B12EB4D11C1A6550051958A /* ArtistDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B12EB4C11C1A6550051958A /* ArtistDatasource.m */; };
+		6B2E0DC111DBD48700B6DF5A /* lowVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC011DBD48700B6DF5A /* lowVolume.png */; };
+		6B2E0DC311DBD50600B6DF5A /* highVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC211DBD50600B6DF5A /* highVolume.png */; };
 		6B35D53511A71E6D00BC846C /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D53411A71E6D00BC846C /* URLParser.m */; };
 		6B35D91911A8932100BC846C /* DAAPResponseaply.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D91811A8932100BC846C /* DAAPResponseaply.m */; };
 		6B35D9C311A89A0600BC846C /* DAAPResponseabro.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9C211A89A0600BC846C /* DAAPResponseabro.m */; };
@@ -78,6 +80,7 @@
 		6BCDA63111B7B84A00A3ED01 /* DAAPResponsecmgt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCDA63011B7B84A00A3ED01 /* DAAPResponsecmgt.m */; };
 		6BD18E9711C4A2AB00612A33 /* defaultAlbumArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */; };
 		6BD18EB011C4A80700612A33 /* AsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */; };
+		6BD933E711DDF3A000AD3DB0 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BD933E611DDF3A000AD3DB0 /* Entitlements.plist */; };
 		6BE275F111AB948600F1F600 /* FDServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE275F011AB948600F1F600 /* FDServer.m */; };
 		6BE2765C11ABA40100F1F600 /* DAAPResponsemccr.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2765B11ABA40100F1F600 /* DAAPResponsemccr.m */; };
 		6BE2B34111C05EA000EE6AC7 /* DAAPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */; };
@@ -123,6 +126,8 @@
 		6B056B2611C04113008EF26B /* DAAPResponsemshl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponsemshl.m; sourceTree = "<group>"; };
 		6B12EB4B11C1A6550051958A /* ArtistDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistDatasource.h; sourceTree = "<group>"; };
 		6B12EB4C11C1A6550051958A /* ArtistDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistDatasource.m; sourceTree = "<group>"; };
+		6B2E0DC011DBD48700B6DF5A /* lowVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowVolume.png; sourceTree = "<group>"; };
+		6B2E0DC211DBD50600B6DF5A /* highVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highVolume.png; sourceTree = "<group>"; };
 		6B35D53311A71E6D00BC846C /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
 		6B35D53411A71E6D00BC846C /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
 		6B35D91711A8932100BC846C /* DAAPResponseaply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseaply.h; sourceTree = "<group>"; };
@@ -229,6 +234,7 @@
 		6BD18E9611C4A2AB00612A33 /* defaultAlbumArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultAlbumArtwork.png; sourceTree = "<group>"; };
 		6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageLoader.h; sourceTree = "<group>"; };
 		6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageLoader.m; sourceTree = "<group>"; };
+		6BD933E611DDF3A000AD3DB0 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		6BE275EF11AB948600F1F600 /* FDServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDServer.h; sourceTree = "<group>"; };
 		6BE275F011AB948600F1F600 /* FDServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDServer.m; sourceTree = "<group>"; };
 		6BE2765A11ABA40100F1F600 /* DAAPResponsemccr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponsemccr.h; sourceTree = "<group>"; };
@@ -353,6 +359,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6B2E0DC211DBD50600B6DF5A /* highVolume.png */,
+				6B2E0DC011DBD48700B6DF5A /* lowVolume.png */,
 				6BA8F10811D33F0400A621C6 /* nowPlayingspeaker.png */,
 				6B4F18C211D0EBA0009D0A42 /* buttonBg.png */,
 				6B4F18A811D0E5F7009D0A42 /* pinBg.png */,
@@ -384,6 +392,7 @@
 				8D1107310486CEB800E47090 /* RemoteHD-Info.plist */,
 				6BA5FAA011C2B2F60009921E /* Detail.xib */,
 				6BF662C711D430DA00B1E47B /* Localizable.strings */,
+				6BD933E611DDF3A000AD3DB0 /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -525,9 +534,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* RemoteHD */ = {
+		1D6058900D05DD3D006BFB54 /* yTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RemoteHD" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "yTrack" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -537,7 +546,7 @@
 			);
 			dependencies = (
 			);
-			name = RemoteHD;
+			name = yTrack;
 			productName = RemoteHD;
 			productReference = 1D6058910D05DD3D006BFB54 /* RemoteHD.app */;
 			productType = "com.apple.product-type.application";
@@ -554,7 +563,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* RemoteHD */,
+				1D6058900D05DD3D006BFB54 /* yTrack */,
 			);
 		};
 /* End PBXProject section */
@@ -598,6 +607,9 @@
 				6BA8F10911D33F0400A621C6 /* nowPlayingspeaker.png in Resources */,
 				6BF6614511D41B4C00B1E47B /* DetailedTrackCustomCellView.xib in Resources */,
 				6BF662C811D430DA00B1E47B /* Localizable.strings in Resources */,
+				6B2E0DC111DBD48700B6DF5A /* lowVolume.png in Resources */,
+				6B2E0DC311DBD50600B6DF5A /* highVolume.png in Resources */,
+				6BD933E711DDF3A000AD3DB0 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,14 +727,16 @@
 			buildSettings = {
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphonesimulator*]" = i386;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fabrice Dewasmes";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F2C64C6E-C821-4477-8F8A-9457DCAE9383";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
 		};
@@ -730,13 +744,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fabrice Dewasmes";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fabrice Dewasmes";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RemoteHD_Prefix.pch;
 				INFOPLIST_FILE = "RemoteHD-Info.plist";
-				PRODUCT_NAME = RemoteHD;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PRODUCT_NAME = yTrack;
+				PROVISIONING_PROFILE = "F2C64C6E-C821-4477-8F8A-9457DCAE9383";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F2C64C6E-C821-4477-8F8A-9457DCAE9383";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
@@ -775,7 +792,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "RemoteHD" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "yTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
