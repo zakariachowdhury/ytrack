@@ -146,12 +146,6 @@
 	}*/
 }
 
-- (void) display {
-	//self.results = [[[SessionManager sharedSessionManager] currentServer] getPlayLists];
-	
-	[self.tableView reloadData];
-}
-
 #pragma mark -
 #pragma mark Memory management
 

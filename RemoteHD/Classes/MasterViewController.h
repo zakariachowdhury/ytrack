@@ -19,6 +19,4 @@
 
 @property (nonatomic, retain) NSArray *results;
 
-- (void) display;
-
 @end

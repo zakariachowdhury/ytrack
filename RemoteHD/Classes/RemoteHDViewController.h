@@ -24,6 +24,7 @@
 	IBOutlet UIActivityIndicatorView *activityIndicator;
 	IBOutlet UISegmentedControl *segmentedControl;
 	IBOutlet UILabel *nowPlayingLabel;
+	IBOutlet UIBarButtonItem *settingsButton;
 	
 	IBOutlet MasterViewController *masterViewController;
 	IBOutlet DetailViewController *detailViewController;
