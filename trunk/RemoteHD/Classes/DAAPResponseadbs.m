@@ -17,21 +17,7 @@
 @synthesize mrco;
 @synthesize res;
 
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	NSMutableArray *temp = [[NSMutableArray alloc] init];
-	NSDictionary * results = [[dict objectForKey:@"adbs"] objectForKey:@"mlcl"];
-	for (id key in results) {
-		if ([key hasPrefix:@"mlit"]) {
-			DAAPResponsemlit * song = [[DAAPResponsemlit alloc] init];
-			NSDictionary *rawSong = (NSDictionary *)[results objectForKey:key];
-			[song didFinishRawParsing:rawSong];
-			[temp addObject:song];
-			[song release];
-		}
-	}
-	self.res = [NSArray arrayWithArray:temp];
-	[temp release];
-}
+
 
 - (void)dealloc {
 	[self.mstt release];

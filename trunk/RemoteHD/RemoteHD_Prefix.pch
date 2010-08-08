@@ -12,5 +12,8 @@
 #define kNotificationConnected @"connected"
 #define kNotificationConnectionLost @"connectionLost"
 #define kNotificationStatusUpdate @"statusUpdate"
+#define kNotificationTryReconnect @"tryReconnect"
+#define kNotificationFinishReconnect @"finishReconnecting"
+#define kNotificationBrokenConnection @"brokenConnection"
 
 #endif

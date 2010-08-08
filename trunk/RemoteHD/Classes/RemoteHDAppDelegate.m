@@ -21,6 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	// Override point for customization after app launch  
+	UIDevice *device = [UIDevice currentDevice];
+	[device beginGeneratingDeviceOrientationNotifications];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 

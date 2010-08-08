@@ -131,6 +131,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	[self persistPreferences];
 }
 
+- (void) saveViewState:(NSString *)state withKey:(NSString *)key{
+	[self.preferences setObject:state forKey:key];
+}
+
+- (NSString *) getViewStateForKey:(NSString *)key{
+	return [self.preferences objectForKey:key];
+}
+
 - (void)dealloc {
     [self.preferences release];
     [super dealloc];

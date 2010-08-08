@@ -1,6 +1,6 @@
 //
 //  DAAPResponseServerInfo.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -36,15 +36,6 @@
 @synthesize msdc;
 @synthesize mstc;
 @synthesize msto;
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	
-	NSDictionary * results = [dict objectForKey:@"msrv"];
-	for (id key in results) {
-		NSLog(@"%@",key);
-	}
-	
-}
 
 - (void)dealloc {
 	[self.mstt release];

@@ -11,4 +11,14 @@
 
 @implementation DAAPResponseerror
 
+@synthesize error;
+
+- (id) initWithData:(NSData *)theData error:(NSError *)err{
+	if ((self = [super initWithData:theData])) {
+        error = err;
+		[error retain];
+    }
+    return self;
+}
+
 @end

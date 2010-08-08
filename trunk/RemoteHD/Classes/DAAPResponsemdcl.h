@@ -1,6 +1,6 @@
 //
 //  DAAPResponsemdcl.h
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -16,7 +16,7 @@
 }
 
 @property (nonatomic, retain) NSNumber *caia;
-@property (nonatomic, retain) NSString *minm;
+@property (nonatomic, copy, getter=name) NSString *minm;
 @property (nonatomic, retain) NSNumber *msma;
 
 @end

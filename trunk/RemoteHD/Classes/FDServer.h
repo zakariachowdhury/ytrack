@@ -49,16 +49,23 @@
 	NSDictionary *TXT;
 	int sessionId;
 	NSInteger databaseId;
+	long long databasePersistentId;
 	NSInteger musicLibraryId;
 	NSInteger podcastsLibraryId;
+	long long podcastsPersistentId;
 	NSInteger booksLibraryId;
+	long long booksPersistentId;
 	int musr;
 	long revNum;
 	BOOL connected;
 	NSString *currentTrack;
 	NSString *currentAlbum;
 	NSString *currentArtist;
+	long long currentAlbumId;
 	DAAPRequestReply *daapReqRep;
+	
+	@private
+	NSMutableArray *userPlaylists;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -71,12 +78,15 @@
 @property (nonatomic) NSInteger musicLibraryId;
 @property (nonatomic) NSInteger podcastsLibraryId;
 @property (nonatomic) NSInteger booksLibraryId;
+@property (nonatomic, readonly) long long booksPersistentId;
+@property (nonatomic, readonly) long long podcastsPersistentId;
 @property (nonatomic, retain) DAAPRequestReply *daapReqRep;
 
 @property (nonatomic) BOOL connected;
 @property (nonatomic, copy) NSString *currentTrack;
 @property (nonatomic, copy) NSString *currentAlbum;
 @property (nonatomic, copy) NSString *currentArtist;
+@property (nonatomic) long long currentAlbumId;
 
 
 
@@ -89,12 +99,17 @@
 - (void) getArtists:(id<DAAPRequestDelegate>)aDelegate;
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist;
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
+- (void) getTracksForAlbum:(NSString *)albumId delegate:(id<DAAPRequestDelegate>)aDelegate;
+- (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
+- (void) getAllTracksForPlaylist:(int)playlistId delegate:(id<DAAPRequestDelegate>)aDelegate;
 - (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
 - (void) getAllAlbums:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
+- (void) getAllPodcasts:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
+- (void) playSongInPlaylist:(long long)containermper song:(long)songId;
 - (void) playBookInLibrary:(int)bookId;
 - (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;
 - (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex;
@@ -103,7 +118,8 @@
 - (void) playPause;
 - (void) monitorPlayStatus;
 - (void) updateStatus;
-- (long) getVolume;
+//- (long) getVolume;
+- (void) getVolume:(id<DAAPRequestDelegate>)aDelegate action:(SEL)action;
 - (void) setVolume:(long) volume;
 - (void) changePlayingTime:(int)position;
 - (NSArray *) getSpeakers;

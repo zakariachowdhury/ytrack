@@ -23,12 +23,13 @@
 	[self.list addObject:mlit];
 }
 
+
+/*
+ here we have to override the isBranch method just to tell 
+ that mlit is not a branch but a leaf
+ */
 - (BOOL) isBranch:(NSString *)command{
-	/*NSPredicate *branches = [NSPredicate
-	 predicateWithFormat:@"SELF MATCHES %@", kBranchPattern];*/
 	if ([command isEqualToString:@"cmst"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cmst"]) {
 		return YES;
 	} else if ([command isEqualToString:@"mlog"]) {
 		return YES;

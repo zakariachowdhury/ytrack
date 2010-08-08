@@ -97,6 +97,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		}
 	}
 	if (foundIndex >=0) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTryReconnect object:self];
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
 		if ([server open]){
 			[self foundNewServer:server];

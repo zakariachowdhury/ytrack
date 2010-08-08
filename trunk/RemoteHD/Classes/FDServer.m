@@ -43,7 +43,10 @@
 @synthesize currentTrack;
 @synthesize currentAlbum;
 @synthesize currentArtist;
+@synthesize currentAlbumId;
 @synthesize daapReqRep;
+@synthesize booksPersistentId;
+@synthesize podcastsPersistentId;
 
 
 - (id) init {
@@ -59,6 +62,10 @@
 	NSLog(@"%@",loginURL);
 	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
 	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
+		DAAPResponseerror *err = (DAAPResponseerror *)resp;
+		if (err.error != nil) {
+			return NO;
+		}
 		// in case of error, reply is not formatted as other messages, reply is only 3 bytes long
 		// here I assume there is only one kind of error namely the rejected remote case
 		if (resp.data.length == 3) {
@@ -89,21 +96,39 @@
 	// we have to know the databaseId for further requests
 	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
 	DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
-	self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.mlcl.list  objectAtIndex:0] miid] intValue];
+	if ([db isKindOfClass:[DAAPResponseerror class]]) {
+		self.connected = NO;
+		return NO;
+	}
+	self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.listing.list  objectAtIndex:0] miid] intValue];
 	
 	// query playslists to get the Id of those we're interested in
 	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,sessionId];
 	NSLog(@"%@",requestUrl);
 	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
-	for (DAAPResponsemlit *pl in response.mlcl.list) {
+	if (userPlaylists == nil) {
+		userPlaylists = [[[NSMutableArray alloc] init] retain];
+	} else {
+		[userPlaylists removeAllObjects];
+	}
+
+	for (DAAPResponsemlit *pl in response.listing.list) {
+		if ([pl.aePS longValue] == 0 && [pl.aeSP longValue] == 0 && [pl.mimc longValue] > 0) {
+			NSLog(@"%d-%qX-%@-%d-%d-%i",[pl.miid longValue],[pl.mper longLongValue], pl.name,[pl.aePS longValue], [pl.aeSP longValue],[pl.mimc longValue]);
+			[userPlaylists addObject:pl];
+		}
 		if ([pl.aePS shortValue] == kServerMusicLibraryAEPS){
 			self.musicLibraryId = [pl.miid intValue];
+			databasePersistentId = [pl.persistentId longLongValue];
 		} else if ([pl.aePS shortValue] == kServerPodcastsLibraryAEPS){
+			podcastsPersistentId = [pl.persistentId longLongValue];
 			self.podcastsLibraryId = [pl.miid intValue];
 		} else if ([pl.aePS shortValue] == kServerBooksLibraryAEPS){
+			booksPersistentId = [pl.persistentId longLongValue];
 			self.booksLibraryId = [pl.miid intValue];
 		}
 	}
+	[userPlaylists removeObjectAtIndex:0];
 	
 	// initiate server monitoring to receive action events
 	[self monitorPlayStatus];
@@ -166,11 +191,13 @@
 
 - (NSArray *) getPlayLists{
 	NSLog(@"FDServer-getPlayLists");
-	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,sessionId];
+	/*NSString *requestUrl = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,sessionId];
 	NSLog(@"%@",requestUrl);
 	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
-	NSArray *list = [NSArray arrayWithArray:response.mlcl.list];
-	return list;
+	NSArray *list = [NSArray arrayWithArray:response.listing.list];
+	
+	return list;*/
+	return [NSArray arrayWithArray:userPlaylists];
 }
 
 - (void) getArtists:(id<DAAPRequestDelegate>)aDelegate{
@@ -201,9 +228,39 @@
 	return response;
 }
 
+- (void) getAllTracksForPlaylist:(int)playlistId delegate:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getAllTracksForPlaylist");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestTracksForPlaylist,self.host,self.port,databaseId,playlistId, sessionId];
+	NSLog(@"%@",requestUrl);
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:requestUrl]];
+	[daapreq release];
+}
+
 - (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId{
 	NSLog(@"FDServer-getTracksForAlbum");
 	NSString *requestUrl = [NSString stringWithFormat:kRequestTracksForAlbum,self.host,self.port,databaseId,musicLibraryId, sessionId,albumId];
+	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
+	return response;
+}
+
+- (void) getTracksForAlbum:(NSString *)albumId delegate:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getTracksForAlbum - Async");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestTracksForAlbum,self.host,self.port,databaseId,musicLibraryId, sessionId,albumId];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:requestUrl]];
+	[daapreq release];
+	
+	//DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
+	//return response;
+}
+
+- (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId{
+	NSLog(@"FDServer-getTracksForPodcast");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestPodcastTracks,self.host,self.port,databaseId,podcastsLibraryId, sessionId,podcastId];
+	NSLog(@"%@",requestUrl);
 	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
 	return response;
 }
@@ -245,7 +302,14 @@
 	[daapreq release];
 }
 
-
+- (void) getAllPodcasts:(id<DAAPRequestDelegate>)aDelegate{
+	NSLog(@"FDServer-getAllPodcasts with delegate");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestAllPodcasts,self.host,self.port,databaseId,sessionId];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:requestUrl]];
+	[daapreq release];
+}
 
 #pragma mark -
 #pragma mark server monitoring
@@ -270,16 +334,18 @@
 // if user can't connect to host, simply give up and don't try to reconnect automatically
 - (void) cantConnect{
 	NSLog(@"FDServer-cantConnect");
-	self.connected = NO;
+	//self.connected = NO;
+	[self logout];
 	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnectionLost object:nil];
 }
 
-// server finally send a reply, see what's happened and notifiy observers
+// server finally sent a reply, see what's happened and notify observers
 - (void) didFinishLoading:(DAAPResponse *)response{
 	NSLog(@"FDServer-didFinishLoading");
 	if (response == nil){
-		[self open];
 		NSLog(@"---PLAYSTATUSUPDATE RESPONSE IS NIL");
+		[self logout];
+		[self open];
 		return;
 	}
 	DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
@@ -287,6 +353,7 @@
 	self.currentTrack = cmst.cann;
 	self.currentAlbum = cmst.canl;
 	self.currentArtist = cmst.cana;
+	self.currentAlbumId = [cmst.asai longLongValue];
 	
 	revNum = [[cmst cmsr] longValue];
 	/*if (revNum < 1) {
@@ -340,11 +407,15 @@
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
-- (long) getVolume{
+- (void) getVolume:(id<DAAPRequestDelegate>)aDelegate action:(SEL)action{
 	NSLog(@"FDServer-getVolume");
 	NSString *requestUrl = [NSString stringWithFormat:kRequestPropertyVolume,self.host,self.port, sessionId];
-	DAAPResponsecmgt * response = (DAAPResponsecmgt *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl]];
-	return [response.cmvo longValue];
+	
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq setAction:action];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:30];
+	[daapreq release];
 }
 
 // this call cannot be made asynchronously as we re-read state from server immediately after chnging the volume value
@@ -372,6 +443,16 @@
 	
 	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInLibrary,self.host,self.port,songId,sessionId];
 	NSLog(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
+- (void) playSongInPlaylist:(long long)containermper song:(long)songId{
+	NSLog(@"FDServer-playSongInPlaylist");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlaySongInPlaylist,self.host,self.port,databasePersistentId,containermper,songId,sessionId];
+	NSLog(@"----%@",string2);
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
@@ -470,6 +551,7 @@
 #pragma mark memory management
 
 - (void)dealloc {
+	[userPlaylists release];
 	[self.host release];
 	[self.port release];
 	[self.pairingGUID release];

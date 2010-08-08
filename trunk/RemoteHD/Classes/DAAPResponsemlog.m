@@ -1,6 +1,6 @@
 //
 //  DAAPResponsemlog.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -13,11 +13,6 @@
 
 @synthesize mstt;
 @synthesize mlid;
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	self.mlid = [[dict objectForKey:@"mlog"] objectForKey:@"mlid"];
-	self.mstt = [[dict objectForKey:@"mlog"] objectForKey:@"mstt"];
-}
 
 - (void)dealloc {
     [self.mstt release];

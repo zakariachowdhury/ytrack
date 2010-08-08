@@ -79,27 +79,27 @@
 	NSString *artist = [self.list objectAtIndex:i];
 	DAAPResponseagal * resp = [[[SessionManager sharedSessionManager] currentServer] getAlbumsForArtist:artist];
 	
-	if ([resp.mlcl.list count] == 0) {
+	if ([resp.listing.list count] == 0) {
 		// No named album for that artist
 		//TODO use header view to place a 'all tracks' in case some tracks are in an album and others don't
 		DAAPResponseapso * resp2 = [[[SessionManager sharedSessionManager] currentServer] getAllTracksForArtist:artist];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
-		c.tracks = resp2.mlcl.list;
+		c.tracks = resp2.listing.list;
 		[self.navigationController setNavigationBarHidden:NO animated:NO];
 		[c setTitle:NSLocalizedString(@"TracksDefaultName",@"Pistes")];
 		c.shouldPlayAllTracks = YES;
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
 		
-	} else if ([resp.mlcl.list count] == 1) {
-		long long albumId = [[(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] mper] longLongValue];
+	} else if ([resp.listing.list count] == 1) {
+		long long albumId = [[(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] persistentId] longLongValue];
 		DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
-		c.tracks = resp.mlcl.list;
+		c.tracks = resp.listing.list;
 		c.shouldPlayAllTracks = NO;
 		[self.navigationController setNavigationBarHidden:NO animated:NO];
-		[c setTitle:[(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] asal]];
-		c.albumName = [(DAAPResponsemlit *)[resp.mlcl.list objectAtIndex:0] minm];
+		[c setTitle:[(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] albumName]];
+		c.albumName = [(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] name];
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
 	}
@@ -119,7 +119,7 @@
 	DAAPResponseabro * resp = (DAAPResponseabro *)response;
 
 	self.list = resp.abar.list;
-	self.indexList = resp.mshl.indexList;
+	self.indexList = resp.headerList.indexList;
 	
 	[self.delegate refreshTableView];
 	[self.delegate didFinishLoading];

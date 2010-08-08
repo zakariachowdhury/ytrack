@@ -11,12 +11,24 @@
 #import "DAAPRequestReply.h"
 #import "DetailViewController.h"
 
+@protocol MasterViewDelegate
+
+- (void)didSelectPlaylist;
+- (void)didSelectLibrary;
+
+@end
+
 
 @interface MasterViewController : UITableViewController {
 	NSArray *results;
 	IBOutlet DetailViewController *detailViewController;
+	id<MasterViewDelegate> delegate;
+	NSIndexPath *previouslySelected;
 }
 
 @property (nonatomic, retain) NSArray *results;
+@property (nonatomic, assign) id<MasterViewDelegate> delegate;
+
+- (void) didChangeLibrary;
 
 @end

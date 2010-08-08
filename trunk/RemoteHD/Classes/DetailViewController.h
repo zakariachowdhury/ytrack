@@ -14,7 +14,9 @@
 #import "DAAPDatasource.h"
 #import "TracksDatasource.h"
 #import "BooksDatasource.h"
+#import "PodcastsDatasource.h"
 #import "AlbumsDatasource.h"
+#import "PlaylistDatasource.h"
 
 @protocol DetailDelegate
 
@@ -35,7 +37,9 @@
 	ArtistDatasource *artistDatasource;
 	TracksDatasource *tracksDatasource;
 	BooksDatasource *booksDatasource;
+	PodcastsDatasource *podcastsDatasource;
 	AlbumsDatasource *albumsDatasource;
+	PlaylistDatasource *playlistDatasource;
 	id<DetailDelegate> delegate;
 }
 
@@ -49,6 +53,8 @@
 @property (nonatomic, retain) TracksDatasource *tracksDatasource;
 @property (nonatomic, retain) AlbumsDatasource *albumsDatasource;
 @property (nonatomic, retain) BooksDatasource *booksDatasource;
+@property (nonatomic, retain) PodcastsDatasource *podcastsDatasource;
+@property (nonatomic, retain) PlaylistDatasource *playlistDatasource;
 
 - (void) display;
 - (void) didFinishLoading:(DAAPResponse *)response;
@@ -56,6 +62,8 @@
 - (void) changeToAlbumView;
 - (void) changeToTrackView;
 - (void) changeToBookView;
+- (void) changeToPodcastView;
 - (void) didChangeLibrary;
+- (void) changeToPlaylistView:(int)playlistId persistentId:(long long)persistentId;
 
 @end

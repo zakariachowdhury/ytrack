@@ -26,6 +26,6 @@
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
 @property (nonatomic, retain) DAAPResponseabar *abar;
-@property (nonatomic, retain) DAAPResponsemshl *mshl;
+@property (nonatomic, retain, getter=headerList) DAAPResponsemshl *mshl;
 
 @end

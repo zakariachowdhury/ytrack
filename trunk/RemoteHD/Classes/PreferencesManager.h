@@ -11,6 +11,11 @@
 
 #define kPrefLibrarykey @"libraries"
 #define kPrefLastUsedLibrary @"lastUsedLib"
+#define kPrefLastSelectedSegControl @"segControl"
+
+#define kPrefLastSelectedSegControlTrack @"track"
+#define kPrefLastSelectedSegControlArtist @"artist"
+#define kPrefLastSelectedSegControlAlbum @"album"
 
 @interface PreferencesManager : NSObject {
 	NSMutableDictionary *preferences;
@@ -30,7 +35,8 @@
 - (void) persistPreferences;
 - (void) addServer:(FDServer *) newServer;
 - (void) deleteServerAtIndex:(int)index;
-
+- (void) saveViewState:(NSString *)state withKey:(NSString *)key;
+- (NSString *) getViewStateForKey:(NSString *)key;
 
 
 @end

@@ -20,7 +20,7 @@
 
 @property (nonatomic, retain) NSNumber *mstt;
 @property (nonatomic, assign) NSArray *res;
-@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
-@property (nonatomic, retain) DAAPResponsemshl *mshl;
+@property (nonatomic, retain, getter=listing) DAAPResponsemlcl *mlcl;
+@property (nonatomic, retain, getter=headerList) DAAPResponsemshl *mshl;
 
 @end

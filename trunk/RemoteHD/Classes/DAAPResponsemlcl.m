@@ -1,6 +1,6 @@
 //
 //  DAAPResponsemlcl.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -14,7 +14,6 @@
 @implementation DAAPResponsemlcl
 
 @synthesize list;
-@synthesize indexedList;
 
 - (void) setMlit:(DAAPResponsemlit *)mlit{
 	if (list == nil) {
@@ -23,26 +22,6 @@
 		[temp release];
 	}
 	[self.list addObject:mlit];
-	int position = [self.list count] - 1;
-	mlit.index = position;
-	NSString * firstLetter = [[mlit.minm substringToIndex:1] uppercaseString];
-	if (indexedList == nil) {
-		NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
-		self.indexedList = temp;
-		[temp release];
-	}
-	if ([firstLetter intValue] != 0) {
-		firstLetter = @"#";
-	}
-	NSMutableArray *charTable = [indexedList objectForKey:firstLetter];
-	if (charTable == nil) {
-		charTable = [[NSMutableArray alloc] init];
-		[indexedList setObject:charTable forKey:firstLetter];
-		[charTable release];
-	} else {
-		[charTable addObject:mlit];
-	}
-
 }
 
 - (void) parse{
@@ -51,7 +30,6 @@
 
 - (void)dealloc {
     [self.list release];
-	[self.indexedList release];
     [super dealloc];
 }
 

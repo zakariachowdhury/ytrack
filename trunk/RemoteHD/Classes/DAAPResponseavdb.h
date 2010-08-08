@@ -1,6 +1,6 @@
 //
 //  DAAPResponseavdb.h
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -23,6 +23,6 @@
 @property (nonatomic, retain) NSNumber *muty;
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
+@property (nonatomic, retain, getter=listing) DAAPResponsemlcl *mlcl;
 
 @end

@@ -1,6 +1,6 @@
 //
 //  DAAPResponsemlit.h
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -10,6 +10,7 @@
 #import "DAAPResponse.h"
 
 @interface DAAPResponsemlit : DAAPResponse {
+@private
 	NSNumber *miid;
 	NSNumber *mper;
 	NSString *minm;
@@ -36,8 +37,8 @@
 }
 
 @property (nonatomic, retain) NSNumber *miid;
-@property (nonatomic, retain) NSNumber *mper;
-@property (nonatomic, copy) NSString *minm;
+@property (nonatomic, retain, getter=persistentId) NSNumber *mper;
+@property (nonatomic, copy, getter=name) NSString *minm;
 @property (nonatomic, retain) NSNumber *mimc;
 @property (nonatomic, retain) NSNumber *mctc;
 @property (nonatomic, retain) NSNumber *meds;
@@ -50,13 +51,12 @@
 @property (nonatomic, retain) NSNumber *astn;
 @property (nonatomic, retain) NSNumber *astm;
 @property (nonatomic, retain) NSNumber *assp;
-@property (nonatomic, copy) NSString *asal;
-@property (nonatomic, copy) NSString *asar;
+@property (nonatomic, copy, getter=albumName) NSString *asal;
+@property (nonatomic, copy, getter=artistName) NSString *asar;
 @property (nonatomic, copy) NSString *asaa;
 @property (nonatomic, copy) NSString *mshc;
 @property (nonatomic, retain) NSNumber *mshi;
 @property (nonatomic, retain) NSNumber *mshn;
 @property (nonatomic, retain) NSNumber *mcti;
-@property (nonatomic) int index;
 
 @end

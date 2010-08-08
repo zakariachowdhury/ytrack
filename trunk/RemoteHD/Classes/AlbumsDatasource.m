@@ -92,7 +92,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"AlbumCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -103,7 +103,7 @@
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.list objectAtIndex:(offset + indexPath.row)];
 	
-    cell.textLabel.text = mlit.minm;
+    cell.textLabel.text = mlit.name;
 	cell.imageView.image = [self artworkForAlbum:mlit.miid];
 	if ([cellId objectForKey:mlit.miid] == nil) {
 		[cellId setObject:indexPath forKey:mlit.miid];
@@ -118,13 +118,13 @@
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	long long albumId = [[(DAAPResponsemlit *)[self.list objectAtIndex:i] mper] longLongValue];
+	long long albumId = [[(DAAPResponsemlit *)[self.list objectAtIndex:i] persistentId] longLongValue];
 	
 	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
-	c.tracks = resp.mlcl.list;
-	c.albumName = [(DAAPResponsemlit *)[self.list objectAtIndex:i] minm];
-	[c setTitle:[(DAAPResponsemlit *)[self.list objectAtIndex:i] minm]];
+	c.tracks = resp.listing.list;
+	c.albumName = [(DAAPResponsemlit *)[self.list objectAtIndex:i] name];
+	[c setTitle:[(DAAPResponsemlit *)[self.list objectAtIndex:i] name]];
 	[self.navigationController pushViewController:c animated:YES];
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
 	[c release];
@@ -132,8 +132,8 @@
 
 - (void) didFinishLoading:(DAAPResponse *)response{
 	[super didFinishLoading:response];
-	self.list = [[(DAAPResponseagal *)response mlcl] list];
-	self.indexList = [[(DAAPResponseagal *)response mshl] indexList];
+	self.list = [[(DAAPResponseagal *)response listing] list];
+	self.indexList = [[(DAAPResponseagal *)response headerList] indexList];
 	
 	[self.delegate refreshTableView];
 	[self.delegate didFinishLoading];
