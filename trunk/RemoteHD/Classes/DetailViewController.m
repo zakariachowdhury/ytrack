@@ -123,6 +123,7 @@
 		self.tracksDatasource = d;
 		self.tracksDatasource.navigationController = self.navigationController;
 		self.tracksDatasource.delegate = self;
+		[self.delegate startLoading];
 		[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self.tracksDatasource];
 		[d release];
 		self.tableView.dataSource = self.tracksDatasource;
@@ -183,6 +184,7 @@
 		self.artistDatasource = d;
 		self.artistDatasource.navigationController = self.navigationController;
 		self.artistDatasource.delegate = self;
+		[self.delegate startLoading];
 		[[[SessionManager sharedSessionManager] currentServer] getArtists:self.artistDatasource];
 		[d release];
 		self.tableView.dataSource = self.artistDatasource;
@@ -213,6 +215,7 @@
 		self.albumsDatasource = d;
 		self.albumsDatasource.navigationController = self.navigationController;
 		self.albumsDatasource.delegate = self;
+		[self.delegate startLoading];
 		[[[SessionManager sharedSessionManager] currentServer] getAllAlbums:self.albumsDatasource];
 		[d release];
 		self.tableView.dataSource = self.albumsDatasource;
