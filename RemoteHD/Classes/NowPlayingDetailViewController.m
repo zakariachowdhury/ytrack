@@ -14,6 +14,8 @@
 
 - (void) _statusUpdate:(NSNotification *)notification;
 - (void) _didChangeOrientation;
+- (void) _repositionToLandscape;
+- (void) _repositionToPortrait;
 
 @end
 
@@ -127,31 +129,46 @@
 	[UIView commitAnimations];		
 }
 
+- (void) _repositionToLandscape{
+	containerView.frame = CGRectMake(128, 0, 768, 768);
+	listController.tableView.frame = CGRectMake(0, 125, 768, 529);
+	bottomBackground.alpha = 1.0;
+	backButton.frame = CGRectMake(128, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
+	listButton.frame = CGRectMake(824, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
+	nextButton.frame = CGRectMake(820, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
+	previousButton.frame = CGRectMake(706, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
+	playButton.frame = CGRectMake(779, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
+	pauseButton.frame = CGRectMake(779, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+}
+
+- (void) _repositionToPortrait{
+	containerView.frame = CGRectMake(0, 125, 768, 768);
+	listController.tableView.frame = CGRectMake(0, 0, 768, 768);
+	bottomBackground.alpha = 0.0;
+	backButton.frame = CGRectMake(0, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
+	listButton.frame = CGRectMake(696, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
+	nextButton.frame = CGRectMake(689, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
+	previousButton.frame = CGRectMake(570, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
+	playButton.frame = CGRectMake(643, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
+	pauseButton.frame = CGRectMake(643, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+}
+
 -(void) _didChangeOrientation{
 	UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
-	if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight || o == UIDeviceOrientationFaceUp || o == UIDeviceOrientationFaceDown) {
+	if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight) {
 		NSLog(@"landscape"); 
-		containerView.frame = CGRectMake(128, 0, 768, 768);
-		listController.tableView.frame = CGRectMake(0, 125, 768, 529);
-		bottomBackground.alpha = 1.0;
-		backButton.frame = CGRectMake(128, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
-		listButton.frame = CGRectMake(824, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
-		nextButton.frame = CGRectMake(820, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
-		previousButton.frame = CGRectMake(706, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
-		playButton.frame = CGRectMake(779, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
-		pauseButton.frame = CGRectMake(779, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+		[self _repositionToLandscape];
 	} else if (o == UIDeviceOrientationPortrait || o == UIDeviceOrientationPortraitUpsideDown) {
 		NSLog(@"portrait");
-		containerView.frame = CGRectMake(0, 125, 768, 768);
-		listController.tableView.frame = CGRectMake(0, 0, 768, 768);
-		bottomBackground.alpha = 0.0;
-		backButton.frame = CGRectMake(0, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
-		listButton.frame = CGRectMake(696, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
-		nextButton.frame = CGRectMake(689, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
-		previousButton.frame = CGRectMake(570, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
-		playButton.frame = CGRectMake(643, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
-		pauseButton.frame = CGRectMake(643, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+		[self _repositionToPortrait];
+	} else {
+		if (self.view.bounds.size.width == 1024.0) {
+			[self _repositionToLandscape];
+		} else {
+			[self _repositionToPortrait];
+		}
 	}
+
 }
 
 - (void) _statusUpdate:(NSNotification *)notification{
