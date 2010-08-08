@@ -12,6 +12,8 @@
 #import "DAAPResponsemshl.h"
 
 @interface DAAPResponseagal : DAAPResponse {
+
+@private
 	NSNumber *mstt;
 	NSNumber *muty;
 	NSNumber *mtco;
@@ -24,7 +26,7 @@
 @property (nonatomic, retain) NSNumber *muty;
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
-@property (nonatomic, retain) DAAPResponsemshl *mshl;
+@property (nonatomic, retain, getter=listing) DAAPResponsemlcl *mlcl;
+@property (nonatomic, retain, getter=headerList) DAAPResponsemshl *mshl;
 
 @end

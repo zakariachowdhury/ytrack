@@ -81,7 +81,7 @@
     
     // Configure the cell...
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
-    cell.trackName.text = mlit.minm;
+    cell.trackName.text = mlit.name;
 	int timeMillis = [mlit.astm intValue];
 	int timeSec = timeMillis / 1000;
 	
@@ -92,7 +92,7 @@
 
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
 	cell.trackNumber.text = [NSString stringWithFormat:@"%d.",indexPath.row+1];
-	if ([cell.trackName.text isEqualToString:self.currentTrack] && [mlit.asar isEqualToString:self.currentArtist]){
+	if ([cell.trackName.text isEqualToString:self.currentTrack] && [mlit.artistName isEqualToString:self.currentArtist]){
 		if (self.shouldPlayAllTracks) {
 			cell.nowPlaying = YES;
 		} else {
@@ -124,7 +124,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
 	if (self.shouldPlayAllTracks) {
-		[[[SessionManager sharedSessionManager] currentServer] playAllTracksForArtist:mlit.asar index:indexPath.row];
+		[[[SessionManager sharedSessionManager] currentServer] playAllTracksForArtist:mlit.artistName index:indexPath.row];
 	} else {
 		[[[SessionManager sharedSessionManager] currentServer] playSongIndex:indexPath.row inAlbum:mlit.asai];
 	}

@@ -13,12 +13,14 @@
 #import "DetailViewController.h"
 #import "AsyncImageView.h"
 #import "SessionManager.h"
+#import "NowPlayingDetailViewController.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, DAAPRequestDelegate, MasterViewDelegate, NowPlayingDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;
 	IBOutlet UIView *nolibView;
+	IBOutlet UIView *testView;
 	IBOutlet UILabel *noLibViewMessage;
 	IBOutlet UILabel *loadingMessageLabel;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -42,6 +44,7 @@
 	IBOutlet UILabel *remainingPlayingTime;
 	UINavigationController *navigationController;
 	UIPopoverController *popOver;
+	NowPlayingDetailViewController *nowPlayingDetail;
 	
 	NSTimer *timer;
 @private 
@@ -54,6 +57,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) UIPopoverController *popOver;
 @property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic, retain) NowPlayingDetailViewController *nowPlayingDetail;
 
 - (IBAction) buttonClicked:(id)sender;
 - (IBAction) playClicked:(id)sender;
@@ -65,6 +69,7 @@
 - (IBAction) startingPlaytimeEdit:(id)sender;
 - (IBAction) buttonSelected:(id)sender;
 - (IBAction) speakerSelectorClicked:(id)sender;
+- (IBAction) showNowPlayingDetail:(id)sender;
 
 @end
 

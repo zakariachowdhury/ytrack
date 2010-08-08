@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FDServer.h"
+#import "RemoteHDViewController.h"
+
 
 @interface SessionManager : NSObject {
 @private

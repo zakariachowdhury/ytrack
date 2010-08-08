@@ -1,6 +1,6 @@
 //
 //  DAAPResponsemlit.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 19/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -33,18 +33,6 @@
 @synthesize mshi;
 @synthesize mshn;
 @synthesize mcti;
-@synthesize index;
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	self.miid = [dict objectForKey:@"miid"];
-	self.mper = [dict objectForKey:@"mper"];
-	self.minm = [dict objectForKey:@"minm"];
-	self.asai = [dict objectForKey:@"asai"];
-	self.aeSI = [dict objectForKey:@"aeSI"];
-	self.astn = [dict objectForKey:@"astn"];
-	self.asal = [dict objectForKey:@"asal"];
-	self.asar = [dict objectForKey:@"asar"];
-}
 
 - (void) parse{
 	[self parse:self.data];

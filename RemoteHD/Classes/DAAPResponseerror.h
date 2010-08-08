@@ -10,7 +10,11 @@
 #import "DAAPResponse.h"
 
 @interface DAAPResponseerror : DAAPResponse {
-
+	NSError *error;
 }
+
+@property (nonatomic, readonly) NSError *error;
+
+- (id) initWithData:(NSData *)theData error:(NSError *)err;
 
 @end

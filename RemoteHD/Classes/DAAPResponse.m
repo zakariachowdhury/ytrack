@@ -1,6 +1,6 @@
 //
 //  DAAPResponse.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -22,9 +22,6 @@
 }
 
 - (BOOL) isString:(NSString *)command{
-	/*NSPredicate *strings = [NSPredicate
-							predicateWithFormat:@"SELF MATCHES %@", kStringPattern];
-	return [strings evaluateWithObject:command];*/
 	if ([command isEqualToString:@"minm"]) {
 		return YES;
 	} else if ([command isEqualToString:@"cann"]) {
@@ -66,11 +63,7 @@
 }
 
 - (BOOL) isBranch:(NSString *)command{
-	/*NSPredicate *branches = [NSPredicate
-							 predicateWithFormat:@"SELF MATCHES %@", kBranchPattern];*/
 	if ([command isEqualToString:@"cmst"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cmst"]) {
 		return YES;
 	} else if ([command isEqualToString:@"mlog"]) {
 		return YES;
@@ -270,10 +263,6 @@
 	int length = [self parseLength:self.data atPosition:4];
 	self.data = [self.data subdataWithRange:NSMakeRange(8, length)];
 	[self parse:self.data];
-}
-
-- (void) didFinishRawParsing:(NSDictionary *)dict{
-	// delegate method to heriting classes
 }
 
 - (void)dealloc {

@@ -15,6 +15,9 @@
 #import "PreferencesManager.h"
 #import "DAAPResponsemlit.h"
 #import "SpeakersViewController.h"
+#import "DAAPResponsecmgt.h"
+#import "AlbumCoverViewController.h"
+#import "RemoteHDAppDelegate.h"
 
 @interface RemoteHDViewController(PrivateMethods)
 
@@ -31,11 +34,13 @@
 @synthesize navigationController;
 @synthesize popOver;
 @synthesize timer;
-
+@synthesize nowPlayingDetail;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	nowPlaying.displayShadow = YES;
 	
 	// i18n
 	loadingMessageLabel.text = NSLocalizedString(@"loading",@"Chargement en cours...");
@@ -59,10 +64,12 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_libraryAvailable) name:kNotificationConnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:kNotificationConnectionLost object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:kNotificationTryReconnect object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayError) name:kNotificationBrokenConnection object:nil];
 	
 	// load preferences file and try to connect to the last used server
 	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
-	[[SessionManager sharedSessionManager] openLastUsedServer];
+	
 	
 	// customize sliders
 	volumeSlider.backgroundColor = [UIColor clearColor];	
@@ -96,6 +103,13 @@
 	_editingPlayingTime = NO;
 }
 
+- (void) viewDidAppear:(BOOL)animated{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	if (!server.connected) {
+		[[SessionManager sharedSessionManager] openLastUsedServer];
+	}
+	
+}
 
 #pragma mark -
 #pragma mark Actions
@@ -152,18 +166,32 @@
 }
 
 - (IBAction) buttonSelected:(id)sender{
-	NSLog(@"value Changed !");
-	
 	switch (segmentedControl.selectedSegmentIndex) {
 		case 0:
+			[[PreferencesManager sharedPreferencesManager] saveViewState:kPrefLastSelectedSegControlTrack withKey:kPrefLastSelectedSegControl];
 			[detailViewController changeToTrackView];
 			break;
 		case 1:
+			[[PreferencesManager sharedPreferencesManager] saveViewState:kPrefLastSelectedSegControlArtist withKey:kPrefLastSelectedSegControl];
 			[detailViewController changeToArtistView];
 			break;
 		case 2:
+			[[PreferencesManager sharedPreferencesManager] saveViewState:kPrefLastSelectedSegControlAlbum withKey:kPrefLastSelectedSegControl];
 			[detailViewController changeToAlbumView];
 			break;
+		case 3:
+			NSLog(@"showing testView");
+			[self.view bringSubviewToFront:testView];
+			AlbumCoverViewController *c = [[AlbumCoverViewController alloc] initWithNibName:@"AlbumCover" bundle:nil];
+			[testView addSubview:c.view];
+			c.image.image = [UIImage imageNamed:@"defaultCover.png"];
+			c.albumTitle.text = @"test";
+			
+			AlbumCoverViewController *c2 = [[AlbumCoverViewController alloc] initWithNibName:@"AlbumCover" bundle:nil];
+			c2.view.frame = CGRectMake(198, 0, 198, 186);
+			[testView addSubview:c2.view];
+			c2.image.image = [UIImage imageNamed:@"defaultCover.png"];
+			c2.albumTitle.text = @"test2";
 		default:
 			break;
 	}
@@ -189,6 +217,22 @@
 	}
 	[self.popOver presentPopoverFromBarButtonItem:sender
 								   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction) showNowPlayingDetail:(id)sender{
+	NowPlayingDetailViewController *c = [[NowPlayingDetailViewController alloc] initWithNibName:kNowPlayingDetailViewNibName bundle:nil];
+	self.nowPlayingDetail = c;
+	self.nowPlayingDetail.playing = playing;
+	self.nowPlayingDetail.modalPresentationStyle = UIModalPresentationFullScreen;
+	[self.nowPlayingDetail setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	[self.nowPlayingDetail setDelegate:self];
+	[self presentModalViewController:self.nowPlayingDetail animated:YES];
+//	[self.view addSubview:self.nowPlayingDetail.view];
+	[c release];
+}
+
+- (void)didFinishWithNowPlaying{
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)navigationController:(UINavigationController *)theNavigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -231,13 +275,41 @@
 	[activityIndicator startAnimating];
 }
 
+
+#pragma mark -
+#pragma mark MasterDelegate methods
+
+- (void) didSelectPlaylist{
+	segmentedControl.hidden = YES;
+}
+
+- (void) didSelectLibrary{
+	segmentedControl.hidden = NO;
+	[self buttonSelected:nil];
+}
+
 #pragma mark -
 #pragma mark private methods
 
 - (void) _updateVolume{
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	long v = [server getVolume];
-	volumeSlider.value = v;
+	//long v = [server getVolume];
+	[server getVolume:self action:@selector(readVolume:)];
+	
+}
+
+- (void) readVolume:(DAAPResponse *)resp{
+	DAAPResponsecmgt * response = (DAAPResponsecmgt *)resp;
+	volumeSlider.value = [response.cmvo longValue];
+}
+
+- (void) didFinishLoading:(DAAPResponse *)response{
+}
+
+- (void) connectionTimedOut{
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	server.connected = NO;
+	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnectionLost object:nil];
 }
 
 
@@ -311,15 +383,33 @@
 }
 
 - (void) _displayNoLib{
+	[self didFinishWithNowPlaying];
 	[self.timer invalidate];
 	donePlayingTime.text = @"00:00";
 	remainingPlayingTime.text = @"00:00";
 	progress.enabled = NO;
 	volumeSlider.value = 0;
 	volumeSlider.enabled = NO;
+	segmentedControl.hidden = YES;
 	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"notConnected" 
 																		  value:@"Vous n'êtes pas connecté" 
 																		  table:@"Localizable"];
+	noLibViewMessage.text = notConnectedMessage;
+	nolibView.alpha = 1.0;
+}
+
+- (void) _displayError{
+	[self didFinishWithNowPlaying];
+	[self.timer invalidate];
+	donePlayingTime.text = @"00:00";
+	remainingPlayingTime.text = @"00:00";
+	progress.enabled = NO;
+	volumeSlider.value = 0;
+	volumeSlider.enabled = NO;
+	segmentedControl.hidden = YES;
+	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"brokenConnection" 
+																		   value:@"La communication avec le serveur ne peut être établie" 
+																		   table:@"Localizable"];
 	noLibViewMessage.text = notConnectedMessage;
 	nolibView.alpha = 1.0;
 }
@@ -330,6 +420,17 @@
 	volumeSlider.enabled = YES;
 	[self startLoading];
 	[detailViewController didChangeLibrary];
+	[masterViewController didChangeLibrary];
+	segmentedControl.hidden = NO;
+	NSString *state = [[PreferencesManager sharedPreferencesManager] getViewStateForKey:kPrefLastSelectedSegControl];
+	if ([state isEqualToString:kPrefLastSelectedSegControlTrack]) {
+	 segmentedControl.selectedSegmentIndex = 0;
+	 } else if ([state isEqualToString:kPrefLastSelectedSegControlArtist]) {
+	 segmentedControl.selectedSegmentIndex = 1;
+	 } else if ([state isEqualToString:kPrefLastSelectedSegControlAlbum]) {
+	 segmentedControl.selectedSegmentIndex = 2;
+	 }
+	
 	[self buttonSelected:nil];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
@@ -359,6 +460,7 @@
 - (void)dealloc {
 	[self.timer invalidate];
 	[self.popOver release];
+	[self.nowPlayingDetail release];
     [super dealloc];
 }
 

@@ -22,6 +22,6 @@
 @property (nonatomic, retain) NSNumber *muty;
 @property (nonatomic, retain) NSNumber *mtco;
 @property (nonatomic, retain) NSNumber *mrco;
-@property (nonatomic, retain) DAAPResponsemlcl *mlcl;
+@property (nonatomic, retain, getter=listing) DAAPResponsemlcl *mlcl;
 
 @end

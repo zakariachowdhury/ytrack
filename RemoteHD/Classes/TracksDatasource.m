@@ -13,7 +13,6 @@
 #import "DAAPResponsemlog.h"
 #import "DAAPResponseabro.h"
 #import "DAAPResponseavdb.h"
-#import "DAAPResponsemlcl.h"
 
 @implementation TracksDatasource
 
@@ -67,9 +66,9 @@
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *track = [self.list objectAtIndex:(offset + indexPath.row)];
 	
-	cell.trackName.text = track.minm;
+	cell.trackName.text = track.name;
 	NSString *album = track.asal;
-	NSString *artist = track.asar;
+	NSString *artist = track.artistName;
 	cell.artistName.text = artist;
 	cell.albumName.text = album;
 	
@@ -112,8 +111,8 @@
 
 - (void) didFinishLoading:(DAAPResponse *)response{
 	[super didFinishLoading:response];
-	self.list = [[(DAAPResponseapso *)response mlcl] list];
-	self.indexList = [[(DAAPResponseapso *)response mshl] indexList];
+	self.list = [[(DAAPResponseapso *)response listing] list];
+	self.indexList = [[(DAAPResponseapso *)response headerList] indexList];
 	
 	[self.delegate refreshTableView];
 	[self.delegate didFinishLoading];

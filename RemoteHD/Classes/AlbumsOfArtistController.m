@@ -55,19 +55,19 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [self.agal.mshl.indexList count];
+	return [self.agal.headerList.indexList count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	long res = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshn] longValue];
+	long res = [[(DAAPResponsemlit *)[self.agal.headerList.indexList objectAtIndex:section] mshn] longValue];
 	
 	return res;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
 	NSMutableArray *chars = [[[NSMutableArray alloc] init] autorelease];
-	for (DAAPResponsemlit *mlit in self.agal.mshl.indexList) {
+	for (DAAPResponsemlit *mlit in self.agal.headerList.indexList) {
 		[chars addObject:[mlit mshc]];
 	}
 	//return arrayOfCharacters;
@@ -76,7 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
 	NSInteger count = 0;
-	for(DAAPResponsemlit *mlit in self.agal.mshl.indexList)
+	for(DAAPResponsemlit *mlit in self.agal.headerList.indexList)
 	{
 		if([mlit.mshc isEqualToString:title])
 			return count;
@@ -88,7 +88,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 
-	return [(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:section] mshc];
+	return [(DAAPResponsemlit *)[self.agal.headerList.indexList objectAtIndex:section] mshc];
 }
 
 -(void)didFinishLoading:(UIImage *)image forAlbumId:(NSNumber *)albumId{
@@ -117,7 +117,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"AlbumOfArtistCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -125,10 +125,10 @@
     }
     
     // Configure the cell...
-	long offset = [[(DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section] mshi] longValue];
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:(offset + indexPath.row)];
+	long offset = [[(DAAPResponsemlit *)[self.agal.headerList.indexList objectAtIndex:indexPath.section] mshi] longValue];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:(offset + indexPath.row)];
 	
-    cell.textLabel.text = mlit.minm;
+    cell.textLabel.text = mlit.name;
 	cell.imageView.image = [self artworkForAlbum:mlit.miid];
 	if ([cellId objectForKey:mlit.miid] == nil) {
 		[cellId setObject:indexPath forKey:mlit.miid];
@@ -140,17 +140,17 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.mshl.indexList objectAtIndex:indexPath.section];
+	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.headerList.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	long long albumId = [[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] mper] longLongValue];
+	long long albumId = [[(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] persistentId] longLongValue];
 	NSLog(@"%qi");
 
 	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
-	c.tracks = resp.mlcl.list;
-	c.albumName = [(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm];
-	[c setTitle:[(DAAPResponsemlit *)[self.agal.mlcl.list objectAtIndex:i] minm]];
+	c.tracks = resp.listing.list;
+	c.albumName = [(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] name];
+	[c setTitle:[(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] name]];
 	[self.navigationController pushViewController:c animated:YES];
 	[c release];
 }

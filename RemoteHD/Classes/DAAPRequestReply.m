@@ -1,6 +1,6 @@
 //
 //  DAAPRequestReply.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 15/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -15,9 +15,10 @@
 @implementation DAAPRequestReply
 
 @synthesize delegate;
+@synthesize action;
 
 
-- (void) asyncRequestAndParse:(NSURL *)url{
+- (void) asyncRequestAndParse:(NSURL *)url withTimeout:(int)timeoutInterval{
 	NSLog(@"async requesting %@",url);
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
@@ -25,12 +26,16 @@
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
 														   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-													   timeoutInterval:43200];
+													   timeoutInterval:timeoutInterval];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	NSURLConnection *conn =[[NSURLConnection alloc]
 							initWithRequest:request delegate:self];
     self.connection = conn;
 	[conn release];
+}
+
+- (void) asyncRequestAndParse:(NSURL *)url{
+	[self asyncRequestAndParse:url withTimeout:43200];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
@@ -44,6 +49,14 @@
 	} else if (error.code == NSURLErrorTimedOut) {
 		if([delegate respondsToSelector:@selector(connectionTimedOut)])
 			[delegate connectionTimedOut];
+	} else if (error.code == NSURLErrorNotConnectedToInternet) {
+		NSLog(@"###########");
+		if([delegate respondsToSelector:@selector(cantConnect)])
+			[delegate cantConnect];
+	} else if (error.code == NSURLErrorCannotFindHost) {
+		NSLog(@"###########");
+		if([delegate respondsToSelector:@selector(cantConnect)])
+			[delegate cantConnect];
 	}
 }
 
@@ -71,21 +84,56 @@
 	
     self.data = nil;
 	self.connection = nil;
-	if (delegate != nil) {
+	/*if (delegate != nil) {
 		if([delegate respondsToSelector:@selector(didFinishLoading:)])
 			[delegate didFinishLoading:response];
+	}*/
+	
+	if (delegate != nil) {
+		if([delegate respondsToSelector:action])
+			[delegate performSelector:action withObject:response];
+		else if([delegate respondsToSelector:@selector(didFinishLoading:)])
+			[delegate didFinishLoading:response];
+
 	}
 	
 	[response release];
 }
 
-
-+ (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url {
++ (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url{
 	NSURLResponse * resp;
 	NSError *error;
-	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+														   timeoutInterval:30];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
+	if (error != nil) {
+		NSLog(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBrokenConnection object:self];
+	}
+	[HexDumpUtility printHexDumpToConsole:dat];
+	
+	NSString *command = [self parseCommandName:dat atPosition:0];
+	if (command == nil) {
+		return [[[DAAPResponseerror alloc] initWithData:dat error:error] autorelease];
+	}
+	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
+	
+	
+	DAAPResponse *response = [[[NSClassFromString(clazz) alloc] initWithData:dat] autorelease];
+	[response performSelector:@selector(parse)];
+	return response;
+}
+
+
++ (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url error:(NSError **)error{
+	NSURLResponse * resp;
+	//NSError *error;
+	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+														   timeoutInterval:30];
+	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:error];
+
 	//[HexDumpUtility printHexDumpToConsole:dat];
 
 	NSString *command = [self parseCommandName:dat atPosition:0];
@@ -207,7 +255,7 @@
 		clazz = [NSString stringWithFormat:@"DAAPResponse%@",key];
 	}
 	DAAPResponse *response = (DAAPResponse *)[[[NSClassFromString(clazz) alloc] init] autorelease];
-	[response didFinishRawParsing:retValue];
+	//[response didFinishRawParsing:retValue];
 	return response;
 }
 

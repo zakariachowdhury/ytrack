@@ -1,6 +1,6 @@
 //
 //  DAAPResponsecasp.m
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
@@ -22,7 +22,7 @@
 		[temp release];
 	}
 	RemoteSpeaker *sp = [[RemoteSpeaker alloc] init];
-	sp.speakerName = mdcl.minm;
+	sp.speakerName = mdcl.name;
 	if ([mdcl.caia shortValue] == 1) {
 		sp.on = YES;
 	} else {

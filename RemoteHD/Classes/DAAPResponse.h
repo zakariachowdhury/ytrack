@@ -1,19 +1,14 @@
 //
 //  DAAPResponse.h
-//  BonjourWeb
+//  yTrack
 //
 //  Created by Fabrice Dewasmes on 18/05/10.
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "DAAPResponseDelegate.h"
 
-#define kBranchPattern @"cmst|mlog|agal|mlcl|mshl|abro|abar|apso|caci|avdb|cmgt|aply|adbs|msrv|casp|mdcl|mlit|mccr|gmlc"
-#define kStringPattern @"minm|cann|cana|cang|canl|asaa|asal|asar|ceWM|asdt|msts|mcna|ascm|asfm|mcnm"
-
-
-@interface DAAPResponse : NSObject <DAAPResponseDelegate>{
+@interface DAAPResponse : NSObject {
 	NSString * commandName;
 	NSData *data;
 }

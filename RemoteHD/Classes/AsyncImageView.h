@@ -18,6 +18,7 @@
     NSMutableData* data;
 	UILabel *loadingImageLabel;
 	UIActivityIndicatorView *activityIndicator;
+	BOOL displayShadow;
 
 	id <AsyncImageViewDelegate> delegate;
 }
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) NSMutableData *data;
 @property (nonatomic, retain) NSURLConnection *connection;
+@property (assign) BOOL displayShadow;
 
 - (void)loadImageFromURL:(NSURL*)url;
 - (void)loadImageNotAvailable;

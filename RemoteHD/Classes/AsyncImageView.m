@@ -25,6 +25,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 @synthesize activityIndicator;
 @synthesize data;
 @synthesize connection;
+@synthesize displayShadow;
 
 - (void)loadImageFromURL:(NSURL*)url  {
 	//self.backgroundColor = [UIColor whiteColor];
@@ -119,7 +120,12 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	}
 
 
-	UIImageView *imageView = [self _newImageWithShadowFromImage:image];
+	UIImageView *imageView;
+	if (displayShadow) {
+		imageView = [self _newImageWithShadowFromImage:image];
+	} else {
+		imageView = [[UIImageView alloc] initWithImage:image];
+	}
 	[image release];
 	
 	imageView.alpha = 0.0;
@@ -132,6 +138,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	imageView.alpha = 1.0;
 	
 	[UIView commitAnimations];
+	[imageView setContentMode:UIViewContentModeScaleAspectFill];
 	[imageView release];
 	
     self.data = nil;
@@ -170,8 +177,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	UIGraphicsEndImageContext();
 	
 	UIImageView* imageView = [[UIImageView alloc] initWithImage:shadowedImage];
-	imageView.contentMode = UIViewContentModeScaleAspectFit;
+	imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth || UIViewAutoresizingFlexibleHeight );
+	[imageView setNeedsDisplay];
 	return imageView;
 }
 
