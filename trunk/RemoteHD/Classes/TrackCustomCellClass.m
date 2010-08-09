@@ -9,6 +9,13 @@
 #import "TrackCustomCellClass.h"
 
 
+@interface TrackCustomCellClass(PrivateMethods)
+
+- (void) _repositionToLandscape;
+- (void) _repositionToPortrait;
+
+@end
+
 @implementation TrackCustomCellClass
 @synthesize trackName;
 @synthesize artistName;
@@ -24,21 +31,38 @@
 }
 
 
+- (void) _repositionToLandscape{
+	sep2.center = CGPointMake(450, sep2.center.y);
+	albumName.center = CGPointMake(550, albumName.center.y);
+	sep3.center = CGPointMake(650, sep3.center.y);
+	trackLength.center = CGPointMake(700, trackLength.center.y);
+	nowPlayingIndicator.center = CGPointMake(735, nowPlayingIndicator.center.y);
+	
+}
+- (void) _repositionToPortrait{
+	sep2.center = CGPointMake(540, sep2.center.y);
+	albumName.center = CGPointMake(650, albumName.center.y);
+	sep3.center = CGPointMake(674, sep3.center.y);
+	trackLength.center = CGPointMake(719, trackLength.center.y);
+	nowPlayingIndicator.center = CGPointMake(480, nowPlayingIndicator.center.y);
+}
+
 - (void)drawRect:(CGRect)rect{
 	UIDevice *device = [UIDevice currentDevice];
 	if (device.orientation == UIDeviceOrientationPortrait || device.orientation == UIDeviceOrientationPortraitUpsideDown) {
-		sep2.center = CGPointMake(540, sep2.center.y);
-		albumName.center = CGPointMake(650, albumName.center.y);
-		sep3.center = CGPointMake(674, sep3.center.y);
-		trackLength.center = CGPointMake(719, trackLength.center.y);
-		nowPlayingIndicator.center = CGPointMake(480, nowPlayingIndicator.center.y);
+		[self _repositionToPortrait];
 	} else if (device.orientation == UIDeviceOrientationLandscapeLeft || device.orientation == UIDeviceOrientationLandscapeRight){
-		sep2.center = CGPointMake(450, sep2.center.y);
-		albumName.center = CGPointMake(550, albumName.center.y);
-		sep3.center = CGPointMake(650, sep3.center.y);
-		trackLength.center = CGPointMake(700, trackLength.center.y);
-		nowPlayingIndicator.center = CGPointMake(735, nowPlayingIndicator.center.y);
+		[self _repositionToLandscape];
+	} else {
+		NSLog(@"%f,%f",self.bounds.size.width,self.bounds.size.height);
+		if (self.bounds.size.width > 768.0) {
+			[self _repositionToLandscape];
+		} else {
+			[self _repositionToPortrait];
+		}
+
 	}
+
 
 }
 
