@@ -108,6 +108,7 @@
 
 - (void)dealloc {
 	[self cleanJobs];
+	[list release];
 	[artworks release];
 	[cellId release];
 	[loaders release];

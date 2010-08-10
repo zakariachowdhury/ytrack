@@ -21,4 +21,10 @@
     return self;
 }
 
+- (void)dealloc {
+	[error release];
+    [super dealloc];
+}
+
+
 @end
