@@ -28,6 +28,10 @@
 		6B4F18A611D0E317009D0A42 /* pinNumBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4F18A511D0E317009D0A42 /* pinNumBg.png */; };
 		6B4F18A911D0E5F7009D0A42 /* pinBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4F18A811D0E5F7009D0A42 /* pinBg.png */; };
 		6B4F18C311D0EBA0009D0A42 /* buttonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4F18C211D0EBA0009D0A42 /* buttonBg.png */; };
+		6B505FD81213BD8900FA05B0 /* DDConsoleLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B505FD31213BD8900FA05B0 /* DDConsoleLogger.m */; };
+		6B505FD91213BD8900FA05B0 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B505FD51213BD8900FA05B0 /* DDFileLogger.m */; };
+		6B505FDA1213BD8900FA05B0 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B505FD71213BD8900FA05B0 /* DDLog.m */; };
+		6B50623C1214C88B00FA05B0 /* defaultCoverBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B50623B1214C88B00FA05B0 /* defaultCoverBig.png */; };
 		6B6A0F3011CDF3CF00A6B83E /* hsep.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6A0F2F11CDF3CF00A6B83E /* hsep.png */; };
 		6B6A0F3C11CDF4CB00A6B83E /* vsep.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6A0F3B11CDF4CB00A6B83E /* vsep.png */; };
 		6B6A0F5111CDF6BD00A6B83E /* lightvsep.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B6A0F5011CDF6BD00A6B83E /* lightvsep.png */; };
@@ -112,6 +116,10 @@
 		6BEE7718120B924300B3B8D3 /* detailBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE7717120B924300B3B8D3 /* detailBg.png */; };
 		6BEE77D3120B9C4C00B3B8D3 /* detailbg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE77D2120B9C4C00B3B8D3 /* detailbg2.png */; };
 		6BEE77F3120B9F7B00B3B8D3 /* detailbg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE77F2120B9F7B00B3B8D3 /* detailbg3.png */; };
+		6BF1F6011215F44E005D7E84 /* podcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF1F6001215F44E005D7E84 /* podcast.png */; };
+		6BF1F60F1215F57B005D7E84 /* audiobooks.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF1F60E1215F57B005D7E84 /* audiobooks.png */; };
+		6BF1F6171215FCC0005D7E84 /* podcast-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF1F6161215FCC0005D7E84 /* podcast-inv.png */; };
+		6BF1F6411216073A005D7E84 /* audiobooks-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF1F6401216073A005D7E84 /* audiobooks-inv.png */; };
 		6BF29E3712061ADE004233D9 /* AlbumCover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BF29E3612061ADE004233D9 /* AlbumCover.xib */; };
 		6BF29E3C12061BB6004233D9 /* AlbumCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF29E3B12061BB6004233D9 /* AlbumCoverViewController.m */; };
 		6BF29E9912069EC0004233D9 /* NowPlayingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BF29E9812069EC0004233D9 /* NowPlayingView.xib */; };
@@ -158,6 +166,13 @@
 		6B4F18A511D0E317009D0A42 /* pinNumBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinNumBg.png; sourceTree = "<group>"; };
 		6B4F18A811D0E5F7009D0A42 /* pinBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinBg.png; sourceTree = "<group>"; };
 		6B4F18C211D0EBA0009D0A42 /* buttonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBg.png; sourceTree = "<group>"; };
+		6B505FD21213BD8900FA05B0 /* DDConsoleLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDConsoleLogger.h; sourceTree = "<group>"; };
+		6B505FD31213BD8900FA05B0 /* DDConsoleLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDConsoleLogger.m; sourceTree = "<group>"; };
+		6B505FD41213BD8900FA05B0 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		6B505FD51213BD8900FA05B0 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		6B505FD61213BD8900FA05B0 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		6B505FD71213BD8900FA05B0 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		6B50623B1214C88B00FA05B0 /* defaultCoverBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultCoverBig.png; sourceTree = "<group>"; };
 		6B6A0F2F11CDF3CF00A6B83E /* hsep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hsep.png; sourceTree = "<group>"; };
 		6B6A0F3B11CDF4CB00A6B83E /* vsep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vsep.png; sourceTree = "<group>"; };
 		6B6A0F5011CDF6BD00A6B83E /* lightvsep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightvsep.png; sourceTree = "<group>"; };
@@ -291,6 +306,10 @@
 		6BEE7717120B924300B3B8D3 /* detailBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailBg.png; sourceTree = "<group>"; };
 		6BEE77D2120B9C4C00B3B8D3 /* detailbg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailbg2.png; sourceTree = "<group>"; };
 		6BEE77F2120B9F7B00B3B8D3 /* detailbg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailbg3.png; sourceTree = "<group>"; };
+		6BF1F6001215F44E005D7E84 /* podcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = podcast.png; sourceTree = "<group>"; };
+		6BF1F60E1215F57B005D7E84 /* audiobooks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audiobooks.png; sourceTree = "<group>"; };
+		6BF1F6161215FCC0005D7E84 /* podcast-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "podcast-inv.png"; sourceTree = "<group>"; };
+		6BF1F6401216073A005D7E84 /* audiobooks-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audiobooks-inv.png"; sourceTree = "<group>"; };
 		6BF29E3612061ADE004233D9 /* AlbumCover.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCover.xib; sourceTree = "<group>"; };
 		6BF29E3A12061BB6004233D9 /* AlbumCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCoverViewController.h; sourceTree = "<group>"; };
 		6BF29E3B12061BB6004233D9 /* AlbumCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCoverViewController.m; sourceTree = "<group>"; };
@@ -326,6 +345,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6B301BA512158CAA00D11017 /* NowPlaying */,
+				6B505FC71213BD5D00FA05B0 /* Lumberjack */,
 				6BF29EA31207F11F004233D9 /* Libraries */,
 				6BA8F20811D39C2600A621C6 /* Datasources */,
 				6B43AD9411A95C6C00DBD74E /* SynthesizeSingleton.h */,
@@ -352,13 +373,6 @@
 				6BEA5B9B11CD7EFE00E419EC /* SpeakersViewController.m */,
 				6BF29E3A12061BB6004233D9 /* AlbumCoverViewController.h */,
 				6BF29E3B12061BB6004233D9 /* AlbumCoverViewController.m */,
-				6BF29EA71207F252004233D9 /* NowPlayingDetailViewController.h */,
-				6BF29EA81207F252004233D9 /* NowPlayingDetailViewController.m */,
-				6BF2A0DC12085D67004233D9 /* NowPlayingListController.h */,
-				6BF2A0DD12085D67004233D9 /* NowPlayingListController.m */,
-				6BEE7387120AA95200B3B8D3 /* NowPlayingCustomCell.xib */,
-				6BEE7390120AB14700B3B8D3 /* NowPlayingCustomCellViewController.h */,
-				6BEE7391120AB14700B3B8D3 /* NowPlayingCustomCellViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -395,6 +409,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6B50623B1214C88B00FA05B0 /* defaultCoverBig.png */,
 				6BEE77F2120B9F7B00B3B8D3 /* detailbg3.png */,
 				6BEE77D2120B9C4C00B3B8D3 /* detailbg2.png */,
 				6BEE7717120B924300B3B8D3 /* detailBg.png */,
@@ -441,6 +456,33 @@
 				6B75F84811A40B1A00B9D841 /* CFNetwork.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B301BA512158CAA00D11017 /* NowPlaying */ = {
+			isa = PBXGroup;
+			children = (
+				6BF29EA71207F252004233D9 /* NowPlayingDetailViewController.h */,
+				6BF29EA81207F252004233D9 /* NowPlayingDetailViewController.m */,
+				6BF2A0DC12085D67004233D9 /* NowPlayingListController.h */,
+				6BF2A0DD12085D67004233D9 /* NowPlayingListController.m */,
+				6BEE7387120AA95200B3B8D3 /* NowPlayingCustomCell.xib */,
+				6BEE7390120AB14700B3B8D3 /* NowPlayingCustomCellViewController.h */,
+				6BEE7391120AB14700B3B8D3 /* NowPlayingCustomCellViewController.m */,
+			);
+			name = NowPlaying;
+			sourceTree = "<group>";
+		};
+		6B505FC71213BD5D00FA05B0 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				6B505FD21213BD8900FA05B0 /* DDConsoleLogger.h */,
+				6B505FD31213BD8900FA05B0 /* DDConsoleLogger.m */,
+				6B505FD41213BD8900FA05B0 /* DDFileLogger.h */,
+				6B505FD51213BD8900FA05B0 /* DDFileLogger.m */,
+				6B505FD61213BD8900FA05B0 /* DDLog.h */,
+				6B505FD71213BD8900FA05B0 /* DDLog.m */,
+			);
+			name = Lumberjack;
 			sourceTree = "<group>";
 		};
 		6B75F7ED11A408EE00B9D841 /* DAAP */ = {
@@ -615,6 +657,10 @@
 		6BF29EA61207F1F0004233D9 /* left menu */ = {
 			isa = PBXGroup;
 			children = (
+				6BF1F6401216073A005D7E84 /* audiobooks-inv.png */,
+				6BF1F6161215FCC0005D7E84 /* podcast-inv.png */,
+				6BF1F6001215F44E005D7E84 /* podcast.png */,
+				6BF1F60E1215F57B005D7E84 /* audiobooks.png */,
 				6B7AE70412047E8300F18900 /* playlist-inv.png */,
 				6B7AE6CD1204798A00F18900 /* playlist.png */,
 				6BEA5B0A11CD6E9600E419EC /* iTunes-inv.png */,
@@ -711,6 +757,11 @@
 				6BEE7718120B924300B3B8D3 /* detailBg.png in Resources */,
 				6BEE77D3120B9C4C00B3B8D3 /* detailbg2.png in Resources */,
 				6BEE77F3120B9F7B00B3B8D3 /* detailbg3.png in Resources */,
+				6B50623C1214C88B00FA05B0 /* defaultCoverBig.png in Resources */,
+				6BF1F6011215F44E005D7E84 /* podcast.png in Resources */,
+				6BF1F60F1215F57B005D7E84 /* audiobooks.png in Resources */,
+				6BF1F6171215FCC0005D7E84 /* podcast-inv.png in Resources */,
+				6BF1F6411216073A005D7E84 /* audiobooks-inv.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +836,9 @@
 				6BF29EA91207F252004233D9 /* NowPlayingDetailViewController.m in Sources */,
 				6BF2A0DE12085D67004233D9 /* NowPlayingListController.m in Sources */,
 				6BEE7392120AB14700B3B8D3 /* NowPlayingCustomCellViewController.m in Sources */,
+				6B505FD81213BD8900FA05B0 /* DDConsoleLogger.m in Sources */,
+				6B505FD91213BD8900FA05B0 /* DDFileLogger.m in Sources */,
+				6B505FDA1213BD8900FA05B0 /* DDLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +927,8 @@
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = CONFIGURATION_DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -888,6 +944,8 @@
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = CONFIGURATION_RELEASE;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

@@ -20,6 +20,7 @@
 @synthesize track;
 @synthesize album;
 @synthesize artist;
+@synthesize albumId;
 
 #pragma mark -
 #pragma mark Initialization
@@ -149,14 +150,17 @@
 
 - (void) _statusUpdate:(NSNotification *)notification{
 	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
-	BOOL trackChanged = (![track isEqualToString:cmst.cann] || ![artist isEqualToString:cmst.cana] || ![album isEqualToString:cmst.canl]);
-	
 	self.track = cmst.cann;
 	self.artist = cmst.cana;
 	self.album = cmst.canl;
-	if (trackChanged) {
-		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",[cmst.asai longLongValue]] delegate:self];
-	}	
+	
+		
+	if (cmst.asai && [self.albumId longLongValue] != [cmst.asai longLongValue]){
+		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:cmst.asai delegate:self];
+		self.albumId = cmst.asai;
+	}
+	[self.tableView reloadData];
+	
 }
 
 -(void)didFinishLoading:(DAAPResponse *)response{
@@ -217,6 +221,9 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	[server playSongIndex:indexPath.row inAlbum:server.currentAlbumId];
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -238,6 +245,7 @@
 
 - (void)dealloc {
 	[tracks release];
+	[albumId release];
     [super dealloc];
 }
 

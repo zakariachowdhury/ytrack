@@ -10,6 +10,13 @@
 #import "HexDumpUtility.h"
 #import "SessionManager.h"
 #import "DAAPResponseerror.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 
 @implementation DAAPRequestReply
@@ -19,7 +26,7 @@
 
 
 - (void) asyncRequestAndParse:(NSURL *)url withTimeout:(int)timeoutInterval{
-	NSLog(@"async requesting %@",url);
+	DDLogVerbose(@"DAAPRequestReply async requesting %@",url);
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
 	lastUrl = url;
@@ -29,18 +36,18 @@
 													   timeoutInterval:timeoutInterval];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	NSURLConnection *conn =[[NSURLConnection alloc]
-							initWithRequest:request delegate:self];
+							initWithRequest:request delegate:self startImmediately:YES];
     self.connection = conn;
 	[conn release];
 }
 
 - (void) asyncRequestAndParse:(NSURL *)url{
-	[self asyncRequestAndParse:url withTimeout:43200];
+	[self asyncRequestAndParse:url withTimeout:10];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
 	assert(theConnection == self.connection);
-	NSLog(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+	DDLogError(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 	[self.connection cancel];
 	self.connection = nil;
 	if (error.code == NSURLErrorCannotConnectToHost) {
@@ -62,7 +69,6 @@
 
 - (void)connection:(NSURLConnection *)theConnection
 	didReceiveData:(NSData *)incrementalData {
-	NSLog(@"%@",theConnection);
 	assert(theConnection == self.connection);
     if (self.data==nil) {
 		NSMutableData *temp = [[NSMutableData alloc] initWithCapacity:2048];
@@ -101,6 +107,7 @@
 }
 
 + (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url{
+	DDLogVerbose(@"---- CALLING SYNC !---");
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData

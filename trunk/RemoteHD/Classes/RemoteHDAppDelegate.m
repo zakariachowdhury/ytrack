@@ -11,6 +11,9 @@
 #import "RemoteHDViewController.h"
 #import "PreferencesManager.h"
 #import "SynthesizeSingleton.h"
+#import "DDLog.h"
+#import "DDConsoleLogger.h"
+#import "DDFileLogger.h"
 
 @implementation RemoteHDAppDelegate
 
@@ -19,7 +22,13 @@
 
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
+	[DDLog addLogger:[DDConsoleLogger sharedInstance]];
+	DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+	fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+	
+	[DDLog addLogger:fileLogger];
 	// Override point for customization after app launch  
 	UIDevice *device = [UIDevice currentDevice];
 	[device beginGeneratingDeviceOrientationNotifications];

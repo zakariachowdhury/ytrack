@@ -16,9 +16,7 @@
 @synthesize msma;
 
 - (void) parse{
-	NSLog(@"PARSING MDCL");
 	[self parse:self.data];
-	NSLog(@"END PARSING MDCL");
 }
 
 - (void)dealloc {

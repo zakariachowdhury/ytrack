@@ -143,10 +143,9 @@
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.agal.headerList.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	long long albumId = [[(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] persistentId] longLongValue];
-	NSLog(@"%qi");
+	NSNumber *albumId = [(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] persistentId];
 
-	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
+	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:albumId];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 	c.tracks = resp.listing.list;
 	c.albumName = [(DAAPResponsemlit *)[self.agal.listing.list objectAtIndex:i] name];

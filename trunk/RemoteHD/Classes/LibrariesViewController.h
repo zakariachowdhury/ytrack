@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PinCodeController.h"
+#import "DAAPRequestReply.h"
 
 @protocol LibraryDelegate
 
@@ -16,7 +17,7 @@
 @end
 
 
-@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate>{
+@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate, DAAPRequestDelegate>{
 	id<LibraryDelegate> delegate;
 	IBOutlet UITableView *table;
 	IBOutlet UIBarButtonItem *editButton;

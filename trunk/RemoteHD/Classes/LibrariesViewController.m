@@ -14,6 +14,14 @@
 #import "FDServer.h"
 #import "DAAPResponsemdcl.h"
 #import "RemoteSpeaker.h"
+#import "DAAPResponsecasp.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 #define kProgressIndicatorSize 20.0
 #define kLocalizedEdit     NSLocalizedString(@"Edit","Modifier")
@@ -98,6 +106,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.*/
 - (void)viewDidLoad {
     [super viewDidLoad];
+	DDLogVerbose(@"Library view did load");
 	_services = [[NSMutableArray alloc] init];
 	self.availableServices = [[NSMutableArray alloc] init];
 	editButton.possibleTitles = [NSSet setWithObjects:kLocalizedEdit, kLocalizedDone, nil];
@@ -105,10 +114,16 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+	DDLogVerbose(@"Library view did appear");
+	if (![[[SessionManager sharedSessionManager] currentServer] connected]) {
+		if (self.speakers != nil) {
+			self.speakers = nil;
+		}
+	}
 	if ([[[SessionManager sharedSessionManager] getServers] count] > 0) {
 		[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
 		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-		self.speakers = [server getSpeakers];
+		[server getSpeakers:self];
 	}
 }
 
@@ -231,8 +246,8 @@
 		[spList removeObjectIdenticalTo:num];
 	}
 	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
-	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];
-	[self.table reloadData];
+	[[[SessionManager sharedSessionManager] currentServer] getSpeakers:self];
+//	[self.table reloadData];
 }
 
 
@@ -450,7 +465,7 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
 	assert(service == self.currentResolve);
-	
+	DDLogVerbose(@"LibraryViewController did resolve address");
 	[service retain];
 	
 	NSString * host = [self.currentResolve hostName];
@@ -468,11 +483,12 @@
 	[self stopCurrentResolve];
 
 	if (![service.name isEqualToString:[[[SessionManager sharedSessionManager] currentServer] servicename]]) {
+		DDLogVerbose(@"LibraryViewController logout");
 		[[[SessionManager sharedSessionManager] currentServer] logout];
 		FDServer *server = [[FDServer alloc] initWithHost:host port:portStr pairingGUID:self.currentGUID serviceName:self.currentServiceName TXT:TXTDict];
 		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
 		if ([serv open]){
-			self.speakers = [serv getSpeakers];
+			[serv getSpeakers:self];
 		}
 		
 		[server release];
@@ -483,6 +499,21 @@
 	[self.table reloadData];
 }
 
+// get speaker list
+-(void)didFinishLoading:(DAAPResponse *)response{
+	//BOOL shouldAnimate = ((self.speakers == nil) && (self.speakers.count < 2));
+	DAAPResponsecasp *casp = (DAAPResponsecasp *)response;
+	
+	self.speakers = casp.speakers;
+	/*if (shouldAnimate){
+		[self.table beginUpdates];
+		[self.table insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationTop];
+		[self.table endUpdates];
+	} else {*/
+		[self.table reloadData];
+	//}
+
+}
 
 #pragma mark -
 #pragma mark Memory management

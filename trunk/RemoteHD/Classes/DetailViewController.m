@@ -14,6 +14,13 @@
 #import "DAAPResponseabro.h"
 #import "DAAPResponseavdb.h"
 #import "AlbumsOfArtistController.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation DetailViewController
 
@@ -117,8 +124,10 @@
 }
 
 - (void) changeToTrackView{
+	DDLogVerbose(@"Changing to track view");
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.tracksDatasource == nil) {
+		DDLogVerbose(@"creating track view datasource");
 		TracksDatasource *d = [[TracksDatasource alloc] init];
 		self.tracksDatasource = d;
 		self.tracksDatasource.navigationController = self.navigationController;
@@ -130,18 +139,18 @@
 		self.tableView.delegate = self.tracksDatasource;
 	} else {
 		if (tracksDatasource.needsRefresh) {
+			DDLogVerbose(@"track view datasource needs refresh");
 			[self.delegate startLoading];
 			[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self.tracksDatasource];
 			self.tableView.dataSource = self.tracksDatasource;
 			self.tableView.delegate = self.tracksDatasource;
 		} else {
+			DDLogVerbose(@"track view datasource does not need refresh");
 			self.tableView.dataSource = self.tracksDatasource;
 			self.tableView.delegate = self.tracksDatasource;
 			[self.tableView reloadData];
 			[self.delegate didFinishLoading];
 		}
-
-		
 	}
 }
 

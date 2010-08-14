@@ -54,7 +54,6 @@
 	} else if (device.orientation == UIDeviceOrientationLandscapeLeft || device.orientation == UIDeviceOrientationLandscapeRight){
 		[self _repositionToLandscape];
 	} else {
-		NSLog(@"%f,%f",self.bounds.size.width,self.bounds.size.height);
 		if (self.bounds.size.width > 768.0) {
 			[self _repositionToLandscape];
 		} else {

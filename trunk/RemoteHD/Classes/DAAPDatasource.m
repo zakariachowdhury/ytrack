@@ -8,7 +8,13 @@
 
 #import "DAAPDatasource.h"
 #import "DAAPResponsecmst.h"
+#import "DDLog.h"
 
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation DAAPDatasource
 @synthesize delegate;
@@ -21,7 +27,6 @@
 
 - (id) init{
 	if ((self = [super init])) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUpdate:) name:kNotificationStatusUpdate object:nil];
 		needsRefresh = YES;
     }
     return self;
@@ -34,8 +39,9 @@
 	self.currentTrack = cmst.cann;
 	self.currentArtist = cmst.cana;
 	self.currentAlbum = cmst.canl;
-	
+	DDLogVerbose(@"DAAPDatasource received update from server");
 	[self.delegate refreshTableView];
+	DDLogVerbose(@"DAAPDatasource doneRefreshing");
 }
 
 - (void) clearDatas{

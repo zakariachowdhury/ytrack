@@ -50,7 +50,7 @@
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
+		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId size:90 delegate:self];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
@@ -105,6 +105,8 @@
 	}
 	
 	cell.imageView.image = [self artworkForAlbum:track.miid];
+	NSLog(@"%d",cell.contentView.frame.size.height);
+	cell.imageView.frame = CGRectMake(0, 0, 90, 90);
 	if ([cellId objectForKey:track.miid] == nil) {
 		[cellId setObject:indexPath forKey:track.miid];
 	}
@@ -130,6 +132,10 @@
 	[self.navigationController pushViewController:c animated:YES];
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
 	[c release];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	return 90;
 }
 
 // Used to update nowPlaying in the table

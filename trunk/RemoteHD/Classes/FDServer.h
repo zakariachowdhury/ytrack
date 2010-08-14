@@ -61,7 +61,7 @@
 	NSString *currentTrack;
 	NSString *currentAlbum;
 	NSString *currentArtist;
-	long long currentAlbumId;
+	NSNumber *currentAlbumId;
 	DAAPRequestReply *daapReqRep;
 	
 	@private
@@ -86,7 +86,7 @@
 @property (nonatomic, copy) NSString *currentTrack;
 @property (nonatomic, copy) NSString *currentAlbum;
 @property (nonatomic, copy) NSString *currentArtist;
-@property (nonatomic) long long currentAlbumId;
+@property (nonatomic, retain) NSNumber *currentAlbumId;
 
 
 
@@ -98,12 +98,13 @@
 - (NSArray *) getPlayLists;
 - (void) getArtists:(id<DAAPRequestDelegate>)aDelegate;
 - (DAAPResponseagal *) getAlbumsForArtist:(NSString *)artist;
-- (DAAPResponseapso *) getTracksForAlbum:(NSString *)albumId;
-- (void) getTracksForAlbum:(NSString *)albumId delegate:(id<DAAPRequestDelegate>)aDelegate;
+- (DAAPResponseapso *) getTracksForAlbum:(NSNumber *)albumId;
+- (void) getTracksForAlbum:(NSNumber *)albumId delegate:(id<DAAPRequestDelegate>)aDelegate;
 - (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (void) getAllTracksForPlaylist:(int)playlistId delegate:(id<DAAPRequestDelegate>)aDelegate;
 - (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
+- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId size:(int)aSize delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
 - (void) getAllAlbums:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
@@ -123,6 +124,7 @@
 - (void) setVolume:(long) volume;
 - (void) changePlayingTime:(int)position;
 - (NSArray *) getSpeakers;
+- (void) getSpeakers:(id<DAAPRequestDelegate>)aDelegate;
 - (void) setSpeakers:(NSArray *)speakers;
 - (NSDictionary *) getAsDictionary;
 

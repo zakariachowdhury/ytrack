@@ -14,11 +14,13 @@
 	NSString *track;
 	NSString *album;
 	NSString *artist;
+	NSNumber *albumId;
 }
 
 @property (nonatomic, retain) NSArray *tracks;
 @property (nonatomic, copy) NSString *track;
 @property (nonatomic, copy) NSString *album;
 @property (nonatomic, copy) NSString *artist;
+@property (nonatomic, retain) NSNumber *albumId;
 
 @end
