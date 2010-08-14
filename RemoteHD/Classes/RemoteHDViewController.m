@@ -18,6 +18,8 @@
 #import "DAAPResponsecmgt.h"
 #import "AlbumCoverViewController.h"
 #import "RemoteHDAppDelegate.h"
+#import "DDLog.h"
+
 
 @interface RemoteHDViewController(PrivateMethods)
 
@@ -115,13 +117,15 @@
 #pragma mark Actions
 
 - (IBAction) buttonClicked:(id)sender{
+	DDLogVerbose(@"RemoteHDViewController settings button clicked");
 	if (librariesViewController == nil) {
+		DDLogVerbose(@"RemoteHDViewController creating libraries view controller");
 		librariesViewController = [[LibrariesViewController alloc ] initWithNibName:@"LibrariesViewController" bundle:nil];
 		librariesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
 		[librariesViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 		[librariesViewController setDelegate:self];
 	}
-	
+	DDLogVerbose(@"RemoteHDViewController presenting modal view");
 	[self presentModalViewController:librariesViewController animated:YES]; 
 }
 
@@ -166,6 +170,7 @@
 }
 
 - (IBAction) buttonSelected:(id)sender{
+	DDLogVerbose(@"restoring segmented control position");
 	switch (segmentedControl.selectedSegmentIndex) {
 		case 0:
 			[[PreferencesManager sharedPreferencesManager] saveViewState:kPrefLastSelectedSegControlTrack withKey:kPrefLastSelectedSegControl];
@@ -245,6 +250,8 @@
 #pragma mark LibraryDelegate methods
 
 - (void) didFinishEditingLibraries {
+	
+	DDLogVerbose(@"Did finish editing libraries");
 	[self dismissModalViewControllerAnimated:YES];
 	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
 		[self startLoading];
@@ -292,6 +299,7 @@
 #pragma mark private methods
 
 - (void) _updateVolume{
+	DDLogVerbose(@"updating volume");
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	//long v = [server getVolume];
 	[server getVolume:self action:@selector(readVolume:)];
@@ -360,7 +368,6 @@
 	track.text = cmst.cann;
 	artist.text = cmst.cana;
 	album.text = cmst.canl;
-	NSLog(@"%d",[cmst.caps shortValue]);
 	if ([cmst.caps shortValue] == 4) {
 		playing = YES;
 		play.alpha = 0.0;
@@ -415,6 +422,7 @@
 }
 
 - (void) _libraryAvailable {
+	DDLogVerbose(@"Library available");
 	nolibView.alpha = 0.0;
 	progress.enabled = YES;
 	volumeSlider.enabled = YES;
@@ -434,6 +442,7 @@
 	[self buttonSelected:nil];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
+	DDLogVerbose(@"requesting now playing artwork");
 	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 	[self _updateVolume];
 }

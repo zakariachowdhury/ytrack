@@ -22,6 +22,7 @@
 	IBOutlet UILabel *track;
 	IBOutlet UILabel *album;
 	IBOutlet UILabel *artist;
+	NSNumber *albumId;
 	IBOutlet UIImageView *topSeparator;
 	IBOutlet UIImageView *bottomBackground;
 	IBOutlet UIImageView *topBackground;
@@ -44,6 +45,7 @@
 @property (nonatomic, retain) UILabel *track;
 @property (nonatomic, retain) UILabel *album;
 @property (nonatomic, retain) UILabel *artist;
+@property (nonatomic, retain) NSNumber *albumId;
 @property (nonatomic, retain) AsyncImageView *coverArt;
 @property (nonatomic) BOOL playing;
 @property (nonatomic, assign) id<NowPlayingDelegate>delegate;

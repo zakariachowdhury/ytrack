@@ -8,6 +8,7 @@
 
 #import "SpeakersViewController.h"
 #import "RemoteSpeaker.h"
+#import "DAAPResponsecasp.h"
 
 @implementation SpeakersViewController
 @synthesize speakers;
@@ -36,7 +37,7 @@
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	self.speakers = [server getSpeakers];
+	[server getSpeakers:self];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -47,7 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	self.speakers = [server getSpeakers];
+	[server getSpeakers:self];
 }
 
 /*
@@ -133,8 +134,8 @@
 		[spList removeObjectIdenticalTo:num];
 	}
 	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
-	self.speakers = [[[SessionManager sharedSessionManager] currentServer] getSpeakers];
-	[self.tableView reloadData];
+	[[[SessionManager sharedSessionManager] currentServer] getSpeakers:self];
+	//[self.tableView reloadData];
 }
 
 
@@ -193,6 +194,22 @@
 	 */
 }
 
+
+// get speaker list
+-(void)didFinishLoading:(DAAPResponse *)response{
+	//BOOL shouldAnimate = ((self.speakers == nil) && (self.speakers.count < 2));
+	DAAPResponsecasp *casp = (DAAPResponsecasp *)response;
+	
+	self.speakers = casp.speakers;
+	/*if (shouldAnimate){
+	 [self.tableView beginUpdates];
+	 [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationTop];
+	 [self.tableView endUpdates];
+	 } else {*/
+	[self.tableView reloadData];
+	//}
+	
+}
 
 #pragma mark -
 #pragma mark Memory management

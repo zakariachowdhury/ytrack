@@ -19,7 +19,9 @@
 	UILabel *loadingImageLabel;
 	UIActivityIndicatorView *activityIndicator;
 	BOOL displayShadow;
-
+	BOOL isDefaultCoverBig;
+	UIImage *smallCover;
+	UIImage *bigCover;
 	id <AsyncImageViewDelegate> delegate;
 }
 
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) NSMutableData *data;
 @property (nonatomic, retain) NSURLConnection *connection;
+@property (assign) BOOL isDefaultCoverBig;
 @property (assign) BOOL displayShadow;
 
 - (void)loadImageFromURL:(NSURL*)url;

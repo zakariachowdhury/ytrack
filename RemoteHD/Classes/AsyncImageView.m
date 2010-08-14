@@ -26,6 +26,24 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 @synthesize data;
 @synthesize connection;
 @synthesize displayShadow;
+@synthesize isDefaultCoverBig;
+
+- (id) init {
+	if ((self = [super init])) {
+        self.isDefaultCoverBig = NO;
+		smallCover = [UIImage imageNamed:@"defaultCover.png"];
+		bigCover = [UIImage imageNamed:@"defaultCoverBig.png"];
+    }
+    return self;
+}
+
+- (void) awakeFromNib{
+	self.isDefaultCoverBig = NO;
+	smallCover = [UIImage imageNamed:@"defaultCover.png"];
+	bigCover = [UIImage imageNamed:@"defaultCoverBig.png"];
+	
+	
+}
 
 - (void)loadImageFromURL:(NSURL*)url  {
 	//self.backgroundColor = [UIColor whiteColor];
@@ -112,21 +130,29 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 		}
 		
 	}
-	UIImage * image;
-	if (self.data.length > 0) {
-		image = [[UIImage alloc] initWithData:self.data];
-	} else {
-		image = [UIImage imageNamed:@"defaultCover.png"];
-	}
-
-
+	 
 	UIImageView *imageView;
-	if (displayShadow) {
-		imageView = [self _newImageWithShadowFromImage:image];
+	if (self.data.length > 0) {
+		UIImage *image = [[UIImage alloc] initWithData:self.data];
+		if (displayShadow) {
+			imageView = [self _newImageWithShadowFromImage:image];
+		} else {
+			imageView = [[UIImageView alloc] initWithImage:image];
+		}
+		[image release];
 	} else {
-		imageView = [[UIImageView alloc] initWithImage:image];
+		UIImage *image;
+		if (self.isDefaultCoverBig) {
+			image = bigCover;
+		} else {
+			image = smallCover;
+		}
+		if (displayShadow) {
+			imageView = [self _newImageWithShadowFromImage:image];
+		} else {
+			imageView = [[UIImageView alloc] initWithImage:image];
+		}
 	}
-	[image release];
 	
 	imageView.alpha = 0.0;
 	

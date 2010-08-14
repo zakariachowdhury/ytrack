@@ -10,7 +10,7 @@
 #import "FDServer.h"
 #import "SessionManager.h"
 
-@interface SpeakersViewController : UITableViewController {
+@interface SpeakersViewController : UITableViewController <DAAPRequestDelegate>{
 	@private
 	NSArray *speakers;
 }

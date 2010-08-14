@@ -13,11 +13,26 @@
 #import "DAAPResponsemlog.h"
 #import "DAAPResponseabro.h"
 #import "DAAPResponseavdb.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
+
 
 @implementation TracksDatasource
 
 @synthesize navigationController;
 
+
+- (id) init{
+	if ((self = [super init])) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUpdate:) name:kNotificationStatusUpdate object:nil];
+    }
+    return self;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return [self.indexList count];
@@ -110,11 +125,13 @@
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{
+	DDLogVerbose(@"TracksDatasource didFinishloading");
 	[super didFinishLoading:response];
 	self.list = [[(DAAPResponseapso *)response listing] list];
 	self.indexList = [[(DAAPResponseapso *)response headerList] indexList];
-	
+	DDLogVerbose(@"TracksDatasource will refresh table view");
 	[self.delegate refreshTableView];
+	DDLogVerbose(@"TracksDatasource will invoke didFinishLoading");
 	[self.delegate didFinishLoading];
 }
 

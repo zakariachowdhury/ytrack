@@ -28,6 +28,7 @@
 @synthesize coverArt;
 @synthesize playing;
 @synthesize delegate;
+@synthesize albumId;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -62,9 +63,10 @@
 	self.track.text = [server currentTrack];
 	self.album.text = [server currentAlbum];
 	self.artist.text = [server currentArtist];
-	[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",server.currentAlbumId] delegate:listController];
+	[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:server.currentAlbumId delegate:listController];
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtworkBig,server.host,server.port,server.sessionId];
 	
+	coverArt.isDefaultCoverBig = YES;
 	[coverArt loadImageFromURL:[NSURL URLWithString:string]];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
 //	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneButtonPressed:) name:kNotificationConnectionLost object:nil];
@@ -173,12 +175,17 @@
 
 - (void) _statusUpdate:(NSNotification *)notification{
 	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
-	BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+	BOOL trackChanged = NO;
+	if (cmst.asai && [self.albumId longLongValue] != [cmst.asai longLongValue]){
+		trackChanged = YES;
+		self.albumId = cmst.asai;
+	}
+	//BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
 	
 	track.text = cmst.cann;
 	artist.text = cmst.cana;
 	album.text = cmst.canl;
-	NSLog(@"%d",[cmst.caps shortValue]);
+
 	if ([cmst.caps shortValue] == 4) {
 		playing = YES;
 		playButton.alpha = 0.0;
@@ -189,7 +196,7 @@
 		pauseButton.alpha = 0.0;
 	} 
 	if (trackChanged) {
-		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",[cmst.asai longLongValue]] delegate:listController];
+		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:cmst.asai delegate:listController];
 		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtworkBig,server.host,server.port,server.sessionId];
 		[coverArt loadImageFromURL:[NSURL URLWithString:string]];
@@ -266,6 +273,7 @@
 	[album release];
 	[artist release];
 	[coverArt release];
+	[albumId release];
     [super dealloc];
 }
 

@@ -92,8 +92,8 @@
 		[c release];
 		
 	} else if ([resp.listing.list count] == 1) {
-		long long albumId = [[(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] persistentId] longLongValue];
-		DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:[NSString stringWithFormat:@"%qi",albumId]];
+		NSNumber *albumId = [(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] persistentId];
+		DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:albumId];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 		c.tracks = resp.listing.list;
 		c.shouldPlayAllTracks = NO;

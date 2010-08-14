@@ -53,7 +53,11 @@
 
 - (void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
+	
 	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+}
+
+- (void)awakeFromNib{
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -78,7 +82,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) return 3;
-	else return [[[[SessionManager sharedSessionManager] currentServer] getPlayLists] count];
+	else return [self.results count];
     //return [self.results count];
 	//return 1;
 }
@@ -96,49 +100,27 @@
     
     // Configure the cell...
 	//cell.textLabel.text = [(DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row] minm];
+	cell.textLabel.shadowColor = [UIColor grayColor];
+	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+	
 	if (indexPath.section == 0){
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"music", @"Musique");
-			
-			if (cell.selected){
-			cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-			cell.textLabel.shadowColor = [UIColor grayColor];
-			cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			} else {
-			 cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
-			 cell.textLabel.shadowColor = [UIColor whiteColor];
-			 cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			 }
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"iTunes-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = @"Books";
-			
-			if (cell.selected){
-				cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-				cell.textLabel.shadowColor = [UIColor grayColor];
-				cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			} else {
-				cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
-				cell.textLabel.shadowColor = [UIColor whiteColor];
-				cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			}
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"audiobooks-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"audiobooks.png"];
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Podcasts";
-			
-			if (cell.selected){
-				cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-				cell.textLabel.shadowColor = [UIColor grayColor];
-				cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			} else {
-				cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
-				cell.textLabel.shadowColor = [UIColor whiteColor];
-				cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-			}
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"podcast-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"podcast.png"];
 		}
 	} else {
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-		NSArray *pls = [server getPlayLists];
-		DAAPResponsemlit *mlit = (DAAPResponsemlit *)[pls objectAtIndex:indexPath.row];
+		DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
 		cell.textLabel.text = mlit.name;
+		cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
 		cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
 	}
 
@@ -151,25 +133,6 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-	if (indexPath.section ==0)
-		cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-	else {
-		cell.imageView.image = [UIImage imageNamed:@"playlist-inv.png"];
-	}
-	//cell.imageView.image = [UIImage imageNamed:@"iTunes-inv.png"];
-	
-	UITableViewCell *previousCell = [self.tableView cellForRowAtIndexPath:previouslySelected];
-	if (previouslySelected.section ==0)
-		previousCell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
-	else {
-		previousCell.imageView.image = [UIImage imageNamed:@"playlist.png"];
-	}
-
-	
-	cell.textLabel.shadowColor = [UIColor grayColor];
-	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-	previouslySelected = indexPath;
 	/*
 	if (indexPath.row == 0) {
 		[detailViewController changeToTrackView];
@@ -187,14 +150,14 @@
 			
 		}
 	} else if (indexPath.section == 1){
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-		DAAPResponsemlit *playlist = [[server getPlayLists] objectAtIndex:indexPath.row];
+		DAAPResponsemlit *playlist = [self.results objectAtIndex:indexPath.row];
 		[detailViewController changeToPlaylistView:[playlist.miid longValue] persistentId:[playlist.persistentId longLongValue]];
 		[self.delegate didSelectPlaylist];
 	}
 }
 
 - (void) didChangeLibrary{
+	self.results = [[[SessionManager sharedSessionManager] currentServer] getPlayLists];
 	[self.tableView reloadData];
 }
 
@@ -215,6 +178,7 @@
 
 
 - (void)dealloc {
+	[results release];
     [super dealloc];
 }
 
