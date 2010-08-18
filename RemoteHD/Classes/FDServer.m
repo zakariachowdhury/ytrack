@@ -23,6 +23,7 @@
 #import "SessionManager.h"
 #import "DDLog.h"
 
+
 #ifdef CONFIGURATION_DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
@@ -31,7 +32,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 @interface FDServer() 
+- (BOOL) _login;
 - (NSString *) _encodeString:(NSString *)string;
+- (void) _renewConnection:(NSTimer *)timer;
 
 @end
 
@@ -55,6 +58,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize daapReqRep;
 @synthesize booksPersistentId;
 @synthesize podcastsPersistentId;
+@synthesize r;
 
 
 - (id) init {
@@ -66,43 +70,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (BOOL) open{
 	DDLogInfo(@"FDServer-open, pairingGUID:%@",pairingGUID);
-	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
-	DDLogVerbose(@"Login url : %@",loginURL);
-	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
-	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
-		DAAPResponseerror *err = (DAAPResponseerror *)resp;
-		if (err.error != nil) {
-			DDLogError(@"Error : %@, %d",[err.error localizedDescription], err.error.code);
-			return NO;
-		}
-		// in case of error, reply is not formatted as other messages, reply is only 3 bytes long
-		// here I assume there is only one kind of error namely the rejected remote case
-		if (resp.data.length == 3) {
-			DDLogVerbose(@"Remote rejected");
-			NSString *rejectedAlertTitle = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertTitle" 
-												   value:@"Telecommande rejetée" 
-												   table:@"Localizable"];
-			NSString *rejectedAlertContent = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertContent" 
-																				  value:@"Votre télécommande n'est plus acceptée par le serveur" 
-																				  table:@"Localizable"];
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:rejectedAlertTitle message:rejectedAlertContent delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-			[alert show];
-			[alert release];
-			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
-			return NO;
-		}
-	} else {
-		sessionId = [[(DAAPResponsemlog *)resp mlid] longValue];
-	}
-	
-	// in case we've got no sessionId, something went wrongly
-	if (sessionId == 0) {
-		DDLogError(@"SessionId is 0");
-		return NO;
-	}
-	
-	// we've got a sessionId, we're connected !
-	self.connected = YES;
+	if (![self _login]) return NO;
 	
 	// we have to know the databaseId for further requests
 	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
@@ -126,11 +94,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
 
 	for (DAAPResponsemlit *pl in response.listing.list) {
-		if ([pl.aePS longValue] == 0 && [pl.aeSP longValue] == 0 && [pl.mimc longValue] > 0) {
-			DDLogVerbose(@"Playlist : name=%@,miid=%d,mper=%qX,aePS=%d,aeSP=%d,mimc=%i",pl.name, [pl.miid longValue],[pl.mper longLongValue],[pl.aePS longValue], [pl.aeSP longValue],[pl.mimc longValue]);
+		DDLogVerbose(@"Playlist : name=%@,miid=%d,mper=%qX,aePS=%hi,aeSP=%hi,mimc=%i",pl.name, [pl.miid longValue],[pl.mper longLongValue],[pl.aePS shortValue], [pl.aeSP shortValue],[pl.mimc longValue]);
+		if ([pl.aePS shortValue] == 0 && [pl.aeSP shortValue] == 0 && [pl.mimc longValue] > 0) {			
 			[userPlaylists addObject:pl];
 		}
-		if ([pl.aePS shortValue] == kServerMusicLibraryAEPS){
+		if ([pl.abpl shortValue] == 1){
 			self.musicLibraryId = [pl.miid intValue];
 			databasePersistentId = [pl.persistentId longLongValue];
 		} else if ([pl.aePS shortValue] == kServerPodcastsLibraryAEPS){
@@ -141,13 +109,76 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			self.booksLibraryId = [pl.miid intValue];
 		}
 	}
+	
 	[userPlaylists removeObjectAtIndex:0];
+	
+	[self getServerInfo];
 	
 	// initiate server monitoring to receive action events
 	[self monitorPlayStatus];
 	
 	// tell the world we're connected
 	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnected object:nil]; 
+	
+	self.r = [Reachability reachabilityWithHostName:self.host];
+	[r startNotifier];
+	DDLogVerbose(@"----------------------------------");
+	DDLogVerbose(@"isConnectionRequired : %@",[r isConnectionRequired]?@"YES":@"NO");
+	switch ([r currentReachabilityStatus]) {
+		case kNotReachable:
+			DDLogVerbose(@"not reachable");
+			break;
+		case kReachableViaWiFi:
+			DDLogVerbose(@"reachable via WiFi");
+			break;
+		case kReachableViaWWAN:
+			DDLogVerbose(@"reachable via WWAN");
+			break;
+			
+		default:
+			break;
+	}
+	return YES;
+}
+
+- (BOOL) _login{
+	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
+	DDLogVerbose(@"Login url : %@",loginURL);
+	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
+	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
+		DAAPResponseerror *err = (DAAPResponseerror *)resp;
+		if (err.error != nil) {
+			DDLogError(@"Error : %@, %d",[err.error localizedDescription], err.error.code);
+			return NO;
+		}
+		// in case of error, reply is not formatted as other messages, reply is only 3 bytes long
+		// here I assume there is only one kind of error namely the rejected remote case
+		if (resp.data.length == 3) {
+			DDLogVerbose(@"Remote rejected");
+			NSString *rejectedAlertTitle = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertTitle" 
+																				  value:@"Telecommande rejetée" 
+																				  table:@"Localizable"];
+			NSString *rejectedAlertContent = [[NSBundle mainBundle] localizedStringForKey:@"rejectedAlertContent" 
+																					value:@"Votre télécommande n'est plus acceptée par le serveur" 
+																					table:@"Localizable"];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:rejectedAlertTitle message:rejectedAlertContent delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
+			return NO;
+		}
+	} else {
+		sessionId = [[(DAAPResponsemlog *)resp mlid] longValue];
+	}
+	
+	// in case we've got no sessionId, something went wrongly
+	if (sessionId == 0) {
+		DDLogError(@"SessionId is 0");
+		return NO;
+	}
+	
+	// we've got a sessionId, we're connected !
+	self.connected = YES;
 	return YES;
 }
 
@@ -174,6 +205,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.port = thePort;
 		self.TXT = theTXT;
 		musr = 1;
+		revNum = 1;
 	}
 	return self;
 }
@@ -187,6 +219,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.port = [dict objectForKey:kLibraryPortKey];
 		self.TXT = [dict objectForKey:kLibraryTXTKey];
 		musr = 1;
+		revNum = 1;
 	}
 	return self;
 }
@@ -335,14 +368,24 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void) monitorPlayStatus{
 	DDLogInfo(@"FDServer-monitorPlayStatus");
+	
 	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,1,sessionId];
+	if (revNum > 1) {
+		requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,revNum,sessionId];
+	}
 
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:43200];
+	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:20];
 	self.daapReqRep = daapReq;
 	[daapReq release];
+	//[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(_renewConnection:) userInfo:nil repeats:NO];
+}
+
+- (void) _renewConnection:(NSTimer *)timer{
+	[self.daapReqRep cancelConnection];
+	[self monitorPlayStatus];
 }
 
 - (void) connectionTimedOut{
@@ -363,29 +406,30 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DDLogInfo(@"**************FDServer-didFinishLoading");
 	if (response == nil){
 		DDLogError(@"---PLAYSTATUSUPDATE RESPONSE IS NIL");
-		[self logout];
-		[self open];
-		return;
+		[self _login];
+	}else {
+		DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
+		[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
+		self.currentTrack = cmst.cann;
+		self.currentAlbum = cmst.canl;
+		self.currentArtist = cmst.cana;
+		self.currentAlbumId = cmst.asai;
+		
+		DDLogVerbose(@"received infos : %@, %@, %@",self.currentTrack, self.currentAlbum, self.currentArtist);
+		if ([[cmst cmsr] longValue] > 1) {
+			revNum = [[cmst cmsr] longValue];
+		}
+		//revNum = [[cmst cmsr] longValue];
 	}
-	DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
-	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
-	self.currentTrack = cmst.cann;
-	self.currentAlbum = cmst.canl;
-	self.currentArtist = cmst.cana;
-	self.currentAlbumId = cmst.asai;
-	
-	DDLogVerbose(@"received infos : %@, %@, %@",self.currentTrack, self.currentAlbum, self.currentArtist);
-	
-	revNum = [[cmst cmsr] longValue];
-	/*if (revNum < 1) {
+	if (revNum < 1) {
 		revNum = 1;
-	}*/
+	}
 	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,revNum,sessionId];
 	DDLogVerbose(@"FDServer %@",requestUrl);
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:43200];
+	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:20];
 	self.daapReqRep = daapReq;
 	[daapReq release];
 	DDLogVerbose(@"FDServer leaving didFinishLoading");
@@ -555,13 +599,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	musr = [mupd.musr intValue];
 }
 
-+ (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port{
-	DDLogInfo(@"FDServer-getServerInfoForHost");
-	//NSString* str = [NSString stringWithFormat:kRequestServerInfo,host,port];
-	//DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
-	//[msrv release];
-	//NSString* str = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
-	//DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply requestAndParseResponse:[NSURL URLWithString:str]];
+- (void) getServerInfo{
+	DDLogInfo(@"FDServer-getServerInfo");
+	NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
+	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
+	NSString* str2 = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
+	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];
 }
 
 - (NSString *) _encodeString:(NSString *)string{
