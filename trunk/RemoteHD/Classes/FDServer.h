@@ -13,6 +13,7 @@
 #import "DAAPResponsecmst.h"
 #import "DAAPResponseagal.h"
 #import "AsyncImageLoader.h"
+#import "Reachability.h"
 
 #define kLibraryServicenameKey @"servicename"
 #define kLibraryPairingGUIDKey @"pairingGUID"
@@ -66,6 +67,7 @@
 	
 	@private
 	NSMutableArray *userPlaylists;
+	Reachability *r;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -81,6 +83,7 @@
 @property (nonatomic, readonly) long long booksPersistentId;
 @property (nonatomic, readonly) long long podcastsPersistentId;
 @property (nonatomic, retain) DAAPRequestReply *daapReqRep;
+@property (nonatomic, retain) Reachability *r;
 
 @property (nonatomic) BOOL connected;
 @property (nonatomic, copy) NSString *currentTrack;
@@ -129,7 +132,7 @@
 - (NSDictionary *) getAsDictionary;
 
 
-+ (void) getServerInfoForHost:(NSString *)host atPort:(NSString *)port;
+- (void) getServerInfo;
 - (void) connectionTimedOut;
 
 
