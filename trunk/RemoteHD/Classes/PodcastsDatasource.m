@@ -104,6 +104,7 @@
 		cell.backgroundView.backgroundColor = [UIColor whiteColor];
 	}
 	
+	//TODO add now playing indicator
 	cell.imageView.image = [self artworkForAlbum:track.miid];
 	NSLog(@"%d",cell.contentView.frame.size.height);
 	cell.imageView.frame = CGRectMake(0, 0, 90, 90);
@@ -140,10 +141,10 @@
 
 // Used to update nowPlaying in the table
 - (void) statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+	/*DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	self.currentTrack = cmst.cann;
 	self.currentArtist = cmst.cana;
-	self.currentAlbum = cmst.canl;
+	self.currentAlbum = cmst.canl;*/
 	
 	[self.delegate refreshTableView];
 }

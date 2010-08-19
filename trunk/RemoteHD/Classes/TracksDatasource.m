@@ -96,8 +96,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     int totalSeconds = timeSec % 60;
 	
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	
-	if ([cell.trackName.text isEqualToString:self.currentTrack] && [cell.artistName.text isEqualToString:self.currentArtist] && [cell.albumName.text isEqualToString:self.currentAlbum]) {
+	if ([cell.trackName.text isEqualToString:server.currentTrack] && [cell.artistName.text isEqualToString:server.currentArtist] && [cell.albumName.text isEqualToString:server.currentAlbum]) {
 		cell.nowPlaying = YES;
 	} else {
 		cell.nowPlaying = NO;
