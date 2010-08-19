@@ -16,9 +16,6 @@
 @synthesize tracks;
 @synthesize shouldPlayAllTracks;
 @synthesize albumName;
-@synthesize currentTrack;
-@synthesize currentAlbum;
-@synthesize currentArtist;
 
 #pragma mark -
 #pragma mark Initialization
@@ -92,11 +89,12 @@
 
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
 	cell.trackNumber.text = [NSString stringWithFormat:@"%d.",indexPath.row+1];
-	if ([cell.trackName.text isEqualToString:self.currentTrack] && [mlit.artistName isEqualToString:self.currentArtist]){
+	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	if ([cell.trackName.text isEqualToString:server.currentTrack] && [mlit.artistName isEqualToString:server.currentArtist]){
 		if (self.shouldPlayAllTracks) {
 			cell.nowPlaying = YES;
 		} else {
-			if ([self.title isEqualToString:self.currentAlbum]) {
+			if ([self.title isEqualToString:server.currentAlbum]) {
 				cell.nowPlaying = YES;
 			} else {
 				cell.nowPlaying = NO;
@@ -133,11 +131,6 @@
 
 // Used to update nowPlaying in the table
 - (void) statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
-	self.currentTrack = cmst.cann;
-	self.currentArtist = cmst.cana;
-	self.currentAlbum = cmst.canl;
-	
 	[self.tableView reloadData];
 }
 
@@ -160,9 +153,6 @@
 - (void)dealloc {
 	[self.tracks release];
 	[self.albumName release];
-	[self.currentTrack release];
-	[self.currentAlbum release];
-	[self.currentArtist release];
     [super dealloc];
 }
 
