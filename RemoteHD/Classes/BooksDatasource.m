@@ -118,6 +118,8 @@
 	} else {
 		cell.nowPlaying = NO;
 	}*/
+	
+	//TODO add now playing indicator
 	cell.textLabel.text = track.name;
 	int res = indexPath.row % 2;
 	if (res != 0){
@@ -150,10 +152,10 @@
 
 // Used to update nowPlaying in the table
 - (void) statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+	/*DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	self.currentTrack = cmst.cann;
 	self.currentArtist = cmst.cana;
-	self.currentAlbum = cmst.canl;
+	self.currentAlbum = cmst.canl;*/
 	
 	[self.delegate refreshTableView];
 }

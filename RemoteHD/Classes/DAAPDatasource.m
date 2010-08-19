@@ -20,9 +20,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize delegate;
 @synthesize list;
 @synthesize indexList;
-@synthesize currentTrack;
+/*@synthesize currentTrack;
 @synthesize currentAlbum;
-@synthesize currentArtist;
+@synthesize currentArtist;*/
 @synthesize needsRefresh;
 
 - (id) init{
@@ -35,10 +35,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 // Used to update nowPlaying in the table
 - (void) statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
+/*	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	self.currentTrack = cmst.cann;
 	self.currentArtist = cmst.cana;
-	self.currentAlbum = cmst.canl;
+	self.currentAlbum = cmst.canl;*/
 	DDLogVerbose(@"DAAPDatasource received update from server");
 	[self.delegate refreshTableView];
 	DDLogVerbose(@"DAAPDatasource doneRefreshing");
@@ -57,9 +57,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void) dealloc{
 	[self.list release];
 	[self.indexList release];
-	[currentTrack release];
+/*	[currentTrack release];
 	[currentAlbum release];
-	[currentArtist release];
+	[currentArtist release];*/
 	[super dealloc];
 }
 
