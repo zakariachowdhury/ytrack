@@ -311,14 +311,21 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	return response;
 }
 
-- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate{
+- (AsyncImageLoader *) getArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum{
 	DDLogInfo(@"FDServer-getArtworkForAlbum");
-	return [self getAlbumArtwork:albumId size:55 delegate:aDelegate];
+	return [self getArtwork:albumId size:55 delegate:aDelegate forAlbum:forAlbum];
 }
 
-- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId size:(int)aSize delegate:(id<AsyncImageLoaderDelegate>)aDelegate{
+- (AsyncImageLoader *) getArtwork:(NSNumber *)albumId size:(int)aSize delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum{
 	DDLogInfo(@"FDServer-getArtworkForAlbum with size");
-	NSString *requestUrl = [NSString stringWithFormat:kRequestAlbumArtwork,self.host,self.port,databaseId,[albumId intValue], sessionId, aSize, aSize];
+	NSString *requestUrl;
+	if (forAlbum) {
+		requestUrl = [NSString stringWithFormat:kRequestAlbumArtwork,self.host,self.port,databaseId,[albumId intValue], sessionId, aSize, aSize];
+	} else {
+		requestUrl = [NSString stringWithFormat:kRequestTrackArtwork,self.host,self.port,databaseId,[albumId intValue], sessionId, aSize, aSize];
+	}
+
+		
 	DDLogVerbose(@"%@",requestUrl);
 	AsyncImageLoader *loader = [[[AsyncImageLoader alloc] init] autorelease];
 	loader.delegate = aDelegate;

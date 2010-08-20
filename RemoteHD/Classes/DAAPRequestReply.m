@@ -64,7 +64,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		NSLog(@"###########");
 		if([delegate respondsToSelector:@selector(cantConnect)])
 			[delegate cantConnect];
-	}
+	} 
 }
 
 - (void)connection:(NSURLConnection *)theConnection
@@ -78,9 +78,31 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [self.data appendData:incrementalData];
 }
 
+- (void)connection:(NSURLConnection *)conn didReceiveResponse:(NSURLResponse *)response
+// A delegate method called by the NSURLConnection when the request/response 
+// exchange is complete.  We look at the response to check that the HTTP 
+// status code is 2xx and that the Content-Type is acceptable.  If these checks 
+// fail, we give up on the transfer.
+{
+#pragma unused(conn)
+    
+    NSHTTPURLResponse * httpResponse;
+	
+    assert(conn == self.connection);
+	
+   
+    httpResponse = (NSHTTPURLResponse *) response;
+    assert( [httpResponse isKindOfClass:[NSHTTPURLResponse class]] );
+    
+    if ((httpResponse.statusCode / 100) != 2) {
+        DDLogError(@"HTTP error %zd", (ssize_t) httpResponse.statusCode);
+    } 
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	assert(theConnection == self.connection);
-	//[HexDumpUtility printHexDumpToConsole:data];
+	
+	[HexDumpUtility printHexDumpToConsole:data];
 	
 	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
@@ -141,7 +163,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:error];
 
-	//[HexDumpUtility printHexDumpToConsole:dat];
+	[HexDumpUtility printHexDumpToConsole:dat];
 
 	NSString *command = [self parseCommandName:dat atPosition:0];
 	if (command == nil) {

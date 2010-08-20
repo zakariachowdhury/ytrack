@@ -42,6 +42,7 @@
 #define kRequestAllAlbums @"http://%@:%@/databases/%d/groups?session-id=%d&meta=dmap.itemname,dmap.itemid,dmap.persistentid,daap.songartist&type=music&group-type=albums&sort=album&include-sort-headers=1&query=(('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songalbum!:')"
 #define kRequestAllTracksForArtist @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid,daap.songtime&type=music&sort=album&query=(('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songartist:%@')"
 #define kRequestAlbumArtwork @"http://%@:%@/databases/%d/groups/%d/extra_data/artwork?session-id=%d&mw=%d&mh=%d&group-type=albums"
+#define kRequestTrackArtwork @"http://%@:%@/databases/%d/items/%d/extra_data/artwork?session-id=%d&mw=%d&mh=%d"
 #define kRequestPlayTracksInAlbum @"http://%@:%@/ctrl-int/1/cue?command=play&query=(('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songalbumid:%qi')&index=%d&sort=album&session-id=%d"
 #define kRequestPlayAllTracksForArtist @"http://%@:%@/ctrl-int/1/cue?command=play&query=(('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songartist:%@')&index=%d&sort=album&session-id=%d"
 #define kRequestSetPlayingTime @"http://%@:%@/ctrl-int/1/setproperty?dacp.playingtime=%d&session-id=%d"

@@ -16,7 +16,7 @@
 @synthesize navigationController;
 @synthesize containerPersistentId;
 @synthesize list;
-
+@synthesize currentPodcastGroupId;
 
 - (id) init{
 	if ((self = [super init])) {
@@ -44,13 +44,17 @@
 	}
 	[artworks setObject:image forKey:albumId];
 	[loaders removeObjectForKey:albumId];
-	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
-	//[self.tableView updateImage:image forIndexPath:[cellId objectForKey:albumId]];
+	NSIndexPath *index = (NSIndexPath *)[cellId objectForKey:albumId];
+	NSLog(@"got image for row : %d, track %d",[index row], [albumId intValue]);
+	UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:index];
+	cell.imageView.image = image;
+	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationNone];
+	
 }
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
+		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getArtwork:albumId delegate:self forAlbum:NO];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
@@ -112,6 +116,7 @@
 	[artworks release];
 	[cellId release];
 	[loaders release];
+	[currentPodcastGroupId release];
     [super dealloc];
 }
 

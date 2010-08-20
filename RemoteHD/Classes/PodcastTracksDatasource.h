@@ -19,11 +19,13 @@
 	NSMutableDictionary *cellId;
 	NSMutableDictionary *loaders;
 	NSArray *list;
+	NSNumber *currentPodcastGroupId;
 	id<DAAPDatasourceDelegate> delegate;
 }
 
 @property (nonatomic, assign) UINavigationController *navigationController;
 @property (nonatomic, assign) long long containerPersistentId;
 @property (nonatomic, retain) NSArray *list;
+@property (nonatomic, retain) NSNumber *currentPodcastGroupId;
 
 @end
