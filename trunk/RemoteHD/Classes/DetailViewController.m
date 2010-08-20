@@ -120,7 +120,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 
 - (void) updateImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath{
-	[[[self.tableView cellForRowAtIndexPath:indexPath] imageView] setImage:image];
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	cell.imageView.image = image;
+	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void) changeToTrackView{
