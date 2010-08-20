@@ -106,8 +106,8 @@
 - (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (void) getAllTracksForPlaylist:(int)playlistId delegate:(id<DAAPRequestDelegate>)aDelegate;
-- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
-- (AsyncImageLoader *) getAlbumArtwork:(NSNumber *)albumId size:(int)aSize delegate:(id<AsyncImageLoaderDelegate>)aDelegate;
+- (AsyncImageLoader *) getArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum;
+- (AsyncImageLoader *) getArtwork:(NSNumber *)albumId size:(int)aSize delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum;
 - (void) getAllAlbums:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
