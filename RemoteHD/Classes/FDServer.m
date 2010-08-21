@@ -305,7 +305,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId{
 	DDLogInfo(@"FDServer-getTracksForPodcast");
-	NSString *requestUrl = [NSString stringWithFormat:kRequestPodcastTracks,self.host,self.port,databaseId,podcastsLibraryId, sessionId,podcastId];
+	NSString *requestUrl = [NSString stringWithFormat:kRequestPodcastTracks,self.host,self.port,databaseId,musicLibraryId, sessionId,podcastId];
 	DDLogVerbose(@"%@",requestUrl);
 	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
 	return response;
