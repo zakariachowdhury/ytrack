@@ -45,6 +45,8 @@
 	UINavigationController *navigationController;
 	UIPopoverController *popOver;
 	NowPlayingDetailViewController *nowPlayingDetail;
+	BOOL nowPlayingDetailShown;
+	BOOL librariesShown;
 	
 	NSTimer *timer;
 @private 
