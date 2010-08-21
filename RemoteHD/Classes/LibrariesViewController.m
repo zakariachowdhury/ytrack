@@ -43,6 +43,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void)stopCurrentResolve;
 - (void)initialWaitOver:(NSTimer*)timer;
 - (void)didChangeSpeakerValue:(id)sender;
+- (void)didChangeVolumeControl:(id)sender;
+- (BOOL) _hasRemoteSpeakers;
 @end
 
 @implementation LibrariesViewController
@@ -139,20 +141,31 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-	if ((self.speakers != nil) && ([self.speakers count] > 1)){
-		return 2;
+	if ([self _hasRemoteSpeakers]){
+		return 3;
 	}
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // If there are no services and searchingForServicesString is set, show one row to tell the user.
-	if (section == 0) {
-		NSUInteger count = [[[SessionManager sharedSessionManager] getServers] count];
-		return count + 1;
-	} 
-	return [self.speakers count];
+	switch (section) {
+		case 0:
+			return [[[SessionManager sharedSessionManager] getServers] count] + 1;
+			break;
+		case 1:
+			if ([self _hasRemoteSpeakers]) { 
+				return [self.speakers count];
+			} else {
+				return 1;
+			}
+			break;
+		case 2:
+			return 1;
+			break;
+		default:
+			return 0;
+	}		
 }
 
 
@@ -166,18 +179,21 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	if (indexPath.section == 1) {
-		RemoteSpeaker * sp = (RemoteSpeaker *)[self.speakers objectAtIndex:indexPath.row];
-		cell.textLabel.text = sp.speakerName;
-		UISwitch *sw = [[UISwitch alloc] init];
-		if (sp.on) {
-			sw.on = YES;
-		} else {
-			sw.on = NO;
-		}
-		sw.tag = 10+indexPath.row;
-		[sw addTarget:self action:@selector(didChangeSpeakerValue:) forControlEvents:UIControlEventValueChanged];
-		cell.accessoryView = sw;
-		[sw release];
+		if ([self _hasRemoteSpeakers]){
+			RemoteSpeaker * sp = (RemoteSpeaker *)[self.speakers objectAtIndex:indexPath.row];
+			cell.textLabel.text = sp.speakerName;
+			UISwitch *sw = [[UISwitch alloc] init];
+			if (sp.on) {
+				sw.on = YES;
+			} else {
+				sw.on = NO;
+			}
+			sw.tag = 10+indexPath.row;
+			[sw addTarget:self action:@selector(didChangeSpeakerValue:) forControlEvents:UIControlEventValueChanged];
+			cell.accessoryView = sw;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			[sw release];
+		} 
     } else if (indexPath.section == 0) {
 		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
 			cell.textLabel.text = NSLocalizedString(@"addLibrary",@"Ajouter une bibliothèque");
@@ -225,6 +241,21 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			
 		}
 	}
+	
+	if ((indexPath.section == 1 && ![self _hasRemoteSpeakers]) || indexPath.section == 2) {
+		cell.textLabel.text = NSLocalizedString(@"volumeControl",@"Contrôle du volume");
+		UISwitch *sw = [[UISwitch alloc] init];
+		if ([[PreferencesManager sharedPreferencesManager] volumeControl]) {
+			sw.on = YES;
+		} else {
+			sw.on = NO;
+		}
+		//sw.tag = 10+indexPath.row;
+		[sw addTarget:self action:@selector(didChangeVolumeControl:) forControlEvents:UIControlEventValueChanged];
+		cell.accessoryView = sw;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		[sw release];
+	}
     
     return cell;
 }
@@ -250,16 +281,30 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 //	[self.table reloadData];
 }
 
+- (void) didChangeVolumeControl:(id)sender{
+	UISwitch *sw = (UISwitch *)sender;
+	[[PreferencesManager sharedPreferencesManager] setVolumeControl:sw.on];
+	
+}
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 	if (section == 0) {
 		return NSLocalizedString(@"iTunesLibraries",@"Bibliothèques de musique");
-	} 
-	return NSLocalizedString(@"remoteSpeakers",@"Haut parleurs");
+	} else  if (section == 1) {
+		if ([self _hasRemoteSpeakers]){
+			return NSLocalizedString(@"remoteSpeakers",@"Haut parleurs");
+		}
+		else{
+			return NSLocalizedString(@"Options",@"Options");
+		}
+	} else {
+		return NSLocalizedString(@"Options",@"Options");
+	}
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
+	if (indexPath.section == 1 || indexPath.section == 2) {
 		return NO;
 	} else if (indexPath.section == 0) {
 		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
@@ -309,33 +354,33 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[self.currentResolve stop];
-	
-	// user selected add library
-	if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]) {
-		[self.netServiceBrowser stop];
-		PinCodeController *pincodeController = [[PinCodeController alloc] initWithNibName:@"PinCodeController" bundle:nil];
-		pincodeController.modalPresentationStyle = UIModalPresentationFullScreen;
-		pincodeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		pincodeController.delegate = self;
-		[self presentModalViewController:pincodeController animated:YES];
-	} 
-	// user selected a previously paired library, try to resolve service in case the host has changed
-	else {
-		FDServer *selectedServer = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
-		self.currentServiceName = selectedServer.servicename;
-		self.currentGUID = selectedServer.pairingGUID;
-		NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedServer.servicename];
-		[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedServer.TXT]];
-		self.currentResolve = service;
-		[self.currentResolve setDelegate:self];
-		
-		// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
-		// choose to cancel the resolve by selecting another service in the table view.
-		[self.currentResolve resolveWithTimeout:0.0];
-		[self.services addObject:service];
-		self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showWaiting:) userInfo:self.currentResolve repeats:NO];
+	if (indexPath.section == 0) {
+		// user selected add library
+		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]) {
+			[self.netServiceBrowser stop];
+			PinCodeController *pincodeController = [[PinCodeController alloc] initWithNibName:@"PinCodeController" bundle:nil];
+			pincodeController.modalPresentationStyle = UIModalPresentationFullScreen;
+			pincodeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+			pincodeController.delegate = self;
+			[self presentModalViewController:pincodeController animated:YES];
+		} 
+		// user selected a previously paired library, try to resolve service in case the host has changed
+		else {
+			FDServer *selectedServer = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
+			self.currentServiceName = selectedServer.servicename;
+			self.currentGUID = selectedServer.pairingGUID;
+			NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedServer.servicename];
+			[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedServer.TXT]];
+			self.currentResolve = service;
+			[self.currentResolve setDelegate:self];
+			
+			// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
+			// choose to cancel the resolve by selecting another service in the table view.
+			[self.currentResolve resolveWithTimeout:0.0];
+			[self.services addObject:service];
+			self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showWaiting:) userInfo:self.currentResolve repeats:NO];
+		}
 	}
-
 }
 
 #pragma mark -
@@ -513,6 +558,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		[self.table reloadData];
 	//}
 
+}
+
+- (BOOL) _hasRemoteSpeakers{
+	return (self.speakers != nil) && ([self.speakers count] > 1);
 }
 
 #pragma mark -
