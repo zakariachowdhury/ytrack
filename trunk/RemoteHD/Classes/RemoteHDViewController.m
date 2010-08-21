@@ -19,6 +19,7 @@
 #import "AlbumCoverViewController.h"
 #import "RemoteHDAppDelegate.h"
 #import "DDLog.h"
+#import "Reachability.h"
 
 
 @interface RemoteHDViewController(PrivateMethods)
@@ -29,6 +30,7 @@
 - (void) _updateTime:(NSTimer *)timer;
 - (void) _statusUpdate:(NSNotification *)notification;
 - (void) _libraryAvailable;
+-(void) networkReachabilityEvent: (NSNotification *) notification;
 @end
 
 
@@ -43,6 +45,9 @@
     [super viewDidLoad];
 	
 	nowPlaying.displayShadow = YES;
+	
+	nowPlayingDetailShown = NO;
+	librariesShown = NO;
 	
 	// i18n
 	loadingMessageLabel.text = NSLocalizedString(@"loading",@"Chargement en cours...");
@@ -68,6 +73,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:kNotificationTryReconnect object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayError) name:kNotificationBrokenConnection object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityEvent:) name:kReachabilityChangedNotification object:nil];
 	
 	// load preferences file and try to connect to the last used server
 	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
@@ -127,6 +133,7 @@
 	}
 	DDLogVerbose(@"RemoteHDViewController presenting modal view");
 	[self presentModalViewController:librariesViewController animated:YES]; 
+	librariesShown = YES;
 }
 
 - (IBAction) playClicked:(id)sender{
@@ -234,10 +241,12 @@
 	[self presentModalViewController:self.nowPlayingDetail animated:YES];
 //	[self.view addSubview:self.nowPlayingDetail.view];
 	[c release];
+	nowPlayingDetailShown = YES;
 }
 
 - (void)didFinishWithNowPlaying{
 	[self dismissModalViewControllerAnimated:YES];
+	nowPlayingDetailShown = NO;
 }
 
 - (void)navigationController:(UINavigationController *)theNavigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -261,7 +270,7 @@
 	} else {
 		[self _displayNoLib];
 	}
-
+	librariesShown = NO;
 }
 
 #pragma mark -
@@ -406,7 +415,9 @@
 }
 
 - (void) _displayError{
-	[self didFinishWithNowPlaying];
+	if (nowPlayingDetailShown) {
+		[self didFinishWithNowPlaying];
+	}
 	[self.timer invalidate];
 	donePlayingTime.text = @"00:00";
 	remainingPlayingTime.text = @"00:00";
@@ -448,6 +459,28 @@
 }
 
 
+-(void) networkReachabilityEvent: (NSNotification *) notification{
+	Reachability *r = [notification object];
+	DDLogVerbose(@"----------------------------------");
+	 DDLogVerbose(@"isConnectionRequired : %@",[r isConnectionRequired]?@"YES":@"NO");
+	switch ([r currentReachabilityStatus]) {
+		case kNotReachable:
+			DDLogVerbose(@"not reachable");
+			[self _displayError];
+			[[SessionManager sharedSessionManager] logout];
+			[[SessionManager sharedSessionManager] openLastUsedServer];
+			break;
+		case kReachableViaWiFi:
+			DDLogVerbose(@"reachable via WiFi");
+			break;
+		case kReachableViaWWAN:
+			DDLogVerbose(@"reachable via WWAN");
+			break;
+
+		default:
+			break;
+	}
+}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
 	//[self.popOver release];
