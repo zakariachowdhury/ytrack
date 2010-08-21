@@ -103,7 +103,7 @@
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getAlbumArtwork:albumId delegate:self];
+		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getArtwork:albumId delegate:self forAlbum:YES];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
