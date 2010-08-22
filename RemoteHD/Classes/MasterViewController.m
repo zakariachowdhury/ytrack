@@ -157,7 +157,7 @@
 }
 
 - (void) didChangeLibrary{
-	self.results = [[[SessionManager sharedSessionManager] currentServer] getPlayLists];
+	self.results = [CurrentServer getPlayLists];
 	[self.tableView reloadData];
 }
 
