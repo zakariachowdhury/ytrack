@@ -36,7 +36,6 @@
 	IBOutlet UIButton *listButton;
 	IBOutlet UIView *containerView;
 	id<NowPlayingDelegate> delegate;
-	BOOL playing;
 	BOOL fullScreen;
 	IBOutlet NowPlayingListController *listController;
 	BOOL isDisplayingCover;
@@ -47,7 +46,6 @@
 @property (nonatomic, retain) UILabel *artist;
 @property (nonatomic, retain) NSNumber *albumId;
 @property (nonatomic, retain) AsyncImageView *coverArt;
-@property (nonatomic) BOOL playing;
 @property (nonatomic, assign) id<NowPlayingDelegate>delegate;
 
 - (IBAction) playClicked:(id)sender;
@@ -57,5 +55,7 @@
 - (IBAction) listButtonClicked:(id)sender;
 - (IBAction) doneButtonPressed:(id)sender;
 - (IBAction) didTouchCover:(id)sender;
+- (IBAction) shuffleClicked:(id)sender;
+- (IBAction) repeatClicked:(id)sender;
 
 @end
