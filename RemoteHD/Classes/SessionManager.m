@@ -59,9 +59,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		oldServer.sessionId = server.sessionId;
 		oldServer.musicLibraryId = server.musicLibraryId;
 		oldServer.databaseId = server.databaseId;
-		oldServer.currentAlbum = server.currentAlbum;
-		oldServer.currentTrack = server.currentTrack;
-		oldServer.currentArtist = server.currentArtist;
 		[[PreferencesManager sharedPreferencesManager] addServer:server];
 		return oldServer;
 	} else {
