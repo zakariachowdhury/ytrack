@@ -36,6 +36,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (NSString *) _encodeString:(NSString *)string;
 - (void) _renewConnection:(NSTimer *)timer;
 
+@property (nonatomic, copy, readwrite) NSString *currentTrack;
+@property (nonatomic, copy, readwrite) NSString *currentAlbum;
+@property (nonatomic, copy, readwrite) NSString *currentArtist;
+@property (nonatomic, readwrite) BOOL playing;
+@property (nonatomic, readwrite) BOOL trackChanged;
+
+@property (nonatomic, retain) DAAPRequestReply *daapReqRep;
+
 @end
 
 @implementation FDServer
@@ -55,6 +63,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize currentAlbum;
 @synthesize currentArtist;
 @synthesize currentAlbumId;
+@synthesize playing;
+@synthesize repeatState;
+@synthesize shuffle;
+@synthesize trackChanged;
 @synthesize daapReqRep;
 @synthesize booksPersistentId;
 @synthesize podcastsPersistentId;
@@ -416,11 +428,22 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		[self _login];
 	}else {
 		DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
-		[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
+		
 		self.currentTrack = cmst.cann;
 		self.currentAlbum = cmst.canl;
 		self.currentArtist = cmst.cana;
 		self.currentAlbumId = cmst.asai;
+		shuffle = [cmst.cash boolValue];
+		repeatState = [cmst.carp intValue];
+		if ([cmst.caps shortValue] == 4) {
+			playing = YES;
+		} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
+			playing = NO;
+		} 
+		
+		trackChanged = (![self.currentTrack isEqualToString:cmst.cann] || ![self.currentArtist isEqualToString:cmst.cana] || [self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
+		
+		[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
 		
 		DDLogVerbose(@"received infos : %@, %@, %@",self.currentTrack, self.currentAlbum, self.currentArtist);
 		if ([[cmst cmsr] longValue] > 1) {
@@ -506,6 +529,36 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DDLogInfo(@"FDServer-setVolume");
 	NSString *string = [NSString stringWithFormat:kRequestChangePropertyVolume,self.host,self.port,volume,sessionId];
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
+- (void) toggleShuffle{
+	NSString *string = [NSString stringWithFormat:kRequestChangePropertyShuffle,self.host,self.port,!shuffle,sessionId];
+	if ([DAAPRequestReply request:[NSURL URLWithString:string]]){
+		shuffle = !shuffle;
+	}
+}
+
+- (void) toggleRepeatState{
+	kRepeatState newState;
+	switch (repeatState) {
+		case kRepeatStateNoRepeat:
+			newState = kRepeatStateWhole;
+			break;
+		case kRepeatStateWhole:
+			newState = kRepeatStateTrack;
+			break;
+		case kRepeatStateTrack:
+			newState = kRepeatStateNoRepeat;
+			break;
+		default:
+			newState = kRepeatStateNoRepeat;
+			break;
+	}
+
+	NSString *string = [NSString stringWithFormat:kRequestChangePropertyRepeat,self.host,self.port,newState,sessionId];
+	if ([DAAPRequestReply request:[NSURL URLWithString:string]]){
+		repeatState = newState;
+	}
 }
 
 - (void) changePlayingTime:(int)position{

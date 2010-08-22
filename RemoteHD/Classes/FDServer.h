@@ -41,8 +41,15 @@
 
 @end
 
+typedef enum {
+	kRepeatStateNoRepeat = 0,
+	kRepeatStateTrack = 1,
+	kRepeatStateWhole = 2
+} kRepeatState;
+
 
 @interface FDServer : NSObject <DAAPRequestDelegate> {
+	@private
 	NSString *host;
 	NSString *port;
 	NSString *pairingGUID;
@@ -63,9 +70,13 @@
 	NSString *currentAlbum;
 	NSString *currentArtist;
 	NSNumber *currentAlbumId;
-	DAAPRequestReply *daapReqRep;
+	BOOL playing;
+	kRepeatState repeatState;
+	BOOL shuffle;
+	BOOL trackChanged;
 	
-	@private
+	
+	DAAPRequestReply *daapReqRep;
 	NSMutableArray *userPlaylists;
 	Reachability *r;
 }
@@ -82,14 +93,18 @@
 @property (nonatomic) NSInteger booksLibraryId;
 @property (nonatomic, readonly) long long booksPersistentId;
 @property (nonatomic, readonly) long long podcastsPersistentId;
-@property (nonatomic, retain) DAAPRequestReply *daapReqRep;
+
 @property (nonatomic, retain) Reachability *r;
 
 @property (nonatomic) BOOL connected;
-@property (nonatomic, copy) NSString *currentTrack;
-@property (nonatomic, copy) NSString *currentAlbum;
-@property (nonatomic, copy) NSString *currentArtist;
+@property (nonatomic, copy, readonly) NSString *currentTrack;
+@property (nonatomic, copy, readonly) NSString *currentAlbum;
+@property (nonatomic, copy, readonly) NSString *currentArtist;
 @property (nonatomic, retain) NSNumber *currentAlbumId;
+@property (nonatomic, readonly) BOOL playing;
+@property (nonatomic, readonly) kRepeatState repeatState;
+@property (nonatomic, readonly) BOOL shuffle;
+@property (nonatomic, readonly) BOOL trackChanged;
 
 
 
@@ -122,9 +137,10 @@
 - (void) playPause;
 - (void) monitorPlayStatus;
 - (void) updateStatus;
-//- (long) getVolume;
 - (void) getVolume:(id<DAAPRequestDelegate>)aDelegate action:(SEL)action;
 - (void) setVolume:(long) volume;
+- (void) toggleShuffle;
+- (void) toggleRepeatState;
 - (void) changePlayingTime:(int)position;
 - (NSArray *) getSpeakers;
 - (void) getSpeakers:(id<DAAPRequestDelegate>)aDelegate;
