@@ -117,15 +117,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)viewWillAppear:(BOOL)animated{
 	DDLogVerbose(@"Library view did appear");
-	if (![[[SessionManager sharedSessionManager] currentServer] connected]) {
+	if (![CurrentServer connected]) {
 		if (self.speakers != nil) {
 			self.speakers = nil;
 		}
 	}
 	if ([[[SessionManager sharedSessionManager] getServers] count] > 0) {
 		[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-		[server getSpeakers:self];
+		[CurrentServer getSpeakers:self];
 	}
 }
 
@@ -233,7 +232,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			} else if (cell.accessoryView) {
 				cell.accessoryView = nil;
 			}		
-			FDServer *currentServer = [[SessionManager sharedSessionManager] currentServer];
+			FDServer *currentServer = CurrentServer;
 			if ([serviceName isEqualToString:currentServer.servicename]) {
 				cell.accessoryType = UITableViewCellAccessoryCheckmark;
 				cell.textLabel.textColor = [UIColor blackColor];
@@ -276,8 +275,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	else {
 		[spList removeObjectIdenticalTo:num];
 	}
-	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
-	[[[SessionManager sharedSessionManager] currentServer] getSpeakers:self];
+	[CurrentServer setSpeakers:spList];
+	[CurrentServer getSpeakers:self];
 //	[self.table reloadData];
 }
 
@@ -527,9 +526,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	[self stopCurrentResolve];
 
-	if (![service.name isEqualToString:[[[SessionManager sharedSessionManager] currentServer] servicename]]) {
+	if (![service.name isEqualToString:[CurrentServer servicename]]) {
 		DDLogVerbose(@"LibraryViewController logout");
-		[[[SessionManager sharedSessionManager] currentServer] logout];
+		[CurrentServer logout];
 		FDServer *server = [[FDServer alloc] initWithHost:host port:portStr pairingGUID:self.currentGUID serviceName:self.currentServiceName TXT:TXTDict];
 		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
 		if ([serv open]){

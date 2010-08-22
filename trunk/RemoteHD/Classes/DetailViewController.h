@@ -31,9 +31,6 @@
 	NSArray *results;
 	NSArray *indexList;
 	NSMutableArray *arrayOfCharacters;
-	NSString *currentTrack;
-	NSString *currentArtist;
-	NSString *currentAlbum;
 	ArtistDatasource *artistDatasource;
 	TracksDatasource *tracksDatasource;
 	BooksDatasource *booksDatasource;
@@ -46,9 +43,6 @@
 @property (nonatomic, retain) NSArray *results;
 @property (nonatomic, retain) NSArray *indexList;
 @property (nonatomic, assign) id<DetailDelegate> delegate;
-@property (nonatomic, copy) NSString *currentTrack;
-@property (nonatomic, copy) NSString *currentAlbum;
-@property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, retain) ArtistDatasource *artistDatasource;
 @property (nonatomic, retain) TracksDatasource *tracksDatasource;
 @property (nonatomic, retain) AlbumsDatasource *albumsDatasource;

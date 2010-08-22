@@ -77,12 +77,12 @@
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
 	NSString *artist = [self.list objectAtIndex:i];
-	DAAPResponseagal * resp = [[[SessionManager sharedSessionManager] currentServer] getAlbumsForArtist:artist];
+	DAAPResponseagal * resp = [CurrentServer getAlbumsForArtist:artist];
 	
 	if ([resp.listing.list count] == 0) {
 		// No named album for that artist
 		//TODO use header view to place a 'all tracks' in case some tracks are in an album and others don't
-		DAAPResponseapso * resp2 = [[[SessionManager sharedSessionManager] currentServer] getAllTracksForArtist:artist];
+		DAAPResponseapso * resp2 = [CurrentServer getAllTracksForArtist:artist];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 		c.tracks = resp2.listing.list;
 		[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -93,7 +93,7 @@
 		
 	} else if ([resp.listing.list count] == 1) {
 		NSNumber *albumId = [(DAAPResponsemlit *)[resp.listing.list objectAtIndex:0] persistentId];
-		DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:albumId];
+		DAAPResponseapso * resp = [CurrentServer getTracksForAlbum:albumId];
 		TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 		c.tracks = resp.listing.list;
 		c.shouldPlayAllTracks = NO;

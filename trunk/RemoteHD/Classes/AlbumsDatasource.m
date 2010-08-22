@@ -78,7 +78,7 @@
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getArtwork:albumId delegate:self forAlbum:YES];
+		AsyncImageLoader *loader = [CurrentServer getArtwork:albumId delegate:self forAlbum:YES];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
@@ -120,7 +120,7 @@
 	long i = offset + indexPath.row;
 	NSNumber *albumId = [(DAAPResponsemlit *)[self.list objectAtIndex:i] persistentId];
 	
-	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:albumId];
+	DAAPResponseapso * resp = [CurrentServer getTracksForAlbum:albumId];
 	TracksForAlbumController * c = [[TracksForAlbumController alloc] init];
 	c.tracks = resp.listing.list;
 	c.albumName = [(DAAPResponsemlit *)[self.list objectAtIndex:i] name];

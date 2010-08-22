@@ -191,13 +191,26 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 
 
-+ (void) request:(NSURL *) url {
++ (BOOL) request:(NSURL *) url {
 	NSLog(@"sync requesting one way %@",url);
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
+
+	NSHTTPURLResponse * httpResponse;
+    httpResponse = (NSHTTPURLResponse *) resp;
+	
+	if ((httpResponse.statusCode / 100) != 2) {
+        DDLogError(@"HTTP error %zd", (ssize_t) httpResponse.statusCode);
+		return NO;
+    }
+	if (error != nil) {
+		DDLogError(@"AsyncDAAPRequestReply - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+		return NO;
+	}
+	return YES;
 }
 
 + (void) parseSearchResponse:(NSData *) theData handle:(int)handle resp:(NSMutableDictionary *)dict{

@@ -27,9 +27,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize results;
 @synthesize indexList;
 @synthesize delegate;
-@synthesize currentTrack;
-@synthesize currentAlbum;
-@synthesize currentArtist;
+
 @synthesize artistDatasource;
 @synthesize tracksDatasource;
 @synthesize albumsDatasource;
@@ -80,17 +78,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:i];
+	[CurrentServer playSongInLibrary:i];
     [delegate didSelectItem];
 }
 
 // Used to update nowPlaying in the table
 - (void) statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
-	self.currentTrack = cmst.cann;
-	self.currentArtist = cmst.cana;
-	self.currentAlbum = cmst.canl;
-
 	[self.tableView reloadData];
 }
 
@@ -135,7 +128,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.tracksDatasource.navigationController = self.navigationController;
 		self.tracksDatasource.delegate = self;
 		[self.delegate startLoading];
-		[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self.tracksDatasource];
+		[CurrentServer getAllTracks:self.tracksDatasource];
 		[d release];
 		self.tableView.dataSource = self.tracksDatasource;
 		self.tableView.delegate = self.tracksDatasource;
@@ -143,7 +136,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		if (tracksDatasource.needsRefresh) {
 			DDLogVerbose(@"track view datasource needs refresh");
 			[self.delegate startLoading];
-			[[[SessionManager sharedSessionManager] currentServer] getAllTracks:self.tracksDatasource];
+			[CurrentServer getAllTracks:self.tracksDatasource];
 			self.tableView.dataSource = self.tracksDatasource;
 			self.tableView.delegate = self.tracksDatasource;
 		} else {
@@ -165,7 +158,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.playlistDatasource.navigationController = self.navigationController;
 		self.playlistDatasource.delegate = self;
 		
-		[[[SessionManager sharedSessionManager] currentServer] getAllTracksForPlaylist:playlistId delegate:self.playlistDatasource];
+		[CurrentServer getAllTracksForPlaylist:playlistId delegate:self.playlistDatasource];
 		[d release];
 		self.tableView.dataSource = self.playlistDatasource;
 		self.tableView.delegate = self.playlistDatasource;
@@ -173,7 +166,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.playlistDatasource.containerPersistentId = persistentId;
 		if (playlistDatasource.needsRefresh) {
 			[self.delegate startLoading];
-			[[[SessionManager sharedSessionManager] currentServer] getAllTracksForPlaylist:playlistId delegate:self.playlistDatasource];
+			[CurrentServer getAllTracksForPlaylist:playlistId delegate:self.playlistDatasource];
 			self.tableView.dataSource = self.playlistDatasource;
 			self.tableView.delegate = self.playlistDatasource;
 		} else {
@@ -196,7 +189,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.artistDatasource.navigationController = self.navigationController;
 		self.artistDatasource.delegate = self;
 		[self.delegate startLoading];
-		[[[SessionManager sharedSessionManager] currentServer] getArtists:self.artistDatasource];
+		[CurrentServer getArtists:self.artistDatasource];
 		[d release];
 		self.tableView.dataSource = self.artistDatasource;
 		self.tableView.delegate = self.artistDatasource;
@@ -204,7 +197,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	} else {
 		if (artistDatasource.needsRefresh) {
 			[self.delegate startLoading];
-			[[[SessionManager sharedSessionManager] currentServer] getArtists:self.artistDatasource];
+			[CurrentServer getArtists:self.artistDatasource];
 			self.tableView.dataSource = self.artistDatasource;
 			self.tableView.delegate = self.artistDatasource;
 		} else {
@@ -227,7 +220,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.albumsDatasource.navigationController = self.navigationController;
 		self.albumsDatasource.delegate = self;
 		[self.delegate startLoading];
-		[[[SessionManager sharedSessionManager] currentServer] getAllAlbums:self.albumsDatasource];
+		[CurrentServer getAllAlbums:self.albumsDatasource];
 		[d release];
 		self.tableView.dataSource = self.albumsDatasource;
 		self.tableView.delegate = self.albumsDatasource;
@@ -235,7 +228,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	} else {
 		if (albumsDatasource.needsRefresh) {
 			[self.delegate startLoading];
-			[[[SessionManager sharedSessionManager] currentServer] getAllAlbums:self.albumsDatasource];
+			[CurrentServer getAllAlbums:self.albumsDatasource];
 			self.tableView.dataSource = self.albumsDatasource;
 			self.tableView.delegate = self.albumsDatasource;
 		} else {
@@ -256,13 +249,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.booksDatasource = d;
 		self.booksDatasource.navigationController = self.navigationController;
 		self.booksDatasource.delegate = self;
-		self.booksDatasource.containerPersistentId = [[[SessionManager sharedSessionManager] currentServer] booksPersistentId];
+		self.booksDatasource.containerPersistentId = [CurrentServer booksPersistentId];
 		[d release];
 	}
 	self.tableView.dataSource = self.booksDatasource;
 	self.tableView.delegate = self.booksDatasource;
 	
-	[[[SessionManager sharedSessionManager] currentServer] getAllBooks:self.booksDatasource];
+	[CurrentServer getAllBooks:self.booksDatasource];
 }
 
 - (void) changeToPodcastView{
@@ -272,13 +265,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		self.podcastsDatasource = d;
 		self.podcastsDatasource.navigationController = self.navigationController;
 		self.podcastsDatasource.delegate = self;
-		self.podcastsDatasource.containerPersistentId = [[[SessionManager sharedSessionManager] currentServer] podcastsPersistentId];
+		self.podcastsDatasource.containerPersistentId = [CurrentServer podcastsPersistentId];
 		[d release];
 	}
 	self.tableView.dataSource = self.podcastsDatasource;
 	self.tableView.delegate = self.podcastsDatasource;
 	
-	[[[SessionManager sharedSessionManager] currentServer] getAllPodcasts:self.podcastsDatasource];
+	[CurrentServer getAllPodcasts:self.podcastsDatasource];
 }
 
 - (void) didChangeLibrary{
@@ -308,9 +301,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void)dealloc {
 	[results release];
 	[indexList release];
-	[currentTrack release];
-	[currentAlbum release];
-	[currentArtist release];
 	[artistDatasource release];
 	[tracksDatasource release];
 	[booksDatasource release];

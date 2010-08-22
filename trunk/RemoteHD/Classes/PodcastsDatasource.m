@@ -50,7 +50,7 @@
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getArtwork:albumId size:90 delegate:self forAlbum:YES];
+		AsyncImageLoader *loader = [CurrentServer getArtwork:albumId size:90 delegate:self forAlbum:YES];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
@@ -124,7 +124,7 @@
 	
 	NSLog(@"%@-%qi-%qi",song.name,[song.persistentId longLongValue],containerPersistentId);
 	
-	DAAPResponseapso * resp = [[[SessionManager sharedSessionManager] currentServer] getTracksForPodcast:[NSString stringWithFormat:@"%qi",[song.persistentId longLongValue]]];
+	DAAPResponseapso * resp = [CurrentServer getTracksForPodcast:[NSString stringWithFormat:@"%qi",[song.persistentId longLongValue]]];
 	PodcastsTracksDatasource * c = [[PodcastsTracksDatasource alloc] init];
 	c.list = resp.listing.list;
 	c.containerPersistentId = containerPersistentId ;

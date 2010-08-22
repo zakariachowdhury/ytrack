@@ -54,7 +54,7 @@
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
 	if ([artworks objectForKey:albumId] == nil) {
-		AsyncImageLoader *loader = [[[SessionManager sharedSessionManager] currentServer] getArtwork:albumId delegate:self forAlbum:NO];
+		AsyncImageLoader *loader = [CurrentServer getArtwork:albumId delegate:self forAlbum:NO];
 		UIImage *defaultImage = [UIImage imageNamed:@"defaultAlbumArtwork.png"];
 		[artworks setObject:defaultImage forKey:albumId];
 		[loaders setObject:loader forKey:albumId];
@@ -98,7 +98,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:indexPath.row];
-	[[[SessionManager sharedSessionManager] currentServer] playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
+	[CurrentServer playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
 }
 
 - (void) cleanJobs{
