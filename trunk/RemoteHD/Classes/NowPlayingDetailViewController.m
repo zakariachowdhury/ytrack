@@ -26,7 +26,6 @@
 @synthesize album;
 @synthesize artist;
 @synthesize coverArt;
-@synthesize playing;
 @synthesize delegate;
 @synthesize albumId;
 
@@ -59,12 +58,11 @@
 	fullScreen = NO;
 	isDisplayingCover = YES;
 	//[self _didChangeOrientation];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	self.track.text = [server currentTrack];
-	self.album.text = [server currentAlbum];
-	self.artist.text = [server currentArtist];
-	[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:server.currentAlbumId delegate:listController];
-	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtworkBig,server.host,server.port,server.sessionId];
+	self.track.text = CurrentServer.currentTrack;
+	self.album.text = CurrentServer.currentAlbum;
+	self.artist.text = CurrentServer.currentArtist;
+	[CurrentServer getTracksForAlbum:CurrentServer.currentAlbumId delegate:listController];
+	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtworkBig,CurrentServer.host,CurrentServer.port,CurrentServer.sessionId];
 	
 	coverArt.isDefaultCoverBig = YES;
 	[coverArt loadImageFromURL:[NSURL URLWithString:string]];
@@ -76,22 +74,22 @@
 
 
 - (IBAction) playClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPause];
 }
 
 - (IBAction) pauseClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPause];
 }
 
 - (IBAction) nextClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playNextItem];
 }
 
 - (IBAction) previousClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPreviousItem];
 }
 
@@ -131,11 +129,19 @@
 	[UIView commitAnimations];		
 }
 
+- (IBAction) shuffleClicked:(id)sender{
+	[CurrentServer toggleShuffle];
+}
+- (IBAction) repeatClicked:(id)sender{
+	[CurrentServer toggleRepeatState];
+}
+
+
 - (void) _repositionToLandscape{
 	containerView.frame = CGRectMake(128, 0, 768, 768);
 	listController.tableView.frame = CGRectMake(0, 125, 768, 529);
 	bottomBackground.alpha = 1.0;
-	backButton.frame = CGRectMake(128, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
+	backButton.frame = CGRectMake(158, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
 	listButton.frame = CGRectMake(824, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
 	nextButton.frame = CGRectMake(820, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(706, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
@@ -147,7 +153,7 @@
 	containerView.frame = CGRectMake(0, 125, 768, 768);
 	listController.tableView.frame = CGRectMake(0, 0, 768, 768);
 	bottomBackground.alpha = 0.0;
-	backButton.frame = CGRectMake(0, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
+	backButton.frame = CGRectMake(30, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
 	listButton.frame = CGRectMake(696, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
 	nextButton.frame = CGRectMake(689, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(570, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
@@ -186,18 +192,16 @@
 	artist.text = cmst.cana;
 	album.text = cmst.canl;
 
-	if ([cmst.caps shortValue] == 4) {
-		playing = YES;
+	if (CurrentServer.playing) {
 		playButton.alpha = 0.0;
 		pauseButton.alpha = 1.0;
-	} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
-		playing = NO;
+	} else {
 		playButton.alpha = 1.0;
 		pauseButton.alpha = 0.0;
 	} 
 	if (trackChanged) {
-		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:cmst.asai delegate:listController];
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+		[CurrentServer getTracksForAlbum:cmst.asai delegate:listController];
+		FDServer *server = CurrentServer;
 		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtworkBig,server.host,server.port,server.sessionId];
 		[coverArt loadImageFromURL:[NSURL URLWithString:string]];
 	}	
