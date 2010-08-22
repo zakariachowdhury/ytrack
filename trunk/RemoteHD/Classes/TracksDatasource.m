@@ -29,7 +29,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (id) init{
 	if ((self = [super init])) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusUpdate:) name:kNotificationStatusUpdate object:nil];
+		
     }
     return self;
 }
@@ -96,9 +96,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     int totalSeconds = timeSec % 60;
 	
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	
-	if ([cell.trackName.text isEqualToString:server.currentTrack] && [cell.artistName.text isEqualToString:server.currentArtist] && [cell.albumName.text isEqualToString:server.currentAlbum]) {
+
+	if ([cell.trackName.text isEqualToString:CurrentServer.currentTrack] && [cell.artistName.text isEqualToString:CurrentServer.currentArtist] && [cell.albumName.text isEqualToString:CurrentServer.currentAlbum]) {
 		cell.nowPlaying = YES;
 	} else {
 		cell.nowPlaying = NO;
@@ -121,7 +120,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section];
 	long offset = [mlit.mshi longValue];
 	long i = offset + indexPath.row;
-	[[[SessionManager sharedSessionManager] currentServer] playSongInLibrary:i];
+	[CurrentServer playSongInLibrary:i];
    // [delegate didSelectItem];
 }
 

@@ -85,9 +85,8 @@
     int totalSeconds = timeSec % 60;
 	
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
 	
-	if ([cell.trackName.text isEqualToString:server.currentTrack] && [cell.artistName.text isEqualToString:server.currentArtist] && [cell.albumName.text isEqualToString:server.currentAlbum]) {
+	if ([cell.trackName.text isEqualToString:CurrentServer.currentTrack] && [cell.artistName.text isEqualToString:CurrentServer.currentArtist] && [cell.albumName.text isEqualToString:CurrentServer.currentAlbum]) {
 		cell.nowPlaying = YES;
 	} else {
 		cell.nowPlaying = NO;
@@ -114,7 +113,7 @@
 		index = indexPath.section*10 + indexPath.row;
 	}
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:index];
-	[[[SessionManager sharedSessionManager] currentServer] playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
+	[CurrentServer playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
 }
 
 - (void) didFinishLoading:(DAAPResponse *)response{

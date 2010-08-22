@@ -89,12 +89,11 @@
 
 	cell.trackLength.text = [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
 	cell.trackNumber.text = [NSString stringWithFormat:@"%d.",indexPath.row+1];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	if ([cell.trackName.text isEqualToString:server.currentTrack] && [mlit.artistName isEqualToString:server.currentArtist]){
+	if ([cell.trackName.text isEqualToString:CurrentServer.currentTrack] && [mlit.artistName isEqualToString:CurrentServer.currentArtist]){
 		if (self.shouldPlayAllTracks) {
 			cell.nowPlaying = YES;
 		} else {
-			if ([self.title isEqualToString:server.currentAlbum]) {
+			if ([self.title isEqualToString:CurrentServer.currentAlbum]) {
 				cell.nowPlaying = YES;
 			} else {
 				cell.nowPlaying = NO;
@@ -122,9 +121,9 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.tracks objectAtIndex:indexPath.row];
 	if (self.shouldPlayAllTracks) {
-		[[[SessionManager sharedSessionManager] currentServer] playAllTracksForArtist:mlit.artistName index:indexPath.row];
+		[CurrentServer playAllTracksForArtist:mlit.artistName index:indexPath.row];
 	} else {
-		[[[SessionManager sharedSessionManager] currentServer] playSongIndex:indexPath.row inAlbum:mlit.asai];
+		[CurrentServer playSongIndex:indexPath.row inAlbum:mlit.asai];
 	}
 	
 }
