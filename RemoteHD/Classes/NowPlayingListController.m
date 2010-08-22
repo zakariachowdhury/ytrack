@@ -44,10 +44,9 @@
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
-	self.track = [server currentTrack];
-	self.album = [server currentAlbum];
-	self.artist = [server currentArtist];
+	self.track = CurrentServer.currentTrack;
+	self.album = CurrentServer.currentAlbum;
+	self.artist = CurrentServer.currentArtist;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
 	
@@ -156,7 +155,7 @@
 	
 		
 	if (cmst.asai && [self.albumId longLongValue] != [cmst.asai longLongValue]){
-		[[[SessionManager sharedSessionManager] currentServer] getTracksForAlbum:cmst.asai delegate:self];
+		[CurrentServer getTracksForAlbum:cmst.asai delegate:self];
 		self.albumId = cmst.asai;
 	}
 	[self.tableView reloadData];
@@ -221,7 +220,7 @@
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
 	 */
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playSongIndex:indexPath.row inAlbum:server.currentAlbumId];
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

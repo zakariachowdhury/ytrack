@@ -36,7 +36,7 @@
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server getSpeakers:self];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -47,7 +47,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server getSpeakers:self];
 }
 
@@ -133,8 +133,8 @@
 	else {
 		[spList removeObjectIdenticalTo:num];
 	}
-	[[[SessionManager sharedSessionManager] currentServer] setSpeakers:spList];
-	[[[SessionManager sharedSessionManager] currentServer] getSpeakers:self];
+	[CurrentServer setSpeakers:spList];
+	[CurrentServer getSpeakers:self];
 	//[self.tableView reloadData];
 }
 
