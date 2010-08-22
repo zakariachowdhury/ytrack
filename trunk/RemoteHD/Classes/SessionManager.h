@@ -10,6 +10,7 @@
 #import "FDServer.h"
 #import "RemoteHDViewController.h"
 
+#define CurrentServer [[SessionManager sharedSessionManager] currentServer]
 
 @interface SessionManager : NSObject {
 @private
