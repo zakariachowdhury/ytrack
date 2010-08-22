@@ -135,6 +135,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	[self.preferences setObject:state forKey:key];
 }
 
+- (void) setVolumeControl:(BOOL)volumeControlEnabled{
+	[self.preferences setObject:[NSNumber numberWithBool:volumeControlEnabled] forKey:kPrefVolumeControlEnabled];
+}
+
+- (BOOL) volumeControl{
+	return [(NSNumber *)[self.preferences objectForKey:kPrefVolumeControlEnabled] boolValue];
+}
+
 - (NSString *) getViewStateForKey:(NSString *)key{
 	return [self.preferences objectForKey:key];
 }

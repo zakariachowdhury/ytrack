@@ -16,6 +16,7 @@
 #define kPrefLastSelectedSegControlTrack @"track"
 #define kPrefLastSelectedSegControlArtist @"artist"
 #define kPrefLastSelectedSegControlAlbum @"album"
+#define kPrefVolumeControlEnabled @"volumeControl"
 
 @interface PreferencesManager : NSObject {
 	NSMutableDictionary *preferences;
@@ -35,6 +36,8 @@
 - (void) persistPreferences;
 - (void) addServer:(FDServer *) newServer;
 - (void) deleteServerAtIndex:(int)index;
+- (void) setVolumeControl:(BOOL)volumeControlEnabled;
+- (BOOL) volumeControl;
 - (void) saveViewState:(NSString *)state withKey:(NSString *)key;
 - (NSString *) getViewStateForKey:(NSString *)key;
 

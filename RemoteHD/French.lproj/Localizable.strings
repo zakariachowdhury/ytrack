@@ -26,6 +26,8 @@
 "Edit" = "Modifier";
 "Done" = "OK";
 "addLibrary" = "Ajouter une bibliothèque";
+"volumeControl" = "Contrôle du volume";
+"Options" = "Options";
 
 // PinCode
 "pincodeTip" = "Pour ajouter une bibliothèque iTunes, ouvrez iTunes puis sélectionnez votre iPad dans la liste d'appareils.";

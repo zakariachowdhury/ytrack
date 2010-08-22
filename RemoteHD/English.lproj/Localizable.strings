@@ -27,6 +27,8 @@
 "Edit" = "Edit";
 "Done" = "Done";
 "addLibrary" = "Add Library";
+"volumeControl" = "Volume Control";
+"Options" = "Options";
 
 // PinCode
 "pincodeTip" = "To add an iTunes library, open iTunes and select your iPad from the Devices list";
