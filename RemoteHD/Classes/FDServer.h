@@ -19,6 +19,9 @@
 #define kLibraryPairingGUIDKey @"pairingGUID"
 #define kLibraryHostKey @"host"
 #define kLibraryPortKey @"port"
+#define kLibraryDomainKey @"domain"
+#define kLibraryTypeKey @"type"
+#define kLibraryNameKey @"name"
 #define kLibraryTXTKey @"TXT"
 
 #define kServerPodcastsLibraryAEPS 1
@@ -37,6 +40,8 @@
 @protocol FDServerDelegate
 
 @optional
+- (void) didFinishResolvingServerWithSuccess:(BOOL)success;
+- (void) didOpenServer:(id)server;
 - (void) didFindSpeakers:(NSArray *)speakers;
 
 @end
@@ -75,10 +80,17 @@ typedef enum {
 	BOOL shuffle;
 	BOOL trackChanged;
 	
-	
 	DAAPRequestReply *daapReqRep;
 	NSMutableArray *userPlaylists;
 	Reachability *r;
+	
+	id<FDServerDelegate> delegate;
+	
+	@private
+	NSNetService *_currentResolve;
+	NSString *_domain;
+	NSString *_type;
+	NSString *_name;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -106,11 +118,11 @@ typedef enum {
 @property (nonatomic, readonly) BOOL shuffle;
 @property (nonatomic, readonly) BOOL trackChanged;
 
+@property (nonatomic, assign) id<FDServerDelegate> delegate;
 
-
-- (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT;
+- (id) initWithNetService:(NSNetService *)service serviceName:(NSString *) serviceName pairingGUID:(NSString *)thePairingGUID;
 - (id) initWithDictionary:(NSDictionary *)dict;
-- (BOOL) open;
+- (void) open;
 - (void) logout;
 
 - (NSArray *) getPlayLists;
