@@ -15,7 +15,7 @@
 #import "SessionManager.h"
 #import "NowPlayingDetailViewController.h"
 
-@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, FDServerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, DAAPRequestDelegate, MasterViewDelegate, NowPlayingDelegate>{
+@interface RemoteHDViewController : UIViewController <LibraryDelegate, DetailDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, DAAPRequestDelegate, MasterViewDelegate, NowPlayingDelegate>{
 	IBOutlet UIToolbar *topToolbar;
 	IBOutlet UIToolbar *bottomToolbar;
 	IBOutlet UIView *loadingView;
@@ -52,7 +52,6 @@
 @private 
 	int doneTime;
 	int totalTime;
-	BOOL playing;
 	BOOL _editingPlayingTime;
 }
 

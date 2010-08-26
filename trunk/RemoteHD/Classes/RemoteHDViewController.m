@@ -8,7 +8,6 @@
 //
 
 #import "RemoteHDViewController.h"
-#import "DAAPRequestReply.h"
 #import "DAAPResponsemlog.h"
 #import "DAAPResponsemsrv.h"
 #import "DAAPResponsemdcl.h"
@@ -30,6 +29,7 @@
 - (void) _updateTime:(NSTimer *)timer;
 - (void) _statusUpdate:(NSNotification *)notification;
 - (void) _libraryAvailable;
+- (void) _showOrHideVolumeControl;
 -(void) networkReachabilityEvent: (NSNotification *) notification;
 @end
 
@@ -103,7 +103,7 @@
 	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateNormal];
 
 	// hide most part of the UI if we cannot connect to last used server
-	if ([[SessionManager sharedSessionManager] currentServer] == nil) {
+	if (CurrentServer == nil) {
 		[self _displayNoLib];
 	}
 	
@@ -112,8 +112,9 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	if (!server.connected) {
+		//FIXME DON'T DO THIS HERE as it freezes the UI at startup when host is not reachable
 		[[SessionManager sharedSessionManager] openLastUsedServer];
 	}
 	
@@ -137,28 +138,28 @@
 }
 
 - (IBAction) playClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPause];
 }
 
 - (IBAction) pauseClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPause];
 }
 
 - (IBAction) nextClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playNextItem];
 }
 
 - (IBAction) previousClicked:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server playPreviousItem];
 }
 
 // user did change volume
 - (IBAction) volumeChanged:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server setVolume:volumeSlider.value];
 	[self _updateVolume];
 }
@@ -170,7 +171,7 @@
 }
 
 - (IBAction) playingTimeChanged:(id)sender{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	[server changePlayingTime:progress.value];
 	doneTime = progress.value;
 	_editingPlayingTime = NO;
@@ -234,7 +235,6 @@
 - (IBAction) showNowPlayingDetail:(id)sender{
 	NowPlayingDetailViewController *c = [[NowPlayingDetailViewController alloc] initWithNibName:kNowPlayingDetailViewNibName bundle:nil];
 	self.nowPlayingDetail = c;
-	self.nowPlayingDetail.playing = playing;
 	self.nowPlayingDetail.modalPresentationStyle = UIModalPresentationFullScreen;
 	[self.nowPlayingDetail setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
 	[self.nowPlayingDetail setDelegate:self];
@@ -246,6 +246,7 @@
 
 - (void)didFinishWithNowPlaying{
 	[self dismissModalViewControllerAnimated:YES];
+	[self _updateVolume];
 	nowPlayingDetailShown = NO;
 }
 
@@ -262,7 +263,7 @@
 	
 	DDLogVerbose(@"Did finish editing libraries");
 	[self dismissModalViewControllerAnimated:YES];
-	if ([[SessionManager sharedSessionManager] currentServer] != nil ) {
+	if (CurrentServer != nil ) {
 		[self startLoading];
 		//[detailViewController display];
 		[self buttonSelected:nil];
@@ -271,6 +272,7 @@
 		[self _displayNoLib];
 	}
 	librariesShown = NO;
+	[self _showOrHideVolumeControl];
 }
 
 #pragma mark -
@@ -309,7 +311,7 @@
 
 - (void) _updateVolume{
 	DDLogVerbose(@"updating volume");
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	//long v = [server getVolume];
 	[server getVolume:self action:@selector(readVolume:)];
 	
@@ -324,14 +326,14 @@
 }
 
 - (void) connectionTimedOut{
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	server.connected = NO;
 	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnectionLost object:nil];
 }
 
 
 - (void) _updateTime:(NSTimer *)timer{
-	if (playing) {
+	if (CurrentServer.playing) {
 		doneTime += 1000;
 		if (!_editingPlayingTime) {
 			progress.maximumValue = totalTime;
@@ -372,22 +374,20 @@
 	progress.maximumValue = totalTime;
 	progress.minimumValue = 0;
 	progress.value = doneTime;
-	BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+	//BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
 	
-	track.text = cmst.cann;
-	artist.text = cmst.cana;
-	album.text = cmst.canl;
-	if ([cmst.caps shortValue] == 4) {
-		playing = YES;
+	track.text = CurrentServer.currentTrack;
+	artist.text = CurrentServer.currentArtist;
+	album.text = CurrentServer.currentAlbum;
+	if ([CurrentServer playing]) {
 		play.alpha = 0.0;
 		pause.alpha = 1.0;
-	} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
-		playing = NO;
+	} else {
 		play.alpha = 1.0;
 		pause.alpha = 0.0;
 	} 
-	if (trackChanged) {
-		FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	if (CurrentServer.trackChanged) {
+		FDServer *server = CurrentServer;
 		NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
 		[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 	}
@@ -451,11 +451,22 @@
 	 }
 	
 	[self buttonSelected:nil];
-	FDServer *server = [[SessionManager sharedSessionManager] currentServer];
+	FDServer *server = CurrentServer;
 	NSString *string = [NSString stringWithFormat:kRequestNowPlayingArtwork,server.host,server.port,server.sessionId];
 	DDLogVerbose(@"requesting now playing artwork");
 	[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
-	[self _updateVolume];
+	[self _showOrHideVolumeControl];
+}
+
+- (void) _showOrHideVolumeControl {
+	FDServer *server = CurrentServer;
+	if ([[PreferencesManager sharedPreferencesManager] volumeControl]) {
+		[server setVolume:100];
+		volumeSlider.hidden = YES;
+	}else {
+		volumeSlider.hidden = NO;
+		[self _updateVolume];
+	}
 }
 
 
