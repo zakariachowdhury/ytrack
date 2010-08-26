@@ -11,11 +11,13 @@
 #import "SessionManager.h"
 #import "DAAPRequestReply.h"
 #import "HexDumpUtility.h"
-#import "FDServer.h"
 #import "DAAPResponsemdcl.h"
 #import "RemoteSpeaker.h"
 #import "DAAPResponsecasp.h"
 #import "DDLog.h"
+#import <netinet/in.h>
+#import <sys/socket.h>
+#include <arpa/inet.h>
 
 #ifdef CONFIGURATION_DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -37,6 +39,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @property (nonatomic, assign, readwrite) BOOL needsActivityIndicator;
 @property (nonatomic, assign, readwrite) BOOL initialWaitOver;
 @property (nonatomic, copy, readwrite) NSString *currentServiceName;
+@property (nonatomic, copy, readwrite) NSString *selectedServiceName;
 @property (nonatomic, copy, readwrite) NSString *currentGUID;
 @property (nonatomic, retain, readwrite) NSMutableArray *availableServices;
 
@@ -60,6 +63,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @dynamic timer;
 @synthesize initialWaitOver = _initialWaitOver;
 @synthesize currentServiceName = _currentServiceName;
+@synthesize selectedServiceName = _selectedServiceName;
 @synthesize currentGUID = _currentGUID;
 @synthesize availableServices = _availableServices;
 
@@ -206,7 +210,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			NSString *serviceName = server.servicename;
 			
 			cell.textLabel.text = libraryName;
+			// by default library names are greyed
 			cell.textLabel.textColor = [UIColor grayColor];
+			
+			// unless it has been found during the service discovery
 			if ([self.availableServices indexOfObject:serviceName] != NSNotFound) {
 				cell.textLabel.textColor = [UIColor blackColor];
 			}
@@ -215,7 +222,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
 			
 			// Note that the underlying array could have changed, and we want to show the activity indicator on the correct cell
-			if (self.needsActivityIndicator && self.currentResolve.name == serviceName) {
+			if (self.needsActivityIndicator && [self.selectedServiceName isEqualToString:serviceName]) {
 				if (!cell.accessoryView) {
 					CGRect frame = CGRectMake(0.0, 0.0, kProgressIndicatorSize, kProgressIndicatorSize);
 					UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc] initWithFrame:frame];
@@ -232,6 +239,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			} else if (cell.accessoryView) {
 				cell.accessoryView = nil;
 			}		
+			// is we are currently connected to a server add a checkmark
 			FDServer *currentServer = CurrentServer;
 			if ([serviceName isEqualToString:currentServer.servicename]) {
 				cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -335,19 +343,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 // If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
 - (void)showWaiting:(NSTimer*)timer {
 	if (timer == self.timer) {
-		NSNetService* service = (NSNetService*)[self.timer userInfo];
-		if (self.currentResolve == service) {
-			self.needsActivityIndicator = YES;
-			
-			NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[self.services indexOfObject:self.currentResolve] inSection:0];
-			if (indexPath.row != NSNotFound) {
-				[self.table reloadRowsAtIndexPaths:[NSArray	arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-				// Deselect the row since the activity indicator shows the user something is happening.
-				[self.table deselectRowAtIndexPath:indexPath animated:YES];
-			}
-		}
+		self.needsActivityIndicator = YES;
+		NSIndexPath *indexPath = (NSIndexPath *)timer.userInfo;
+		[self.table reloadRowsAtIndexPaths:[NSArray	arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+		// Deselect the row since the activity indicator shows the user something is happening.
+		[self.table deselectRowAtIndexPath:indexPath animated:YES];
+		
 	}
 }
+
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -366,18 +370,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		// user selected a previously paired library, try to resolve service in case the host has changed
 		else {
 			FDServer *selectedServer = [[[SessionManager sharedSessionManager] getServers] objectAtIndex:indexPath.row];
-			self.currentServiceName = selectedServer.servicename;
-			self.currentGUID = selectedServer.pairingGUID;
-			NSNetService *service = [[NSNetService alloc] initWithDomain:@"local" type:@"_touch-able._tcp" name:selectedServer.servicename];
-			[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:selectedServer.TXT]];
-			self.currentResolve = service;
-			[self.currentResolve setDelegate:self];
 			
-			// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
-			// choose to cancel the resolve by selecting another service in the table view.
-			[self.currentResolve resolveWithTimeout:0.0];
-			[self.services addObject:service];
-			self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showWaiting:) userInfo:self.currentResolve repeats:NO];
+			if (!selectedServer.connected) {
+				selectedServer.delegate = self;
+				[CurrentServer logout];
+				[selectedServer open];
+				self.selectedServiceName = selectedServer.servicename;
+				self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showWaiting:) userInfo:indexPath repeats:NO];
+			}			
 		}
 	}
 }
@@ -485,7 +485,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		
 		// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
 		// choose to cancel the resolve by selecting another service in the table view.
-		[self.currentResolve resolveWithTimeout:0.0];
+		[self.currentResolve resolveWithTimeout:20.0];
 		[self.services addObject:service];
 	} else {
 		
@@ -510,36 +510,31 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
 	assert(service == self.currentResolve);
 	DDLogVerbose(@"LibraryViewController did resolve address");
+	
 	[service retain];
-	
-	NSString * host = [self.currentResolve hostName];
-	// Note that [NSNetService port:] returns an NSInteger in host byte order
-	NSInteger port = [service port];
-	NSString *portStr;
-	if (port != 0 && port != 80) {
-		portStr = [NSString  stringWithFormat:@"%d",port];
-	} else {
-		portStr = @"";
-	}
-
-	NSDictionary* TXTDict = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
-	
 	[self stopCurrentResolve];
 
 	if (![service.name isEqualToString:[CurrentServer servicename]]) {
 		DDLogVerbose(@"LibraryViewController logout");
 		[CurrentServer logout];
-		FDServer *server = [[FDServer alloc] initWithHost:host port:portStr pairingGUID:self.currentGUID serviceName:self.currentServiceName TXT:TXTDict];
+		FDServer *server = [[FDServer alloc] initWithNetService:service serviceName:self.currentServiceName pairingGUID:self.currentGUID];
 		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
-		if ([serv open]){
-			[serv getSpeakers:self];
-		}
-		
+		[serv open];
 		[server release];
 	}
 	
-	
 	[service release];
+	[self.table reloadData];
+}
+
+- (void) didFinishResolvingServerWithSuccess:(BOOL)success{
+	self.needsActivityIndicator = NO;
+	self.timer = nil;
+	[self.table reloadData];
+}
+
+- (void) didOpenServer:(FDServer *)server {
+	[(FDServer *)server getSpeakers:self];
 	[self.table reloadData];
 }
 

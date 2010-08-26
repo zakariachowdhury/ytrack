@@ -14,6 +14,9 @@
 #import "PreferencesManager.h"
 
 @interface SessionManager()
+
+- (void) _didSuccessfullyConnect:(NSNotification *)notification;
+
 @property (nonatomic, retain, readwrite) NSMutableArray* servers;
 @end
 
@@ -26,6 +29,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 - (id) init {
 	if ((self = [super init])) {
 		self.servers = [NSMutableArray arrayWithArray:[[PreferencesManager sharedPreferencesManager] getAllStoredServers]];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didSuccessfullyConnect:) name:kNotificationConnected object:nil];
 	}
 	return self;
 }
@@ -96,9 +100,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	if (foundIndex >=0) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTryReconnect object:self];
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
-		if ([server open]){
-			[self foundNewServer:server];
-		}
+		[server open];
 	}
 }
 
@@ -118,6 +120,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	}
 	
 	
+}
+
+- (void) _didSuccessfullyConnect:(NSNotification *)notification{
+	[self foundNewServer:(FDServer *)[notification.userInfo objectForKey:@"server"]];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PinCodeController.h"
 #import "DAAPRequestReply.h"
+#import "FDServer.h"
 
 @protocol LibraryDelegate
 
@@ -17,7 +18,7 @@
 @end
 
 
-@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate, DAAPRequestDelegate>{
+@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate, DAAPRequestDelegate, FDServerDelegate>{
 	id<LibraryDelegate> delegate;
 	IBOutlet UITableView *table;
 	IBOutlet UIBarButtonItem *editButton;
@@ -32,6 +33,7 @@
 	BOOL _needsActivityIndicator;
 	BOOL _initialWaitOver;
 	NSString *_currentServiceName;
+	NSString *_selectedServiceName;
 	NSString *_currentGUID;
 	NSMutableArray *_availableServices;
 }

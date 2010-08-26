@@ -22,6 +22,9 @@
 #import "DAAPResponseerror.h"
 #import "SessionManager.h"
 #import "DDLog.h"
+#import <netinet/in.h>
+#import <sys/socket.h>
+#include <arpa/inet.h>
 
 
 #ifdef CONFIGURATION_DEBUG
@@ -35,12 +38,20 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (BOOL) _login;
 - (NSString *) _encodeString:(NSString *)string;
 - (void) _renewConnection:(NSTimer *)timer;
+- (void) _stopCurrentResolve;
+- (void) _updateWithNetService:(NSNetService *)service;
+- (void) _resolve;
+- (BOOL) _connect;
 
 @property (nonatomic, copy, readwrite) NSString *currentTrack;
 @property (nonatomic, copy, readwrite) NSString *currentAlbum;
 @property (nonatomic, copy, readwrite) NSString *currentArtist;
 @property (nonatomic, readwrite) BOOL playing;
 @property (nonatomic, readwrite) BOOL trackChanged;
+@property (nonatomic, retain, readwrite) NSNetService* currentResolve;
+@property (nonatomic, copy, readwrite) NSString *domain;
+@property (nonatomic, copy, readwrite) NSString *type;
+@property (nonatomic, copy, readwrite) NSString *name;
 
 @property (nonatomic, retain) DAAPRequestReply *daapReqRep;
 
@@ -71,6 +82,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize booksPersistentId;
 @synthesize podcastsPersistentId;
 @synthesize r;
+@synthesize currentResolve = _currentResolve;
+@synthesize domain = _domain;
+@synthesize type = _type;
+@synthesize name = _name;
+@synthesize delegate;
 
 
 - (id) init {
@@ -80,9 +96,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return self;
 }
 
-- (BOOL) open{
-	DDLogInfo(@"FDServer-open, pairingGUID:%@",pairingGUID);
-	if (![self _login]) return NO;
+- (BOOL) _connect{
+	DDLogInfo(@"FDServer-connect, pairingGUID:%@",pairingGUID);
+	
+	if (![self _login]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationConnectionLost object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"server"]]; 
+		self.connected = NO;
+		return NO;
+	}
 	
 	// we have to know the databaseId for further requests
 	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
@@ -104,7 +125,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	} else {
 		[userPlaylists removeAllObjects];
 	}
-
+	
 	for (DAAPResponsemlit *pl in response.listing.list) {
 		DDLogVerbose(@"Playlist : name=%@,miid=%d,mper=%qX,aePS=%hi,aeSP=%hi,mimc=%i",pl.name, [pl.miid longValue],[pl.mper longLongValue],[pl.aePS shortValue], [pl.aeSP shortValue],[pl.mimc longValue]);
 		if ([pl.aePS shortValue] == 0 && [pl.aeSP shortValue] == 0 && [pl.mimc longValue] > 0) {			
@@ -130,7 +151,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[self monitorPlayStatus];
 	
 	// tell the world we're connected
-	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnected object:nil]; 
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationConnected object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"server"]]; 
 	
 	self.r = [Reachability reachabilityWithHostName:self.host];
 	[r startNotifier];
@@ -150,8 +172,67 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		default:
 			break;
 	}
+	[delegate didOpenServer:self];
 	return YES;
 }
+
+- (void) open{
+	DDLogVerbose(@"FDServer-open");
+	[self _resolve];
+}
+
+- (void) _stopCurrentResolve {
+	[self.currentResolve stop];
+	self.currentResolve = nil;
+}
+
+// This should never be called, since we resolve with a timeout of 0.0, which means indefinite
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
+	DDLogVerbose(@"FDServer - netServiceDidNOTResolveAddress");
+	[delegate didFinishResolvingServerWithSuccess:NO];
+	[self _stopCurrentResolve];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)service {
+	DDLogVerbose(@"FDServer - netServiceDidResolveAddress");
+	[self _updateWithNetService:service];
+	[self _stopCurrentResolve];
+	[delegate didFinishResolvingServerWithSuccess:YES];
+	[self _connect];
+}
+
+- (void) _resolve{
+	DDLogVerbose(@"FDServer - starting resolving");
+	NSNetService *service = [[NSNetService alloc] initWithDomain:self.domain type:self.type name:self.servicename];
+	[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:self.TXT]];
+	self.currentResolve = service;
+	[self.currentResolve setDelegate:self];
+	[self.currentResolve resolveWithTimeout:20.0];
+}
+
+- (void) _updateWithNetService:(NSNetService *)service{
+	[service retain];
+	self.domain = service.domain;
+	self.type = service.type;
+	self.name = service.name;
+	
+	NSData *address = address = [[service addresses] objectAtIndex:0];
+	struct sockaddr_in *socketAddress = (struct sockaddr_in *) [address bytes];
+	self.host = [NSString stringWithFormat: @"%s", inet_ntoa(socketAddress->sin_addr)];
+	
+	// Note that [NSNetService port:] returns an NSInteger in host byte order
+	NSInteger portNumber = [service port];
+	if (portNumber != 0 && portNumber != 80) {
+		self.port = [NSString  stringWithFormat:@"%d",portNumber];
+	} else {
+		self.port = @"";
+	}
+	DDLogVerbose(@"FDServer - resolved service : %@, %@, %@",service.name, self.host, self.port);
+	self.TXT = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
+	[service release];
+}
+
+
 
 - (BOOL) _login{
 	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
@@ -204,18 +285,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 
 	// here we do not check the status of the command
-	// the request method should at least send back status just in case
+	// TODO the request method should at least send back status just in case
 	self.connected = NO;
 }
 
 // initializer for newly paired servers
-- (id) initWithHost:(NSString *)theHost port:(NSString *)thePort pairingGUID:(NSString *)thePairingGUID serviceName:(NSString *)serviceName TXT:(NSDictionary *)theTXT{
+- (id) initWithNetService:(NSNetService *)service serviceName:(NSString *) serviceName pairingGUID:(NSString *)thePairingGUID{
 	if ((self = [super init])) {
 		self.servicename = serviceName;
 		self.pairingGUID = thePairingGUID;
-		self.host = theHost;
-		self.port = thePort;
-		self.TXT = theTXT;
+		
+		[self _updateWithNetService:service];
+		
 		musr = 1;
 		revNum = 1;
 	}
@@ -227,9 +308,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	if ((self = [super init])) {
 		self.servicename = [dict objectForKey:kLibraryServicenameKey];
 		self.pairingGUID = [dict objectForKey:kLibraryPairingGUIDKey];
-		self.host = [dict objectForKey:kLibraryHostKey];
-		self.port = [dict objectForKey:kLibraryPortKey];
+		//self.host = [dict objectForKey:kLibraryHostKey];
+		//self.port = [dict objectForKey:kLibraryPortKey];
+		self.domain = [dict objectForKey:kLibraryDomainKey];
+		self.type = [dict objectForKey:kLibraryTypeKey];
+		self.name = [dict objectForKey:kLibraryNameKey];
 		self.TXT = [dict objectForKey:kLibraryTXTKey];
+		
 		musr = 1;
 		revNum = 1;
 	}
@@ -239,8 +324,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 // return a form of the object that is persistable
 // I think I should use NSCoder
 - (NSDictionary *) getAsDictionary{
-	NSDictionary *dict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.servicename, self.pairingGUID, self.host, self.port, self.TXT, nil] 
-													 forKeys:[NSArray arrayWithObjects:kLibraryServicenameKey, kLibraryPairingGUIDKey, kLibraryHostKey, kLibraryPortKey, kLibraryTXTKey, nil]];
+	NSDictionary *dict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.servicename, self.pairingGUID, self.host, self.port, self.TXT, self.domain, self.type, self.name, nil] 
+													 forKeys:[NSArray arrayWithObjects:kLibraryServicenameKey, kLibraryPairingGUIDKey, kLibraryHostKey, kLibraryPortKey, kLibraryTXTKey, kLibraryDomainKey, kLibraryTypeKey, kLibraryNameKey, nil]];
 	return dict;
 }
 
