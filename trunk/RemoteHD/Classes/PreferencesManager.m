@@ -39,6 +39,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
     return ([self writeApplicationData:pData toFile:(NSString *)fileName]);
 }
 
+- (void) checkAndMigrate{
+	if ([self.preferences objectForKey:kPrefVersion] == nil) {
+		
+		NSMutableArray *servers = [self.preferences objectForKey:kPrefLibrarykey];
+		if (servers != nil){
+			for (int i = 0; i<[servers count];i++) {
+				[[servers objectAtIndex:i] removeObjectForKey:kLibraryHostKey];
+				[[servers objectAtIndex:i] removeObjectForKey:kLibraryPortKey];
+				[[servers objectAtIndex:i] setObject:@"local" forKey:kLibraryDomainKey];
+				[[servers objectAtIndex:i] setObject:@"_touch-able._tcp" forKey:kLibraryTypeKey];
+			}
+		}
+		[self saveViewState:kPrefLastSelectedSegControlArtist withKey:kPrefLastSelectedSegControl];
+		[self setVolumeControl:YES];
+		[self.preferences setObject:@"1.1" forKey:kPrefVersion];
+	}
+	
+}
 
 - (void) loadPreferencesFromFile{
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -57,6 +75,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 	
 	self.prefPath = prefDocPath;
 	
+	[self checkAndMigrate];
 }
 
 - (void) persistPreferences{
@@ -140,7 +159,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 }
 
 - (BOOL) volumeControl{
-	return [(NSNumber *)[self.preferences objectForKey:kPrefVolumeControlEnabled] boolValue];
+	NSNumber *volumeControlEnabled = (NSNumber *)[self.preferences objectForKey:kPrefVolumeControlEnabled];
+	if (volumeControlEnabled == nil) {
+		[self setVolumeControl:YES];
+		return YES;
+	}
+	return [volumeControlEnabled boolValue];
 }
 
 - (NSString *) getViewStateForKey:(NSString *)key{
