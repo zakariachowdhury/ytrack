@@ -48,16 +48,12 @@
 	BOOL nowPlayingDetailShown;
 	BOOL librariesShown;
 	
-	NSTimer *timer;
 @private 
-	int doneTime;
-	int totalTime;
 	BOOL _editingPlayingTime;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) UIPopoverController *popOver;
-@property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) NowPlayingDetailViewController *nowPlayingDetail;
 
 - (IBAction) buttonClicked:(id)sender;

@@ -18,6 +18,8 @@
 #define kPrefLastSelectedSegControlAlbum @"album"
 #define kPrefVolumeControlEnabled @"volumeControl"
 
+#define kPrefVersion @"version"
+
 @interface PreferencesManager : NSObject {
 	NSMutableDictionary *preferences;
 	NSString *prefPath;
@@ -40,6 +42,7 @@
 - (BOOL) volumeControl;
 - (void) saveViewState:(NSString *)state withKey:(NSString *)key;
 - (NSString *) getViewStateForKey:(NSString *)key;
+- (void) checkAndMigrate;
 
 
 @end

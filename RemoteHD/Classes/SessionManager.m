@@ -16,6 +16,7 @@
 @interface SessionManager()
 
 - (void) _didSuccessfullyConnect:(NSNotification *)notification;
+- (void) _purgePendingServerRemoval:(NSTimer *)timer;
 
 @property (nonatomic, retain, readwrite) NSMutableArray* servers;
 @end
@@ -101,6 +102,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTryReconnect object:self];
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
 		[server open];
+		
 	}
 }
 
@@ -115,11 +117,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 	if (foundIndex >=0) {
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
 		[server logout];
-		[self.servers removeObjectAtIndex:foundIndex];
 		[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:foundIndex];
+		// delay removal or the remaining operations on server can't be executed properly
+		[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(_purgePendingServerRemoval:) userInfo:[NSNumber numberWithInt:foundIndex] repeats:NO];
 	}
-	
-	
+}
+
+- (void) _purgePendingServerRemoval:(NSTimer *)timer{
+	NSNumber *index = (NSNumber *)timer.userInfo;
+	[self.servers removeObjectAtIndex:[index intValue]];
 }
 
 - (void) _didSuccessfullyConnect:(NSNotification *)notification{

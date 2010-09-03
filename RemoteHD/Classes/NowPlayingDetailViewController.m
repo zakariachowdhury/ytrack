@@ -8,7 +8,9 @@
 
 #import "NowPlayingDetailViewController.h"
 #import "SessionManager.h"
+#import "PreferencesManager.h"
 #import "FDServer.h"
+#import "DAAPResponsecmgt.h"
 
 @interface NowPlayingDetailViewController(PrivateMethods)
 
@@ -16,6 +18,11 @@
 - (void) _didChangeOrientation;
 - (void) _repositionToLandscape;
 - (void) _repositionToPortrait;
+- (void) _showOrHideVolumeControl;
+- (void) _updateVolume;
+- (void) _updateShuffleState;
+- (void) _updateRepeatState;
+- (void) _updateTime;
 
 @end
 
@@ -48,6 +55,8 @@
 - (void) viewWillAppear:(BOOL)animated{
 	//ensure that screen layout conforms to device orientation
 	[self _didChangeOrientation];
+	[self _updateShuffleState];
+	[self _updateRepeatState];
 }
 
 
@@ -69,8 +78,80 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_statusUpdate:) name:kNotificationStatusUpdate object:nil];
 //	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneButtonPressed:) name:kNotificationConnectionLost object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didChangeOrientation) name:UIDeviceOrientationDidChangeNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTime) name:kNotificationTimerTicks object:nil];
+	
+	volumeSlider.backgroundColor = [UIColor clearColor];	
+	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"slider-black-fill.png"]
+								stretchableImageWithLeftCapWidth:34.0 topCapHeight:0.0];
+	UIImage *stetchRightTrack = [[UIImage imageNamed:@"slider-black-empty.png"]
+								 stretchableImageWithLeftCapWidth:34.0 topCapHeight:0.0];
+	[volumeSlider setThumbImage: [UIImage imageNamed:@"slider-black-pin.png"] forState:UIControlStateNormal];
+	[volumeSlider setThumbImage: [UIImage imageNamed:@"slider-black-pin.png"] forState:UIControlStateSelected];
+	[volumeSlider setThumbImage: [UIImage imageNamed:@"slider-black-pin.png"] forState:UIControlStateHighlighted];
+	[volumeSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+	[volumeSlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
+	
+	progress.backgroundColor = [UIColor clearColor];	
+	UIImage *stetchLeftTrack2 = [[UIImage imageNamed:@"timeslider1.png"]
+								 stretchableImageWithLeftCapWidth:6.0 topCapHeight:0.0];
+	UIImage *stetchRightTrack2 = [[UIImage imageNamed:@"timeslider2.png"]
+								  stretchableImageWithLeftCapWidth:6.0 topCapHeight:0.0];
+	[progress setThumbImage: [UIImage imageNamed:@"timeSliderPin.png"] forState:UIControlStateNormal];
+	[progress setThumbImage: [UIImage imageNamed:@"timeSliderPin.png"] forState:UIControlStateSelected];
+	[progress setThumbImage: [UIImage imageNamed:@"timeSliderPin.png"] forState:UIControlStateHighlighted];
+	[progress setMinimumTrackImage:stetchLeftTrack2 forState:UIControlStateNormal];
+	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateNormal];
+	
+	[self _showOrHideVolumeControl];
 }
 
+- (void) _showOrHideVolumeControl {
+	FDServer *server = CurrentServer;
+	if (![[PreferencesManager sharedPreferencesManager] volumeControl]) {
+		[server setVolume:100];
+		volumeSlider.hidden = YES;
+	}else {
+		volumeSlider.hidden = NO;
+		[self _updateVolume];
+	}
+}
+
+- (void) _updateShuffleState{
+	if (CurrentServer.shuffle) {
+		[shuffleButton setImage:[UIImage imageNamed:@"shuffle-icon-highlighted.png"] forState:UIControlStateNormal];
+	} else {
+		[shuffleButton setImage:[UIImage imageNamed:@"shuffle-icon.png"] forState:UIControlStateNormal];
+	}
+}
+
+- (void) _updateRepeatState{
+	switch (CurrentServer.repeatState) {
+		case kRepeatStateTrack:
+			[repeatButton setImage:[UIImage imageNamed:@"repeat-icon-track-highlighted.png"] forState:UIControlStateNormal];
+			break;
+		case kRepeatStateWhole:
+			[repeatButton setImage:[UIImage imageNamed:@"repeat-icon-highlighted.png"] forState:UIControlStateNormal];
+			break;
+		case kRepeatStateNoRepeat:
+			[repeatButton setImage:[UIImage imageNamed:@"repeat-icon.png"] forState:UIControlStateNormal];
+			break;
+
+		default:
+			break;
+	} 
+}
+
+- (void) _updateVolume{
+	[CurrentServer getVolume:self action:@selector(readVolume:)];
+}
+
+- (void) readVolume:(DAAPResponse *)resp{
+	DAAPResponsecmgt * response = (DAAPResponsecmgt *)resp;
+	volumeSlider.value = [response.cmvo longValue];
+}
+
+- (void) didFinishLoading:(DAAPResponse *)response{
+}
 
 
 - (IBAction) playClicked:(id)sender{
@@ -105,7 +186,7 @@
 		
 		if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight) {
 			NSLog(@"landscape"); 
-			listController.tableView.frame = CGRectMake(0, 125, 768, 529);
+			listController.tableView.frame = CGRectMake(0, 142, 768, 529);
 		} else if (o == UIDeviceOrientationPortrait || o == UIDeviceOrientationPortraitUpsideDown) {
 			NSLog(@"portrait");
 			listController.tableView.frame = CGRectMake(0, 0, 768, 768);
@@ -131,34 +212,67 @@
 
 - (IBAction) shuffleClicked:(id)sender{
 	[CurrentServer toggleShuffle];
+	[self _updateShuffleState];	
 }
 - (IBAction) repeatClicked:(id)sender{
 	[CurrentServer toggleRepeatState];
+	[self _updateRepeatState];	
+}
+
+// user did change volume
+- (IBAction) volumeChanged:(id)sender{
+	FDServer *server = CurrentServer;
+	[server setVolume:volumeSlider.value];
+	[self _updateVolume];
 }
 
 
 - (void) _repositionToLandscape{
 	containerView.frame = CGRectMake(128, 0, 768, 768);
-	listController.tableView.frame = CGRectMake(0, 125, 768, 529);
-	bottomBackground.alpha = 1.0;
+	listController.tableView.frame = CGRectMake(0, 142, 768, 529);
+	if (!fullScreen) {
+		bottomBackgroundLandscape.alpha = 1.0;
+		bottomBackground.alpha = 0.0;
+		topBackground.alpha = 0.0;
+		topBackgroundLandscape.alpha = 1.0;
+	}
 	backButton.frame = CGRectMake(158, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
 	listButton.frame = CGRectMake(824, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
 	nextButton.frame = CGRectMake(820, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(706, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
 	playButton.frame = CGRectMake(779, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
 	pauseButton.frame = CGRectMake(779, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+	repeatButton.frame = CGRectMake(150, repeatButton.frame.origin.y, repeatButton.frame.size.width, repeatButton.frame.size.height);
+	shuffleButton.frame = CGRectMake(854, shuffleButton.frame.origin.y, shuffleButton.frame.size.width, shuffleButton.frame.size.height);
+	volumeSlider.frame = CGRectMake(148, volumeSlider.frame.origin.y, volumeSlider.frame.size.width, volumeSlider.frame.size.height);
+	donePlayingTime.frame = CGRectMake(181, donePlayingTime.frame.origin.y, donePlayingTime.frame.size.width, donePlayingTime.frame.size.height);
+	remainingPlayingTime.frame = CGRectMake(791, remainingPlayingTime.frame.origin.y, remainingPlayingTime.frame.size.width, remainingPlayingTime.frame.size.height);
+	progress.frame = CGRectMake(237, progress.frame.origin.y, progress.frame.size.width, progress.frame.size.height);
+	isPortraitMode = NO;
 }
 
 - (void) _repositionToPortrait{
-	containerView.frame = CGRectMake(0, 125, 768, 768);
+	containerView.frame = CGRectMake(0, 142, 768, 768);
 	listController.tableView.frame = CGRectMake(0, 0, 768, 768);
-	bottomBackground.alpha = 0.0;
+	if (!fullScreen){
+		bottomBackground.alpha = 1.0;
+		bottomBackgroundLandscape.alpha = 0.0;
+		topBackground.alpha = 1.0;
+		topBackgroundLandscape.alpha = 0.0;
+	}
 	backButton.frame = CGRectMake(30, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
 	listButton.frame = CGRectMake(696, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
 	nextButton.frame = CGRectMake(689, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(570, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
 	playButton.frame = CGRectMake(643, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
 	pauseButton.frame = CGRectMake(643, pauseButton.frame.origin.y, pauseButton.frame.size.width, pauseButton.frame.size.height);
+	repeatButton.frame = CGRectMake(20, repeatButton.frame.origin.y, repeatButton.frame.size.width, repeatButton.frame.size.height);
+	shuffleButton.frame = CGRectMake(731, shuffleButton.frame.origin.y, shuffleButton.frame.size.width, shuffleButton.frame.size.height);
+	volumeSlider.frame = CGRectMake(23, volumeSlider.frame.origin.y, volumeSlider.frame.size.width, volumeSlider.frame.size.height);
+	donePlayingTime.frame = CGRectMake(56, donePlayingTime.frame.origin.y, donePlayingTime.frame.size.width, donePlayingTime.frame.size.height);
+	remainingPlayingTime.frame = CGRectMake(670, remainingPlayingTime.frame.origin.y, remainingPlayingTime.frame.size.width, remainingPlayingTime.frame.size.height);
+	progress.frame = CGRectMake(114, progress.frame.origin.y, progress.frame.size.width, progress.frame.size.height);
+	isPortraitMode = YES;
 }
 
 -(void) _didChangeOrientation{
@@ -207,16 +321,33 @@
 	}	
 }
 
+// called when user start changing the playing time slider
+// used to avoid the timer to try top update slide state while user is editing value
+- (IBAction) startingPlaytimeEdit:(id)sender{
+	_editingPlayingTime = YES;
+}
+
+- (IBAction) playingTimeChanged:(id)sender{
+	FDServer *server = CurrentServer;
+	[server changePlayingTime:progress.value];
+	_editingPlayingTime = NO;
+}
+
 - (IBAction) doneButtonPressed:(id)sender{
 	[delegate didFinishWithNowPlaying];
 }
 
 - (IBAction) didTouchCover:(id)sender{
+	if (!isDisplayingCover) {
+		return;
+	}
 	NSLog(@"touched");
 	[UIView beginAnimations:@"fullscreen" context:NULL];
 	if (!fullScreen) {
 		NSLog(@"full");
+		bottomBackgroundLandscape.alpha = 0.0;
 		bottomBackground.alpha = 0.0;
+		topBackgroundLandscape.alpha = 0.0;
 		topBackground.alpha = 0.0;
 		backButton.alpha = 0.0;
 		listButton.alpha = 0.0;
@@ -224,30 +355,59 @@
 		pauseButton.alpha = 0.0;
 		previousButton.alpha = 0.0;
 		nextButton.alpha = 0.0;
+		repeatButton.alpha = 0.0;
+		shuffleButton.alpha = 0.0;
 		track.alpha = 0.0;
 		album.alpha = 0.0;
 		artist.alpha = 0.0;
 		topSeparator.alpha = 0.0;
+		volumeSlider.alpha = 0.0;
+		donePlayingTime.alpha = 0.0;
+		remainingPlayingTime.alpha = 0.0;
+		progress.alpha = 0.0;
 		fullScreen = YES;
 	} else {
-		bottomBackground.alpha = 1.0;
-		topBackground.alpha = 1.0;
+		if (isPortraitMode) {
+			topBackground.alpha = 1.0;
+			bottomBackground.alpha = 1.0;
+		} else {
+			topBackgroundLandscape.alpha = 1.0;
+			bottomBackgroundLandscape.alpha = 1.0;
+		}
+
 		backButton.alpha = 1.0;
 		listButton.alpha = 1.0;
 		playButton.alpha = 1.0;
 		pauseButton.alpha = 1.0;
 		previousButton.alpha = 1.0;
 		nextButton.alpha = 1.0;
+		repeatButton.alpha = 1.0;
+		shuffleButton.alpha = 1.0;
 		track.alpha = 1.0;
 		album.alpha = 1.0;
 		artist.alpha = 1.0;
 		topSeparator.alpha = 1.0;
+		volumeSlider.alpha = 1.0;
+		donePlayingTime.alpha = 1.0;
+		remainingPlayingTime.alpha = 1.0;
+		progress.alpha = 1.0;
 		fullScreen = NO;
 	}
 
 	
 	[UIView commitAnimations];
 	
+}
+
+- (void) _updateTime{
+	if (CurrentServer.playing && !_editingPlayingTime) {
+		progress.maximumValue = CurrentServer.numericTotalTime;
+		progress.minimumValue = 0;
+		progress.value = CurrentServer.numericDoneTime;
+		
+		donePlayingTime.text = CurrentServer.doneTime;
+		remainingPlayingTime.text = CurrentServer.remainingTime;
+	}
 }
 
 // Override to allow orientations other than the default portrait orientation.
