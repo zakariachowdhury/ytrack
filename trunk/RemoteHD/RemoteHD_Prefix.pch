@@ -15,5 +15,6 @@
 #define kNotificationTryReconnect @"tryReconnect"
 #define kNotificationFinishReconnect @"finishReconnecting"
 #define kNotificationBrokenConnection @"brokenConnection"
+#define kNotificationTimerTicks @"timerTicks"
 
 #endif

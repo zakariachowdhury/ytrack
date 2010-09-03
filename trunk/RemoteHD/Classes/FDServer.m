@@ -42,6 +42,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void) _updateWithNetService:(NSNetService *)service;
 - (void) _resolve;
 - (BOOL) _connect;
+- (NSString *) _computePrintableTime:(int)milliseconds;
+- (void) _updateTime:(NSTimer *)timer;
 
 @property (nonatomic, copy, readwrite) NSString *currentTrack;
 @property (nonatomic, copy, readwrite) NSString *currentAlbum;
@@ -51,7 +53,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @property (nonatomic, retain, readwrite) NSNetService* currentResolve;
 @property (nonatomic, copy, readwrite) NSString *domain;
 @property (nonatomic, copy, readwrite) NSString *type;
-@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readwrite) NSString *doneTime;
+@property (nonatomic, copy, readwrite) NSString *remainingTime;
 
 @property (nonatomic, retain) DAAPRequestReply *daapReqRep;
 
@@ -85,8 +88,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize currentResolve = _currentResolve;
 @synthesize domain = _domain;
 @synthesize type = _type;
-@synthesize name = _name;
 @synthesize delegate;
+@synthesize doneTime;
+@synthesize remainingTime;
+@synthesize numericDoneTime;
+@synthesize numericTotalTime;
+@synthesize timer;
 
 
 - (id) init {
@@ -100,7 +107,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DDLogInfo(@"FDServer-connect, pairingGUID:%@",pairingGUID);
 	
 	if (![self _login]) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationConnectionLost object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"server"]]; 
+		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationConnectionLost object:nil userInfo:nil]; 
+		[timer invalidate];
 		self.connected = NO;
 		return NO;
 	}
@@ -214,7 +222,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[service retain];
 	self.domain = service.domain;
 	self.type = service.type;
-	self.name = service.name;
+	self.servicename = service.name;
 	
 	NSData *address = address = [[service addresses] objectAtIndex:0];
 	struct sockaddr_in *socketAddress = (struct sockaddr_in *) [address bytes];
@@ -231,8 +239,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	self.TXT = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 	[service release];
 }
-
-
 
 - (BOOL) _login{
 	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
@@ -290,9 +296,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 
 // initializer for newly paired servers
-- (id) initWithNetService:(NSNetService *)service serviceName:(NSString *) serviceName pairingGUID:(NSString *)thePairingGUID{
+- (id) initWithNetService:(NSNetService *)service pairingGUID:(NSString *)thePairingGUID{
 	if ((self = [super init])) {
-		self.servicename = serviceName;
 		self.pairingGUID = thePairingGUID;
 		
 		[self _updateWithNetService:service];
@@ -312,7 +317,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		//self.port = [dict objectForKey:kLibraryPortKey];
 		self.domain = [dict objectForKey:kLibraryDomainKey];
 		self.type = [dict objectForKey:kLibraryTypeKey];
-		self.name = [dict objectForKey:kLibraryNameKey];
 		self.TXT = [dict objectForKey:kLibraryTXTKey];
 		
 		musr = 1;
@@ -324,8 +328,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 // return a form of the object that is persistable
 // I think I should use NSCoder
 - (NSDictionary *) getAsDictionary{
-	NSDictionary *dict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.servicename, self.pairingGUID, self.host, self.port, self.TXT, self.domain, self.type, self.name, nil] 
-													 forKeys:[NSArray arrayWithObjects:kLibraryServicenameKey, kLibraryPairingGUIDKey, kLibraryHostKey, kLibraryPortKey, kLibraryTXTKey, kLibraryDomainKey, kLibraryTypeKey, kLibraryNameKey, nil]];
+	NSDictionary *dict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.servicename, self.pairingGUID, self.TXT, self.domain, self.type, nil] 
+													 forKeys:[NSArray arrayWithObjects:kLibraryServicenameKey, kLibraryPairingGUIDKey, kLibraryTXTKey, kLibraryDomainKey, kLibraryTypeKey, nil]];
 	return dict;
 }
 
@@ -503,6 +507,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	//self.connected = NO;
 	[self logout];
 	[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationConnectionLost object:nil];
+	[timer invalidate];
 }
 
 // server finally sent a reply, see what's happened and notify observers
@@ -514,20 +519,28 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}else {
 		DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
 		
-		self.currentTrack = cmst.cann;
-		self.currentAlbum = cmst.canl;
-		self.currentArtist = cmst.cana;
-		self.currentAlbumId = cmst.asai;
+		numericDoneTime = [cmst.cast intValue]-[cmst.cant intValue];
+		numericTotalTime = [cmst.cast intValue];
+		
+		self.doneTime = [self _computePrintableTime:numericDoneTime];
+		int remTime = numericTotalTime - numericDoneTime;
+		self.remainingTime = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remTime]];
+		
 		shuffle = [cmst.cash boolValue];
 		repeatState = [cmst.carp intValue];
 		if ([cmst.caps shortValue] == 4) {
 			playing = YES;
+			trackChanged = (![self.currentTrack isEqualToString:cmst.cann] || ![self.currentArtist isEqualToString:cmst.cana] || [self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
+			self.currentTrack = cmst.cann;
+			self.currentAlbum = cmst.canl;
+			self.currentArtist = cmst.cana;
+			self.currentAlbumId = cmst.asai;
 		} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
 			playing = NO;
+			trackChanged = NO;
 		} 
-		
-		trackChanged = (![self.currentTrack isEqualToString:cmst.cann] || ![self.currentArtist isEqualToString:cmst.cana] || [self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
-		
+		[self.timer invalidate];
+		self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTime:) userInfo:nil repeats:YES];
 		[[NSNotificationCenter defaultCenter ]postNotificationName:kNotificationStatusUpdate object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:cmst,@"cmst",nil]];
 		
 		DDLogVerbose(@"received infos : %@, %@, %@",self.currentTrack, self.currentAlbum, self.currentArtist);
@@ -652,6 +665,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DAAPRequest *daapReq = [[DAAPRequest alloc] init];
 	[daapReq asyncRequest:[NSURL URLWithString:string]];
 	[daapReq release];
+	numericDoneTime = position;
 }
 
 #pragma mark -
@@ -734,6 +748,35 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[daapReq release];
 }
 
+- (NSString *) _computePrintableTime:(int)milliseconds{
+	int timeSec = milliseconds / 1000;
+	
+	int totalDays = timeSec / 86400;
+    int totalHours = (timeSec / 3600) - (totalDays * 24);
+    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
+    int totalSeconds = timeSec % 60;
+	if (totalHours > 0) {
+		return [NSString stringWithFormat:@"%d:%02d:%02d",totalHours,totalMinutes,totalSeconds];
+	} else {
+		return [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
+	}
+}
+
+- (void) _updateTime:(NSTimer *)timer{
+	if (playing) {
+		numericDoneTime += 1000;
+	}
+	int remTime = numericTotalTime - numericDoneTime;
+	self.doneTime = [self _computePrintableTime:numericDoneTime];
+	self.remainingTime = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remTime]];	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTimerTicks object:nil userInfo:nil]; 
+	
+}
+
+- (void) shouldInvalidateTimerUpdates{
+	[timer invalidate];
+}
+
 #pragma mark -
 #pragma mark not used
 
@@ -782,6 +825,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[self.currentTrack release];
 	[self.currentArtist release];
 	[self.currentAlbumId release];
+	[self.doneTime release];
+	[self.remainingTime release];
+	[self.timer invalidate];
     [super dealloc];
 }
 

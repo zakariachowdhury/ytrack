@@ -25,8 +25,7 @@
 
 - (void) _updateVolume;
 - (void) _displayNoLib;
-- (NSString *) _computePrintableTime:(int)milliseconds;
-- (void) _updateTime:(NSTimer *)timer;
+- (void) _updateTime;
 - (void) _statusUpdate:(NSNotification *)notification;
 - (void) _libraryAvailable;
 - (void) _showOrHideVolumeControl;
@@ -37,7 +36,6 @@
 @implementation RemoteHDViewController
 @synthesize navigationController;
 @synthesize popOver;
-@synthesize timer;
 @synthesize nowPlayingDetail;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -74,6 +72,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayNoLib) name:kNotificationTryReconnect object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayError) name:kNotificationBrokenConnection object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityEvent:) name:kReachabilityChangedNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTime) name:kNotificationTimerTicks object:nil];
 	
 	// load preferences file and try to connect to the last used server
 	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
@@ -173,7 +172,6 @@
 - (IBAction) playingTimeChanged:(id)sender{
 	FDServer *server = CurrentServer;
 	[server changePlayingTime:progress.value];
-	doneTime = progress.value;
 	_editingPlayingTime = NO;
 }
 
@@ -246,7 +244,8 @@
 
 - (void)didFinishWithNowPlaying{
 	[self dismissModalViewControllerAnimated:YES];
-	[self _updateVolume];
+	if (CurrentServer != nil && CurrentServer.connected)
+		[self _updateVolume];
 	nowPlayingDetailShown = NO;
 }
 
@@ -332,49 +331,25 @@
 }
 
 
-- (void) _updateTime:(NSTimer *)timer{
-	if (CurrentServer.playing) {
-		doneTime += 1000;
-		if (!_editingPlayingTime) {
-			progress.maximumValue = totalTime;
+- (void) _updateTime{
+	if (CurrentServer.playing && !_editingPlayingTime) {
+			progress.maximumValue = CurrentServer.numericTotalTime;
 			progress.minimumValue = 0;
-			progress.value = doneTime;
+			progress.value = CurrentServer.numericDoneTime;
 			
-			int remainingTime = totalTime - doneTime;
-			donePlayingTime.text = [self _computePrintableTime:doneTime];
-			remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
-		}
-	} else {
-		progress.maximumValue = totalTime;
-		progress.minimumValue = 0;
-		progress.value = doneTime;
-		int remainingTime = totalTime - doneTime;
-		donePlayingTime.text = [self _computePrintableTime:doneTime];
-		remainingPlayingTime.text = [NSString stringWithFormat:@"-%@",[self _computePrintableTime:remainingTime]];
+			donePlayingTime.text = CurrentServer.doneTime;
+			remainingPlayingTime.text = CurrentServer.remainingTime;
 	}
-
 }
 
-- (NSString *) _computePrintableTime:(int)milliseconds{
-	int timeSec = milliseconds / 1000;
-	
-	int totalDays = timeSec / 86400;
-    int totalHours = (timeSec / 3600) - (totalDays * 24);
-    int totalMinutes = (timeSec / 60) - (totalDays * 24 * 60) - (totalHours * 60);
-    int totalSeconds = timeSec % 60;
-	return [NSString stringWithFormat:@"%d:%02d",totalMinutes,totalSeconds];
-}
+
 
 #pragma mark notification handling methods
 
 - (void) _statusUpdate:(NSNotification *)notification{
-	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
-	doneTime = [cmst.cast intValue]-[cmst.cant intValue];
-	totalTime = [cmst.cast intValue];
-	progress.maximumValue = totalTime;
+	progress.maximumValue = CurrentServer.numericTotalTime;
 	progress.minimumValue = 0;
-	progress.value = doneTime;
-	//BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
+	progress.value = CurrentServer.numericDoneTime;
 	
 	track.text = CurrentServer.currentTrack;
 	artist.text = CurrentServer.currentArtist;
@@ -392,15 +367,14 @@
 		[nowPlaying loadImageFromURL:[NSURL URLWithString:string]];
 	}
 	
-	donePlayingTime.text = [self _computePrintableTime:doneTime];
-	[self.timer invalidate];
-	//	[self.timer release];
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTime:) userInfo:nil repeats:YES];
+	donePlayingTime.text = CurrentServer.doneTime;
+	remainingPlayingTime.text = CurrentServer.remainingTime;
+	
 }
 
 - (void) _displayNoLib{
 	[self didFinishWithNowPlaying];
-	[self.timer invalidate];
+	[CurrentServer shouldInvalidateTimerUpdates];
 	donePlayingTime.text = @"00:00";
 	remainingPlayingTime.text = @"00:00";
 	progress.enabled = NO;
@@ -418,7 +392,7 @@
 	if (nowPlayingDetailShown) {
 		[self didFinishWithNowPlaying];
 	}
-	[self.timer invalidate];
+	[CurrentServer shouldInvalidateTimerUpdates];
 	donePlayingTime.text = @"00:00";
 	remainingPlayingTime.text = @"00:00";
 	progress.enabled = NO;
@@ -460,7 +434,7 @@
 
 - (void) _showOrHideVolumeControl {
 	FDServer *server = CurrentServer;
-	if ([[PreferencesManager sharedPreferencesManager] volumeControl]) {
+	if (![[PreferencesManager sharedPreferencesManager] volumeControl]) {
 		[server setVolume:100];
 		volumeSlider.hidden = YES;
 	}else {
@@ -511,7 +485,6 @@
 
 
 - (void)dealloc {
-	[self.timer invalidate];
 	[self.popOver release];
 	[self.nowPlayingDetail release];
     [super dealloc];

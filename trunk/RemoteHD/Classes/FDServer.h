@@ -21,7 +21,6 @@
 #define kLibraryPortKey @"port"
 #define kLibraryDomainKey @"domain"
 #define kLibraryTypeKey @"type"
-#define kLibraryNameKey @"name"
 #define kLibraryTXTKey @"TXT"
 
 #define kServerPodcastsLibraryAEPS 1
@@ -86,11 +85,15 @@ typedef enum {
 	
 	id<FDServerDelegate> delegate;
 	
-	@private
 	NSNetService *_currentResolve;
 	NSString *_domain;
 	NSString *_type;
-	NSString *_name;
+	
+	int numericDoneTime;
+	int numericTotalTime;
+	NSString *doneTime;
+	NSString *remainingTime;
+	NSTimer *timer;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -117,10 +120,15 @@ typedef enum {
 @property (nonatomic, readonly) kRepeatState repeatState;
 @property (nonatomic, readonly) BOOL shuffle;
 @property (nonatomic, readonly) BOOL trackChanged;
+@property (nonatomic, readonly) int numericDoneTime;
+@property (nonatomic, readonly) int numericTotalTime;
+@property (nonatomic, copy, readonly) NSString *doneTime;
+@property (nonatomic, copy, readonly) NSString *remainingTime;
+@property (nonatomic, retain) NSTimer *timer;
 
 @property (nonatomic, assign) id<FDServerDelegate> delegate;
 
-- (id) initWithNetService:(NSNetService *)service serviceName:(NSString *) serviceName pairingGUID:(NSString *)thePairingGUID;
+- (id) initWithNetService:(NSNetService *)service pairingGUID:(NSString *)thePairingGUID;
 - (id) initWithDictionary:(NSDictionary *)dict;
 - (void) open;
 - (void) logout;
@@ -158,6 +166,8 @@ typedef enum {
 - (void) getSpeakers:(id<DAAPRequestDelegate>)aDelegate;
 - (void) setSpeakers:(NSArray *)speakers;
 - (NSDictionary *) getAsDictionary;
+//FIXME : remove that method ! Noone should tell the server to stop tick time !
+- (void) shouldInvalidateTimerUpdates;
 
 
 - (void) getServerInfo;

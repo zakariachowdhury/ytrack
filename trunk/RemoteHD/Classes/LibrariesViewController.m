@@ -517,7 +517,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	if (![service.name isEqualToString:[CurrentServer servicename]]) {
 		DDLogVerbose(@"LibraryViewController logout");
 		[CurrentServer logout];
-		FDServer *server = [[FDServer alloc] initWithNetService:service serviceName:self.currentServiceName pairingGUID:self.currentGUID];
+		FDServer *server = [[FDServer alloc] initWithNetService:service pairingGUID:self.currentGUID];
 		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
 		[serv open];
 		[server release];

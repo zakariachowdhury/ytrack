@@ -7,6 +7,14 @@
 //
 
 #import "HexDumpUtility.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
+
 
 
 @implementation HexDumpUtility
@@ -62,7 +70,8 @@
 	[hexDump appendFormat:@"% @\n", tempAscii];
 	
 	
-	NSLog(@"%@",hexDump);
+//	NSLog(@"%@",hexDump);
+	DDLogVerbose(@"%@",hexDump);
 	[hexDump release];
 }
 

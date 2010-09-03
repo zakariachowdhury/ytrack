@@ -18,14 +18,16 @@
 
 @end
 
-@interface NowPlayingDetailViewController : UIViewController {
+@interface NowPlayingDetailViewController : UIViewController <DAAPRequestDelegate> {
 	IBOutlet UILabel *track;
 	IBOutlet UILabel *album;
 	IBOutlet UILabel *artist;
 	NSNumber *albumId;
 	IBOutlet UIImageView *topSeparator;
 	IBOutlet UIImageView *bottomBackground;
+	IBOutlet UIImageView *bottomBackgroundLandscape;
 	IBOutlet UIImageView *topBackground;
+	IBOutlet UIImageView *topBackgroundLandscape;
 	IBOutlet AsyncImageView *coverArt;
 	IBOutlet UIButton *coverButton;
 	IBOutlet UIButton *playButton;
@@ -34,11 +36,21 @@
 	IBOutlet UIButton *previousButton;
 	IBOutlet UIButton *backButton;
 	IBOutlet UIButton *listButton;
+	IBOutlet UIButton *repeatButton;
+	IBOutlet UIButton *shuffleButton;
+	IBOutlet UISlider *volumeSlider;
+	IBOutlet UISlider *progress;
+	IBOutlet UILabel *donePlayingTime;
+	IBOutlet UILabel *remainingPlayingTime;
 	IBOutlet UIView *containerView;
 	id<NowPlayingDelegate> delegate;
 	BOOL fullScreen;
 	IBOutlet NowPlayingListController *listController;
 	BOOL isDisplayingCover;
+	BOOL isPortraitMode;
+	
+@private 
+	BOOL _editingPlayingTime;
 }
 
 @property (nonatomic, retain) UILabel *track;
@@ -57,5 +69,8 @@
 - (IBAction) didTouchCover:(id)sender;
 - (IBAction) shuffleClicked:(id)sender;
 - (IBAction) repeatClicked:(id)sender;
+- (IBAction) volumeChanged:(id)sender;
+- (IBAction) playingTimeChanged:(id)sender;
+- (IBAction) startingPlaytimeEdit:(id)sender;
 
 @end
