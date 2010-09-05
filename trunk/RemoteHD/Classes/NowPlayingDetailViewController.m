@@ -58,6 +58,7 @@
 	[self _updateShuffleState];
 	[self _updateRepeatState];
 	[self _statusUpdate:nil];
+	[self _updateTime];
 }
 
 
