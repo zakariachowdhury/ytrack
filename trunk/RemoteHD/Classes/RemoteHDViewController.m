@@ -452,7 +452,7 @@
 		case kNotReachable:
 			DDLogVerbose(@"not reachable");
 			[self _displayError];
-			[[SessionManager sharedSessionManager] logout];
+			[CurrentServer logout];
 			[[SessionManager sharedSessionManager] openLastUsedServer];
 			break;
 		case kReachableViaWiFi:
