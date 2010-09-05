@@ -136,7 +136,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	for (DAAPResponsemlit *pl in response.listing.list) {
 		DDLogVerbose(@"Playlist : name=%@,miid=%d,mper=%qX,aePS=%hi,aeSP=%hi,mimc=%i",pl.name, [pl.miid longValue],[pl.mper longLongValue],[pl.aePS shortValue], [pl.aeSP shortValue],[pl.mimc longValue]);
-		if ([pl.aePS shortValue] == 0 && [pl.aeSP shortValue] == 0 && [pl.mimc longValue] > 0) {			
+		if ([pl.aePS shortValue] == 0 && [pl.mimc longValue] > 0) {			
 			[userPlaylists addObject:pl];
 		}
 		if ([pl.abpl shortValue] == 1){
