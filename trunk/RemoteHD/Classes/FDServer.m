@@ -519,8 +519,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}else {
 		DAAPResponsecmst * cmst = (DAAPResponsecmst *)response;
 		
-		numericDoneTime = [cmst.cast intValue]-[cmst.cant intValue];
+		if ([cmst.cant intValue] == 0) {
+			numericDoneTime = 0;
+		} else {
+			numericDoneTime = [cmst.cast intValue]-[cmst.cant intValue];
+		}
 		numericTotalTime = [cmst.cast intValue];
+		DDLogVerbose(@"remainingTime : %d, totalTime : %d",[cmst.cant intValue], numericTotalTime);
 		
 		self.doneTime = [self _computePrintableTime:numericDoneTime];
 		int remTime = numericTotalTime - numericDoneTime;
@@ -528,16 +533,17 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		
 		shuffle = [cmst.cash boolValue];
 		repeatState = [cmst.carp intValue];
+		//trackChanged = (![self.currentTrack isEqualToString:cmst.cann] || ![self.currentArtist isEqualToString:cmst.cana] || [self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
+		trackChanged = ([self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
+		self.currentTrack = cmst.cann;
+		self.currentAlbum = cmst.canl;
+		self.currentArtist = cmst.cana;
+		self.currentAlbumId = cmst.asai;
+		
 		if ([cmst.caps shortValue] == 4) {
 			playing = YES;
-			trackChanged = (![self.currentTrack isEqualToString:cmst.cann] || ![self.currentArtist isEqualToString:cmst.cana] || [self.currentAlbumId longLongValue] != [cmst.asai longLongValue]);
-			self.currentTrack = cmst.cann;
-			self.currentAlbum = cmst.canl;
-			self.currentArtist = cmst.cana;
-			self.currentAlbumId = cmst.asai;
 		} else if ([cmst.caps shortValue] == 3 || [cmst.caps shortValue] == 2) {
 			playing = NO;
-			trackChanged = NO;
 		} 
 		[self.timer invalidate];
 		self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTime:) userInfo:nil repeats:YES];
