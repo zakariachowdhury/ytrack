@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="108"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -203,7 +203,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Label</string>
+								<string key="IBUIText"/>
 								<object class="NSFont" key="IBUIFont" id="522569057">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">12</double>
@@ -231,7 +231,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Label</string>
+								<string key="IBUIText"/>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">14</double>
@@ -259,7 +259,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Label</string>
+								<string key="IBUIText"/>
 								<reference key="IBUIFont" ref="522569057"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">3</int>
