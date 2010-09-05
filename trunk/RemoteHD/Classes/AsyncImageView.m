@@ -137,7 +137,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 		if (displayShadow) {
 			imageView = [self _newImageWithShadowFromImage:image];
 		} else {
-			imageView = [[UIImageView alloc] initWithImage:image];
+			imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 768)];
+			[imageView setContentMode:UIViewContentModeScaleAspectFill];
+			imageView.image = image;
 		}
 		[image release];
 	} else {
