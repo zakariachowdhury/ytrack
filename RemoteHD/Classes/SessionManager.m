@@ -119,7 +119,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		[server logout];
 		[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:foundIndex];
 		// delay removal or the remaining operations on server can't be executed properly
-		[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(_purgePendingServerRemoval:) userInfo:[NSNumber numberWithInt:foundIndex] repeats:NO];
+		[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_purgePendingServerRemoval:) userInfo:[NSNumber numberWithInt:foundIndex] repeats:NO];
 	}
 }
 
