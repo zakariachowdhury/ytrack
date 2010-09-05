@@ -57,6 +57,7 @@
 	[self _didChangeOrientation];
 	[self _updateShuffleState];
 	[self _updateRepeatState];
+	[self _statusUpdate:nil];
 }
 
 
@@ -296,15 +297,15 @@
 - (void) _statusUpdate:(NSNotification *)notification{
 	DAAPResponsecmst *cmst = (DAAPResponsecmst *)[notification.userInfo objectForKey:@"cmst"];
 	BOOL trackChanged = NO;
-	if (cmst.asai && [self.albumId longLongValue] != [cmst.asai longLongValue]){
+	if (cmst != nil && cmst.asai && [self.albumId longLongValue] != [cmst.asai longLongValue]){
 		trackChanged = YES;
 		self.albumId = cmst.asai;
 	}
 	//BOOL trackChanged = (![track.text isEqualToString:cmst.cann] || ![artist.text isEqualToString:cmst.cana] || ![album.text isEqualToString:cmst.canl]);
 	
-	track.text = cmst.cann;
-	artist.text = cmst.cana;
-	album.text = cmst.canl;
+	track.text = CurrentServer.currentTrack;
+	artist.text = CurrentServer.currentArtist;
+	album.text = CurrentServer.currentAlbum;
 
 	if (CurrentServer.playing) {
 		playButton.alpha = 0.0;
@@ -400,7 +401,7 @@
 }
 
 - (void) _updateTime{
-	if (CurrentServer.playing && !_editingPlayingTime) {
+	if (!_editingPlayingTime) {
 		progress.maximumValue = CurrentServer.numericTotalTime;
 		progress.minimumValue = 0;
 		progress.value = CurrentServer.numericDoneTime;
