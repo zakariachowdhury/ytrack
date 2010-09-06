@@ -18,7 +18,7 @@
 
 @end
 
-@interface NowPlayingDetailViewController : UIViewController <DAAPRequestDelegate> {
+@interface NowPlayingDetailViewController : UIViewController <DAAPRequestDelegate, AsyncImageViewDelegate> {
 	IBOutlet UILabel *track;
 	IBOutlet UILabel *album;
 	IBOutlet UILabel *artist;
@@ -29,6 +29,7 @@
 	IBOutlet UIImageView *topBackground;
 	IBOutlet UIImageView *topBackgroundLandscape;
 	IBOutlet AsyncImageView *coverArt;
+	IBOutlet UIButton *smallcoverButton;
 	IBOutlet UIButton *coverButton;
 	IBOutlet UIButton *playButton;
 	IBOutlet UIButton *pauseButton;
@@ -43,6 +44,7 @@
 	IBOutlet UILabel *donePlayingTime;
 	IBOutlet UILabel *remainingPlayingTime;
 	IBOutlet UIView *containerView;
+	IBOutlet UIView *toggleButtonView;
 	id<NowPlayingDelegate> delegate;
 	BOOL fullScreen;
 	IBOutlet NowPlayingListController *listController;
