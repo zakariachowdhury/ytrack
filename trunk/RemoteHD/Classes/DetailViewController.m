@@ -114,6 +114,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void) updateImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath{
 	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	cell.imageView.backgroundColor = [UIColor blackColor];
 	cell.imageView.image = image;
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
