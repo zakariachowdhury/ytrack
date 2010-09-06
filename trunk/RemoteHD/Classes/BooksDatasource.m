@@ -125,7 +125,7 @@
 	// [delegate didSelectItem];
 	
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:indexPath.row];
-	[CurrentServer playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
+	[CurrentServer playPodcast:containerPersistentId song:[song.miid longValue]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
