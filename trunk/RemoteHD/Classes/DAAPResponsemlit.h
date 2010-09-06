@@ -53,7 +53,7 @@
 @property (nonatomic, retain) NSNumber *assp;
 @property (nonatomic, copy, getter=albumName) NSString *asal;
 @property (nonatomic, copy, getter=artistName) NSString *asar;
-@property (nonatomic, copy) NSString *asaa;
+@property (nonatomic, copy, getter=songAlbumArtist) NSString *asaa;
 @property (nonatomic, copy) NSString *mshc;
 @property (nonatomic, retain) NSNumber *mshi;
 @property (nonatomic, retain) NSNumber *mshn;
