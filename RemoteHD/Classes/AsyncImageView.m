@@ -157,6 +157,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	}
 	
 	imageView.alpha = 0.0;
+	imageView.tag = 200;
 	
     [self addSubview:imageView];
     [self setNeedsLayout];
@@ -182,8 +183,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 }
 
 - (UIImage*) image {
-    UIImageView* iv = [[self subviews] objectAtIndex:0];
-    return [iv image];
+	UIImageView *imgView = (UIImageView *)[self viewWithTag:200];
+    return [imgView image];
 }
 
 #pragma mark -
