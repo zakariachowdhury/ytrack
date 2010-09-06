@@ -60,11 +60,22 @@
     [super viewWillAppear:animated];
 }
 */
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+
+- (void) scrollToCurrentlyPlayingTrack{
+	int row = -1;
+	for (int i = 0; i<[tracks count]; i++) {
+		DAAPResponsemlit *t = [tracks objectAtIndex:i];
+		if ([t.name isEqualToString:CurrentServer.currentTrack]) {
+			row = i;
+			break;
+		}
+	}
+	
+	if (row >= 0) {
+		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+	}
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -158,8 +169,8 @@
 		[CurrentServer getTracksForAlbum:cmst.asai delegate:self];
 		self.albumId = cmst.asai;
 	}
+		
 	[self.tableView reloadData];
-	
 }
 
 -(void)didFinishLoading:(DAAPResponse *)response{

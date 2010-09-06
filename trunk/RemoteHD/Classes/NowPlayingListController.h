@@ -23,4 +23,6 @@
 @property (nonatomic, copy) NSString *artist;
 @property (nonatomic, retain) NSNumber *albumId;
 
+- (void) scrollToCurrentlyPlayingTrack;
+
 @end
