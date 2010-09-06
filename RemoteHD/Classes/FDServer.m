@@ -697,6 +697,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
+- (void) playPodcast:(long long)containermper song:(long)songId{
+	DDLogInfo(@"FDServer-playPodcast");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayPodcast,self.host,self.port,databasePersistentId,containermper,songId,sessionId];
+	DDLogVerbose(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
 - (void) playBookInLibrary:(int)bookId{
 	DDLogInfo(@"FDServer-playBookInLibrary");
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
