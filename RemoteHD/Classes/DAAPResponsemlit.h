@@ -48,7 +48,7 @@
 @property (nonatomic, retain) NSNumber *aePS;
 @property (nonatomic, retain) NSNumber *asai;
 @property (nonatomic, retain) NSNumber *aeSI;
-@property (nonatomic, retain) NSNumber *astn;
+@property (nonatomic, retain, getter=songTrackNumber) NSNumber *astn;
 @property (nonatomic, retain) NSNumber *astm;
 @property (nonatomic, retain) NSNumber *assp;
 @property (nonatomic, copy, getter=albumName) NSString *asal;

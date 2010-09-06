@@ -195,7 +195,7 @@
 			NSLog(@"portrait");
 			listController.tableView.frame = CGRectMake(0, 0, 768, 768);
 		}
-
+		[listController scrollToCurrentlyPlayingTrack];
 		[containerView addSubview:[listController view]];
 		
 		//isDisplayingCover = NO;
