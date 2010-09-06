@@ -48,8 +48,10 @@
 	nowPlaying = value;
 	if (nowPlaying) {
 		nowPlayingIndicator.hidden = NO;
+		trackNumber.hidden = YES;
 	} else {
 		nowPlayingIndicator.hidden = YES;
+		trackNumber.hidden = NO;
 	}
 	[self setNeedsDisplay];
 }
