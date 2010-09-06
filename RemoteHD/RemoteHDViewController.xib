@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
+			<integer value="108"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -403,6 +403,7 @@
 								<reference key="NSSuperview" ref="791798390"/>
 								<reference key="IBUIBackgroundColor" ref="438019882"/>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUIContentMode">4</int>
 								<string key="IBUIContentStretch">{{0, 0}, {0.8, 1}}</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -558,36 +559,6 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-							<object class="IBUIImageView" id="347531975">
-								<reference key="NSNextResponder" ref="791798390"/>
-								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{12, 11}, {52, 40}}</string>
-								<reference key="NSSuperview" ref="791798390"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">lowVolume.png</string>
-								</object>
-							</object>
-							<object class="IBUIImageView" id="946652667">
-								<reference key="NSNextResponder" ref="791798390"/>
-								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{230, 7}, {42, 46}}</string>
-								<reference key="NSSuperview" ref="791798390"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">highVolume.png</string>
-								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{768, 70}</string>
@@ -1233,8 +1204,6 @@ b25uZXIgbGUgYm91dG9uIGVuIGJhcyDDoCBnYXVjaGUgZGUgbCfDqWNyYW4KA</string>
 							<reference ref="242956963"/>
 							<reference ref="565449375"/>
 							<reference ref="853987624"/>
-							<reference ref="946652667"/>
-							<reference ref="347531975"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">TopToolbar</string>
@@ -1339,16 +1308,6 @@ b25uZXIgbGUgYm91dG9uIGVuIGJhcyDDoCBnYXVjaGUgZGUgbCfDqWNyYW4KA</string>
 					<object class="IBObjectRecord">
 						<int key="objectID">141</int>
 						<reference key="object" ref="853987624"/>
-						<reference key="parent" ref="791798390"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">153</int>
-						<reference key="object" ref="347531975"/>
-						<reference key="parent" ref="791798390"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">154</int>
-						<reference key="object" ref="946652667"/>
 						<reference key="parent" ref="791798390"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2206,9 +2165,7 @@ b25uZXIgbGUgYm91dG9uIGVuIGJhcyDDoCBnYXVjaGUgZGUgbCfDqWNyYW4KA</string>
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>ToolbarBackground.png</string>
 				<string>connect.png</string>
-				<string>highVolume.png</string>
 				<string>hsep.png</string>
-				<string>lowVolume.png</string>
 				<string>next.png</string>
 				<string>pause.png</string>
 				<string>play.png</string>
@@ -2220,9 +2177,7 @@ b25uZXIgbGUgYm91dG9uIGVuIGJhcyDDoCBnYXVjaGUgZGUgbCfDqWNyYW4KA</string>
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{70, 70}</string>
 				<string>{256, 256}</string>
-				<string>{28, 26}</string>
 				<string>{7, 2}</string>
-				<string>{28, 26}</string>
 				<string>{38, 38}</string>
 				<string>{44, 44}</string>
 				<string>{44, 44}</string>
