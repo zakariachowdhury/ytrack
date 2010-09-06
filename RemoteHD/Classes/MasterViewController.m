@@ -75,8 +75,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-	if (section == 0) return @"library";
-	else return @"playlists";
+	if (section == 0) return NSLocalizedString(@"library", @"Bibilothèque");
+	else return NSLocalizedString(@"playlists", @"Listes");
 }
 
 
@@ -109,11 +109,11 @@
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"iTunes-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
 		} else if (indexPath.row == 1) {
-			cell.textLabel.text = @"Books";
+			cell.textLabel.text = NSLocalizedString(@"books", @"Livres audio");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"audiobooks-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"audiobooks.png"];
 		} else if (indexPath.row == 2) {
-			cell.textLabel.text = @"Podcasts";
+			cell.textLabel.text = NSLocalizedString(@"podcasts", @"Podcasts");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"podcast-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"podcast.png"];
 		}
