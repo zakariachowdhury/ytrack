@@ -10,6 +10,7 @@
 #import "SessionManager.h"
 #import "DAAPResponsemlit.h"
 #import "PodcastTracksDatasource.h"
+#import "BooksAndPodcastsCustomCellView.h"
 
 @implementation PodcastsDatasource
 
@@ -86,17 +87,18 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	static NSString *CellIdentifier = @"PodcastCell";
+	static NSString *CellIdentifier = @"PodcastsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	BooksAndPodcastsCustomCellView *cell = (BooksAndPodcastsCustomCellView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[NSBundle mainBundle] loadNibNamed: @"BooksAndPodcastsCell" owner: self options: nil] objectAtIndex: 0];
     }
     
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *track = [self.list objectAtIndex:(offset + indexPath.row)];
 	
-	cell.textLabel.text = track.name;
+	cell.trackName.text = track.name;
+	cell.artistName.text = track.songAlbumArtist;
 	int res = indexPath.row % 2;
 	if (res != 0){
 		cell.backgroundView.backgroundColor = cellColoredBackground;
@@ -104,10 +106,8 @@
 		cell.backgroundView.backgroundColor = [UIColor whiteColor];
 	}
 	
-	//TODO add now playing indicator
 	cell.imageView.image = [self artworkForAlbum:track.miid];
-	NSLog(@"%d",cell.contentView.frame.size.height);
-	cell.imageView.frame = CGRectMake(0, 0, 90, 90);
+	
 	if ([cellId objectForKey:track.miid] == nil) {
 		[cellId setObject:indexPath forKey:track.miid];
 	}
@@ -119,6 +119,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:(offset + indexPath.row)];
 	
