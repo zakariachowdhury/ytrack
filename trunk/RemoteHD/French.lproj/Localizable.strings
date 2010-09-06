@@ -12,7 +12,11 @@
 "notConnected" = "Vous n'êtes connecté à aucune bibliothèque\nVeuillez sélectionner le bouton en bas à gauche de l'écran";
 "brokenConnection" = "La communication avec la bibliothèque n'a pas pu être établie\nVeuillez sélectionner une autre bibliothèque";
 "loading" = "Chargement en cours...";
+"library" = "Bibliothèque";
 "music"= "Musique";
+"books" = "Livres audio";
+"podcasts" = "Podcasts";
+"playlists" = "Listes";
 "Tracks" = "Morceaux";
 "Albums" = "Albums";
 "Artists" = "Artistes";
