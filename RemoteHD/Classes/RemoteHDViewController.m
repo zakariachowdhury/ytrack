@@ -29,6 +29,7 @@
 - (void) _statusUpdate:(NSNotification *)notification;
 - (void) _libraryAvailable;
 - (void) _showOrHideVolumeControl;
+- (void) _reconnect;
 -(void) networkReachabilityEvent: (NSNotification *) notification;
 @end
 
@@ -81,9 +82,9 @@
 	// customize sliders
 	volumeSlider.backgroundColor = [UIColor clearColor];	
 	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"slider1.png"]
-								stretchableImageWithLeftCapWidth:19.0 topCapHeight:0.0];
+								stretchableImageWithLeftCapWidth:34.0 topCapHeight:0.0];
 	UIImage *stetchRightTrack = [[UIImage imageNamed:@"slider2.png"]
-								 stretchableImageWithLeftCapWidth:19.0 topCapHeight:0.0];
+								 stretchableImageWithLeftCapWidth:34.0 topCapHeight:0.0];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateNormal];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateSelected];
 	[volumeSlider setThumbImage: [UIImage imageNamed:@"sliderPin.png"] forState:UIControlStateHighlighted];
@@ -102,21 +103,22 @@
 	[progress setMaximumTrackImage:stetchRightTrack2 forState:UIControlStateNormal];
 
 	// hide most part of the UI if we cannot connect to last used server
-	if (CurrentServer == nil) {
+	//if (CurrentServer == nil) {
 		[self _displayNoLib];
-	}
+	//}
 	
 	// init the editing playing time state
 	_editingPlayingTime = NO;
 }
 
 - (void) viewDidAppear:(BOOL)animated{
-	FDServer *server = CurrentServer;
-	if (!server.connected) {
-		//FIXME DON'T DO THIS HERE as it freezes the UI at startup when host is not reachable
+	[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_reconnect) userInfo:nil repeats:NO];
+}
+
+- (void) _reconnect {
+	if (!CurrentServer.connected) {
 		[[SessionManager sharedSessionManager] openLastUsedServer];
 	}
-	
 }
 
 #pragma mark -
@@ -375,11 +377,11 @@
 - (void) _displayNoLib{
 	[self didFinishWithNowPlaying];
 	[CurrentServer shouldInvalidateTimerUpdates];
-	donePlayingTime.text = @"00:00";
-	remainingPlayingTime.text = @"00:00";
-	progress.enabled = NO;
+	donePlayingTime.text = @"";
+	remainingPlayingTime.text = @"";
+	progress.hidden = YES;
 	volumeSlider.value = 0;
-	volumeSlider.enabled = NO;
+	volumeSlider.hidden = YES;
 	segmentedControl.hidden = YES;
 	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"notConnected" 
 																		  value:@"Vous n'êtes pas connecté" 
@@ -393,11 +395,11 @@
 		[self didFinishWithNowPlaying];
 	}
 	[CurrentServer shouldInvalidateTimerUpdates];
-	donePlayingTime.text = @"00:00";
-	remainingPlayingTime.text = @"00:00";
-	progress.enabled = NO;
+	donePlayingTime.text = @"";
+	remainingPlayingTime.text = @"";
+	progress.hidden = YES;
 	volumeSlider.value = 0;
-	volumeSlider.enabled = NO;
+	volumeSlider.hidden = YES;
 	segmentedControl.hidden = YES;
 	NSString *notConnectedMessage = [[NSBundle mainBundle] localizedStringForKey:@"brokenConnection" 
 																		   value:@"La communication avec le serveur ne peut être établie" 
@@ -409,8 +411,8 @@
 - (void) _libraryAvailable {
 	DDLogVerbose(@"Library available");
 	nolibView.alpha = 0.0;
-	progress.enabled = YES;
-	volumeSlider.enabled = YES;
+	progress.hidden = NO;
+	volumeSlider.hidden = NO;
 	[self startLoading];
 	[detailViewController didChangeLibrary];
 	[masterViewController didChangeLibrary];
