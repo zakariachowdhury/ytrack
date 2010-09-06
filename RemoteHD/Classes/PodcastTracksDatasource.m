@@ -98,7 +98,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:indexPath.row];
-	[CurrentServer playSongInPlaylist:containerPersistentId song:[song.mcti longValue]];
+	[CurrentServer playPodcast:containerPersistentId song:[song.miid longValue]];
 }
 
 - (void) cleanJobs{
