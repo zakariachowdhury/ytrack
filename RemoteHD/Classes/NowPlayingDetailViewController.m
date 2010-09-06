@@ -66,6 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	coverArt.displayShadow = NO;
+	coverArt.delegate = self;
 	fullScreen = NO;
 	isDisplayingCover = YES;
 	//[self _didChangeOrientation];
@@ -189,18 +190,20 @@
 		if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight) {
 			NSLog(@"landscape"); 
 			listController.tableView.frame = CGRectMake(0, 142, 768, 529);
+			
 		} else if (o == UIDeviceOrientationPortrait || o == UIDeviceOrientationPortraitUpsideDown) {
 			NSLog(@"portrait");
 			listController.tableView.frame = CGRectMake(0, 0, 768, 768);
 		}
+
 		[containerView addSubview:[listController view]];
 		
-		isDisplayingCover = NO;
+		//isDisplayingCover = NO;
 	} else {
 		[listController.view removeFromSuperview];
 		[containerView addSubview:coverArt];
 		[[coverButton superview] bringSubviewToFront:coverButton];
-		isDisplayingCover = YES;
+		//isDisplayingCover = YES;
 	}
 
 //	if (device.orientation == UIDeviceOrientationLandscapeLeft || device.orientation == UIDeviceOrientationLandscapeRight) {
@@ -209,7 +212,30 @@
 	//	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:NO];
 //	}
 	
-	[UIView commitAnimations];		
+	[UIView commitAnimations];	
+	[UIView beginAnimations:@"Change view" context:NULL];
+	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:toggleButtonView cache:NO];
+	[UIView setAnimationDuration:0.6];
+	
+	if (isDisplayingCover) {
+		[listButton removeFromSuperview];
+		smallcoverButton.hidden = NO;
+		smallcoverButton.frame = CGRectMake(0, 0, 44, 44);
+		[toggleButtonView addSubview:smallcoverButton];
+		isDisplayingCover = NO;
+	} else {
+		[smallcoverButton removeFromSuperview];
+		[toggleButtonView addSubview:listButton];
+		isDisplayingCover = YES;
+	}
+	
+	//	if (device.orientation == UIDeviceOrientationLandscapeLeft || device.orientation == UIDeviceOrientationLandscapeRight) {
+	//		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:NO];
+	//	} else if (device.orientation == UIDeviceOrientationPortrait || device.orientation == UIDeviceOrientationPortraitUpsideDown) {
+	//	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:containerView cache:NO];
+	//	}
+	
+	[UIView commitAnimations];	
 }
 
 - (IBAction) shuffleClicked:(id)sender{
@@ -239,7 +265,7 @@
 		topBackgroundLandscape.alpha = 1.0;
 	}
 	backButton.frame = CGRectMake(158, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
-	listButton.frame = CGRectMake(824, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
+	toggleButtonView.frame = CGRectMake(824, toggleButtonView.frame.origin.y, toggleButtonView.frame.size.width, toggleButtonView.frame.size.height);
 	nextButton.frame = CGRectMake(820, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(706, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
 	playButton.frame = CGRectMake(779, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
@@ -263,7 +289,7 @@
 		topBackgroundLandscape.alpha = 0.0;
 	}
 	backButton.frame = CGRectMake(30, backButton.frame.origin.y, backButton.frame.size.width, backButton.frame.size.height);
-	listButton.frame = CGRectMake(696, listButton.frame.origin.y, listButton.frame.size.width, listButton.frame.size.height);
+	toggleButtonView.frame = CGRectMake(687, toggleButtonView.frame.origin.y, toggleButtonView.frame.size.width, toggleButtonView.frame.size.height);
 	nextButton.frame = CGRectMake(689, nextButton.frame.origin.y, nextButton.frame.size.width, nextButton.frame.size.height);
 	previousButton.frame = CGRectMake(570, previousButton.frame.origin.y, previousButton.frame.size.width, previousButton.frame.size.height);
 	playButton.frame = CGRectMake(643, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height);
@@ -352,7 +378,7 @@
 		topBackgroundLandscape.alpha = 0.0;
 		topBackground.alpha = 0.0;
 		backButton.alpha = 0.0;
-		listButton.alpha = 0.0;
+		toggleButtonView.alpha = 0.0;
 		playButton.alpha = 0.0;
 		pauseButton.alpha = 0.0;
 		previousButton.alpha = 0.0;
@@ -378,7 +404,7 @@
 		}
 
 		backButton.alpha = 1.0;
-		listButton.alpha = 1.0;
+		toggleButtonView.alpha = 1.0;
 		playButton.alpha = 1.0;
 		pauseButton.alpha = 1.0;
 		previousButton.alpha = 1.0;
@@ -410,6 +436,11 @@
 		donePlayingTime.text = CurrentServer.doneTime;
 		remainingPlayingTime.text = CurrentServer.remainingTime;
 	}
+}
+
+- (void) didFinishLoading{
+	[smallcoverButton setBackgroundImage:[coverArt image] forState:UIControlStateNormal];
+	
 }
 
 // Override to allow orientations other than the default portrait orientation.
