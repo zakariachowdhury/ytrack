@@ -6,17 +6,17 @@
 //  Copyright 2010 Fabrice Dewasmes. All rights reserved.
 //
 
-#import "PodcastsDatasource.h"
+#import "PodcastsBooksDatasource.h"
 #import "SessionManager.h"
 #import "DAAPResponsemlit.h"
 #import "PodcastTracksDatasource.h"
 #import "BooksAndPodcastsCustomCellView.h"
 
-@implementation PodcastsDatasource
+@implementation PodcastsBooksDatasource
 
 @synthesize navigationController;
 @synthesize containerPersistentId;
-
+@synthesize itemType;
 
 - (id) init{
 	if ((self = [super init])) {
@@ -125,7 +125,14 @@
 	
 	NSLog(@"%@-%qi-%qi",song.name,[song.persistentId longLongValue],containerPersistentId);
 	
-	DAAPResponseapso * resp = [CurrentServer getTracksForPodcast:[NSString stringWithFormat:@"%qi",[song.persistentId longLongValue]]];
+	DAAPResponseapso * resp;
+	if (self.itemType == kItemTypePodcast) {
+		resp = [CurrentServer getTracksForPodcast:[NSString stringWithFormat:@"%qi",[song.persistentId longLongValue]]];
+	} else {
+		resp = [CurrentServer getTracksForBook:[NSString stringWithFormat:@"%qi",[song.persistentId longLongValue]]];
+	}
+
+	
 	PodcastsTracksDatasource * c = [[PodcastsTracksDatasource alloc] init];
 	c.list = resp.listing.list;
 	c.containerPersistentId = containerPersistentId ;

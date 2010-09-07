@@ -412,6 +412,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	return response;
 }
 
+- (DAAPResponseapso *) getTracksForBook:(NSString *)podcastId{
+	DDLogInfo(@"FDServer-getTracksForPodcast");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestBookTracks,self.host,self.port,databaseId,musicLibraryId, sessionId,podcastId];
+	DDLogVerbose(@"%@",requestUrl);
+	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
+	return response;
+}
+
 - (AsyncImageLoader *) getArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum{
 	DDLogInfo(@"FDServer-getArtworkForAlbum");
 	return [self getArtwork:albumId size:55 delegate:aDelegate forAlbum:forAlbum];
