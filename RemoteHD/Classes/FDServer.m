@@ -735,6 +735,26 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
+- (void) playPodcast2:(int)songIndex inAlbum:(NSNumber *)albumId{
+	DDLogInfo(@"FDServer-playPodcast2:inAlbum:");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayPodcast2,self.host,self.port,[albumId longLongValue], songIndex, sessionId];
+	DDLogVerbose(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
+- (void) playBook2:(int)songIndex inAlbum:(NSNumber *)albumId{
+	DDLogInfo(@"FDServer-playBook2:inAlbum:");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayBook2,self.host,self.port,[albumId longLongValue], songIndex, sessionId];
+	DDLogVerbose(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
 - (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex{
 	DDLogInfo(@"FDServer-playAllTracksForArtist");
 	NSString *a = [self _encodeString:artist];

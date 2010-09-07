@@ -134,6 +134,7 @@
 
 	
 	PodcastsTracksDatasource * c = [[PodcastsTracksDatasource alloc] init];
+	c.itemType = self.itemType;
 	c.list = resp.listing.list;
 	c.containerPersistentId = containerPersistentId ;
 	c.currentPodcastGroupId = song.miid;

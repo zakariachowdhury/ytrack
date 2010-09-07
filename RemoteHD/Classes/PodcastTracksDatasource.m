@@ -7,7 +7,6 @@
 //
 
 #import "PodcastTracksDatasource.h"
-#import "PodcastsDatasource.h"
 #import "SessionManager.h"
 #import "DAAPResponsemlit.h"
 
@@ -17,6 +16,7 @@
 @synthesize containerPersistentId;
 @synthesize list;
 @synthesize currentPodcastGroupId;
+@synthesize itemType;
 
 - (id) init{
 	if ((self = [super init])) {
@@ -98,7 +98,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:indexPath.row];
-	[CurrentServer playPodcast:containerPersistentId song:[song.miid longValue]];
+	//[CurrentServer playPodcast:containerPersistentId song:[song.miid longValue]];
+	if (self.itemType == kItemTypePodcast) {
+		[CurrentServer playPodcast2:indexPath.row inAlbum:song.asai];
+	} else {
+		[CurrentServer playBook2:indexPath.row inAlbum:song.asai];
+	}
+
 }
 
 - (void) cleanJobs{
