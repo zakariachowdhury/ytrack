@@ -13,15 +13,22 @@
 #import "TrackCustomCellClass.h"
 #import "AsyncImageLoader.h"
 
-@interface PodcastsDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate, AsyncImageLoaderDelegate>{
+typedef enum {
+	kItemTypePodcast = 0,
+	kItemTypeBook = 1,
+} kItemType;
+
+@interface PodcastsBooksDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate, AsyncImageLoaderDelegate>{
 	UINavigationController *navigationController;
 	long long containerPersistentId;
 	NSMutableDictionary *artworks;
 	NSMutableDictionary *cellId;
 	NSMutableDictionary *loaders;
+	kItemType itemType;
 }
 
 @property (nonatomic, assign) UINavigationController *navigationController;
 @property (nonatomic, assign) long long containerPersistentId;
+@property (nonatomic, assign) kItemType itemType;
 
 @end

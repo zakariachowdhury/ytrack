@@ -14,7 +14,7 @@
 #import "DAAPDatasource.h"
 #import "TracksDatasource.h"
 #import "BooksDatasource.h"
-#import "PodcastsDatasource.h"
+#import "PodcastsBooksDatasource.h"
 #import "AlbumsDatasource.h"
 #import "PlaylistDatasource.h"
 
@@ -33,8 +33,8 @@
 	NSMutableArray *arrayOfCharacters;
 	ArtistDatasource *artistDatasource;
 	TracksDatasource *tracksDatasource;
-	BooksDatasource *booksDatasource;
-	PodcastsDatasource *podcastsDatasource;
+	PodcastsBooksDatasource *booksDatasource;
+	PodcastsBooksDatasource *podcastsDatasource;
 	AlbumsDatasource *albumsDatasource;
 	PlaylistDatasource *playlistDatasource;
 	id<DetailDelegate> delegate;
@@ -46,8 +46,8 @@
 @property (nonatomic, retain) ArtistDatasource *artistDatasource;
 @property (nonatomic, retain) TracksDatasource *tracksDatasource;
 @property (nonatomic, retain) AlbumsDatasource *albumsDatasource;
-@property (nonatomic, retain) BooksDatasource *booksDatasource;
-@property (nonatomic, retain) PodcastsDatasource *podcastsDatasource;
+@property (nonatomic, retain) PodcastsBooksDatasource *booksDatasource;
+@property (nonatomic, retain) PodcastsBooksDatasource *podcastsDatasource;
 @property (nonatomic, retain) PlaylistDatasource *playlistDatasource;
 
 - (void) display;

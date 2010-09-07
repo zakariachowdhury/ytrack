@@ -139,6 +139,7 @@ typedef enum {
 - (DAAPResponseapso *) getTracksForAlbum:(NSNumber *)albumId;
 - (void) getTracksForAlbum:(NSNumber *)albumId delegate:(id<DAAPRequestDelegate>)aDelegate;
 - (DAAPResponseapso *) getTracksForPodcast:(NSString *)podcastId;
+- (DAAPResponseapso *) getTracksForBook:(NSString *)podcastId;
 - (DAAPResponseapso *) getAllTracksForArtist:(NSString *)artist;
 - (void) getAllTracksForPlaylist:(int)playlistId delegate:(id<DAAPRequestDelegate>)aDelegate;
 - (AsyncImageLoader *) getArtwork:(NSNumber *)albumId delegate:(id<AsyncImageLoaderDelegate>)aDelegate forAlbum:(BOOL)forAlbum;

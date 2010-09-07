@@ -246,7 +246,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void) changeToBookView{
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.booksDatasource == nil) {
-		BooksDatasource *d = [[BooksDatasource alloc] init];
+		PodcastsBooksDatasource *d = [[PodcastsBooksDatasource alloc] init];
+		d.itemType = kItemTypeBook;
 		self.booksDatasource = d;
 		self.booksDatasource.navigationController = self.navigationController;
 		self.booksDatasource.delegate = self;
@@ -262,7 +263,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void) changeToPodcastView{
 	[self.navigationController popToRootViewControllerAnimated:NO];
 	if (self.podcastsDatasource == nil) {
-		PodcastsDatasource *d = [[PodcastsDatasource alloc] init];
+		PodcastsBooksDatasource *d = [[PodcastsBooksDatasource alloc] init];
+		d.itemType = kItemTypePodcast;
 		self.podcastsDatasource = d;
 		self.podcastsDatasource.navigationController = self.navigationController;
 		self.podcastsDatasource.delegate = self;
