@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "DAAPResponse.h"
 
+typedef enum {
+	kItemTypePodcast = 0,
+	kItemTypeBook = 1,
+} kItemType;
+
 @protocol DAAPDatasourceDelegate
 
 - (void) refreshTableView;

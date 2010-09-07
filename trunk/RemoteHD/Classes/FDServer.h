@@ -150,7 +150,9 @@ typedef enum {
 - (void) getAllPodcasts:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
 - (void) playSongInPlaylist:(long long)containermper song:(long)songId;
-- (void) playPodcast:(long long)containermper song:(long)songId;
+- (void) playPodcast:(long long)containermper song:(long)songId; 
+- (void) playPodcast2:(int)songIndex inAlbum:(NSNumber *)albumId;
+- (void) playBook2:(int)songIndex inAlbum:(NSNumber *)albumId;
 - (void) playBookInLibrary:(int)bookId;
 - (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;
 - (void) playAllTracksForArtist:(NSString *)artist index:(int)songIndex;

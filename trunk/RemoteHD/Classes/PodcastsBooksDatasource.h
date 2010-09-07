@@ -13,11 +13,6 @@
 #import "TrackCustomCellClass.h"
 #import "AsyncImageLoader.h"
 
-typedef enum {
-	kItemTypePodcast = 0,
-	kItemTypeBook = 1,
-} kItemType;
-
 @interface PodcastsBooksDatasource : DAAPDatasource <UITableViewDataSource, UITableViewDelegate, DAAPRequestDelegate, AsyncImageLoaderDelegate>{
 	UINavigationController *navigationController;
 	long long containerPersistentId;
