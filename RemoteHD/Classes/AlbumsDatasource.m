@@ -11,6 +11,7 @@
 #import "DAAPResponseapso.h"
 #import "TracksForAlbumController.h"
 #import "SessionManager.h"
+#import "UIImage+Resize.h"
 
 
 @implementation AlbumsDatasource
@@ -70,10 +71,12 @@
 	if (image == nil) {
 		return;
 	}
-	[artworks setObject:image forKey:albumId];
+	
+	UIImage *temp = [image resizedImage:CGSizeMake(55, 55) interpolationQuality:kCGInterpolationDefault];
+	//NSLog(@"got image for row : %d, w: %f, h: %f",[(NSIndexPath *)[cellId objectForKey:albumId] row], temp.size.width, temp.size.height);
+	[artworks setObject:temp forKey:albumId];
 	[loaders removeObjectForKey:albumId];
-	//NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
-	[self.delegate  updateImage:image forIndexPath:[cellId objectForKey:albumId]];
+	[self.delegate  updateImage:temp forIndexPath:[cellId objectForKey:albumId]];
 }
 
 - (UIImage *) artworkForAlbum:(NSNumber *)albumId{
