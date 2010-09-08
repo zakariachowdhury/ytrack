@@ -248,8 +248,11 @@
 	content[22] = (rand & 0X0000FF00) >> 8;
 	content[23] = rand & 0X000000FF;
 	
+
+#ifdef CONFIGURATION_DEBUG
 	NSData * data = [NSData dataWithBytes:&content length:sizeof(content)];
 	[HexDumpUtility printHexDumpToConsole:data];
+#endif
 	URLParser * urlParser = [[URLParser alloc] initWithURLString:path];
 	NSString *iTunesPairingCode = [urlParser valueForVariable:@"pairingcode"];
 	NSString *serviceName = [urlParser valueForVariable:@"servicename"];
