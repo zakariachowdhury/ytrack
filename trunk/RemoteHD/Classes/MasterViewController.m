@@ -47,17 +47,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	previouslySelected = [NSIndexPath indexPathForRow:0 inSection:0];
+	initialState = YES;
 }
 
 
 - (void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
-	
-	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
 - (void)awakeFromNib{
+	initialState = YES;
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -103,11 +103,16 @@
 	cell.textLabel.shadowColor = [UIColor grayColor];
 	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
 	
+	
+	
 	if (indexPath.section == 0){
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"music", @"Musique");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"iTunes-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"iTunes.png"];
+			if (initialState) {
+				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+			}
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"books", @"Livres audio");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"audiobooks-inv.png"];
@@ -120,11 +125,16 @@
 	} else {
 		DAAPResponsemlit *mlit = (DAAPResponsemlit *)[self.results objectAtIndex:indexPath.row];
 		cell.textLabel.text = mlit.name;
-		cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
-		cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
-	}
+		if ([mlit.aeSP shortValue] == 1) {
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"smartPlaylistIcon-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"smartPlaylistIcon.png"];
+		} else {
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
 
-    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+		}
+	}
+	
 
     return cell;
 }
@@ -133,6 +143,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (initialState) {
+		initialState = NO;
+	}
 	/*
 	if (indexPath.row == 0) {
 		[detailViewController changeToTrackView];

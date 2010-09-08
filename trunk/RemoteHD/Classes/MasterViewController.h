@@ -23,7 +23,7 @@
 	NSArray *results;
 	IBOutlet DetailViewController *detailViewController;
 	id<MasterViewDelegate> delegate;
-	NSIndexPath *previouslySelected;
+	BOOL initialState;
 }
 
 @property (nonatomic, retain) NSArray *results;
