@@ -70,6 +70,7 @@
 	id <DAAPRequestDelegate> delegate;
 	SEL action;
 	NSURL *lastUrl;
+	NSDate *startRequest;
 }
 
 @property (nonatomic, assign) id <DAAPRequestDelegate> delegate;
@@ -87,6 +88,8 @@
 
 - (void) asyncRequestAndParse:(NSURL *)url;
 - (void) asyncRequestAndParse:(NSURL *)url withTimeout:(int)timeoutInterval;
+
+
 
 
 

@@ -35,6 +35,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 														   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
 													   timeoutInterval:timeoutInterval];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+	startRequest = [NSDate date];
+	[startRequest retain];
 	NSURLConnection *conn =[[NSURLConnection alloc]
 							initWithRequest:request delegate:self startImmediately:YES];
     self.connection = conn;
@@ -101,14 +104,24 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	assert(theConnection == self.connection);
-	
+
+#ifdef CONFIGURATION_DEBUG
 	[HexDumpUtility printHexDumpToConsole:data];
+#endif
 	
 	NSString *command = [DAAPRequestReply parseCommandName:data atPosition:0];
 	NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
 	
 	id response = [[NSClassFromString(clazz) alloc] initWithData:data];
+	
+	NSDate *methodStart = [NSDate date];
+	//DDLogError(@"starting parsing : %@",[methodStart description]); 
 	[response performSelector:@selector(parse)];
+	NSDate *methodFinish = [NSDate date];
+	NSTimeInterval parsingTime = [methodFinish timeIntervalSinceDate:methodStart];
+	NSTimeInterval totalTime = [methodFinish timeIntervalSinceDate:startRequest];
+	DDLogVerbose(@"the connection %@, parsing time : %f, totalTime: %f",[connection description], parsingTime, totalTime);
+	[startRequest release];
 	
     self.data = nil;
 	self.connection = nil;
@@ -135,12 +148,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
 														   timeoutInterval:30];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	if (error != nil) {
 		NSLog(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBrokenConnection object:self];
 	}
+#ifdef CONFIGURATION_DEBUG
 	[HexDumpUtility printHexDumpToConsole:dat];
+#endif
 	
 	NSString *command = [self parseCommandName:dat atPosition:0];
 	if (command == nil) {
@@ -161,9 +177,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
 														   timeoutInterval:30];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:error];
 
+#ifdef CONFIGURATION_DEBUG
 	[HexDumpUtility printHexDumpToConsole:dat];
+#endif
 
 	NSString *command = [self parseCommandName:dat atPosition:0];
 	if (command == nil) {
@@ -182,6 +201,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSLog(@"sync requesting image from %@",url);
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	NSLog(@"END requesting image from %@",url);
@@ -197,6 +217,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 
 	NSHTTPURLResponse * httpResponse;
@@ -237,7 +258,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			if (str != nil)
 				[dict setObject:str forKey:cmdKey];
 			else {
+#ifdef CONFIGURATION_DEBUG
 				[HexDumpUtility printHexDumpToConsole:block];
+#endif
 			}
 
 		}
@@ -288,8 +311,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
+#ifdef CONFIGURATION_DEBUG
 	[HexDumpUtility printHexDumpToConsole:dat];
+#endif
 	[self parseSearchResponse:dat handle:[dat length] resp:dict];
 	NSDictionary * retValue = [NSDictionary dictionaryWithDictionary:dict];
 	NSString *clazz;

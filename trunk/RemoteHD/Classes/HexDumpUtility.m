@@ -10,7 +10,7 @@
 #import "DDLog.h"
 
 #ifdef CONFIGURATION_DEBUG
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 #else
 static const int ddLogLevel = LOG_LEVEL_WARN;
 #endif
