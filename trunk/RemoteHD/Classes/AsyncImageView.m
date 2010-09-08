@@ -82,6 +82,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
 										 timeoutInterval:60.0];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
+	[request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSURLConnection *conn =[[NSURLConnection alloc]
 							initWithRequest:request delegate:self];
     self.connection = conn;
