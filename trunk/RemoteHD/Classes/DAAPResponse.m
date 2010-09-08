@@ -114,9 +114,11 @@
 }
 
 - (NSString *) getSelectorNameFromCommandName:(NSString *)command{
-	NSString *firstLetter = [[command substringToIndex:1] uppercaseString];
-	NSString *rest = [command substringFromIndex:1];
-	return [NSString stringWithFormat:@"set%@%@:",firstLetter,rest];
+//	NSString *firstLetter = [[command substringToIndex:1] uppercaseString];
+//	NSString *rest = [command substringFromIndex:1];
+	NSString *test = [command capitalizedString];
+	return [[@"set" stringByAppendingString:test] stringByAppendingString:@":"];
+//	return [NSString stringWithFormat:@"set%@:",test];
 }
 
 - (NSString *) parseString:(NSData *) theData{
@@ -149,51 +151,33 @@
 
 
 - (short) parseShort:(NSData *) theData{
-	Byte res[2];
-	[self getBytes:res fromData:theData length:2];
-	NSValue *hop = [NSValue value:res withObjCType:@encode(short)];
-	short test;
-	[hop getValue:&test];
-	//	NSLog(@"%d",test);
-	return test;
+	int16_t *temp = malloc(1);
+	[theData getBytes:temp length:2];
+	int16_t swapped = NSSwapShort(*temp);
+	return swapped;
 }
 
 - (long) parseLong:(NSData *) theData {
-	Byte res[4];
-	[self getBytes:res fromData:theData length:4];
-	NSValue *hop = [NSValue value:res withObjCType:@encode(long)];
-	long test;
-	[hop getValue:&test];
-	//	NSLog(@"%d",test);
-	return test;
+	int32_t *temp = malloc(1);
+	[theData getBytes:temp length:4];
+	int32_t swapped = NSSwapInt(*temp);
+	return swapped;
 }
 
 - (long long) parseLongLong:(NSData *)theData{
-	Byte res[8];
-	[self getBytes:res fromData:theData length:8];
-	NSValue *hop = [NSValue value:res withObjCType:@encode(long long)];
-	long long test;
-	[hop getValue:&test];
-	//	NSLog(@"%qX",test);
-	return test;
+	
+	int64_t *temp = malloc(1);
+	[theData getBytes:temp length:8];
+	int64_t swapped = NSSwapLongLong(*temp);
+	return swapped;
 }
 
-- (int) parseLength:(NSData *) theData atPosition:(int)pos{
-	Byte value[4];
-	Byte finalValue[4];
-	int test;
-	int length = 4;
-	[theData getBytes:&value range:NSMakeRange(pos, length)];
-	
-	// we have to revert endianness
-	for (int i = 0; i < length ; i ++) {
-		finalValue[i] = value[length - i - 1];
-	}
-	
-	NSValue *hop = [NSValue value:&finalValue withObjCType:@encode(int)];
-	[hop getValue:&test];
-	
-	return test;
+- (int) parseLength:(NSData *) theData atPosition:(int)pos{	
+	int32_t *temp = malloc(1);
+	[theData getBytes:temp range:NSMakeRange(pos, 4)];
+	int32_t swapped = NSSwapInt(*temp);
+
+	return swapped;
 }
 
 
@@ -201,7 +185,7 @@
 	NSNumber *retValue;
 	switch (length) {
 		case 1:
-			retValue = [NSNumber numberWithShort:[self parseBoolean:theData]];
+			retValue = [NSNumber numberWithShort:[self parseBoolean:theData]];	
 			break;
 		case 2:
 			retValue = [NSNumber numberWithShort:[self parseShort:theData]];
@@ -226,7 +210,7 @@
 		NSString *commandSetter = [self getSelectorNameFromCommandName:command];
 		
 		int length = [self parseLength:theData atPosition:progress+4];
-		//NSLog(@"command (%d) : %@",length,command);
+		//NSLog(@"command (%d) : %@ - %@",length,command, commandSetter);
 		
 		
 		// is current object interested in that command
