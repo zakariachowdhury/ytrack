@@ -93,6 +93,8 @@
 		6BB6AA9C123637CE001C9AD9 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB6AA9B123637CE001C9AD9 /* UIImage+Resize.m */; };
 		6BB6AAA1123637E2001C9AD9 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */; };
 		6BB6AAA2123637E2001C9AD9 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB6AAA0123637E2001C9AD9 /* UIImage+RoundedCorner.m */; };
+		6BB6AB3A1236448C001C9AD9 /* smartPlaylistIcon-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB6AB381236448C001C9AD9 /* smartPlaylistIcon-inv.png */; };
+		6BB6AB3B1236448C001C9AD9 /* smartPlaylistIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB6AB391236448C001C9AD9 /* smartPlaylistIcon.png */; };
 		6BC082A912015FC0005CC7A2 /* PlaylistDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC082A812015FC0005CC7A2 /* PlaylistDatasource.m */; };
 		6BC1C79611CEB6F1006686C9 /* DAAPResponseerror.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1C79511CEB6F1006686C9 /* DAAPResponseerror.m */; };
 		6BC1DDE112245EAC00102D4C /* pause-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC1DDDF12245EAC00102D4C /* pause-black.png */; };
@@ -158,7 +160,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* RemoteHDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteHDAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* RemoteHDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteHDAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* RemoteHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* yTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E5210DE3E06400AC0155 /* RemoteHDViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteHDViewController.xib; sourceTree = "<group>"; };
@@ -298,6 +300,8 @@
 		6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		6BB6AA9F123637E2001C9AD9 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		6BB6AAA0123637E2001C9AD9 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		6BB6AB381236448C001C9AD9 /* smartPlaylistIcon-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smartPlaylistIcon-inv.png"; sourceTree = "<group>"; };
+		6BB6AB391236448C001C9AD9 /* smartPlaylistIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smartPlaylistIcon.png; sourceTree = "<group>"; };
 		6BC082A712015FC0005CC7A2 /* PlaylistDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistDatasource.h; sourceTree = "<group>"; };
 		6BC082A812015FC0005CC7A2 /* PlaylistDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistDatasource.m; sourceTree = "<group>"; };
 		6BC1C79411CEB6F1006686C9 /* DAAPResponseerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseerror.h; sourceTree = "<group>"; };
@@ -439,7 +443,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* RemoteHD.app */,
+				1D6058910D05DD3D006BFB54 /* yTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -469,6 +473,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6BB6AB381236448C001C9AD9 /* smartPlaylistIcon-inv.png */,
+				6BB6AB391236448C001C9AD9 /* smartPlaylistIcon.png */,
 				6B2B30221229CF9F00F480AB /* repeat-icon-highlighted.png */,
 				6B2B30231229CF9F00F480AB /* repeat-icon-track-highlighted.png */,
 				6BC1DE931224957A00102D4C /* shuffle-icon-highlighted.png */,
@@ -772,7 +778,7 @@
 			);
 			name = yTrack;
 			productName = RemoteHD;
-			productReference = 1D6058910D05DD3D006BFB54 /* RemoteHD.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* yTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -866,6 +872,8 @@
 				6B2B30241229CF9F00F480AB /* repeat-icon-highlighted.png in Resources */,
 				6B2B30251229CF9F00F480AB /* repeat-icon-track-highlighted.png in Resources */,
 				6BAFC22D123502F300E3F9A3 /* BooksAndPodcastsCell.xib in Resources */,
+				6BB6AB3A1236448C001C9AD9 /* smartPlaylistIcon-inv.png in Resources */,
+				6BB6AB3B1236448C001C9AD9 /* smartPlaylistIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
