@@ -30,6 +30,7 @@
 - (void) _libraryAvailable;
 - (void) _showOrHideVolumeControl;
 - (void) _reconnect;
+- (void) _switchedToDifferentView;
 -(void) networkReachabilityEvent: (NSNotification *) notification;
 @end
 
@@ -208,6 +209,7 @@
 		default:
 			break;
 	}
+	[self _switchedToDifferentView];
 }
 
 - (IBAction)speakerSelectorClicked:(id)sender
@@ -295,16 +297,25 @@
 }
 
 
+
+
 #pragma mark -
 #pragma mark MasterDelegate methods
 
 - (void) didSelectPlaylist{
 	segmentedControl.hidden = YES;
+	[self _switchedToDifferentView];
 }
 
 - (void) didSelectLibrary{
 	segmentedControl.hidden = NO;
 	[self buttonSelected:nil];
+	[self _switchedToDifferentView];
+}
+
+- (void)didSelectBooksOrPodcasts{
+	segmentedControl.hidden = YES;
+	[self _switchedToDifferentView];
 }
 
 #pragma mark -
@@ -443,6 +454,11 @@
 		volumeSlider.hidden = NO;
 		[self _updateVolume];
 	}
+}
+
+- (void) _switchedToDifferentView{
+	NSLog(@"cancelPendingConnections");
+	[detailViewController cancelPendingConnections];
 }
 
 
