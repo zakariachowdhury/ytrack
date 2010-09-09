@@ -8,7 +8,13 @@
 
 #import "PreferencesManager.h"
 #import "SynthesizeSingleton.h"
+#import "DDLog.h"
 
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation PreferencesManager
 
@@ -22,7 +28,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     if (!documentsDirectory) {
-        NSLog(@"Documents directory not found!");
+        DDLogError(@"Documents directory not found!");
         return NO;
     }
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
@@ -33,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
     NSString *error;
     NSData *pData = [NSPropertyListSerialization dataFromPropertyList:plist format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
     if (!pData) {
-        NSLog(@"%@", error);
+        DDLogError(@"%@", error);
         return NO;
     }
     return ([self writeApplicationData:pData toFile:(NSString *)fileName]);

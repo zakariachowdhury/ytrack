@@ -457,7 +457,7 @@
 }
 
 - (void) _switchedToDifferentView{
-	NSLog(@"cancelPendingConnections");
+	DDLogVerbose(@"cancel Pending Connections");
 	[detailViewController cancelPendingConnections];
 }
 

@@ -45,7 +45,7 @@
 	[artworks setObject:image forKey:albumId];
 	[loaders removeObjectForKey:albumId];
 	NSIndexPath *index = (NSIndexPath *)[cellId objectForKey:albumId];
-	NSLog(@"got image for row : %d, track %d",[index row], [albumId intValue]);
+	//NSLog(@"got image for row : %d, track %d",[index row], [albumId intValue]);
 	UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:index];
 	cell.imageView.image = image;
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationNone];
