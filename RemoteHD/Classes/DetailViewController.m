@@ -277,6 +277,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[CurrentServer getAllPodcasts:self.podcastsDatasource];
 }
 
+- (void) cancelPendingConnections{
+	[albumsDatasource cleanJobs];
+}
+
 - (void) didChangeLibrary{
 	[self.tracksDatasource clearDatas];
 	[self.artistDatasource clearDatas];
