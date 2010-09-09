@@ -29,9 +29,9 @@
 	};
 	28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1097, 6084}}";
-			sepNavSelRange = "{5182, 0}";
-			sepNavVisRange = "{4895, 1031}";
+			sepNavIntBoundsRect = "{{0, 0}, {1097, 6201}}";
+			sepNavSelRange = "{15846, 0}";
+			sepNavVisRange = "{15183, 895}";
 			sepNavWindowFrame = "{{15, 113}, {1109, 660}}";
 		};
 	};
@@ -769,6 +769,10 @@
 			6B1121F01238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F01238D3E20094F2DC /* PBXTextBookmark */;
 			6B1121F11238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F11238D3E20094F2DC /* PBXTextBookmark */;
 			6B1121F21238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F21238D3E20094F2DC /* PBXTextBookmark */;
+			6B1121FB1238D4FD0094F2DC /* PBXTextBookmark */ = 6B1121FB1238D4FD0094F2DC /* PBXTextBookmark */;
+			6B1121FC1238D4FD0094F2DC /* PBXTextBookmark */ = 6B1121FC1238D4FD0094F2DC /* PBXTextBookmark */;
+			6B1121FE1238D4FD0094F2DC /* PBXTextBookmark */ = 6B1121FE1238D4FD0094F2DC /* PBXTextBookmark */;
+			6B1122021238D5060094F2DC /* PBXTextBookmark */ = 6B1122021238D5060094F2DC /* PBXTextBookmark */;
 			6B115B801211197B002B6243 = 6B115B801211197B002B6243 /* PBXTextBookmark */;
 			6B21FE4612353F6E00855B44 = 6B21FE4612353F6E00855B44 /* PBXTextBookmark */;
 			6B21FE4A12353F6E00855B44 = 6B21FE4A12353F6E00855B44 /* PBXTextBookmark */;
@@ -948,9 +952,9 @@
 	};
 	6B008C7111B31194008E2012 /* AsyncImageView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 2821}}";
-			sepNavSelRange = "{2586, 66}";
-			sepNavVisRange = "{2206, 1081}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 3159}}";
+			sepNavSelRange = "{197, 0}";
+			sepNavVisRange = "{0, 579}";
 			sepNavWindowFrame = "{{84, 50}, {1109, 660}}";
 		};
 	};
@@ -1011,7 +1015,7 @@
 		comments = "Passing argument 7 of 'log:level:flag:file:function:line:format:' from incompatible pointer type";
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		rLen = 0;
-		rLoc = 116;
+		rLoc = 114;
 		rType = 1;
 	};
 	6B111D6112379A850094F2DC /* PBXTextBookmark */ = {
@@ -1019,7 +1023,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 116";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 1151;
 		vrLoc = 3469;
@@ -1028,7 +1032,7 @@
 		isa = PBXTextBookmark;
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		rLen = 1;
-		rLoc = 103;
+		rLoc = 101;
 		rType = 1;
 	};
 	6B111D6512379A850094F2DC /* PBXTextBookmark */ = {
@@ -1036,7 +1040,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 116";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 1424;
 		vrLoc = 2980;
@@ -1046,7 +1050,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 116";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 627;
 		vrLoc = 3469;
@@ -1076,7 +1080,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 119";
 		rLen = 21;
-		rLoc = 3936;
+		rLoc = 3886;
 		rType = 0;
 		vrLen = 1003;
 		vrLoc = 3469;
@@ -1086,7 +1090,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 119";
 		rLen = 21;
-		rLoc = 3936;
+		rLoc = 3886;
 		rType = 0;
 		vrLen = 1023;
 		vrLoc = 3630;
@@ -1106,7 +1110,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 3973;
+		rLoc = 3923;
 		rType = 0;
 		vrLen = 773;
 		vrLoc = 3476;
@@ -1116,7 +1120,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 128";
 		rLen = 0;
-		rLoc = 4251;
+		rLoc = 4201;
 		rType = 0;
 		vrLen = 838;
 		vrLoc = 4496;
@@ -1146,7 +1150,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 122";
 		rLen = 0;
-		rLoc = 4063;
+		rLoc = 4013;
 		rType = 0;
 		vrLen = 1304;
 		vrLoc = 3314;
@@ -1156,7 +1160,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 122";
 		rLen = 0;
-		rLoc = 4063;
+		rLoc = 4013;
 		rType = 0;
 		vrLen = 719;
 		vrLoc = 3730;
@@ -1203,7 +1207,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 122";
 		rLen = 0;
-		rLoc = 4063;
+		rLoc = 4013;
 		rType = 0;
 		vrLen = 1193;
 		vrLoc = 3314;
@@ -1213,7 +1217,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 124";
 		rLen = 0;
-		rLoc = 4065;
+		rLoc = 4015;
 		rType = 0;
 		vrLen = 1216;
 		vrLoc = 3451;
@@ -1223,7 +1227,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 123";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 722;
 		vrLoc = 3908;
@@ -1293,7 +1297,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 117";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 1142;
 		vrLoc = 3533;
@@ -1303,7 +1307,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 113";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 2707;
 		rType = 0;
 		vrLen = 1130;
 		vrLoc = 2309;
@@ -1313,7 +1317,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 1001;
 		vrLoc = 2309;
@@ -1323,7 +1327,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 960;
 		vrLoc = 2350;
@@ -1333,7 +1337,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 123";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 722;
 		vrLoc = 3908;
@@ -1343,7 +1347,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 2636;
@@ -1353,7 +1357,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 907;
 		vrLoc = 2539;
@@ -1383,7 +1387,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 2636;
@@ -1433,7 +1437,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 733;
 		vrLoc = 2212;
@@ -3011,7 +3015,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 117";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 1144;
 		vrLoc = 3533;
@@ -3021,7 +3025,7 @@
 		fRef = 6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */;
 		name = "DAAPRequest.m: 25";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 883;
 		rType = 0;
 		vrLen = 974;
 		vrLoc = 144;
@@ -3071,7 +3075,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 734;
 		vrLoc = 2211;
@@ -3081,7 +3085,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 734;
 		vrLoc = 2211;
@@ -3105,7 +3109,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 116";
 		rLen = 0;
-		rLoc = 2730;
+		rLoc = 2737;
 		rType = 0;
 		vrLen = 734;
 		vrLoc = 2211;
@@ -3115,7 +3119,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1122;
 		vrLoc = 4594;
@@ -3125,7 +3129,7 @@
 		fRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */;
 		name = "AsyncImageView.m: 85";
 		rLen = 66;
-		rLoc = 2586;
+		rLoc = 2739;
 		rType = 0;
 		vrLen = 1190;
 		vrLoc = 2206;
@@ -3135,7 +3139,7 @@
 		fRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */;
 		name = "AsyncImageView.m: 85";
 		rLen = 66;
-		rLoc = 2586;
+		rLoc = 2739;
 		rType = 0;
 		vrLen = 1190;
 		vrLoc = 2206;
@@ -3145,7 +3149,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1862;
 		vrLoc = 3930;
@@ -3165,7 +3169,7 @@
 		fRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */;
 		name = "AsyncImageView.m: 85";
 		rLen = 66;
-		rLoc = 2586;
+		rLoc = 2739;
 		rType = 0;
 		vrLen = 1190;
 		vrLoc = 2206;
@@ -3235,7 +3239,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1122;
 		vrLoc = 4594;
@@ -3245,7 +3249,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1497;
 		vrLoc = 3542;
@@ -3265,7 +3269,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 705;
 		vrLoc = 6438;
@@ -3275,7 +3279,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1115;
 		vrLoc = 6209;
@@ -3285,7 +3289,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 705;
 		vrLoc = 6438;
@@ -3305,7 +3309,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1080;
 		vrLoc = 6406;
@@ -3315,7 +3319,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1466;
 		vrLoc = 3578;
@@ -3325,7 +3329,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 419;
 		vrLoc = 2601;
@@ -3339,7 +3343,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1815;
 		vrLoc = 2445;
@@ -3369,7 +3373,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 419;
 		vrLoc = 2601;
@@ -3949,7 +3953,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 117";
 		rLen = 0;
-		rLoc = 3807;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 1767;
 		vrLoc = 3328;
@@ -4546,7 +4550,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1401;
 		vrLoc = 2859;
@@ -4556,7 +4560,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 822;
 		vrLoc = 5084;
@@ -4576,7 +4580,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1796;
 		vrLoc = 3930;
@@ -4616,7 +4620,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1789;
 		vrLoc = 3930;
@@ -4726,7 +4730,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 111";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 2707;
 		rType = 0;
 		vrLen = 1068;
 		vrLoc = 2541;
@@ -4746,7 +4750,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 123";
 		rLen = 0;
-		rLoc = 3985;
+		rLoc = 3935;
 		rType = 0;
 		vrLen = 1182;
 		vrLoc = 3450;
@@ -4766,7 +4770,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 451";
 		rLen = 0;
-		rLoc = 16026;
+		rLoc = 16035;
 		rType = 0;
 		vrLen = 760;
 		vrLoc = 15534;
@@ -4786,7 +4790,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 451";
 		rLen = 0;
-		rLoc = 16026;
+		rLoc = 16035;
 		rType = 0;
 		vrLen = 543;
 		vrLoc = 15534;
@@ -4806,7 +4810,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 123";
 		rLen = 0;
-		rLoc = 3985;
+		rLoc = 3935;
 		rType = 0;
 		vrLen = 1154;
 		vrLoc = 3478;
@@ -4846,7 +4850,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 496";
 		rLen = 0;
-		rLoc = 17072;
+		rLoc = 17081;
 		rType = 0;
 		vrLen = 794;
 		vrLoc = 15701;
@@ -4886,7 +4890,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 880";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1843;
 		vrLoc = 3930;
@@ -4916,7 +4920,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1850;
 		vrLoc = 3930;
@@ -4936,7 +4940,7 @@
 		fRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */;
 		name = "AsyncImageView.m: 85";
 		rLen = 66;
-		rLoc = 2586;
+		rLoc = 2739;
 		rType = 0;
 		vrLen = 1081;
 		vrLoc = 2206;
@@ -4946,7 +4950,7 @@
 		fRef = 6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */;
 		name = "AsyncImageLoader.m: 29";
 		rLen = 0;
-		rLoc = 823;
+		rLoc = 976;
 		rType = 0;
 		vrLen = 1148;
 		vrLoc = 317;
@@ -4984,7 +4988,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1850;
 		vrLoc = 3930;
@@ -4998,7 +5002,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 496";
 		rLen = 0;
-		rLoc = 17072;
+		rLoc = 17081;
 		rType = 0;
 		vrLen = 390;
 		vrLoc = 15884;
@@ -5026,7 +5030,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1916;
 		vrLoc = 3930;
@@ -5080,7 +5084,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1850;
 		vrLoc = 3930;
@@ -5151,7 +5155,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15852;
+		rLoc = 15861;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 8151;
@@ -5171,7 +5175,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 281";
 		rLen = 0;
-		rLoc = 8835;
+		rLoc = 8842;
 		rType = 0;
 		vrLen = 923;
 		vrLoc = 8054;
@@ -5268,7 +5272,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15852;
+		rLoc = 15861;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 8151;
@@ -5278,7 +5282,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15851;
+		rLoc = 15860;
 		rType = 0;
 		vrLen = 845;
 		vrLoc = 15580;
@@ -5298,7 +5302,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15851;
+		rLoc = 15860;
 		rType = 0;
 		vrLen = 503;
 		vrLoc = 15670;
@@ -5338,7 +5342,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15851;
+		rLoc = 15860;
 		rType = 0;
 		vrLen = 856;
 		vrLoc = 15483;
@@ -5428,7 +5432,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 879";
 		rLen = 0;
-		rLoc = 33686;
+		rLoc = 33693;
 		rType = 0;
 		vrLen = 1916;
 		vrLoc = 3930;
@@ -5518,7 +5522,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 118";
 		rLen = 0;
-		rLoc = 3879;
+		rLoc = 3829;
 		rType = 0;
 		vrLen = 1222;
 		vrLoc = 3396;
@@ -5528,7 +5532,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 118";
 		rLen = 0;
-		rLoc = 3879;
+		rLoc = 3829;
 		rType = 0;
 		vrLen = 1222;
 		vrLoc = 3396;
@@ -5559,7 +5563,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 118;
+		rLoc = 116;
 		rType = 1;
 	};
 	6B1120F81238623E0094F2DC /* PBXTextBookmark */ = {
@@ -5567,7 +5571,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 1093;
 		vrLoc = 3396;
@@ -5577,7 +5581,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 1071;
 		vrLoc = 3423;
@@ -5597,7 +5601,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 1041;
 		vrLoc = 3476;
@@ -5614,7 +5618,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1367;
 		vrLoc = 32307;
@@ -5644,7 +5648,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 646;
 		vrLoc = 3630;
@@ -5699,7 +5703,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 963;
 		vrLoc = 3554;
@@ -5729,7 +5733,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 676;
 		vrLoc = 3701;
@@ -5824,7 +5828,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1367;
 		vrLoc = 32307;
@@ -5854,7 +5858,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 3478;
@@ -5874,7 +5878,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1027;
 		vrLoc = 32307;
@@ -5884,7 +5888,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 938;
 		vrLoc = 32307;
@@ -5894,7 +5898,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1364;
 		vrLoc = 32307;
@@ -5991,7 +5995,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 855";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1364;
 		vrLoc = 32307;
@@ -6068,7 +6072,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6088,7 +6092,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 857";
 		rLen = 0;
-		rLoc = 33205;
+		rLoc = 33212;
 		rType = 0;
 		vrLen = 1065;
 		vrLoc = 32337;
@@ -6138,7 +6142,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6178,7 +6182,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 857";
 		rLen = 0;
-		rLoc = 33205;
+		rLoc = 33212;
 		rType = 0;
 		vrLen = 1452;
 		vrLoc = 3688;
@@ -6218,7 +6222,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6318,7 +6322,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6398,7 +6402,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6428,7 +6432,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6458,7 +6462,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6488,7 +6492,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6518,7 +6522,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6590,7 +6594,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6644,7 +6648,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6684,7 +6688,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6748,7 +6752,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 281";
 		rLen = 0;
-		rLoc = 8835;
+		rLoc = 8842;
 		rType = 0;
 		vrLen = 908;
 		vrLoc = 8105;
@@ -6768,7 +6772,7 @@
 		fRef = 6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */;
 		name = "DAAPRequestReply.m: 120";
 		rLen = 0;
-		rLoc = 4024;
+		rLoc = 3974;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 3478;
@@ -6808,7 +6812,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6890,7 +6894,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 32252;
@@ -6950,7 +6954,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1434;
 		vrLoc = 32252;
@@ -6980,7 +6984,7 @@
 		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
 		name = "FDServer.m: 856";
 		rLen = 0;
-		rLoc = 33194;
+		rLoc = 33201;
 		rType = 0;
 		vrLen = 1434;
 		vrLoc = 32252;
@@ -6994,6 +6998,63 @@
 		rType = 0;
 		vrLen = 1490;
 		vrLoc = 2777;
+	};
+	6B1121FB1238D4FD0094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 1031;
+		vrLoc = 4895;
+	};
+	6B1121FC1238D4FD0094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B1121FD1238D4FD0094F2DC /* MainTests.js */;
+		name = "MainTests.js: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 254;
+		vrLoc = 0;
+	};
+	6B1121FD1238D4FD0094F2DC /* MainTests.js */ = {
+		isa = PBXFileReference;
+		name = MainTests.js;
+		path = /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainTests.js;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {899, 377}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 254}";
+		};
+	};
+	6B1121FE1238D4FD0094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B1121FF1238D4FD0094F2DC /* MainTests.js */;
+		name = "MainTests.js: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 254;
+		vrLoc = 0;
+	};
+	6B1121FF1238D4FD0094F2DC /* MainTests.js */ = {
+		isa = PBXFileReference;
+		name = MainTests.js;
+		path = /Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/MainTests.js;
+		sourceTree = "<absolute>";
+	};
+	6B1122021238D5060094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 479;
+		vrLoc = 4896;
 	};
 	6B115B801211197B002B6243 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -7189,9 +7250,9 @@
 	};
 	6B43AD9611A95C8500DBD74E /* PreferencesManager.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1166, 2392}}";
-			sepNavSelRange = "{276, 0}";
-			sepNavVisRange = "{1524, 617}";
+			sepNavIntBoundsRect = "{{0, 0}, {992, 2340}}";
+			sepNavSelRange = "{620, 0}";
+			sepNavVisRange = "{44, 1033}";
 			sepNavWindowFrame = "{{15, 113}, {1109, 660}}";
 		};
 	};
@@ -7337,9 +7398,9 @@
 	};
 	6B6CD6F912174C5D001F3101 /* Reachability.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1166, 10647}}";
-			sepNavSelRange = "{9871, 0}";
-			sepNavVisRange = "{9382, 705}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 10244}}";
+			sepNavSelRange = "{7228, 5}";
+			sepNavVisRange = "{6767, 1086}";
 		};
 	};
 	6B75F75F11A3FCB400B9D841 /* yTrack */ = {
@@ -7418,9 +7479,9 @@
 	};
 	6B75F7B311A406B500B9D841 /* DetailViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 4264}}";
-			sepNavSelRange = "{8835, 0}";
-			sepNavVisRange = "{8105, 908}";
+			sepNavIntBoundsRect = "{{0, 0}, {1069, 4355}}";
+			sepNavSelRange = "{2243, 0}";
+			sepNavVisRange = "{1749, 866}";
 			sepNavWindowFrame = "{{15, 77}, {575, 696}}";
 		};
 	};
@@ -7448,9 +7509,9 @@
 	};
 	6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 4563}}";
-			sepNavSelRange = "{4024, 0}";
-			sepNavVisRange = "{3478, 1039}";
+			sepNavIntBoundsRect = "{{0, 0}, {1111, 4264}}";
+			sepNavSelRange = "{8565, 0}";
+			sepNavVisRange = "{8078, 1202}";
 			sepNavWindowFrame = "{{15, 77}, {575, 696}}";
 		};
 	};
@@ -7609,9 +7670,9 @@
 	};
 	6B75F81711A4094100B9D841 /* HexDumpUtility.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 1079}}";
-			sepNavSelRange = "{262, 0}";
-			sepNavVisRange = "{83, 862}";
+			sepNavIntBoundsRect = "{{0, 0}, {964, 1027}}";
+			sepNavSelRange = "{2307, 5}";
+			sepNavVisRange = "{1534, 848}";
 		};
 	};
 	6B75F81811A4094100B9D841 /* HTTPAuthenticationRequest.h */ = {
@@ -7933,9 +7994,9 @@
 	};
 	6B7AE8FE1204DE3600F18900 /* PodcastsBooksDatasource.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1166, 2418}}";
-			sepNavSelRange = "{4531, 0}";
-			sepNavVisRange = "{4187, 756}";
+			sepNavIntBoundsRect = "{{0, 0}, {978, 2353}}";
+			sepNavSelRange = "{4033, 0}";
+			sepNavVisRange = "{3546, 1108}";
 		};
 	};
 	6B7AE96D1204EB3000F18900 /* PodcastTracksDatasource.h */ = {
@@ -7947,9 +8008,9 @@
 	};
 	6B7AE96E1204EB3000F18900 /* PodcastTracksDatasource.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1166, 1638}}";
-			sepNavSelRange = "{3370, 0}";
-			sepNavVisRange = "{2916, 516}";
+			sepNavIntBoundsRect = "{{0, 0}, {908, 1690}}";
+			sepNavSelRange = "{1210, 0}";
+			sepNavVisRange = "{718, 1125}";
 		};
 	};
 	6B7D940411A998C7002465AA /* SessionManager.h */ = {
@@ -8063,7 +8124,7 @@
 		fRef = 6BA5FB1411C2BDFB0009921E /* AlbumsOfArtistController.m */;
 		name = "AlbumsOfArtistController.m: 106";
 		rLen = 0;
-		rLoc = 2937;
+		rLoc = 2939;
 		rType = 0;
 		vrLen = 1839;
 		vrLoc = 2193;
@@ -8281,7 +8342,7 @@
 		fRef = 6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */;
 		name = "DAAPRequest.m: 25";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 883;
 		rType = 0;
 		vrLen = 951;
 		vrLoc = 168;
@@ -8291,7 +8352,7 @@
 		fRef = 6B008C7111B31194008E2012 /* AsyncImageView.m */;
 		name = "AsyncImageView.m: 85";
 		rLen = 66;
-		rLoc = 2586;
+		rLoc = 2739;
 		rType = 0;
 		vrLen = 1190;
 		vrLoc = 2206;
@@ -8301,7 +8362,7 @@
 		fRef = 6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */;
 		name = "AsyncImageLoader.m: 29";
 		rLen = 0;
-		rLoc = 823;
+		rLoc = 976;
 		rType = 0;
 		vrLen = 1168;
 		vrLoc = 317;
@@ -8346,8 +8407,8 @@
 	6BA5FB1411C2BDFB0009921E /* AlbumsOfArtistController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1069, 2496}}";
-			sepNavSelRange = "{3036, 0}";
-			sepNavVisRange = "{2193, 1839}";
+			sepNavSelRange = "{2623, 5}";
+			sepNavVisRange = "{0, 697}";
 		};
 	};
 	6BA5FB4111C2C2AA0009921E /* DAAPResponseagal.h */ = {
@@ -8686,7 +8747,7 @@
 		fRef = 6B7AE96E1204EB3000F18900 /* PodcastTracksDatasource.m */;
 		name = "PodcastTracksDatasource.m: 105";
 		rLen = 0;
-		rLoc = 3370;
+		rLoc = 3372;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 2511;
@@ -8696,7 +8757,7 @@
 		fRef = 6B7AE8FE1204DE3600F18900 /* PodcastsBooksDatasource.m */;
 		name = "PodcastsBooksDatasource.m: 137";
 		rLen = 0;
-		rLoc = 4531;
+		rLoc = 4535;
 		rType = 0;
 		vrLen = 1227;
 		vrLoc = 4117;
@@ -8748,7 +8809,7 @@
 		fRef = 6B75F7B311A406B500B9D841 /* DetailViewController.m */;
 		name = "DetailViewController.m: 249";
 		rLen = 0;
-		rLoc = 7620;
+		rLoc = 7627;
 		rType = 0;
 		vrLen = 961;
 		vrLoc = 7281;
@@ -8916,7 +8977,7 @@
 		fRef = 6BF29EA81207F252004233D9 /* NowPlayingDetailViewController.m */;
 		name = "NowPlayingDetailViewController.m: 198";
 		rLen = 0;
-		rLoc = 7142;
+		rLoc = 7310;
 		rType = 0;
 		vrLen = 1293;
 		vrLoc = 6590;
@@ -8985,9 +9046,9 @@
 	};
 	6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 1001}}";
-			sepNavSelRange = "{823, 0}";
-			sepNavVisRange = "{317, 1148}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 1183}}";
+			sepNavSelRange = "{195, 0}";
+			sepNavVisRange = "{0, 685}";
 		};
 	};
 	6BD2DAEF11BDBD3700A09A4F /* PBXTextBookmark */ = {
@@ -9097,9 +9158,9 @@
 	};
 	6BE275F011AB948600F1F600 /* FDServer.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 11713}}";
-			sepNavSelRange = "{33194, 0}";
-			sepNavVisRange = "{32252, 1434}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 11739}}";
+			sepNavSelRange = "{656, 134}";
+			sepNavVisRange = "{0, 656}";
 			sepNavWindowFrame = "{{15, 77}, {575, 696}}";
 		};
 	};
@@ -9126,9 +9187,9 @@
 	};
 	6BE2B34011C05EA000EE6AC7 /* DAAPRequest.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 1989}}";
-			sepNavSelRange = "{725, 0}";
-			sepNavVisRange = "{144, 974}";
+			sepNavIntBoundsRect = "{{0, 0}, {899, 2106}}";
+			sepNavSelRange = "{457, 0}";
+			sepNavVisRange = "{21, 796}";
 		};
 	};
 	6BEA594F11CD10FA00E419EC /* AlbumsDatasource.h */ = {
@@ -9327,9 +9388,9 @@
 	};
 	6BF29EA81207F252004233D9 /* NowPlayingDetailViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 6539}}";
-			sepNavSelRange = "{7142, 0}";
-			sepNavVisRange = "{6590, 1293}";
+			sepNavIntBoundsRect = "{{0, 0}, {1167, 6253}}";
+			sepNavSelRange = "{15488, 0}";
+			sepNavVisRange = "{15193, 724}";
 		};
 	};
 	6BF29EBA1207F75E004233D9 /* PBXTextBookmark */ = {
