@@ -118,14 +118,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SessionManager)
 		FDServer *server = [self.servers objectAtIndex:foundIndex];
 		[server logout];
 		[[PreferencesManager sharedPreferencesManager] deleteServerAtIndex:foundIndex];
-		// delay removal or the remaining operations on server can't be executed properly
-		[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_purgePendingServerRemoval:) userInfo:[NSNumber numberWithInt:foundIndex] repeats:NO];
+		[self.servers removeObjectAtIndex:foundIndex];
 	}
-}
-
-- (void) _purgePendingServerRemoval:(NSTimer *)timer{
-	NSNumber *index = (NSNumber *)timer.userInfo;
-	[self.servers removeObjectAtIndex:[index intValue]];
 }
 
 - (void) _didSuccessfullyConnect:(NSNotification *)notification{
