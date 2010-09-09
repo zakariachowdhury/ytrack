@@ -15,6 +15,7 @@
 
 - (void)didSelectPlaylist;
 - (void)didSelectLibrary;
+- (void)didSelectBooksOrPodcasts;
 
 @end
 

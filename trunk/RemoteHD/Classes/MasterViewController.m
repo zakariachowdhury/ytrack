@@ -129,8 +129,13 @@
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"smartPlaylistIcon-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"smartPlaylistIcon.png"];
 		} else {
-			cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
-			cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
+			if ([mlit.aePS shortValue] == kServerGeniusLibraryAEPS) {
+				cell.imageView.highlightedImage = [UIImage imageNamed:@"genius-icon-inv.png"];
+				cell.imageView.image = [UIImage imageNamed:@"genius-icon.png"];
+			} else {
+				cell.imageView.highlightedImage = [UIImage imageNamed:@"playlist-inv.png"];
+				cell.imageView.image = [UIImage imageNamed:@"playlist.png"];
+			}
 
 		}
 	}
@@ -157,10 +162,11 @@
 			[self.delegate didSelectLibrary];
 		} else if (indexPath.row == 1) {
 			[detailViewController changeToBookView];
+			[self.delegate didSelectBooksOrPodcasts];
 		}
 		else if (indexPath.row == 2) {
 			[detailViewController changeToPodcastView];
-			
+			[self.delegate didSelectBooksOrPodcasts];
 		}
 	} else if (indexPath.section == 1){
 		DAAPResponsemlit *playlist = [self.results objectAtIndex:indexPath.row];
