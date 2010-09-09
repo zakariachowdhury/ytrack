@@ -154,6 +154,7 @@
 	int16_t *temp = malloc(1);
 	[theData getBytes:temp length:2];
 	int16_t swapped = NSSwapShort(*temp);
+	free(temp);
 	return swapped;
 }
 
@@ -161,6 +162,7 @@
 	int32_t *temp = malloc(1);
 	[theData getBytes:temp length:4];
 	int32_t swapped = NSSwapInt(*temp);
+	free(temp);
 	return swapped;
 }
 
@@ -169,6 +171,7 @@
 	int64_t *temp = malloc(1);
 	[theData getBytes:temp length:8];
 	int64_t swapped = NSSwapLongLong(*temp);
+	free(temp);
 	return swapped;
 }
 
@@ -176,7 +179,7 @@
 	int32_t *temp = malloc(1);
 	[theData getBytes:temp range:NSMakeRange(pos, 4)];
 	int32_t swapped = NSSwapInt(*temp);
-
+	free(temp);
 	return swapped;
 }
 
