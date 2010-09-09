@@ -113,7 +113,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated{
-	[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_reconnect) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_reconnect) userInfo:nil repeats:NO];
 }
 
 - (void) _reconnect {
