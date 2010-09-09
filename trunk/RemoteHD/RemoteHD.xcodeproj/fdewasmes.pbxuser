@@ -29,16 +29,16 @@
 	};
 	28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1132, 7163}}";
-			sepNavSelRange = "{11426, 0}";
-			sepNavVisRange = "{9752, 924}";
+			sepNavIntBoundsRect = "{{0, 0}, {1097, 6084}}";
+			sepNavSelRange = "{5182, 0}";
+			sepNavVisRange = "{4895, 1031}";
 			sepNavWindowFrame = "{{15, 113}, {1109, 660}}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = Distribution;
 		activeExecutable = 6B75F75F11A3FCB400B9D841 /* yTrack */;
-		activeSDKPreference = iphonesimulator3.2;
+		activeSDKPreference = iphoneos3.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* yTrack */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* yTrack */,
@@ -752,6 +752,23 @@
 			6B1121CE1238D1EE0094F2DC /* PBXTextBookmark */ = 6B1121CE1238D1EE0094F2DC /* PBXTextBookmark */;
 			6B1121CF1238D1EE0094F2DC /* PBXTextBookmark */ = 6B1121CF1238D1EE0094F2DC /* PBXTextBookmark */;
 			6B1121D01238D1EE0094F2DC /* PBXTextBookmark */ = 6B1121D01238D1EE0094F2DC /* PBXTextBookmark */;
+			6B1121DB1238D3440094F2DC /* PBXTextBookmark */ = 6B1121DB1238D3440094F2DC /* PBXTextBookmark */;
+			6B1121DC1238D3440094F2DC /* PBXTextBookmark */ = 6B1121DC1238D3440094F2DC /* PBXTextBookmark */;
+			6B1121DD1238D3440094F2DC /* PlistBookmark */ = 6B1121DD1238D3440094F2DC /* PlistBookmark */;
+			6B1121DE1238D3440094F2DC /* PBXTextBookmark */ = 6B1121DE1238D3440094F2DC /* PBXTextBookmark */;
+			6B1121DF1238D3440094F2DC /* PBXTextBookmark */ = 6B1121DF1238D3440094F2DC /* PBXTextBookmark */;
+			6B1121E01238D3460094F2DC /* PBXTextBookmark */ = 6B1121E01238D3460094F2DC /* PBXTextBookmark */;
+			6B1121E11238D3460094F2DC /* PBXTextBookmark */ = 6B1121E11238D3460094F2DC /* PBXTextBookmark */;
+			6B1121E21238D3460094F2DC /* PBXTextBookmark */ = 6B1121E21238D3460094F2DC /* PBXTextBookmark */;
+			6B1121E81238D38F0094F2DC /* PBXTextBookmark */ = 6B1121E81238D38F0094F2DC /* PBXTextBookmark */;
+			6B1121E91238D38F0094F2DC /* PBXTextBookmark */ = 6B1121E91238D38F0094F2DC /* PBXTextBookmark */;
+			6B1121EA1238D3940094F2DC /* PBXTextBookmark */ = 6B1121EA1238D3940094F2DC /* PBXTextBookmark */;
+			6B1121EB1238D3940094F2DC /* PBXTextBookmark */ = 6B1121EB1238D3940094F2DC /* PBXTextBookmark */;
+			6B1121EC1238D3940094F2DC /* PBXTextBookmark */ = 6B1121EC1238D3940094F2DC /* PBXTextBookmark */;
+			6B1121ED1238D3940094F2DC /* PBXTextBookmark */ = 6B1121ED1238D3940094F2DC /* PBXTextBookmark */;
+			6B1121F01238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F01238D3E20094F2DC /* PBXTextBookmark */;
+			6B1121F11238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F11238D3E20094F2DC /* PBXTextBookmark */;
+			6B1121F21238D3E20094F2DC /* PBXTextBookmark */ = 6B1121F21238D3E20094F2DC /* PBXTextBookmark */;
 			6B115B801211197B002B6243 = 6B115B801211197B002B6243 /* PBXTextBookmark */;
 			6B21FE4612353F6E00855B44 = 6B21FE4612353F6E00855B44 /* PBXTextBookmark */;
 			6B21FE4A12353F6E00855B44 = 6B21FE4A12353F6E00855B44 /* PBXTextBookmark */;
@@ -1216,7 +1233,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 416";
 		rLen = 12;
-		rLoc = 14590;
+		rLoc = 14591;
 		rType = 0;
 		vrLen = 1111;
 		vrLoc = 14198;
@@ -1346,7 +1363,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 292";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 650;
 		vrLoc = 10617;
@@ -1406,7 +1423,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 285";
 		rLen = 25;
-		rLoc = 10852;
+		rLoc = 10853;
 		rType = 0;
 		vrLen = 648;
 		vrLoc = 10617;
@@ -1523,7 +1540,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 433;
 		vrLoc = 10863;
@@ -1543,7 +1560,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 656;
 		vrLoc = 10755;
@@ -1553,7 +1570,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 434;
 		vrLoc = 10863;
@@ -1563,7 +1580,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 657;
 		vrLoc = 10782;
@@ -1573,7 +1590,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 474;
 		vrLoc = 10782;
@@ -1583,7 +1600,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 646;
 		vrLoc = 10703;
@@ -1593,7 +1610,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 474;
 		vrLoc = 10782;
@@ -1603,7 +1620,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 595;
 		vrLoc = 10754;
@@ -1633,7 +1650,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 474;
 		vrLoc = 10782;
@@ -3024,7 +3041,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 293";
 		rLen = 0;
-		rLoc = 10967;
+		rLoc = 10968;
 		rType = 0;
 		vrLen = 631;
 		vrLoc = 10718;
@@ -4739,7 +4756,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 292";
 		rLen = 0;
-		rLoc = 10994;
+		rLoc = 10995;
 		rType = 0;
 		vrLen = 503;
 		vrLoc = 10718;
@@ -4749,7 +4766,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 451";
 		rLen = 0;
-		rLoc = 16025;
+		rLoc = 16026;
 		rType = 0;
 		vrLen = 760;
 		vrLoc = 15534;
@@ -4769,7 +4786,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 451";
 		rLen = 0;
-		rLoc = 16025;
+		rLoc = 16026;
 		rType = 0;
 		vrLen = 543;
 		vrLoc = 15534;
@@ -4829,7 +4846,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 496";
 		rLen = 0;
-		rLoc = 17071;
+		rLoc = 17072;
 		rType = 0;
 		vrLen = 794;
 		vrLoc = 15701;
@@ -4981,7 +4998,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 496";
 		rLen = 0;
-		rLoc = 17071;
+		rLoc = 17072;
 		rType = 0;
 		vrLen = 390;
 		vrLoc = 15884;
@@ -5134,7 +5151,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15851;
+		rLoc = 15852;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 8151;
@@ -5251,7 +5268,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15851;
+		rLoc = 15852;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 8151;
@@ -5261,7 +5278,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15850;
+		rLoc = 15851;
 		rType = 0;
 		vrLen = 845;
 		vrLoc = 15580;
@@ -5281,7 +5298,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15850;
+		rLoc = 15851;
 		rType = 0;
 		vrLen = 503;
 		vrLoc = 15670;
@@ -5321,7 +5338,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 455";
 		rLen = 0;
-		rLoc = 15850;
+		rLoc = 15851;
 		rType = 0;
 		vrLen = 856;
 		vrLoc = 15483;
@@ -5331,7 +5348,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 318";
 		rLen = 0;
-		rLoc = 11462;
+		rLoc = 11463;
 		rType = 0;
 		vrLen = 576;
 		vrLoc = 11087;
@@ -5341,7 +5358,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 318";
 		rLen = 0;
-		rLoc = 11462;
+		rLoc = 11463;
 		rType = 0;
 		vrLen = 339;
 		vrLoc = 11324;
@@ -5351,7 +5368,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 317";
 		rLen = 0;
-		rLoc = 11426;
+		rLoc = 11427;
 		rType = 0;
 		vrLen = 606;
 		vrLoc = 11087;
@@ -5361,7 +5378,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 317";
 		rLen = 0;
-		rLoc = 11426;
+		rLoc = 11427;
 		rType = 0;
 		vrLen = 606;
 		vrLoc = 9880;
@@ -5371,7 +5388,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 317";
 		rLen = 0;
-		rLoc = 11426;
+		rLoc = 11427;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 9752;
@@ -5471,7 +5488,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 317";
 		rLen = 0;
-		rLoc = 11426;
+		rLoc = 11427;
 		rType = 0;
 		vrLen = 606;
 		vrLoc = 9880;
@@ -5673,7 +5690,7 @@
 		ignoreCount = 0;
 		lineNumber = 85;
 		location = yTrack;
-		modificationTime = 305713331.665558;
+		modificationTime = 305714017.326484;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5768,7 +5785,7 @@
 		ignoreCount = 0;
 		lineNumber = 80;
 		location = yTrack;
-		modificationTime = 305713331.666919;
+		modificationTime = 305714017.327091;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -6717,7 +6734,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 317";
 		rLen = 0;
-		rLoc = 11426;
+		rLoc = 11427;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 9752;
@@ -6804,6 +6821,178 @@
 		rLoc = 5900;
 		rType = 0;
 		vrLen = 1437;
+		vrLoc = 2777;
+	};
+	6B1121DB1238D3440094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6BEA594F11CD10FA00E419EC /* AlbumsDatasource.h */;
+		name = "AlbumsDatasource.h: 26";
+		rLen = 0;
+		rLoc = 689;
+		rType = 0;
+		vrLen = 696;
+		vrLoc = 0;
+	};
+	6B1121DC1238D3440094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B75F7B211A406B500B9D841 /* DetailViewController.h */;
+		name = "DetailViewController.h: 61";
+		rLen = 34;
+		rLoc = 1910;
+		rType = 0;
+		vrLen = 1094;
+		vrLoc = 857;
+	};
+	6B1121DD1238D3440094F2DC /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* RemoteHD-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			LSRequiresIPhoneOS,
+		);
+		name = "/Users/fdewasmes/Documents/Dev/iPhoneDev/RemoteHD/RemoteHD-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	6B1121DE1238D3440094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 317";
+		rLen = 0;
+		rLoc = 11427;
+		rType = 0;
+		vrLen = 934;
+		vrLoc = 9752;
+	};
+	6B1121DF1238D3440094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 1010;
+		vrLoc = 4627;
+	};
+	6B1121E01238D3460094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 4813;
+	};
+	6B1121E11238D3460094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
+		name = "FDServer.m: 856";
+		rLen = 0;
+		rLoc = 33194;
+		rType = 0;
+		vrLen = 1429;
+		vrLoc = 32252;
+	};
+	6B1121E21238D3460094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B75F7FA11A4094100B9D841 /* DAAPResponse.m */;
+		name = "DAAPResponse.m: 216";
+		rLen = 0;
+		rLoc = 5900;
+		rType = 0;
+		vrLen = 1437;
+		vrLoc = 2777;
+	};
+	6B1121E81238D38F0094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B75F7B011A4063300B9D841 /* MasterViewController.m */;
+		name = "MasterViewController.m: 134";
+		rLen = 0;
+		rLoc = 4452;
+		rType = 0;
+		vrLen = 865;
+		vrLoc = 3758;
+	};
+	6B1121E91238D38F0094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 479;
+		vrLoc = 4896;
+	};
+	6B1121EA1238D3940094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 1031;
+		vrLoc = 4895;
+	};
+	6B1121EB1238D3940094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 1031;
+		vrLoc = 4895;
+	};
+	6B1121EC1238D3940094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
+		name = "FDServer.m: 856";
+		rLen = 0;
+		rLoc = 33194;
+		rType = 0;
+		vrLen = 1434;
+		vrLoc = 32252;
+	};
+	6B1121ED1238D3940094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B75F7FA11A4094100B9D841 /* DAAPResponse.m */;
+		name = "DAAPResponse.m: 216";
+		rLen = 0;
+		rLoc = 5900;
+		rType = 0;
+		vrLen = 1490;
+		vrLoc = 2777;
+	};
+	6B1121F01238D3E20094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
+		name = "RemoteHDViewController.m: 116";
+		rLen = 0;
+		rLoc = 5182;
+		rType = 0;
+		vrLen = 1031;
+		vrLoc = 4895;
+	};
+	6B1121F11238D3E20094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6BE275F011AB948600F1F600 /* FDServer.m */;
+		name = "FDServer.m: 856";
+		rLen = 0;
+		rLoc = 33194;
+		rType = 0;
+		vrLen = 1434;
+		vrLoc = 32252;
+	};
+	6B1121F21238D3E20094F2DC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6B75F7FA11A4094100B9D841 /* DAAPResponse.m */;
+		name = "DAAPResponse.m: 216";
+		rLen = 0;
+		rLoc = 5900;
+		rType = 0;
+		vrLen = 1490;
 		vrLoc = 2777;
 	};
 	6B115B801211197B002B6243 /* PBXTextBookmark */ = {
@@ -7223,7 +7412,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 832}}";
 			sepNavSelRange = "{1910, 34}";
-			sepNavVisRange = "{903, 1048}";
+			sepNavVisRange = "{857, 1094}";
 			sepNavWindowFrame = "{{15, 77}, {575, 696}}";
 		};
 	};
@@ -7276,7 +7465,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1050, 3289}}";
 			sepNavSelRange = "{5900, 0}";
-			sepNavVisRange = "{2777, 1437}";
+			sepNavVisRange = "{2777, 1490}";
 			sepNavWindowFrame = "{{79, 104}, {1109, 660}}";
 		};
 	};
@@ -8073,7 +8262,7 @@
 		ignoreCount = 0;
 		lineNumber = 106;
 		location = yTrack;
-		modificationTime = 305713331.662405;
+		modificationTime = 305714017.325903;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -8407,7 +8596,7 @@
 		ignoreCount = 0;
 		lineNumber = 100;
 		location = RemoteHD;
-		modificationTime = 305713331.660906;
+		modificationTime = 305714017.324417;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -8569,7 +8758,7 @@
 		fRef = 28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */;
 		name = "RemoteHDViewController.m: 351";
 		rLen = 53;
-		rLoc = 12477;
+		rLoc = 12478;
 		rType = 0;
 		vrLen = 860;
 		vrLoc = 12188;
@@ -8908,9 +9097,9 @@
 	};
 	6BE275F011AB948600F1F600 /* FDServer.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 11726}}";
+			sepNavIntBoundsRect = "{{0, 0}, {908, 11713}}";
 			sepNavSelRange = "{33194, 0}";
-			sepNavVisRange = "{32252, 1429}";
+			sepNavVisRange = "{32252, 1434}";
 			sepNavWindowFrame = "{{15, 77}, {575, 696}}";
 		};
 	};

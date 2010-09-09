@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>6B1121CF1238D1EE0094F2DC</string>
+						<string>6B1121F11238D3E20094F2DC</string>
 						<key>history</key>
 						<array>
 							<string>6B112104123863EB0094F2DC</string>
@@ -256,7 +256,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>6B1121D01238D1EE0094F2DC</string>
+						<string>6B1121F21238D3E20094F2DC</string>
 						<key>history</key>
 						<array>
 							<string>6B111F811238428E0094F2DC</string>
@@ -352,15 +352,6 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>6BC1DDC61224557C00102D4C</string>
-								<string>080E96DDFE201D6D7F000001</string>
-								<string>6BA8F20811D39C2600A621C6</string>
-								<string>6B75F7ED11A408EE00B9D841</string>
-								<string>6B75F83B11A4097500B9D841</string>
-								<string>29B97315FDCFA39411CA2CEA</string>
-								<string>29B97317FDCFA39411CA2CEA</string>
-								<string>6BF29EA41207F1A0004233D9</string>
-								<string>6BF662C711D430DA00B1E47B</string>
-								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
@@ -369,13 +360,12 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>101</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2055}, {245, 664}}</string>
+							<string>{{0, 0}, {245, 664}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -410,7 +400,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>6B75F76B11A3FCC100B9D841</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AlbumsDatasource.h</string>
+								<string>RemoteHDViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -418,11 +408,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>6B75F76C11A3FCC100B9D841</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>AlbumsDatasource.h</string>
+										<string>RemoteHDViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6B1121CE1238D1EE0094F2DC</string>
+										<string>6B1121F01238D3E20094F2DC</string>
 										<key>history</key>
 										<array>
 											<string>6BD3500011AC1DDF00A917CB</string>
@@ -511,7 +501,6 @@
 											<string>6B9EF00D1235A457000EB516</string>
 											<string>6B9EF06A1235AF26000EB516</string>
 											<string>6B9EF11A1235B951000EB516</string>
-											<string>6BB6AA0C1236235E001C9AD9</string>
 											<string>6BB6AA3412362875001C9AD9</string>
 											<string>6BB6AA5112362B26001C9AD9</string>
 											<string>6BB6AA5212362B26001C9AD9</string>
@@ -575,7 +564,6 @@
 											<string>6B112059123851480094F2DC</string>
 											<string>6B11205A123851480094F2DC</string>
 											<string>6B112089123854C80094F2DC</string>
-											<string>6B1120A4123858900094F2DC</string>
 											<string>6B1120C2123859C30094F2DC</string>
 											<string>6B1120F61238623E0094F2DC</string>
 											<string>6B11214C1238C38E0094F2DC</string>
@@ -584,13 +572,15 @@
 											<string>6B1121C41238D1EE0094F2DC</string>
 											<string>6B1121C51238D1EE0094F2DC</string>
 											<string>6B1121C61238D1EE0094F2DC</string>
-											<string>6B1121C71238D1EE0094F2DC</string>
 											<string>6B1121C81238D1EE0094F2DC</string>
 											<string>6B1121C91238D1EE0094F2DC</string>
 											<string>6B1121CA1238D1EE0094F2DC</string>
 											<string>6B1121CB1238D1EE0094F2DC</string>
 											<string>6B1121CC1238D1EE0094F2DC</string>
-											<string>6B1121CD1238D1EE0094F2DC</string>
+											<string>6B1121DB1238D3440094F2DC</string>
+											<string>6B1121DC1238D3440094F2DC</string>
+											<string>6B1121DD1238D3440094F2DC</string>
+											<string>6B1121EA1238D3940094F2DC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -932,9 +922,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>6B1121D11238D1EE0094F2DC</string>
-		<string>6B1121D21238D1EE0094F2DC</string>
-		<string>6B1121AE1238D1160094F2DC</string>
 		<string>6B12EBA611C1AB320051958A</string>
 		<string>6B111D8312379BB50094F2DC</string>
 		<string>6B111D8412379BB50094F2DC</string>
