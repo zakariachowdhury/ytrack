@@ -136,7 +136,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	for (DAAPResponsemlit *pl in response.listing.list) {
 		DDLogVerbose(@"Playlist : name=%@,miid=%d,mper=%qX,aePS=%hi,aeSP=%hi,mimc=%i",pl.name, [pl.miid longValue],[pl.mper longLongValue],[pl.aePS shortValue], [pl.aeSP shortValue],[pl.mimc longValue]);
-		if ([pl.aePS shortValue] == 0 && [pl.mimc longValue] > 0) {			
+		if (([pl.aePS shortValue] == 0 || [pl.aePS shortValue] == kServerGeniusLibraryAEPS) && [pl.mimc longValue] > 0) {			
 			[userPlaylists addObject:pl];
 		}
 		if ([pl.abpl shortValue] == 1){
@@ -153,7 +153,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	[userPlaylists removeObjectAtIndex:0];
 	
-	[self getServerInfo];
+	//[self getServerInfo];
 	
 	// initiate server monitoring to receive action events
 	[self monitorPlayStatus];
@@ -214,6 +214,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSNetService *service = [[NSNetService alloc] initWithDomain:self.domain type:self.type name:self.servicename];
 	[service setTXTRecordData: [NSNetService dataFromTXTRecordDictionary:self.TXT]];
 	self.currentResolve = service;
+	[service release];
 	[self.currentResolve setDelegate:self];
 	[self.currentResolve resolveWithTimeout:20.0];
 }
@@ -371,6 +372,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSString *a = [self _encodeString:artist];
 	NSString *requestUrl = [NSString stringWithFormat:kRequestAllTracksForArtist,self.host,self.port,databaseId,musicLibraryId, sessionId,a];
 	DDLogVerbose(@"%@",requestUrl);
+	[a release];
 	DAAPResponseapso * response = (DAAPResponseapso *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
 	return response;
 }
@@ -763,6 +765,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	NSString *string2 = [NSString stringWithFormat:kRequestPlayAllTracksForArtist,self.host,self.port,a, songIndex, sessionId];
 	DDLogVerbose(@"%@",string2);
+	[a release];
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
