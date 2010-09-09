@@ -58,5 +58,6 @@
 - (void) changeToPodcastView;
 - (void) didChangeLibrary;
 - (void) changeToPlaylistView:(int)playlistId persistentId:(long long)persistentId;
+- (void) cancelPendingConnections;
 
 @end
