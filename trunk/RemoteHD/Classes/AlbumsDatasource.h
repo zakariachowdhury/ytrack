@@ -23,4 +23,6 @@
 
 @property (nonatomic, assign) UINavigationController *navigationController;
 
+- (void) cleanJobs;
+
 @end
