@@ -11,6 +11,13 @@
 #import "PreferencesManager.h"
 #import "FDServer.h"
 #import "DAAPResponsecmgt.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @interface NowPlayingDetailViewController(PrivateMethods)
 
@@ -188,11 +195,11 @@
 		[coverArt removeFromSuperview];
 		
 		if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight) {
-			NSLog(@"landscape"); 
+			DDLogVerbose(@"landscape"); 
 			listController.tableView.frame = CGRectMake(0, 142, 768, 529);
 			
 		} else if (o == UIDeviceOrientationPortrait || o == UIDeviceOrientationPortraitUpsideDown) {
-			NSLog(@"portrait");
+			DDLogVerbose(@"portrait");
 			listController.tableView.frame = CGRectMake(0, 0, 768, 768);
 		}
 		[listController scrollToCurrentlyPlayingTrack];
@@ -306,10 +313,10 @@
 -(void) _didChangeOrientation{
 	UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
 	if (o == UIDeviceOrientationLandscapeLeft || o == UIDeviceOrientationLandscapeRight) {
-		NSLog(@"landscape"); 
+		DDLogVerbose(@"landscape"); 
 		[self _repositionToLandscape];
 	} else if (o == UIDeviceOrientationPortrait || o == UIDeviceOrientationPortraitUpsideDown) {
-		NSLog(@"portrait");
+		DDLogVerbose(@"portrait");
 		[self _repositionToPortrait];
 	} else {
 		if (self.view.bounds.size.width == 1024.0) {
@@ -369,10 +376,10 @@
 	if (!isDisplayingCover) {
 		return;
 	}
-	NSLog(@"touched");
+	DDLogVerbose(@"touched");
 	[UIView beginAnimations:@"fullscreen" context:NULL];
 	if (!fullScreen) {
-		NSLog(@"full");
+		DDLogVerbose(@"full");
 		bottomBackgroundLandscape.alpha = 0.0;
 		bottomBackground.alpha = 0.0;
 		topBackgroundLandscape.alpha = 0.0;

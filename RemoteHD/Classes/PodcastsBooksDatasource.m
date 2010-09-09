@@ -45,7 +45,7 @@
 	}
 	[artworks setObject:image forKey:albumId];
 	[loaders removeObjectForKey:albumId];
-	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
+	//NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
 	[self.delegate updateImage:image forIndexPath:[cellId objectForKey:albumId]];
 }
 
@@ -123,7 +123,7 @@
 	long offset = [[(DAAPResponsemlit *)[self.indexList objectAtIndex:indexPath.section] mshi] longValue];
 	DAAPResponsemlit *song = (DAAPResponsemlit *)[self.list objectAtIndex:(offset + indexPath.row)];
 	
-	NSLog(@"%@-%qi-%qi",song.name,[song.persistentId longLongValue],containerPersistentId);
+	//NSLog(@"%@-%qi-%qi",song.name,[song.persistentId longLongValue],containerPersistentId);
 	
 	DAAPResponseapso * resp;
 	if (self.itemType == kItemTypePodcast) {

@@ -58,11 +58,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		if([delegate respondsToSelector:@selector(connectionTimedOut)])
 			[delegate connectionTimedOut];
 	} else if (error.code == NSURLErrorNotConnectedToInternet) {
-		NSLog(@"###########");
 		if([delegate respondsToSelector:@selector(cantConnect)])
 			[delegate cantConnect];
 	} else if (error.code == NSURLErrorCannotFindHost) {
-		NSLog(@"###########");
 		if([delegate respondsToSelector:@selector(cantConnect)])
 			[delegate cantConnect];
 	} 
@@ -147,7 +145,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
 	if (error != nil) {
-		NSLog(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
+		DDLogError(@"onTheFlyRequestAndParseResponse - %@, %d, %@", [error localizedDescription], error.code, error.domain);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBrokenConnection object:self];
 	}
 #ifdef CONFIGURATION_DEBUG
@@ -198,9 +196,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-	NSLog(@"sync requesting image from %@",url);
+	DDLogVerbose(@"sync requesting image from %@",url);
 	NSData *dat = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&resp error:&error];
-	NSLog(@"END requesting image from %@",url);
+	DDLogVerbose(@"END requesting image from %@",url);
 	
 	UIImage * image = [[[UIImage alloc] initWithData:dat] autorelease];
 	return image;
@@ -208,7 +206,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 + (BOOL) request:(NSURL *) url {
-	NSLog(@"sync requesting one way %@",url);
+	DDLogInfo(@"sync requesting one way %@",url);
 	NSURLResponse * resp;
 	NSError *error;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -237,7 +235,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		NSString *command = [self parseCommandName:theData atPosition:progress];
 		
 		int length = [self parseLength:theData atPosition:progress+4];
-		NSLog(@"command (%d) : %@",length,command);
+		DDLogVerbose(@"command (%d) : %@",length,command);
 		
 		handle -= 8 + length;
 		NSPredicate *branches = [NSPredicate

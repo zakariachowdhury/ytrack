@@ -7,7 +7,13 @@
 //
 
 #import "AsyncImageLoader.h"
+#import "DDLog.h"
 
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation AsyncImageLoader
 @synthesize delegate;
@@ -35,7 +41,7 @@
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
 	assert(theConnection == self.connection);
-	NSLog(@"AsyncImageView - %@", [error localizedDescription]);
+	DDLogError(@"AsyncImageView - %@", [error localizedDescription]);
 }
 
 - (void)connection:(NSURLConnection *)theConnection

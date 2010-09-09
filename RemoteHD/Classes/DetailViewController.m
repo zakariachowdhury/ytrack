@@ -89,7 +89,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 - (void) display{
-	NSLog(@"requesting ALL TRACKS");
+	DDLogVerbose(@"requesting ALL TRACKS");
 	[self changeToTrackView];
 }
 

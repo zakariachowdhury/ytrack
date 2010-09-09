@@ -97,7 +97,7 @@
 	}
 	[artworks setObject:image forKey:albumId];
 	[loaders removeObjectForKey:albumId];
-	NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
+	//NSLog(@"got image for row : %d",[(NSIndexPath *)[cellId objectForKey:albumId] row]);
 	[[[self.tableView cellForRowAtIndexPath:[cellId objectForKey:albumId]] imageView] setImage:image];
 }
 

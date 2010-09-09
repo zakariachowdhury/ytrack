@@ -8,8 +8,14 @@
 
 #import "AsyncImageView.h"
 #include <math.h>
-
+#import "DDLog.h"
 #import <QuartzCore/QuartzCore.h>
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
@@ -100,7 +106,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	//self.activityIndicator.hidden = YES;
 	loadingImageLabel.hidden = YES;
 	
-	NSLog(@"AsyncImageView - %@", [error localizedDescription]);
+	DDLogError(@"AsyncImageView - %@", [error localizedDescription]);
 	
 	//UIImageView* imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"?.png"]] autorelease];
     //[self addSubview:imageView];

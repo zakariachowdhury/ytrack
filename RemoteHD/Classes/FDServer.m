@@ -723,7 +723,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 	
 	NSString *string2 = [NSString stringWithFormat:kRequestPlayBookInLibrary,self.host,self.port,bookId,sessionId];
-	NSLog(@"%@",string2);
+	DDLogVerbose(@"%@",string2);
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 

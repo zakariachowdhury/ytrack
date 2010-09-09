@@ -8,13 +8,20 @@
 
 #import "DAAPRequest.h"
 #import "HexDumpUtility.h"
+#import "DDLog.h"
+
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation DAAPRequest
 @synthesize data;
 @synthesize connection;
 
 - (void) asyncRequest:(NSURL *)url{
-	NSLog(@"async requesting %@",url);
+	DDLogInfo(@"async requesting %@",url);
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
     
@@ -31,7 +38,7 @@
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
 	assert(theConnection == self.connection);
-	NSLog(@"AsyncDAAPRequest - %@", [error localizedDescription]);
+	DDLogInfo(@"AsyncDAAPRequest - %@", [error localizedDescription]);
 	[self.connection cancel];
 	self.connection = nil;
 }
@@ -57,7 +64,7 @@
 
 //method used to cancel the connection when don't need anymore the AsyncImageView object
 - (void)cancelConnection {
-	NSLog(@"CANCEL CONNECTION");
+	DDLogVerbose(@"CANCEL CONNECTION");
     [self.connection cancel];
     self.connection = nil;
 	
