@@ -70,7 +70,6 @@
 	id <DAAPRequestDelegate> delegate;
 	SEL action;
 	NSURL *lastUrl;
-	NSDate *startRequest;
 }
 
 @property (nonatomic, assign) id <DAAPRequestDelegate> delegate;

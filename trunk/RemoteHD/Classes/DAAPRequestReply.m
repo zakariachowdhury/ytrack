@@ -36,8 +36,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 													   timeoutInterval:timeoutInterval];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-	startRequest = [NSDate date];
-	[startRequest retain];
 	NSURLConnection *conn =[[NSURLConnection alloc]
 							initWithRequest:request delegate:self startImmediately:YES];
     self.connection = conn;
@@ -119,9 +117,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[response performSelector:@selector(parse)];
 	NSDate *methodFinish = [NSDate date];
 	NSTimeInterval parsingTime = [methodFinish timeIntervalSinceDate:methodStart];
-	NSTimeInterval totalTime = [methodFinish timeIntervalSinceDate:startRequest];
-	DDLogVerbose(@"the connection %@, parsing time : %f, totalTime: %f",[connection description], parsingTime, totalTime);
-	[startRequest release];
+	DDLogVerbose(@"the connection %@, parsing time : %f",[connection description], parsingTime);
 	
     self.data = nil;
 	self.connection = nil;
