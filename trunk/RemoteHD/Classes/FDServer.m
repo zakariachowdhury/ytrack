@@ -264,7 +264,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:rejectedAlertTitle message:rejectedAlertContent delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
 			[alert release];
-			[[SessionManager sharedSessionManager] deleteServerWithPairingGUID:self.pairingGUID];
+			[[SessionManager sharedSessionManager] performSelector:@selector(deleteServerWithPairingGUID:) withObject:self.pairingGUID afterDelay:0.1];
 			return NO;
 		}
 	} else {
