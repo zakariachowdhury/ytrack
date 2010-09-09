@@ -121,6 +121,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)viewWillAppear:(BOOL)animated{
 	DDLogVerbose(@"Library view did appear");
+//	self.currentGUID = nil;
+	
 	if (![CurrentServer connected]) {
 		if (self.speakers != nil) {
 			self.speakers = nil;
@@ -200,6 +202,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     } else if (indexPath.section == 0) {
 		if (indexPath.row == [[[SessionManager sharedSessionManager] getServers] count]){
 			cell.textLabel.text = NSLocalizedString(@"addLibrary",@"Ajouter une bibliothèque");
+			if (cell.accessoryView) {
+				cell.accessoryView = nil;
+			}
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		} else {
 			// Set up the text for the cell
@@ -338,6 +343,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		editButton.style = UIBarButtonItemStyleBordered;
 		[self.table setEditing:NO animated:YES];
 	}
+
 }
 
 // If necessary, sets up state to show an activity indicator to let the user know that a resolve is occuring.
