@@ -16,7 +16,6 @@
 @interface SessionManager()
 
 - (void) _didSuccessfullyConnect:(NSNotification *)notification;
-- (void) _purgePendingServerRemoval:(NSTimer *)timer;
 
 @property (nonatomic, retain, readwrite) NSMutableArray* servers;
 @end

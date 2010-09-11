@@ -836,10 +836,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void) getServerInfo{
 	DDLogInfo(@"FDServer-getServerInfo");
-	NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
+	/*NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
 	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
 	NSString* str2 = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
-	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];
+	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];*/
 }
 
 - (NSString *) _encodeString:(NSString *)string{
