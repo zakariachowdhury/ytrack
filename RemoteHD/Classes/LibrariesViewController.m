@@ -32,19 +32,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface LibrariesViewController()
 @property (nonatomic, retain, readwrite) NSArray* speakers;
-@property (nonatomic, retain, readwrite) NSMutableArray* services;
 @property (nonatomic, retain, readwrite) NSNetServiceBrowser* netServiceBrowser;
 @property (nonatomic, retain, readwrite) NSNetService* currentResolve;
 @property (nonatomic, retain, readwrite) NSTimer* timer;
 @property (nonatomic, assign, readwrite) BOOL needsActivityIndicator;
-@property (nonatomic, assign, readwrite) BOOL initialWaitOver;
-@property (nonatomic, copy, readwrite) NSString *currentServiceName;
+@property (nonatomic, copy, readwrite) NSString *currentlyPairingServiceName;
 @property (nonatomic, copy, readwrite) NSString *selectedServiceName;
 @property (nonatomic, copy, readwrite) NSString *currentGUID;
 @property (nonatomic, retain, readwrite) NSMutableArray *availableServices;
 
 - (void)stopCurrentResolve;
-- (void)initialWaitOver:(NSTimer*)timer;
 - (void)didChangeSpeakerValue:(id)sender;
 - (void)didChangeVolumeControl:(id)sender;
 - (BOOL) _hasRemoteSpeakers;
@@ -58,32 +55,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize currentResolve = _currentResolve;
 @synthesize netServiceBrowser = _netServiceBrowser;
 @synthesize speakers = _speakers;
-@synthesize services = _services;
 @synthesize needsActivityIndicator = _needsActivityIndicator;
 @dynamic timer;
-@synthesize initialWaitOver = _initialWaitOver;
-@synthesize currentServiceName = _currentServiceName;
+@synthesize currentlyPairingServiceName = _currentServiceName;
 @synthesize selectedServiceName = _selectedServiceName;
 @synthesize currentGUID = _currentGUID;
 @synthesize availableServices = _availableServices;
-
-
-- (NSString *)searchingForServicesString {
-	return _searchingForServicesString;
-}
-
-// Holds the string that's displayed in the table view during service discovery.
-- (void)setSearchingForServicesString:(NSString *)searchingForServicesString {
-	if (_searchingForServicesString != searchingForServicesString) {
-		[_searchingForServicesString release];
-		_searchingForServicesString = [searchingForServicesString copy];
-		
-        // If there are no services, reload the table to ensure that searchingForServicesString appears.
-		if ([self.services count] == 0) {
-			[self.table reloadData];
-		}
-	}
-}
 
 - (NSTimer *)timer {
 	return _timer;
@@ -97,23 +74,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	_timer = newTimer;
 }
 
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.*/
 - (void)viewDidLoad {
     [super viewDidLoad];
 	DDLogVerbose(@"Library view did load");
-	_services = [[NSMutableArray alloc] init];
 	self.availableServices = [[NSMutableArray alloc] init];
 	editButton.possibleTitles = [NSSet setWithObjects:kLocalizedEdit, kLocalizedDone, nil];
 	editButton.title = kLocalizedEdit;
@@ -418,7 +383,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)didFinishWithPinCode:(NSString *)serviceName guid:(NSString *)guid{
 	[self dismissModalViewControllerAnimated:YES];
-	self.currentServiceName = serviceName;
+	self.currentlyPairingServiceName = serviceName;
 	self.currentGUID = guid;
 	[self searchForServicesOfType:@"_touch-able._tcp" inDomain:@"local"];
 };
@@ -430,7 +395,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	[self stopCurrentResolve];
 	[self.netServiceBrowser stop];
-	[self.services removeAllObjects];
+	
+	DDLogVerbose(@"starting services search");
 	
 	NSNetServiceBrowser *aNetServiceBrowser = [[NSNetServiceBrowser alloc] init];
 	if(!aNetServiceBrowser) {
@@ -448,6 +414,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 	 
 - (void)stopCurrentResolve {
+	DDLogVerbose(@"stopping current resolve");
 	self.needsActivityIndicator = NO;
 	self.timer = nil;
 	
@@ -455,23 +422,17 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	self.currentResolve = nil;
 }
 
-- (void)initialWaitOver:(NSTimer*)timer {
-	self.initialWaitOver= YES;
-	if (![self.services count])
-		[self.table reloadData];
-}
-
 
 #pragma mark -
 #pragma mark NSNetService callbacks
 
 - (void)netServiceBrowser:(NSNetServiceBrowser*)netServiceBrowser didRemoveService:(NSNetService*)service moreComing:(BOOL)moreComing {
+	DDLogVerbose(@"a service disappeared : %@",service.name);
 	// If a service went away, stop resolving it if it's currently being resolved,
 	// remove it from the list and update the table view if no more events are queued.
 	if (self.currentResolve && [service isEqual:self.currentResolve]) {
 		[self stopCurrentResolve];
 	}
-	[self.services removeObject:service];
 	if ([self.availableServices indexOfObject:service.name] != NSNotFound) {
 		[self.availableServices removeObject:service.name];
 	}
@@ -482,19 +443,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 - (void)netServiceBrowser:(NSNetServiceBrowser*)netServiceBrowser didFindService:(NSNetService*)service moreComing:(BOOL)moreComing {
-	
-	if ([service.name isEqualToString:self.currentServiceName]) {
-		// If a service came online, add it to the list and update the table view if no more events are queued.
-		// Then set the current resolve to the service corresponding to the tapped cell
+	DDLogVerbose(@"Found a service : %@",service.name);
+	if ([service.name isEqualToString:self.currentlyPairingServiceName]) {
+		DDLogVerbose(@"it's the server we've just paired with, resolving it...");
 		self.currentResolve = service;
 		[self.currentResolve setDelegate:self];
+		self.currentlyPairingServiceName = nil;
 		
 		// Attempt to resolve the service. A value of 0.0 sets an unlimited time to resolve it. The user can
 		// choose to cancel the resolve by selecting another service in the table view.
 		[self.currentResolve resolveWithTimeout:20.0];
-		[self.services addObject:service];
 	} else {
-		
+		DDLogVerbose(@"This is either a previously paired service or a new one, just keep it for later use");
 		if ([self.availableServices indexOfObject:service.name] == NSNotFound) {
 			[self.availableServices addObject:service.name];
 		}
@@ -509,22 +469,24 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 // This should never be called, since we resolve with a timeout of 0.0, which means indefinite
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
+	DDLogError(@"service did not resolve");
 	[self stopCurrentResolve];
 	[self.table reloadData];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
 	assert(service == self.currentResolve);
-	DDLogVerbose(@"LibraryViewController did resolve address");
+	DDLogVerbose(@"service %@ address resolved",service.name);
 	
 	[service retain];
 	[self stopCurrentResolve];
 
 	if (![service.name isEqualToString:[CurrentServer servicename]]) {
-		DDLogVerbose(@"LibraryViewController logout");
+		DDLogVerbose(@"We were already connected to that server, logout and refresh server definition");
 		[CurrentServer logout];
 		FDServer *server = [[FDServer alloc] initWithNetService:service pairingGUID:self.currentGUID];
 		FDServer * serv = [[SessionManager sharedSessionManager] foundNewServer:server];
+		serv.delegate = self;
 		[serv open];
 		[server release];
 	}
@@ -546,18 +508,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 // get speaker list
 -(void)didFinishLoading:(DAAPResponse *)response{
-	//BOOL shouldAnimate = ((self.speakers == nil) && (self.speakers.count < 2));
 	DAAPResponsecasp *casp = (DAAPResponsecasp *)response;
 	
 	self.speakers = casp.speakers;
-	/*if (shouldAnimate){
-		[self.table beginUpdates];
-		[self.table insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationTop];
-		[self.table endUpdates];
-	} else {*/
-		[self.table reloadData];
-	//}
-
+	[self.table reloadData];
 }
 
 - (BOOL) _hasRemoteSpeakers{
@@ -574,11 +528,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Release any cached data, images, etc that aren't in use.
 }
 
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)viewDidAppear:(BOOL)animated{
+	[super viewDidDisappear:animated];
 }
 
 
