@@ -18,7 +18,7 @@
 @end
 
 
-@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate, DAAPRequestDelegate, FDServerDelegate>{
+@interface LibrariesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, PincodeDelegate, DAAPRequestDelegate, FDServerDelegate, NSNetServiceDelegate, NSNetServiceBrowserDelegate>{
 	id<LibraryDelegate> delegate;
 	IBOutlet UITableView *table;
 	IBOutlet UIBarButtonItem *editButton;

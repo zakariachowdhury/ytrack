@@ -36,10 +36,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PreferencesManager)
 }
 
 - (BOOL)writeApplicationPlist:(id)plist toFile:(NSString *)fileName {
-    NSString *error;
+    NSString *error = nil;
     NSData *pData = [NSPropertyListSerialization dataFromPropertyList:plist format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
     if (!pData) {
-        DDLogError(@"%@", error);
+		if (error != nil) {
+			DDLogError(@"%@", error);
+		}
         return NO;
     }
     return ([self writeApplicationData:pData toFile:(NSString *)fileName]);
