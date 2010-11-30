@@ -137,8 +137,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 + (DAAPResponse *) onTheFlyRequestAndParseResponse:(NSURL *) url{
 	DDLogVerbose(@"---- CALLING SYNC !---");
-	NSURLResponse * resp;
-	NSError *error;
+	NSURLResponse * resp = nil;
+	NSError *error = nil;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
 														   timeoutInterval:30];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
@@ -191,8 +191,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 
 + (UIImage *) imageFromUrl:(NSURL *) url {
-	NSURLResponse * resp;
-	NSError *error;
+	NSURLResponse * resp = nil;
+	NSError *error = nil;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
@@ -207,8 +207,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 + (BOOL) request:(NSURL *) url {
 	DDLogInfo(@"sync requesting one way %@",url);
-	NSURLResponse * resp;
-	NSError *error;
+	NSURLResponse * resp = nil;
+	NSError *error = nil;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
@@ -301,8 +301,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 + (DAAPResponse *) searchAndParseResponse:(NSURL *) url {
 	NSMutableDictionary *dict = [[[NSMutableDictionary alloc] init] autorelease]; 
-	NSURLResponse * resp;
-	NSError *error;
+	NSURLResponse * resp = nil;
+	NSError *error = nil;
 	NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
 	[urlRequest setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[urlRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];

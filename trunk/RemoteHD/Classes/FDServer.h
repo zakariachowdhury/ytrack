@@ -52,7 +52,7 @@ typedef enum {
 } kRepeatState;
 
 
-@interface FDServer : NSObject <DAAPRequestDelegate> {
+@interface FDServer : NSObject <DAAPRequestDelegate, NSNetServiceDelegate> {
 	@private
 	NSString *host;
 	NSString *port;
