@@ -29,6 +29,7 @@
 		6B35D91911A8932100BC846C /* DAAPResponseaply.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D91811A8932100BC846C /* DAAPResponseaply.m */; };
 		6B35D9C311A89A0600BC846C /* DAAPResponseabro.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9C211A89A0600BC846C /* DAAPResponseabro.m */; };
 		6B35D9D411A89A6D00BC846C /* DAAPResponseabar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B35D9D311A89A6D00BC846C /* DAAPResponseabar.m */; };
+		6B371141131DBBDA00ED4E24 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 6B371140131DBBDA00ED4E24 /* COPYING */; };
 		6B43AD9711A95C8500DBD74E /* PreferencesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B43AD9611A95C8500DBD74E /* PreferencesManager.m */; };
 		6B4F18A611D0E317009D0A42 /* pinNumBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4F18A511D0E317009D0A42 /* pinNumBg.png */; };
 		6B4F18A911D0E5F7009D0A42 /* pinBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4F18A811D0E5F7009D0A42 /* pinBg.png */; };
@@ -192,6 +193,7 @@
 		6B35D9C211A89A0600BC846C /* DAAPResponseabro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseabro.m; sourceTree = "<group>"; };
 		6B35D9D211A89A6D00BC846C /* DAAPResponseabar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseabar.h; sourceTree = "<group>"; };
 		6B35D9D311A89A6D00BC846C /* DAAPResponseabar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseabar.m; sourceTree = "<group>"; };
+		6B371140131DBBDA00ED4E24 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		6B43AD9411A95C6C00DBD74E /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		6B43AD9511A95C8500DBD74E /* PreferencesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesManager.h; sourceTree = "<group>"; };
 		6B43AD9611A95C8500DBD74E /* PreferencesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesManager.m; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				6B371140131DBBDA00ED4E24 /* COPYING */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				6B1121691238CEB30094F2DC /* genius-icon-inv.png in Resources */,
 				6B11216A1238CEB30094F2DC /* genius-icon.png in Resources */,
 				6B1122041238D5730094F2DC /* iTunesArtwork.png in Resources */,
+				6B371141131DBBDA00ED4E24 /* COPYING in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
