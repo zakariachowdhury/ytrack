@@ -78,12 +78,15 @@ Note that the headers of the request must include
 Viewer-Only-Client	1
 }}}
 
-Now that we know the format, here is the list of supported requests (Note: daap://server can be interchanged with
-http://server:3689 for purposes of coding/using command line utilities
-such as curl/wget to poke at things)
-:
+Now that we know the format, here is the list of supported requests
 
 = Supported requests =
+
+*Notes:* 
+ * daap://server can be interchanged with http://server:3689 for purposes of coding/using command line utilities such as curl/wget to poke at things
+
+ * The parameters have to passed to the request using HTTP GET style: http://server:3689/request?param1=value1&param2=value2 
+
 == login ==
  * *Request* daap://server/login
  * *Params*
