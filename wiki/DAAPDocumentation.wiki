@@ -33,3 +33,23 @@ The lookup will return you zero or more services. Each service is a DAAP server.
   * its port
 
 the library name is contained in the TXTRecordData for the service under the `CtlN` key. For the moment it's sufficient to go ahead and connect to the server.
+
+= Pairing =
+
+The pairing process is pretty well explained on Jeff Sharkey's web site. Here is the interesting abstract:
+When a remote client first arrives on the network, it needs to pair itself with iTunes. It does this by advertising a _touch-remote._tcp.local with some TXT entries with information about the remote and a 64-bit Pair hex string:
+
+{{{
+DvNm=Android remote
+RemV=10000
+DvTy=iPod 
+RemN=Remote 
+txtvers=1 
+Pair=0000000000000001
+}}}
+
+Michael Croes observed this MDNS format a few weeks ago. In my experience iTunes doesn't like working with all-0 values, so I threw one bit in there to make it happy. Once this service appears on the network, iTunes shows it along the left-edge of its screen. When you click, it prompts you for a 4-digit PIN code.
+
+iTunes combines this PIN code with the MDNS Pair value above in what appears to be an MD5 sum. It returns the MD5 to the iPhone/iPod Touch asking "does this match?"
+
+This is where it stopped at some point, but finally [http://jinxidoru.blogspot.com/2009/06/itunes-remote-pairing-code.html Michael Paul Bailey figured this out] and it turned out that it boils down to just concatenating them together with the pin code digits separated by null characters.
