@@ -4,7 +4,33 @@ All the requests take the form of http://server:3689/ctrl-int/1/<command>
 
 = playstatusupdate =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+* *Request* /playstatusUpdate
+ * *Params*
+  * *revision-number* revision number 
+  * *session-id* session id 
+ * *Response* avdb
+ * *Description* Jeff Sharkey says 
+
+ "Something important to note is the revision-number field. By starting with revision-number=1, we know that we'll always get a response. However, a new revision-number is returned in the cmsr field. If we request that new revision-number, our HTTP request hangs until the next server event happens, providing push event notification. For example, our request might hang until the user manually changes tracks on the computer, or pauses the track, or maybe a TCP timeout happens."
+
+This is true but from what I've seen the request tends to return and completely reset the state of your session, forcing you to login again.
+
+ * *Content*
+{{{
+cmst
+  mstt 4 000000c8 == 200 
+  cmsr 4 00000006 == 6 # revision-number 
+  caps 1 04 == 4 # play status: 4=playing, 3=paused 
+  cash 1 01 == 1 # shuffle status: 0=off, 1=on 
+  carp 1 00 == 0 # repeat status: 0=none, 1=single, 2=all cavc 1 01 == 1 
+  caas 4 00000002 == 2 caar 4 00000006 == 6 
+  canp 16 00000026000052200000530200000f68 
+  cann 13 Secret Crowds # track 
+  cana 17 Angels & Airwaves # artist 
+  canl 8 I-Empire # album 
+  cang 0 
+  asai 8 a0d34e8b82616ae8 == 11588692627249261288 # album-id 
+  cmmk 4 00000001 == 1 
+  cant 4 0003a15f == 237919 # remaining track time in ms 
+  cast 4 0004a287 == 303751 # total track length in ms
+}}}
