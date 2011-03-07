@@ -84,9 +84,9 @@ Now that we know the format, here is the list of supported requests
 
 *Notes:* 
  * daap://server can be interchanged with http://server:3689 for purposes of coding/using command line utilities such as curl/wget to poke at things
-
  * The parameters have to passed to the request using HTTP GET style: http://server:3689/request?param1=value1&param2=value2 
  * the mlcl tag is a list of items and contains items named mlit 
+ * the DACP requests can be distinguished from DAAP requests by the fact they use `ctrl-int` in the request url path.
 
 == login ==
  * *Request* daap://server/login
