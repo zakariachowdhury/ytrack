@@ -86,6 +86,8 @@ such as curl/wget to poke at things)
 = Supported requests =
 == login ==
  * *Request* daap://server/login
+ * *Params*
+  * *pairing-guid* hexadecimal value of the pairing code (e.g. 0x549361C47D6CDA53)
  * *Response* mlog
  * *Description* Provides session information to use for the rest of the session.  If `requiresLogin` is set in the server-info, then from this point on, a basic http authentication header needs to be included with the request.  It is basically a header of the form:
 
