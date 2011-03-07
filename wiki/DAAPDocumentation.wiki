@@ -78,4 +78,3 @@ The Bonjour code is done by the excellent [http://code.google.com/p/cocoahttpser
 When the user has finished entering the four digits, iTunes sends an HTTP request to the server started by yTrack containing the hash based on the digits the user has entered and the pairing code advertised by yTrack. I compute this same hash using the expected pin code and the advertised pairing code. If the user has entered the right digits then my hash and the hash from iTunes should be the same. 
 
 The pairing code has to be preciously stored as it is what will be needed to login
-=Login=
