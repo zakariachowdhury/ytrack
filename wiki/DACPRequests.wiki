@@ -1,11 +1,8 @@
 #summary Detailed description of DACP requests
 
-= Introduction =
+All the requests take the form of http://server:3689/ctrl-int/1/<command>
 
-Add your content here.
-
-
-= Details =
+= playstatusupdate =
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
