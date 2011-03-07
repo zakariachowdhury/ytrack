@@ -18,19 +18,21 @@ This is true but from what I've seen the request tends to return and completely 
  * *Content*
 {{{
 cmst
-  mstt 4 000000c8 == 200 
-  cmsr 4 00000006 == 6 # revision-number 
-  caps 1 04 == 4 # play status: 4=playing, 3=paused 
-  cash 1 01 == 1 # shuffle status: 0=off, 1=on 
-  carp 1 00 == 0 # repeat status: 0=none, 1=single, 2=all cavc 1 01 == 1 
-  caas 4 00000002 == 2 caar 4 00000006 == 6 
-  canp 16 00000026000052200000530200000f68 
-  cann 13 Secret Crowds # track 
-  cana 17 Angels & Airwaves # artist 
-  canl 8 I-Empire # album 
-  cang 0 
-  asai 8 a0d34e8b82616ae8 == 11588692627249261288 # album-id 
-  cmmk 4 00000001 == 1 
-  cant 4 0003a15f == 237919 # remaining track time in ms 
-  cast 4 0004a287 == 303751 # total track length in ms
+  mstt(4) - status 
+  cmsr(4) - revision-number 
+  caps(1) - play status: 4=playing, 3=paused 
+  cash(1) - shuffle status: 0=off, 1=on 
+  carp(1) - repeat status: 0=none, 1=single, 2=all
+  cavc(1) - <Unknown> 
+  caas(4) - <Unknown> 
+  caar(4) - <Unknown> 
+  canp(16) 00000026000052200000530200000f68 
+  cann(var) - track name
+  cana(var) - artist name
+  canl(var) - album name 
+  cang(0) - <Unknown>
+  asai(8) - album-id 
+  cmmk(4) - <Unknown> 
+  cant(4) - remaining track time in ms 
+  cast(4) - total track length in ms
 }}}
