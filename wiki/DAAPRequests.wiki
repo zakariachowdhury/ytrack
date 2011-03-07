@@ -102,6 +102,18 @@ where the base64 encoded password is the string: `username:password` base64 enco
 
 == logout ==
 == content-codes ==
+ * *Request* daap://server/content-codes
+ * *Response* mccr
+ * *Description* Provides a dictionary of content codes, names, and size information.  
+ * *Content*
+{{{
+	mccr
+	  mstt		status
+	  mdcl		dictionary entry (one for each type)
+	    mcna	item name
+	    mcnm	item number
+	    mcty	item type
+}}}
 == server-info ==
  * *Request* daap://server/server-info (or http://server:3689/)
  * *Response* msrv
