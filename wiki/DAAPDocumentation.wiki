@@ -25,4 +25,11 @@ from all of this what I can say is that DACP is a superset of DAAP and both use 
 
 = Discovery =
 
-As mentioned in Wikipedia, we use Bonjour (zeroConf) to discover a DAAP server. 
+As mentioned in Wikipedia, we use Bonjour (zeroConf) to discover a DAAP server. The service to discover is named `_touch-able._tcp`. Jeff Sharkey is also looking up for the `_dacp._tcp` service but I don't think this is useful (and I don't even remember what it returns).
+
+The lookup will return you zero or more services. Each service is a DAAP server. You now have to resolve it to get more informations on the service and especially:
+  * its library name
+  * its IP address
+  * its port
+
+the library name is contained in the TXTRecordData for the service under the `CtlN` key. For the moment it's sufficient to go ahead and connect to the server.
