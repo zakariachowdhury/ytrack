@@ -86,6 +86,7 @@ Now that we know the format, here is the list of supported requests
  * daap://server can be interchanged with http://server:3689 for purposes of coding/using command line utilities such as curl/wget to poke at things
 
  * The parameters have to passed to the request using HTTP GET style: http://server:3689/request?param1=value1&param2=value2 
+ * the mlcl tag is a list of items and contains items named mlit 
 
 == login ==
  * *Request* daap://server/login
@@ -102,7 +103,7 @@ where the base64 encoded password is the string: `username:password` base64 enco
 {{{
 	mlog
 	  mstt	status
-	  mlid	session id (used in remaining requests <sid> below)
+	  mlid	session id (used in remaining requests below)
 }}}
 
 == logout ==
@@ -112,12 +113,12 @@ where the base64 encoded password is the string: `username:password` base64 enco
  * *Description* Provides a dictionary of content codes, names, and size information.  
  * *Content*
 {{{
-	mccr
-	  mstt		status
-	  mdcl		dictionary entry (one for each type)
-	    mcna	item name
-	    mcnm	item number
-	    mcty	item type
+mccr
+  mstt		status
+  mdcl		dictionary entry (one for each type)
+    mcna	item name
+    mcnm	item number
+    mcty	item type
 }}}
 == server-info ==
  * *Request* daap://server/server-info (or http://server:3689/)
@@ -125,22 +126,44 @@ where the base64 encoded password is the string: `username:password` base64 enco
  * *Description* Provides basic negotiation info on what the server does and doesn't support and protocols.
  * *Content* 
 {{{
-	msrv
-	  mstt - status
-	  apro - daap protocol
-	  msix - does the server support indexing?
-	  msex - does the server support extensions?
-	  msup - does the server support update?
-	  msal - does the server support auto-logout?
-	  mstm - timeout interval
-	  mslr - is login required?
-	  msqy - does the server support queries?
-	  minm - server name
-	  msrs - does the server support resolve?  (needs persistent ids)
-	  msbr - does the server support browsing?
-  	  mspi - does the server support persistent ids?
-	  mpro - dmap protocol version
+msrv
+  mstt - status
+  apro - daap protocol
+  msix - does the server support indexing?
+  msex - does the server support extensions?
+  msup - does the server support update?
+  msal - does the server support auto-logout?
+  mstm - timeout interval
+  mslr - is login required?
+  msqy - does the server support queries?
+  minm - server name
+  msrs - does the server support resolve?  (needs persistent ids)
+  msbr - does the server support browsing?
+  mspi - does the server support persistent ids?
+  mpro - dmap protocol version
 }}}
 
 == databases ==
+ * *Request* daap://server/databases
+ * *Params*
+  * *session-id* session id 
+ * *Response* avdb
+ * *Description* This provides a list of databases served up by the server.  At present, it appears that only one db per server is the norm, but it may be possible to have multiple servers.
+
+ * *Content*
+{{{
+avdb
+  mstt - status
+  muty - update type - always 0 for now
+  mtco - total number of matching records
+  mrco - total number of records returned
+  mlcl - listing of records
+    mlit - single record
+      miid - database id (<dbid> in subsequent requests)
+      mper - database persistent id
+      minm - database name
+      mimc - number of items (songs) in the database
+      mctc - number of containers (playlists) in the database
+}}}
+
 == ctrl-int ==
