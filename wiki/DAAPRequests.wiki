@@ -78,7 +78,10 @@ Note that the headers of the request must include
 Viewer-Only-Client	1
 }}}
 
-Now that we know the format, here is the list of supported requests:
+Now that we know the format, here is the list of supported requests (Note: daap://server can be interchanged with
+http://server:3689 for purposes of coding/using command line utilities
+such as curl/wget to poke at things)
+:
 
 = Supported requests =
 == login ==
@@ -100,5 +103,27 @@ where the base64 encoded password is the string: `username:password` base64 enco
 == logout ==
 == content-codes ==
 == server-info ==
+ * *Request* daap://server/server-info (or http://server:3689/)
+ * *Response* msrv
+ * *Description* Provides basic negotiation info on what the server does and doesn't support and protocols.
+ * *Content* 
+{{{
+	msrv
+	  mstt - status
+	  apro - daap protocol
+	  msix - does the server support indexing?
+	  msex - does the server support extensions?
+	  msup - does the server support update?
+	  msal - does the server support auto-logout?
+	  mstm - timeout interval
+	  mslr - is login required?
+	  msqy - does the server support queries?
+	  minm - server name
+	  msrs - does the server support resolve?  (needs persistent ids)
+	  msbr - does the server support browsing?
+  	  mspi - does the server support persistent ids?
+	  mpro - dmap protocol version
+}}}
+
 == databases ==
 == ctrl-int ==
