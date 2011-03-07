@@ -1,6 +1,6 @@
 #summary Detailed description of DACP requests
 
-All the requests take the form of http://server:3689/ctrl-int/1/<command>
+All the requests take the form of http://server:3689/ctrl-int/1/command-name
 
 = playstatusupdate =
 
@@ -26,7 +26,11 @@ cmst
   cavc(1) - <Unknown> 
   caas(4) - <Unknown> 
   caar(4) - <Unknown> 
-  canp(16) 00000026000052200000530200000f68 
+  canp(16) - it has to be split in 4 sets of 4 bytes
+    first 4 bytes - database id
+    second 4 bytes - container id
+    third 4 bytes - unsure (album-id?)
+    fourth 4 bytes - item (song) id
   cann(var) - track name
   cana(var) - artist name
   canl(var) - album name 
