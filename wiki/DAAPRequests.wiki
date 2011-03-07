@@ -54,6 +54,9 @@ Content-Length	47
 Content-Encoding	gzip
 }}}
 
+
+Here is the hexadecimal representation of the response body:
+
 {{{
 00000000  6d 6c 6f 67 00 00 00 18 6d 73 74 74 00 00 00 04   mlog    mstt    
 00000010  00 00 00 c8 6d 6c 69 64 00 00 00 04 0f 44 4d 4a       mlid     DMJ
@@ -66,8 +69,36 @@ mlog (24 bytes)
   mlid - 8158 (4 bytes)
 }}}
 
-For container types the
-data can, itself contain more code/size/data blocks.  Lists will
-contain multiple code/size/data blocks, one for each item in the list.
+For container types the data can, itself contain more code/size/data blocks.  Lists will contain multiple code/size/data blocks, one for each item in the list.
 
 All sizes are in bytes and count only the following data block.
+
+Note that the headers of the request must include 
+{{{
+Viewer-Only-Client	1
+}}}
+
+Now that we know the format, here is the list of supported requests:
+
+= Supported requests =
+== login ==
+ * *Request* daap://server/login
+ * *Response* mlog
+ * *Description* Provides session information to use for the rest of the session.  If `requiresLogin` is set in the server-info, then from this point on, a basic http authentication header needs to be included with the request.  It is basically a header of the form:
+
+Authentication: base64encodedusernamepassword
+
+where the base64 encoded password is the string: `username:password` base64 encoded (obviously replacing username and password with the appropriate values).  Username appears to be meaningless.
+
+ * *Content*
+{{{
+	mlog
+	  mstt	status
+	  mlid	session id (used in remaining requests <sid> below)
+}}}
+
+== logout ==
+== content-codes ==
+== server-info ==
+== databases ==
+== ctrl-int ==
