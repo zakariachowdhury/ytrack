@@ -1,6 +1,6 @@
 #summary Detailed descriptions of DAAP requests
 
-== login ==
+= login =
  * *Request* daap://server/login
  * *Params*
   * *pairing-guid* hexadecimal value of the pairing code (e.g. 0x549361C47D6CDA53)
@@ -18,8 +18,8 @@ where the base64 encoded password is the string: `username:password` base64 enco
 	  mlid	session id (used in remaining requests below)
 }}}
 
-== logout ==
-== content-codes ==
+= logout =
+= content-codes =
  * *Request* daap://server/content-codes
  * *Response* mccr
  * *Description* Provides a dictionary of content codes, names, and size information.  
@@ -32,7 +32,7 @@ mccr
     mcnm	item number
     mcty	item type
 }}}
-== server-info ==
+= server-info =
  * *Request* daap://server/server-info (or http://server:3689/)
  * *Response* msrv
  * *Description* Provides basic negotiation info on what the server does and doesn't support and protocols.
@@ -55,7 +55,7 @@ msrv
   mpro - dmap protocol version
 }}}
 
-== databases ==
+= databases =
  * *Request* daap://server/databases
  * *Params*
   * *session-id* session id 
