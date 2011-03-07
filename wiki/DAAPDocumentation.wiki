@@ -17,11 +17,11 @@ First of all about the stack. It's still unclear to me what's the difference bet
 *DAAP*: Digital Audio Access Protocol. I think this is the specification of the server in itself. Here is the description on wikipedia:
  A DAAP server is a specialized HTTP server, which performs two functions. It sends a list of songs and it streams requested songs to clients. There are also provisions to notify the client of changes to the server. Requests are sent to the server by the client in form of URLs and are responded to with data in application/x-dmap-tagged mime-type, which can be converted to XML by the client. iTunes uses the ZeroConf (also known as Bonjour) service to announce and discover DAAP shares on a local subnet. The DAAP service uses TCP port 3689 by default.
 
-*DACP*:Digital Audio Control Protocol. This is explained on Wikipedia as being the protocol used the re;ote clients to connect to a DACP enabled server. Well this doesn't really help. I think this is more an augmented set of calls on DAAP.
+*DACP*:Digital Audio Control Protocol. This is explained on Wikipedia as being the protocol used the remote clients to connect to a DACP enabled server. From what I understand DACP protocol enables to take control of the server while DAAP is used for read-only use.
 
-*DMAP*:Digital Metadata Access Protocol? The definition is unclear but I htink this an acronym to group the definition of the metadata information exchanged between DAAP client and servers. There is more information on this when talking about content-codes below.
+*DMAP*:Digital Metadata Access Protocol? The definition is unclear but I think this an acronym to group the definition of the metadata information exchanged between DAAP client and servers. There is more information on this when talking about content-codes below.
 
-from all of this what I can say is that DACP is a superset of DAAP and both use DMAP to echange informations.
+From all of this what I can say is that DACP is a 'write-only' superset of the 'read-only' DAAP and both use DMAP to exchange informations.
 
 = Discovery =
 
