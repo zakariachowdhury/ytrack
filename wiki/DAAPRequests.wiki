@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Detailed descriptions of DAAP requests
 
 == login ==
  * *Request* daap://server/login
