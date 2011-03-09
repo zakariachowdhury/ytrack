@@ -66,6 +66,7 @@ The type number is a reference to the types listed at the bottom of this page
  * *mcna* dmap.contentcodesname (type = 9)
  * *mcty* dmap.contentcodestype (type = 3)
  * *minm* dmap.itemname (type = 9)
+ * *meds* dmap.editcommandssupported (type = 5)
 
 == daap codes ==
 
@@ -118,6 +119,31 @@ The type number is a reference to the types listed at the bottom of this page
  * *apsm* daap.playlistshufflemode (type = 1)
  * *aprm* daap.playlistrepeatmode (type = 1)
 
+ * *asct* daap.songcategory (type = 9)
+ * *ascn* daap.songcontentdescription (type = 9)
+ * *aslc* daap.songlongcontentdescription (type = 9)
+ * *asky* daap.songkeywords (type = 9)
+ * *ascr* daap.songcontentrating (type = 1)
+ * *asgp* daap.songgapless (type = 1)
+ * *ased* daap.songextradata (type = ")
+ * *asdr* daap.songdatereleased (type = 10)
+
+ * *asdp* daap.songdatepurchased (type = 10)
+ * *ashp* daap.songhasbeenplayed (type = 1)
+ * *assn* daap.sortname (type = 9)
+ * *assa* daap.sortartist (type = 9)
+ * *assl* daap.sortalbumartist (type = 9)
+ * *assu* daap.sortalbum (type = 9)
+ * *assc* daap.sortcomposer (type = 9)
+
+ * *asss* daap.sortseriesname (type = 9)
+ * *asbk* daap.bookmarkable (type = 1)
+ * *asbo* daap.songbookmark (type = 5)
+ * *aspu* daap.songpodcasturl (type = 9)
+ * *asai* daap.songalbumid (type = 7)
+ * *asls* daap.songlongsize (type = 7)
+ * *asaa* daap.songalbumartist (type = 9)
+
 == iTunes specifics == 
 
  * *aeNV* com.apple.itunes.norm-volume (type = 5)
@@ -131,31 +157,7 @@ The type number is a reference to the types listed at the bottom of this page
  * *aePC* com.apple.itunes.is-podcast (type = 1)
 
 
-        "mdcl[005942]" =         {
-            mcna = "daap.songcategory";
-            mcnm = asct;
-            mcty = 9;
-        };
-        "mdcl[005997]" =         {
-            mcna = "daap.songcontentdescription";
-            mcnm = ascn;
-            mcty = 9;
-        };
-        "mdcl[006062]" =         {
-            mcna = "daap.songlongcontentdescription";
-            mcnm = aslc;
-            mcty = 9;
-        };
-        "mdcl[006131]" =         {
-            mcna = "daap.songkeywords";
-            mcnm = asky;
-            mcty = 9;
-        };
-        "mdcl[006186]" =         {
-            mcna = "daap.songcontentrating";
-            mcnm = ascr;
-            mcty = 1;
-        };
+     
         "mdcl[006246]" =         {
             mcna = "com.apple.itunes.has-video";
             mcnm = aeHV;
@@ -196,11 +198,7 @@ The type number is a reference to the types listed at the bottom of this page
             mcnm = aeGH;
             mcty = 5;
         };
-        "mdcl[006776]" =         {
-            mcna = "daap.songalbumartist";
-            mcnm = asaa;
-            mcty = 9;
-        };
+ 
         "mdcl[006834]" =         {
             mcna = "com.apple.itunes.gapless-enc-dr";
             mcnm = aeGD;
@@ -226,106 +224,25 @@ The type number is a reference to the types listed at the bottom of this page
             mcnm = "";
             mcty = 1;
         };
-        "mdcl[007170]" =         {
-            mcna = "daap.songgapless";
-            mcnm = asgp;
-            mcty = 1;
-        };
+
         "mdcl[007224]" =         {
             mcna = "com.apple.itunes.special-playlist";
             mcnm = aePS;
             mcty = 1;
         };
-        "mdcl[007295]" =         {
-            mcna = "daap.songextradata";
-            mcnm = ased;
-            mcty = 3;
-        };
-        "mdcl[007351]" =         {
-            mcna = "daap.songdatereleased";
-            mcnm = asdr;
-            mcty = 10;
-        };
-        "mdcl[007410]" =         {
-            mcna = "daap.songdatepurchased";
-            mcnm = asdp;
-            mcty = 10;
-        };
-        "mdcl[007470]" =         {
-            mcna = "daap.songhasbeenplayed";
-            mcnm = ashp;
-            mcty = 1;
-        };
-        "mdcl[007530]" =         {
-            mcna = "daap.sortname";
-            mcnm = assn;
-            mcty = 9;
-        };
-        "mdcl[007581]" =         {
-            mcna = "daap.sortartist";
-            mcnm = assa;
-            mcty = 9;
-        };
-        "mdcl[007634]" =         {
-            mcna = "daap.sortalbumartist";
-            mcnm = assl;
-            mcty = 9;
-        };
-        "mdcl[007692]" =         {
-            mcna = "daap.sortalbum";
-            mcnm = assu;
-            mcty = 9;
-        };
-        "mdcl[007744]" =         {
-            mcna = "daap.sortcomposer";
-            mcnm = assc;
-            mcty = 9;
-        };
-        "mdcl[007799]" =         {
-            mcna = "daap.sortseriesname";
-            mcnm = asss;
-            mcty = 9;
-        };
-        "mdcl[007856]" =         {
-            mcna = "daap.bookmarkable";
-            mcnm = asbk;
-            mcty = 1;
-        };
-        "mdcl[007911]" =         {
-            mcna = "daap.songbookmark";
-            mcnm = asbo;
-            mcty = 5;
-        };
-        "mdcl[007966]" =         {
-            mcna = "daap.songpodcasturl";
-            mcnm = aspu;
-            mcty = 9;
-        };
+ 
         "mdcl[008023]" =         {
             mcna = "com.apple.itunes.content-rating";
             mcnm = aeCR;
             mcty = 9;
         };
-        "mdcl[008092]" =         {
-            mcna = "daap.songalbumid";
-            mcnm = asai;
-            mcty = 7;
-        };
-        "mdcl[008146]" =         {
-            mcna = "daap.songlongsize";
-            mcnm = asls;
-            mcty = 7;
-        };
+    
         "mdcl[008201]" =         {
             mcna = "com.apple.itunes.saved-genius";
             mcnm = aeSG;
             mcty = 1;
         };
-        "mdcl[008268]" =         {
-            mcna = "dmap.editcommandssupported";
-            mcnm = meds;
-            mcty = 5;
-        };
+ 
         "mdcl[008332]" =         {
             mcna = "com.apple.itunes.is-hd-video";
             mcnm = aeHD;
