@@ -20,177 +20,174 @@ The type number is a reference to the types listed at the bottom of this page
 
 == dmap codes ==
 
- * *miid* dmap.itemid (type = 5)
- * *minm* dmap.itemname (type = 9)
- * *mikd* dmap.itemkind (type = 7)
- * *mper* dmap.persistentid (type = 9)
- * *mcon* dmap.container (type = 12)
- * *mcti* dmap.containeritemid (type = 5)
- * *mpco* dmap.parentcontainerid (type = 5)
- * *mstt* dmap.status (type = 5)
- * *msts* dmap.statusstring (type = 9)
- * *mimc* dmap.itemcount (type = 5)
- * *mctc* dmap.containercount (type = 5)
- * *mrco* dmap.returnedcount (type = 5)
- * *mtco* dmap.specifiedtotalcount (type = 5)
- * *f?ch* dmap.haschildcontainers (type = 1)
- * *mlcl* dmap.listing (type = 12)
- * *mlit* dmap.listingitem (type = 12)
- * *mbcl* dmap.bag (type = 12)
- * *mdcl* dmap.dictionary (type = 12)
- * *msrv* dmap.serverinforesponse (type = 12)
- * *msau* dmap.authenticationmethod (type = 1)
- * *msas* dmap.authenticationschemes (type = 5)
- * *mslr* dmap.loginrequired (type = 1)
- * *mpro* dmap.protocolversion (type = 11)
- * *msal* dmap.supportsautologout (type = 1)
- * *msup* dmap.supportsupdate (type = 1)
- * *mspi* dmap.supportspersistentids (type = 1)
- * *msex* dmap.supportsextensions (type = 1)
- * *msbr* dmap.supportsbrowse (type = 1)
- * *msqy* dmap.supportsquery (type = 1)
- * *msix* dmap.supportsindex (type = 1)
- * *msrs* dmap.supportsresolve (type = 1)
- * *mstm* dmap.timeoutinterval (type = 5)
- * *msdc* dmap.databasescount (type = 5)
- * *mstc* dmap.utctime (type = 10)
- * *msto* dmap.utcoffset (type = 6)
- * *mlog* dmap.loginresponse (type = 12)
- * *mlid* dmap.sessionid (type = 5)
- * *mupd* dmap.updateresponse (type = 12)
- * *musr* dmap.serverrevision (type = 5)
- * *muty* dmap.updatetype (type = 1)
- * *mudl* dmap.deletedid (type = 12)
- * *msdc* dmap.databasescount (type = 5)
- * *mccr* dmap.contentcodesresponse (type = 12)
- * *mcnm* dmap.contentcodesnumber (type = 5)
- * *mcna* dmap.contentcodesname (type = 9)
- * *mcty* dmap.contentcodestype (type = 3)
- * *minm* dmap.itemname (type = 9)
- * *meds* dmap.editcommandssupported (type = 5)
+||miid||dmap.itemid||5||
+||minm||dmap.itemname||9||
+||mikd||dmap.itemkind||7||
+||mper||dmap.persistentid||9||
+||mcon||dmap.container||12||
+||mcti||dmap.containeritemid||5||
+||mpco||dmap.parentcontainerid||5||
+||mstt||dmap.status||5||
+||msts||dmap.statusstring||9||
+||mimc||dmap.itemcount||5||
+||mctc||dmap.containercount||5||
+||mrco||dmap.returnedcount||5||
+||mtco||dmap.specifiedtotalcount||5||
+||f?ch||dmap.haschildcontainers||1||
+||mlcl||dmap.listing||12||
+||mlit||dmap.listingitem||12||
+||mbcl||dmap.bag||12||
+||mdcl||dmap.dictionary||12||
+||msrv||dmap.serverinforesponse||12||
+||msau||dmap.authenticationmethod||1||
+||msas||dmap.authenticationschemes||5||
+||mslr||dmap.loginrequired||1||
+||mpro||dmap.protocolversion||11||
+||msal||dmap.supportsautologout||1||
+||msup||dmap.supportsupdate||1||
+||mspi||dmap.supportspersistentids||1||
+||msex||dmap.supportsextensions||1||
+||msbr||dmap.supportsbrowse||1||
+||msqy||dmap.supportsquery||1||
+||msix||dmap.supportsindex||1||
+||msrs||dmap.supportsresolve||1||
+||mstm||dmap.timeoutinterval||5||
+||msdc||dmap.databasescount||5||
+||mstc||dmap.utctime||10||
+||msto||dmap.utcoffset||6||
+||mlog||dmap.loginresponse||12||
+||mlid||dmap.sessionid||5||
+||mupd||dmap.updateresponse||12||
+||musr||dmap.serverrevision||5||
+||muty||dmap.updatetype||1||
+||mudl||dmap.deletedid||12||
+||msdc||dmap.databasescount||5||
+||mccr||dmap.contentcodesresponse||12||
+||mcnm||dmap.contentcodesnumber||5||
+||mcna||dmap.contentcodesname||9||
+||mcty||dmap.contentcodestype||3||
+||minm||dmap.itemname||9||
+||meds||dmap.editcommandssupported||5||
 
 == daap codes ==
 
- * *ated* daap.supportsextradata (type = 3)
- * *apro* daap.protocolversion (type = 11)
- * *avdb* daap.serverdatabases (type = 12)
- * *abro* daap.databasebrowse (type = 12)
- * *adbs* daap.databasesongs (type = 12)
- * *aply* daap.databaseplaylists (type = 12)
- * *apso* daap.playlistsongs (type = 12)
- * *arsv* daap.resolve (type = 12)
- * *arif* daap.resolveinfo (type = 12)
- * *abal* daap.browsealbumlisting (type = 12)
- * *abar* daap.browseartistlisting (type = 12)
- * *abcp* daap.browsecomposerlisting (type = 12)
- * *abgn* daap.browsegenrelisting (type = 12)
- * *aePP* com.apple.itunes.is-podcast-playlist (type = 1)
- * *asal* daap.songalbum (type = 9)
- * *asar* daap.songartist (type = 9)
- * *asbr* daap.songbitrate (type = 3)
- * *ascm* daap.songcomment (type = 9)
- * *asco* daap.songcompilation (type = 1)
- * *ascp* daap.songcomposer (type = 9)
- * *asda* daap.songdateadded (type = 10)
- * *asdm* daap.songdatemodified (type = 10)
- * *asdc* daap.songdisccount (type = 3)
- * *asdn* daap.songdiscnumber (type = 3)
- * *aseq* daap.songeqpreset (type = 9)
- * *asgn* daap.songgenre (type = 9)
- * *asdt* daap.songdescription (type = 9)
- * *asrv* daap.songrelativevolume (type = 2)
- * *assr* daap.songsamplerate (type = 5)
- * *assz* daap.songsize (type = 5)
- * *asst* daap.songstarttime (type = 5)
- * *assp* daap.songstoptime (type = 5)
- * *astm* daap.songtime (type = 5)
- * *astc* daap.songtrackcount (type = 3)
- * *astn* daap.songtracknumber (type = 3)
- * *asur* daap.songuserrating (type = 1)
- * *asyr* daap.songyear (type = 3)
- * *asfm* daap.songformat (type = 9)
- * *asdb* daap.songdisabled (type = 1)
- * *asdk* daap.songdatakind (type = 1)
- * *asul* daap.songdataurl (type = 9)
- * *asbt* daap.songbeatsperminute (type = 3)
- * *abpl* daap.baseplaylist (type = 1)
- * *agrp* daap.songgrouping (type = 9)
- * *ascd* daap.songcodectype (type = 5)
- * *ascs* daap.songcodecsubtype (type = 5)
- * *apsm* daap.playlistshufflemode (type = 1)
- * *aprm* daap.playlistrepeatmode (type = 1)
-
- * *asct* daap.songcategory (type = 9)
- * *ascn* daap.songcontentdescription (type = 9)
- * *aslc* daap.songlongcontentdescription (type = 9)
- * *asky* daap.songkeywords (type = 9)
- * *ascr* daap.songcontentrating (type = 1)
- * *asgp* daap.songgapless (type = 1)
- * *ased* daap.songextradata (type = ")
- * *asdr* daap.songdatereleased (type = 10)
-
- * *asdp* daap.songdatepurchased (type = 10)
- * *ashp* daap.songhasbeenplayed (type = 1)
- * *assn* daap.sortname (type = 9)
- * *assa* daap.sortartist (type = 9)
- * *assl* daap.sortalbumartist (type = 9)
- * *assu* daap.sortalbum (type = 9)
- * *assc* daap.sortcomposer (type = 9)
-
- * *asss* daap.sortseriesname (type = 9)
- * *asbk* daap.bookmarkable (type = 1)
- * *asbo* daap.songbookmark (type = 5)
- * *aspu* daap.songpodcasturl (type = 9)
- * *asai* daap.songalbumid (type = 7)
- * *asls* daap.songlongsize (type = 7)
- * *asaa* daap.songalbumartist (type = 9)
+||ated||daap.supportsextradata||3||
+||apro||daap.protocolversion||11||
+||avdb||daap.serverdatabases||12||
+||abro||daap.databasebrowse||12||
+||adbs||daap.databasesongs||12||
+||aply||daap.databaseplaylists||12||
+||apso||daap.playlistsongs||12||
+||arsv||daap.resolve||12||
+||arif||daap.resolveinfo||12||
+||abal||daap.browsealbumlisting||12||
+||abar||daap.browseartistlisting||12||
+||abcp||daap.browsecomposerlisting||12||
+||abgn||daap.browsegenrelisting||12||
+||aePP||com.apple.itunes.is-podcast-playlist||1||
+||asal||daap.songalbum||9||
+||asar||daap.songartist||9||
+||asbr||daap.songbitrate||3||
+||ascm||daap.songcomment||9||
+||asco||daap.songcompilation||1||
+||ascp||daap.songcomposer||9||
+||asda||daap.songdateadded||10||
+||asdm||daap.songdatemodified||10||
+||asdc||daap.songdisccount||3||
+||asdn||daap.songdiscnumber||3||
+||aseq||daap.songeqpreset||9||
+||asgn||daap.songgenre||9||
+||asdt||daap.songdescription||9||
+||asrv||daap.songrelativevolume||2||
+||assr||daap.songsamplerate||5||
+||assz||daap.songsize||5||
+||asst||daap.songstarttime||5||
+||assp||daap.songstoptime||5||
+||astm||daap.songtime||5||
+||astc||daap.songtrackcount||3||
+||astn||daap.songtracknumber||3||
+||asur||daap.songuserrating||1||
+||asyr||daap.songyear||3||
+||asfm||daap.songformat||9||
+||asdb||daap.songdisabled||1||
+||asdk||daap.songdatakind||1||
+||asul||daap.songdataurl||9||
+||asbt||daap.songbeatsperminute||3||
+||abpl||daap.baseplaylist||1||
+||agrp||daap.songgrouping||9||
+||ascd||daap.songcodectype||5||
+||ascs||daap.songcodecsubtype||5||
+||apsm||daap.playlistshufflemode||1||
+||aprm||daap.playlistrepeatmode||1||
+||asct||daap.songcategory||9||
+||ascn||daap.songcontentdescription||9||
+||aslc||daap.songlongcontentdescription||9||
+||asky||daap.songkeywords||9||
+||ascr||daap.songcontentrating||1||
+||asgp||daap.songgapless||1||
+||ased||daap.songextradata||"||
+||asdr||daap.songdatereleased||10||
+||asdp||daap.songdatepurchased||10||
+||ashp||daap.songhasbeenplayed||1||
+||assn||daap.sortname||9||
+||assa||daap.sortartist||9||
+||assl||daap.sortalbumartist||9||
+||assu||daap.sortalbum||9||
+||assc||daap.sortcomposer||9||
+||asss||daap.sortseriesname||9||
+||asbk||daap.bookmarkable||1||
+||asbo||daap.songbookmark||5||
+||aspu||daap.songpodcasturl||9||
+||asai||daap.songalbumid||7||
+||asls||daap.songlongsize||7||
+||asaa||daap.songalbumartist||9||
 
 == iTunes specifics == 
 
- * *aeNV* com.apple.itunes.norm-volume (type = 5)
- * *aeSP* com.apple.itunes.smart-playlist (type = 1)
- * *aeSI* com.apple.itunes.itms-songid (type = 5)
- * *aeAI* com.apple.itunes.itms-artistid (type = 5)
- * *aePI* com.apple.itunes.itms-playlistid (type = 5)
- * *aeCI* com.apple.itunes.itms-composerid (type = 5)
- * *aeGI* com.apple.itunes.itms-genreid (type = 5)
- * *aeSF* com.apple.itunes.itms-storefrontid (type = 5)
- * *aePC* com.apple.itunes.is-podcast (type = 1)
- * *aeHV* com.apple.itunes.has-video (type = 1)
- * *aeMK* com.apple.itunes.mediakind (type = 1)
- * *aeSN* com.apple.itunes.series-name (type = 9)
- * *aeNN* com.apple.itunes.network-name (type = 9)
- * *aeEN* com.apple.itunes.episode-num-str (type = 9)
- * *aeES* com.apple.itunes.episode-sort (type = 5)
- * *aeSU* com.apple.itunes.season-num (type = 5)
- * *aeGH* com.apple.itunes.gapless-heur (type = 5)
- * *aeGD* com.apple.itunes.gapless-enc-dr (type = 5)
- * *aeGU* com.apple.itunes.gapless-dur (type = 7)
- * *aeGR* com.apple.itunes.gapless-resy (type = 7)
- * *aeGE* com.apple.itunes.gapless-enc-del (type = 5)
- * *????* com.apple.itunes.req-fplay (type = 1)
- * *aePS* com.apple.itunes.special-playlist (type = 1)
- * *aeCR* com.apple.itunes.content-rating (type = 9)
- * *aeSG* com.apple.itunes.saved-genius (type = 1)
- * *aeHD* com.apple.itunes.is-hd-video (type = 1)
- * *aeSE* com.apple.itunes.store-pers-id (type = 7)
- * *aeDR* com.apple.itunes.drm-user-id (type = 7)
- * *aeND* com.apple.itunes.non-drm-user-id (type = 7)
- * *aeK1* com.apple.itunes.drm-key1-id (type = 7)
- * *aeK2* com.apple.itunes.drm-key2-id (type = 7)
- * *aeDV* com.apple.itunes.drm-versions (type = 5)
- * *aeDP* com.apple.itunes.drm-platform-id (type = 5)
- * *aeXD* com.apple.itunes.xid (type = 9)
- * *aeMk* com.apple.itunes.extended-media-kind (type = 5)
- * *aeAD* com.apple.itunes.adam-ids-array (type = 12)
- * *aeSV* com.apple.itunes.music-sharing-version (type = 5)
+||aeNV||com.apple.itunes.norm-volume||5||
+||aeSP||com.apple.itunes.smart-playlist||1||
+||aeSI||com.apple.itunes.itms-songid||5||
+||aeAI||com.apple.itunes.itms-artistid||5||
+||aePI||com.apple.itunes.itms-playlistid||5||
+||aeCI||com.apple.itunes.itms-composerid||5||
+||aeGI||com.apple.itunes.itms-genreid||5||
+||aeSF||com.apple.itunes.itms-storefrontid||5||
+||aePC||com.apple.itunes.is-podcast||1||
+||aeHV||com.apple.itunes.has-video||1||
+||aeMK||com.apple.itunes.mediakind||1||
+||aeSN||com.apple.itunes.series-name||9||
+||aeNN||com.apple.itunes.network-name||9||
+||aeEN||com.apple.itunes.episode-num-str||9||
+||aeES||com.apple.itunes.episode-sort||5||
+||aeSU||com.apple.itunes.season-num||5||
+||aeGH||com.apple.itunes.gapless-heur||5||
+||aeGD||com.apple.itunes.gapless-enc-dr||5||
+||aeGU||com.apple.itunes.gapless-dur||7||
+||aeGR||com.apple.itunes.gapless-resy||7||
+||aeGE||com.apple.itunes.gapless-enc-del||5||
+||????||com.apple.itunes.req-fplay||1||
+||aePS||com.apple.itunes.special-playlist||1||
+||aeCR||com.apple.itunes.content-rating||9||
+||aeSG||com.apple.itunes.saved-genius||1||
+||aeHD||com.apple.itunes.is-hd-video||1||
+||aeSE||com.apple.itunes.store-pers-id||7||
+||aeDR||com.apple.itunes.drm-user-id||7||
+||aeND||com.apple.itunes.non-drm-user-id||7||
+||aeK1||com.apple.itunes.drm-key1-id||7||
+||aeK2||com.apple.itunes.drm-key2-id||7||
+||aeDV||com.apple.itunes.drm-versions||5||
+||aeDP||com.apple.itunes.drm-platform-id||5||
+||aeXD||com.apple.itunes.xid||9||
+||aeMk||com.apple.itunes.extended-media-kind||5||
+||aeAD||com.apple.itunes.adam-ids-array||12||
+||aeSV||com.apple.itunes.music-sharing-version||5||
 
 == jukebox specifics == 
 
- * *ceJV* com.apple.itunes.jukebox-vote (type = 5)
- * *ceJC* com.apple.itunes.jukebox-client-vote (type = 2)
- * *ceJS* com.apple.itunes.jukebox-score (type = 4)
- * *ceJI* com.apple.itunes.jukebox-current (type = 5)
+||ceJV||com.apple.itunes.jukebox-vote||5||
+||ceJC||com.apple.itunes.jukebox-client-vote||2||
+||ceJS||com.apple.itunes.jukebox-score||4||
+||ceJI||com.apple.itunes.jukebox-current||5||
 
 
 = types =
