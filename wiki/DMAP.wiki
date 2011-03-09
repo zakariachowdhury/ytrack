@@ -2,12 +2,812 @@
 
 = Introduction =
 
-Add your content here.
+Here are the types and full names of the different metadata tags that are requested by the client and sent back by the server. 
 
+For the tag name, it's most of the time an abbreviation of the full name.
+
+For the full name, the rule is that each metadata is prefixed by its namespace (dmap or daap) followed by the full name.
+
+The type number is a reference to the types listed at the bottom of this page
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+ * *miid*
+  dmap.itemid
+  type = 5;
+
+        "mdcl[000061]" =         {
+            mcna = "dmap.itemname";
+            mcnm = minm;
+            mcty = 9;
+        };
+        "mdcl[000112]" =         {
+            mcna = "dmap.itemkind";
+            mcnm = mikd;
+            mcty = 1;
+        };
+        "mdcl[000163]" =         {
+            mcna = "dmap.persistentid";
+            mcnm = mper;
+            mcty = 7;
+        };
+        "mdcl[000218]" =         {
+            mcna = "dmap.container";
+            mcnm = mcon;
+            mcty = 12;
+        };
+        "mdcl[000270]" =         {
+            mcna = "dmap.containeritemid";
+            mcnm = mcti;
+            mcty = 5;
+        };
+        "mdcl[000328]" =         {
+            mcna = "dmap.parentcontainerid";
+            mcnm = mpco;
+            mcty = 5;
+        };
+        "mdcl[000388]" =         {
+            mcna = "dmap.status";
+            mcnm = mstt;
+            mcty = 5;
+        };
+        "mdcl[000437]" =         {
+            mcna = "dmap.statusstring";
+            mcnm = msts;
+            mcty = 9;
+        };
+        "mdcl[000492]" =         {
+            mcna = "dmap.itemcount";
+            mcnm = mimc;
+            mcty = 5;
+        };
+        "mdcl[000544]" =         {
+            mcna = "dmap.containercount";
+            mcnm = mctc;
+            mcty = 5;
+        };
+        "mdcl[000601]" =         {
+            mcna = "dmap.returnedcount";
+            mcnm = mrco;
+            mcty = 5;
+        };
+        "mdcl[000657]" =         {
+            mcna = "dmap.specifiedtotalcount";
+            mcnm = mtco;
+            mcty = 5;
+        };
+        "mdcl[000719]" =         {
+            mcna = "dmap.haschildcontainers";
+            mcty = 1;
+        };
+        "mdcl[000780]" =         {
+            mcna = "dmap.listing";
+            mcnm = mlcl;
+            mcty = 12;
+        };
+        "mdcl[000830]" =         {
+            mcna = "dmap.listingitem";
+            mcnm = mlit;
+            mcty = 12;
+        };
+        "mdcl[000884]" =         {
+            mcna = "dmap.bag";
+            mcnm = mbcl;
+            mcty = 12;
+        };
+        "mdcl[000930]" =         {
+            mcna = "dmap.dictionary";
+            mcnm = mdcl;
+            mcty = 12;
+        };
+        "mdcl[000983]" =         {
+            mcna = "dmap.serverinforesponse";
+            mcnm = msrv;
+            mcty = 12;
+        };
+        "mdcl[001044]" =         {
+            mcna = "dmap.authenticationmethod";
+            mcnm = msau;
+            mcty = 1;
+        };
+        "mdcl[001107]" =         {
+            mcna = "dmap.authenticationschemes";
+            mcnm = msas;
+            mcty = 5;
+        };
+        "mdcl[001171]" =         {
+            mcna = "dmap.loginrequired";
+            mcnm = mslr;
+            mcty = 1;
+        };
+        "mdcl[001227]" =         {
+            mcna = "dmap.protocolversion";
+            mcnm = mpro;
+            mcty = 11;
+        };
+        "mdcl[001285]" =         {
+            mcna = "dmap.supportsautologout";
+            mcnm = msal;
+            mcty = 1;
+        };
+        "mdcl[001346]" =         {
+            mcna = "dmap.supportsupdate";
+            mcnm = msup;
+            mcty = 1;
+        };
+        "mdcl[001403]" =         {
+            mcna = "dmap.supportspersistentids";
+            mcnm = mspi;
+            mcty = 1;
+        };
+        "mdcl[001467]" =         {
+            mcna = "dmap.supportsextensions";
+            mcnm = msex;
+            mcty = 1;
+        };
+        "mdcl[001528]" =         {
+            mcna = "dmap.supportsbrowse";
+            mcnm = msbr;
+            mcty = 1;
+        };
+        "mdcl[001585]" =         {
+            mcna = "dmap.supportsquery";
+            mcnm = msqy;
+            mcty = 1;
+        };
+        "mdcl[001641]" =         {
+            mcna = "dmap.supportsindex";
+            mcnm = msix;
+            mcty = 1;
+        };
+        "mdcl[001697]" =         {
+            mcna = "dmap.supportsresolve";
+            mcnm = msrs;
+            mcty = 1;
+        };
+        "mdcl[001755]" =         {
+            mcna = "dmap.timeoutinterval";
+            mcnm = mstm;
+            mcty = 5;
+        };
+        "mdcl[001813]" =         {
+            mcna = "dmap.databasescount";
+            mcnm = msdc;
+            mcty = 5;
+        };
+        "mdcl[001870]" =         {
+            mcna = "dmap.utctime";
+            mcnm = mstc;
+            mcty = 10;
+        };
+        "mdcl[001920]" =         {
+            mcna = "dmap.utcoffset";
+            mcnm = msto;
+            mcty = 6;
+        };
+        "mdcl[001972]" =         {
+            mcna = "dmap.loginresponse";
+            mcnm = mlog;
+            mcty = 12;
+        };
+        "mdcl[002028]" =         {
+            mcna = "dmap.sessionid";
+            mcnm = mlid;
+            mcty = 5;
+        };
+        "mdcl[002080]" =         {
+            mcna = "dmap.updateresponse";
+            mcnm = mupd;
+            mcty = 12;
+        };
+        "mdcl[002137]" =         {
+            mcna = "dmap.serverrevision";
+            mcnm = musr;
+            mcty = 5;
+        };
+        "mdcl[002194]" =         {
+            mcna = "dmap.updatetype";
+            mcnm = muty;
+            mcty = 1;
+        };
+        "mdcl[002247]" =         {
+            mcna = "dmap.deletedid";
+            mcnm = mudl;
+            mcty = 12;
+        };
+        "mdcl[002306]" =         {
+            mcna = "dmap.contentcodesresponse";
+            mcnm = mccr;
+            mcty = 12;
+        };
+        "mdcl[002369]" =         {
+            mcna = "dmap.contentcodesnumber";
+            mcnm = mcnm;
+            mcty = 5;
+        };
+        "mdcl[002430]" =         {
+            mcna = "dmap.contentcodesname";
+            mcnm = mcna;
+            mcty = 9;
+        };
+        "mdcl[002489]" =         {
+            mcna = "dmap.contentcodestype";
+            mcnm = mcty;
+            mcty = 3;
+        };
+        "mdcl[002548]" =         {
+            mcna = "daap.supportsextradata";
+            mcnm = ated;
+            mcty = 3;
+        };
+        "mdcl[002608]" =         {
+            mcna = "daap.protocolversion";
+            mcnm = apro;
+            mcty = 11;
+        };
+        "mdcl[002666]" =         {
+            mcna = "daap.serverdatabases";
+            mcnm = avdb;
+            mcty = 12;
+        };
+        "mdcl[002724]" =         {
+            mcna = "daap.databasebrowse";
+            mcnm = abro;
+            mcty = 12;
+        };
+        "mdcl[002781]" =         {
+            mcna = "daap.databasesongs";
+            mcnm = adbs;
+            mcty = 12;
+        };
+        "mdcl[002837]" =         {
+            mcna = "daap.databaseplaylists";
+            mcnm = aply;
+            mcty = 12;
+        };
+        "mdcl[002897]" =         {
+            mcna = "daap.playlistsongs";
+            mcnm = apso;
+            mcty = 12;
+        };
+        "mdcl[002953]" =         {
+            mcna = "daap.resolve";
+            mcnm = arsv;
+            mcty = 12;
+        };
+        "mdcl[003003]" =         {
+            mcna = "daap.resolveinfo";
+            mcnm = arif;
+            mcty = 12;
+        };
+        "mdcl[003057]" =         {
+            mcna = "daap.browsealbumlisting";
+            mcnm = abal;
+            mcty = 12;
+        };
+        "mdcl[003118]" =         {
+            mcna = "daap.browseartistlisting";
+            mcnm = abar;
+            mcty = 12;
+        };
+        "mdcl[003180]" =         {
+            mcna = "daap.browsecomposerlisting";
+            mcnm = abcp;
+            mcty = 12;
+        };
+        "mdcl[003244]" =         {
+            mcna = "daap.browsegenrelisting";
+            mcnm = abgn;
+            mcty = 12;
+        };
+        "mdcl[003305]" =         {
+            mcna = "com.apple.itunes.is-podcast-playlist";
+            mcnm = aePP;
+            mcty = 1;
+        };
+        "mdcl[003379]" =         {
+            mcna = "daap.songalbum";
+            mcnm = asal;
+            mcty = 9;
+        };
+        "mdcl[003431]" =         {
+            mcna = "daap.songartist";
+            mcnm = asar;
+            mcty = 9;
+        };
+        "mdcl[003484]" =         {
+            mcna = "daap.songbitrate";
+            mcnm = asbr;
+            mcty = 3;
+        };
+        "mdcl[003538]" =         {
+            mcna = "daap.songcomment";
+            mcnm = ascm;
+            mcty = 9;
+        };
+        "mdcl[003592]" =         {
+            mcna = "daap.songcompilation";
+            mcnm = asco;
+            mcty = 1;
+        };
+        "mdcl[003650]" =         {
+            mcna = "daap.songcomposer";
+            mcnm = ascp;
+            mcty = 9;
+        };
+        "mdcl[003705]" =         {
+            mcna = "daap.songdateadded";
+            mcnm = asda;
+            mcty = 10;
+        };
+        "mdcl[003761]" =         {
+            mcna = "daap.songdatemodified";
+            mcnm = asdm;
+            mcty = 10;
+        };
+        "mdcl[003820]" =         {
+            mcna = "daap.songdisccount";
+            mcnm = asdc;
+            mcty = 3;
+        };
+        "mdcl[003876]" =         {
+            mcna = "daap.songdiscnumber";
+            mcnm = asdn;
+            mcty = 3;
+        };
+        "mdcl[003933]" =         {
+            mcna = "daap.songeqpreset";
+            mcnm = aseq;
+            mcty = 9;
+        };
+        "mdcl[003988]" =         {
+            mcna = "daap.songgenre";
+            mcnm = asgn;
+            mcty = 9;
+        };
+        "mdcl[004040]" =         {
+            mcna = "daap.songdescription";
+            mcnm = asdt;
+            mcty = 9;
+        };
+        "mdcl[004098]" =         {
+            mcna = "daap.songrelativevolume";
+            mcnm = asrv;
+            mcty = 2;
+        };
+        "mdcl[004159]" =         {
+            mcna = "daap.songsamplerate";
+            mcnm = assr;
+            mcty = 5;
+        };
+        "mdcl[004216]" =         {
+            mcna = "daap.songsize";
+            mcnm = assz;
+            mcty = 5;
+        };
+        "mdcl[004267]" =         {
+            mcna = "daap.songstarttime";
+            mcnm = asst;
+            mcty = 5;
+        };
+        "mdcl[004323]" =         {
+            mcna = "daap.songstoptime";
+            mcnm = assp;
+            mcty = 5;
+        };
+        "mdcl[004378]" =         {
+            mcna = "daap.songtime";
+            mcnm = astm;
+            mcty = 5;
+        };
+        "mdcl[004429]" =         {
+            mcna = "daap.songtrackcount";
+            mcnm = astc;
+            mcty = 3;
+        };
+        "mdcl[004486]" =         {
+            mcna = "daap.songtracknumber";
+            mcnm = astn;
+            mcty = 3;
+        };
+        "mdcl[004544]" =         {
+            mcna = "daap.songuserrating";
+            mcnm = asur;
+            mcty = 1;
+        };
+        "mdcl[004601]" =         {
+            mcna = "daap.songyear";
+            mcnm = asyr;
+            mcty = 3;
+        };
+        "mdcl[004652]" =         {
+            mcna = "daap.songformat";
+            mcnm = asfm;
+            mcty = 9;
+        };
+        "mdcl[004705]" =         {
+            mcna = "dmap.itemname";
+            mcnm = minm;
+            mcty = 9;
+        };
+        "mdcl[004756]" =         {
+            mcna = "daap.songdisabled";
+            mcnm = asdb;
+            mcty = 1;
+        };
+        "mdcl[004811]" =         {
+            mcna = "com.apple.itunes.norm-volume";
+            mcnm = aeNV;
+            mcty = 5;
+        };
+        "mdcl[004877]" =         {
+            mcna = "com.apple.itunes.smart-playlist";
+            mcnm = aeSP;
+            mcty = 1;
+        };
+        "mdcl[004946]" =         {
+            mcna = "daap.songdatakind";
+            mcnm = asdk;
+            mcty = 1;
+        };
+        "mdcl[005001]" =         {
+            mcna = "daap.songdataurl";
+            mcnm = asul;
+            mcty = 9;
+        };
+        "mdcl[005055]" =         {
+            mcna = "daap.songbeatsperminute";
+            mcnm = asbt;
+            mcty = 3;
+        };
+        "mdcl[005116]" =         {
+            mcna = "daap.baseplaylist";
+            mcnm = abpl;
+            mcty = 1;
+        };
+        "mdcl[005171]" =         {
+            mcna = "daap.songgrouping";
+            mcnm = agrp;
+            mcty = 9;
+        };
+        "mdcl[005226]" =         {
+            mcna = "com.apple.itunes.itms-songid";
+            mcnm = aeSI;
+            mcty = 5;
+        };
+        "mdcl[005292]" =         {
+            mcna = "com.apple.itunes.itms-artistid";
+            mcnm = aeAI;
+            mcty = 5;
+        };
+        "mdcl[005360]" =         {
+            mcna = "com.apple.itunes.itms-playlistid";
+            mcnm = aePI;
+            mcty = 5;
+        };
+        "mdcl[005430]" =         {
+            mcna = "com.apple.itunes.itms-composerid";
+            mcnm = aeCI;
+            mcty = 5;
+        };
+        "mdcl[005500]" =         {
+            mcna = "com.apple.itunes.itms-genreid";
+            mcnm = aeGI;
+            mcty = 5;
+        };
+        "mdcl[005567]" =         {
+            mcna = "daap.songcodectype";
+            mcnm = ascd;
+            mcty = 5;
+        };
+        "mdcl[005623]" =         {
+            mcna = "daap.songcodecsubtype";
+            mcnm = ascs;
+            mcty = 5;
+        };
+        "mdcl[005682]" =         {
+            mcna = "com.apple.itunes.itms-storefrontid";
+            mcnm = aeSF;
+            mcty = 5;
+        };
+        "mdcl[005754]" =         {
+            mcna = "daap.playlistshufflemode";
+            mcnm = apsm;
+            mcty = 1;
+        };
+        "mdcl[005816]" =         {
+            mcna = "daap.playlistrepeatmode";
+            mcnm = aprm;
+            mcty = 1;
+        };
+        "mdcl[005877]" =         {
+            mcna = "com.apple.itunes.is-podcast";
+            mcnm = aePC;
+            mcty = 1;
+        };
+        "mdcl[005942]" =         {
+            mcna = "daap.songcategory";
+            mcnm = asct;
+            mcty = 9;
+        };
+        "mdcl[005997]" =         {
+            mcna = "daap.songcontentdescription";
+            mcnm = ascn;
+            mcty = 9;
+        };
+        "mdcl[006062]" =         {
+            mcna = "daap.songlongcontentdescription";
+            mcnm = aslc;
+            mcty = 9;
+        };
+        "mdcl[006131]" =         {
+            mcna = "daap.songkeywords";
+            mcnm = asky;
+            mcty = 9;
+        };
+        "mdcl[006186]" =         {
+            mcna = "daap.songcontentrating";
+            mcnm = ascr;
+            mcty = 1;
+        };
+        "mdcl[006246]" =         {
+            mcna = "com.apple.itunes.has-video";
+            mcnm = aeHV;
+            mcty = 1;
+        };
+        "mdcl[006310]" =         {
+            mcna = "com.apple.itunes.mediakind";
+            mcnm = aeMK;
+            mcty = 1;
+        };
+        "mdcl[006374]" =         {
+            mcna = "com.apple.itunes.series-name";
+            mcnm = aeSN;
+            mcty = 9;
+        };
+        "mdcl[006440]" =         {
+            mcna = "com.apple.itunes.network-name";
+            mcnm = aeNN;
+            mcty = 9;
+        };
+        "mdcl[006507]" =         {
+            mcna = "com.apple.itunes.episode-num-str";
+            mcnm = aeEN;
+            mcty = 9;
+        };
+        "mdcl[006577]" =         {
+            mcna = "com.apple.itunes.episode-sort";
+            mcnm = aeES;
+            mcty = 5;
+        };
+        "mdcl[006644]" =         {
+            mcna = "com.apple.itunes.season-num";
+            mcnm = aeSU;
+            mcty = 5;
+        };
+        "mdcl[006709]" =         {
+            mcna = "com.apple.itunes.gapless-heur";
+            mcnm = aeGH;
+            mcty = 5;
+        };
+        "mdcl[006776]" =         {
+            mcna = "daap.songalbumartist";
+            mcnm = asaa;
+            mcty = 9;
+        };
+        "mdcl[006834]" =         {
+            mcna = "com.apple.itunes.gapless-enc-dr";
+            mcnm = aeGD;
+            mcty = 5;
+        };
+        "mdcl[006903]" =         {
+            mcna = "com.apple.itunes.gapless-dur";
+            mcnm = aeGU;
+            mcty = 7;
+        };
+        "mdcl[006969]" =         {
+            mcna = "com.apple.itunes.gapless-resy";
+            mcnm = aeGR;
+            mcty = 7;
+        };
+        "mdcl[007036]" =         {
+            mcna = "com.apple.itunes.gapless-enc-del";
+            mcnm = aeGE;
+            mcty = 5;
+        };
+        "mdcl[007106]" =         {
+            mcna = "com.apple.itunes.req-fplay";
+            mcnm = "";
+            mcty = 1;
+        };
+        "mdcl[007170]" =         {
+            mcna = "daap.songgapless";
+            mcnm = asgp;
+            mcty = 1;
+        };
+        "mdcl[007224]" =         {
+            mcna = "com.apple.itunes.special-playlist";
+            mcnm = aePS;
+            mcty = 1;
+        };
+        "mdcl[007295]" =         {
+            mcna = "daap.songextradata";
+            mcnm = ased;
+            mcty = 3;
+        };
+        "mdcl[007351]" =         {
+            mcna = "daap.songdatereleased";
+            mcnm = asdr;
+            mcty = 10;
+        };
+        "mdcl[007410]" =         {
+            mcna = "daap.songdatepurchased";
+            mcnm = asdp;
+            mcty = 10;
+        };
+        "mdcl[007470]" =         {
+            mcna = "daap.songhasbeenplayed";
+            mcnm = ashp;
+            mcty = 1;
+        };
+        "mdcl[007530]" =         {
+            mcna = "daap.sortname";
+            mcnm = assn;
+            mcty = 9;
+        };
+        "mdcl[007581]" =         {
+            mcna = "daap.sortartist";
+            mcnm = assa;
+            mcty = 9;
+        };
+        "mdcl[007634]" =         {
+            mcna = "daap.sortalbumartist";
+            mcnm = assl;
+            mcty = 9;
+        };
+        "mdcl[007692]" =         {
+            mcna = "daap.sortalbum";
+            mcnm = assu;
+            mcty = 9;
+        };
+        "mdcl[007744]" =         {
+            mcna = "daap.sortcomposer";
+            mcnm = assc;
+            mcty = 9;
+        };
+        "mdcl[007799]" =         {
+            mcna = "daap.sortseriesname";
+            mcnm = asss;
+            mcty = 9;
+        };
+        "mdcl[007856]" =         {
+            mcna = "daap.bookmarkable";
+            mcnm = asbk;
+            mcty = 1;
+        };
+        "mdcl[007911]" =         {
+            mcna = "daap.songbookmark";
+            mcnm = asbo;
+            mcty = 5;
+        };
+        "mdcl[007966]" =         {
+            mcna = "daap.songpodcasturl";
+            mcnm = aspu;
+            mcty = 9;
+        };
+        "mdcl[008023]" =         {
+            mcna = "com.apple.itunes.content-rating";
+            mcnm = aeCR;
+            mcty = 9;
+        };
+        "mdcl[008092]" =         {
+            mcna = "daap.songalbumid";
+            mcnm = asai;
+            mcty = 7;
+        };
+        "mdcl[008146]" =         {
+            mcna = "daap.songlongsize";
+            mcnm = asls;
+            mcty = 7;
+        };
+        "mdcl[008201]" =         {
+            mcna = "com.apple.itunes.saved-genius";
+            mcnm = aeSG;
+            mcty = 1;
+        };
+        "mdcl[008268]" =         {
+            mcna = "dmap.editcommandssupported";
+            mcnm = meds;
+            mcty = 5;
+        };
+        "mdcl[008332]" =         {
+            mcna = "com.apple.itunes.is-hd-video";
+            mcnm = aeHD;
+            mcty = 1;
+        };
+        "mdcl[008398]" =         {
+            mcna = "com.apple.itunes.jukebox-vote";
+            mcnm = ceJV;
+            mcty = 5;
+        };
+        "mdcl[008465]" =         {
+            mcna = "com.apple.itunes.jukebox-client-vote";
+            mcnm = ceJC;
+            mcty = 2;
+        };
+        "mdcl[008539]" =         {
+            mcna = "com.apple.itunes.jukebox-score";
+            mcnm = ceJS;
+            mcty = 4;
+        };
+        "mdcl[008607]" =         {
+            mcna = "com.apple.itunes.jukebox-current";
+            mcnm = ceJI;
+            mcty = 5;
+        };
+        "mdcl[008677]" =         {
+            mcna = "com.apple.itunes.store-pers-id";
+            mcnm = aeSE;
+            mcty = 7;
+        };
+        "mdcl[008745]" =         {
+            mcna = "com.apple.itunes.drm-user-id";
+            mcnm = aeDR;
+            mcty = 7;
+        };
+        "mdcl[008811]" =         {
+            mcna = "com.apple.itunes.non-drm-user-id";
+            mcnm = aeND;
+            mcty = 7;
+        };
+        "mdcl[008881]" =         {
+            mcna = "com.apple.itunes.drm-key1-id";
+            mcnm = aeK1;
+            mcty = 7;
+        };
+        "mdcl[008947]" =         {
+            mcna = "com.apple.itunes.drm-key2-id";
+            mcnm = aeK2;
+            mcty = 7;
+        };
+        "mdcl[009013]" =         {
+            mcna = "com.apple.itunes.drm-versions";
+            mcnm = aeDV;
+            mcty = 5;
+        };
+        "mdcl[009080]" =         {
+            mcna = "com.apple.itunes.drm-platform-id";
+            mcnm = aeDP;
+            mcty = 5;
+        };
+        "mdcl[009150]" =         {
+            mcna = "com.apple.itunes.xid";
+            mcnm = aeXD;
+            mcty = 9;
+        };
+        "mdcl[009208]" =         {
+            mcna = "com.apple.itunes.extended-media-kind";
+            mcnm = aeMk;
+            mcty = 5;
+        };
+        "mdcl[009282]" =         {
+            mcna = "com.apple.itunes.adam-ids-array";
+            mcnm = aeAD;
+            mcty = 12;
+        };
+        "mdcl[009351]" =         {
+            mcna = "com.apple.itunes.music-sharing-version";
+            mcnm = aeSV;
+            mcty = 5;
+        };
+
+== types ==
+|| *type* || *name* || *description* ||
+||1 ||char ||	1-byte value, can be used as a boolean (true if the value is present, false if not)||
+||3 ||	short || 2-byte integer ||
+||5 ||	long ||	4-byte integer ||
+||7 ||	long long || 8-byte integer, tends to be represented in hex rather than numerical form ||
+||9 ||	string 	|| string of characters (UTF-8) ||
+||10 ||	date ||	4-byte integer with seconds since 1970 (standard UNIX time format) ||
+||11 ||	version || 2-bytes major version, next byte minor version, last byte patchlevel ||
+||12 ||	container || contains a series of other chunks, one after the other ||
