@@ -73,8 +73,8 @@ cmgt
   * *Params*
    * key-value pair (e.g. dmcp.volume=57)
    * *session-id* session id 
- * *Response* cmgt
- * *Description* edits a property. The properties that can be get and set are: 
+ * *Response* <empty>
+ * *Description* edits a property. The response body is empty which means that it is up to the client to verify that the new value has been correctly set. The properties that can be get and set are: 
   * *dmcp.volume* volume
   * *dacp.shufflestate* shuffle state
   * *dacp.repeatstate* repeat state
