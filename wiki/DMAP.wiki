@@ -12,119 +12,31 @@ The type number is a reference to the types listed at the bottom of this page
 
 = Details =
 
- * *miid*
-  dmap.itemid
-  type = 5;
+ * *miid* dmap.itemid (type = 5)
+ * *minm* dmap.itemname (type = 9)
+ * *mikd* dmap.itemkind (type = 7)
+ * *mper* dmap.persistentid (type = 9)
+ * *mcon* dmap.container (type = 12)
+ * *mcti* dmap.containeritemid (type = 5)
+ * *mpco* dmap.parentcontainerid (type = 5)
+ * *mstt* dmap.status (type = 5)
+ * *msts* dmap.statusstring (type = 9)
+ * *mimc* dmap.itemcount (type = 5)
+ * *mctc* dmap.containercount (type = 5)
+ * *mrco* dmap.returnedcount (type = 5)
+ * *mtco* dmap.specifiedtotalcount (type = 5)
+ * *f?ch* dmap.haschildcontainers (type = 1)
+ * *mlcl* dmap.listing (type = 12)
+ * *mlit* dmap.listingitem (type = 12)
+ * *mbcl* dmap.bag (type = 12)
+ * *mdcl* dmap.dictionary (type = 12)
+ * *msrv* dmap.serverinforesponse (type = 12)
+ * *msau* dmap.authenticationmethod (type = 1)
+ * *msas* dmap.authenticationschemes (type = 5)
+ * *mslr* dmap.loginrequired (type = 1)
+ * *mpro* dmap.protocolversion (type = 11)
 
-        "mdcl[000061]" =         {
-            mcna = "dmap.itemname";
-            mcnm = minm;
-            mcty = 9;
-        };
-        "mdcl[000112]" =         {
-            mcna = "dmap.itemkind";
-            mcnm = mikd;
-            mcty = 1;
-        };
-        "mdcl[000163]" =         {
-            mcna = "dmap.persistentid";
-            mcnm = mper;
-            mcty = 7;
-        };
-        "mdcl[000218]" =         {
-            mcna = "dmap.container";
-            mcnm = mcon;
-            mcty = 12;
-        };
-        "mdcl[000270]" =         {
-            mcna = "dmap.containeritemid";
-            mcnm = mcti;
-            mcty = 5;
-        };
-        "mdcl[000328]" =         {
-            mcna = "dmap.parentcontainerid";
-            mcnm = mpco;
-            mcty = 5;
-        };
-        "mdcl[000388]" =         {
-            mcna = "dmap.status";
-            mcnm = mstt;
-            mcty = 5;
-        };
-        "mdcl[000437]" =         {
-            mcna = "dmap.statusstring";
-            mcnm = msts;
-            mcty = 9;
-        };
-        "mdcl[000492]" =         {
-            mcna = "dmap.itemcount";
-            mcnm = mimc;
-            mcty = 5;
-        };
-        "mdcl[000544]" =         {
-            mcna = "dmap.containercount";
-            mcnm = mctc;
-            mcty = 5;
-        };
-        "mdcl[000601]" =         {
-            mcna = "dmap.returnedcount";
-            mcnm = mrco;
-            mcty = 5;
-        };
-        "mdcl[000657]" =         {
-            mcna = "dmap.specifiedtotalcount";
-            mcnm = mtco;
-            mcty = 5;
-        };
-        "mdcl[000719]" =         {
-            mcna = "dmap.haschildcontainers";
-            mcty = 1;
-        };
-        "mdcl[000780]" =         {
-            mcna = "dmap.listing";
-            mcnm = mlcl;
-            mcty = 12;
-        };
-        "mdcl[000830]" =         {
-            mcna = "dmap.listingitem";
-            mcnm = mlit;
-            mcty = 12;
-        };
-        "mdcl[000884]" =         {
-            mcna = "dmap.bag";
-            mcnm = mbcl;
-            mcty = 12;
-        };
-        "mdcl[000930]" =         {
-            mcna = "dmap.dictionary";
-            mcnm = mdcl;
-            mcty = 12;
-        };
-        "mdcl[000983]" =         {
-            mcna = "dmap.serverinforesponse";
-            mcnm = msrv;
-            mcty = 12;
-        };
-        "mdcl[001044]" =         {
-            mcna = "dmap.authenticationmethod";
-            mcnm = msau;
-            mcty = 1;
-        };
-        "mdcl[001107]" =         {
-            mcna = "dmap.authenticationschemes";
-            mcnm = msas;
-            mcty = 5;
-        };
-        "mdcl[001171]" =         {
-            mcna = "dmap.loginrequired";
-            mcnm = mslr;
-            mcty = 1;
-        };
-        "mdcl[001227]" =         {
-            mcna = "dmap.protocolversion";
-            mcnm = mpro;
-            mcty = 11;
-        };
+
         "mdcl[001285]" =         {
             mcna = "dmap.supportsautologout";
             mcnm = msal;
