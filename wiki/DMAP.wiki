@@ -4,7 +4,12 @@
 
 Here are the types and full names of the different metadata tags that are requested by the client and sent back by the server. 
 
-For the tag name, it's most of the time an abbreviation of the full name.
+They can be distinguished in 3 categories:
+ * dmap codes (that start with the letter 'm')
+ * daap codes (that start with the letter 'a')
+ * iTunes specific codes (that start with the letters 'ae' [e may stand for extended])
+
+For the remainder of the tag name, it's most of the time an abbreviation of the full name. 
 
 For the full name, the rule is that each metadata is prefixed by its namespace (dmap or daap) followed by the full name.
 
