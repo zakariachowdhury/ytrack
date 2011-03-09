@@ -90,77 +90,27 @@ The type number is a reference to the types listed at the bottom of this page
  * *aseq* daap.songeqpreset (type = 9)
  * *asgn* daap.songgenre (type = 9)
  * *asdt* daap.songdescription (type = 9)
-
  * *asrv* daap.songrelativevolume (type = 2)
  * *assr* daap.songsamplerate (type = 5)
  * *assz* daap.songsize (type = 5)
  * *asst* daap.songstarttime (type = 5)
  * *assp* daap.songstoptime (type = 5)
- * *aastmsal* daap.songtime (type = 5)
-
+ * *astm* daap.songtime (type = 5)
  * *astc* daap.songtrackcount (type = 3)
  * *astn* daap.songtracknumber (type = 3)
  * *asur* daap.songuserrating (type = 1)
- * *asal* daap.songalbum (type = 9)
- * *asal* daap.songalbum (type = 9)
- * *asal* daap.songalbum (type = 9)
- * *asal* daap.songalbum (type = 9)
-        
-        "mdcl[004601]" =         {
-            mcna = "daap.songyear";
-            mcnm = asyr;
-            mcty = 3;
-        };
-        "mdcl[004652]" =         {
-            mcna = "daap.songformat";
-            mcnm = asfm;
-            mcty = 9;
-        };
-        "mdcl[004705]" =         {
-            mcna = "dmap.itemname";
-            mcnm = minm;
-            mcty = 9;
-        };
-        "mdcl[004756]" =         {
-            mcna = "daap.songdisabled";
-            mcnm = asdb;
-            mcty = 1;
-        };
-        "mdcl[004811]" =         {
-            mcna = "com.apple.itunes.norm-volume";
-            mcnm = aeNV;
-            mcty = 5;
-        };
-        "mdcl[004877]" =         {
-            mcna = "com.apple.itunes.smart-playlist";
-            mcnm = aeSP;
-            mcty = 1;
-        };
-        "mdcl[004946]" =         {
-            mcna = "daap.songdatakind";
-            mcnm = asdk;
-            mcty = 1;
-        };
-        "mdcl[005001]" =         {
-            mcna = "daap.songdataurl";
-            mcnm = asul;
-            mcty = 9;
-        };
-        "mdcl[005055]" =         {
-            mcna = "daap.songbeatsperminute";
-            mcnm = asbt;
-            mcty = 3;
-        };
-        "mdcl[005116]" =         {
-            mcna = "daap.baseplaylist";
-            mcnm = abpl;
-            mcty = 1;
-        };
-        "mdcl[005171]" =         {
-            mcna = "daap.songgrouping";
-            mcnm = agrp;
-            mcty = 9;
-        };
+ * *asyr* daap.songyear (type = 3)
+ * *asfm* daap.songformat (type = 9)
+ * *minm* dmap.itemname (type = 9)
+ * *asdb* daap.songdisabled (type = 1)
+ * *aeNV* com.apple.itunes.norm-volume (type = 5)
+ * *aeSP* com.apple.itunes.smart-playlist (type = 1)
+ * *asdk* daap.songdatakind (type = 1)
+ * *asul* daap.songdataurl (type = 9)
+ * *asbt* daap.songbeatsperminute (type = 3)
+ * *abpl* daap.baseplaylist (type = 1)
+ * *agrp* daap.songgrouping (type = 9)
+
         "mdcl[005226]" =         {
             mcna = "com.apple.itunes.itms-songid";
             mcnm = aeSI;
