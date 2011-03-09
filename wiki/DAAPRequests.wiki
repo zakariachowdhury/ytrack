@@ -88,6 +88,7 @@ avdb
  * *Description* This provides a list of the playlists. Here is the list of what Remote asks for : dmap.itemname,dmap.itemcount,dmap.itemid,dmap.persistentid,daap.baseplaylist,com.apple.itunes.special-playlist,com.apple.itunes.smart-playlist,com.apple.itunes.saved-genius,dmap.parentcontainerid,dmap.editcommandssupported,com.apple.itunes.jukebox-current,daap.songcontentdescription
 
  * *Content*
+here the list corresponds to the items requested to the server but it could be longer if you requested more informations
 {{{
 aply
   mstt - status
@@ -117,5 +118,8 @@ aply
          13 iTunesU library
          15 GeniusMixes library
          16 GenisMix library
+      aeSG - saved Genius
+      ceJI - jukebox current
+      ascn - song content description
         
 }}}
