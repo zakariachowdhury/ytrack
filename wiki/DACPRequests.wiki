@@ -66,3 +66,21 @@ cmgt
   cash(1) - shuffle state
   carp(1) - repeat state
 }}}
+
+= setproperty =
+
+ * *Request* /setproperty
+  * *Params*
+   * key-value pair (e.g. dmcp.volume=57)
+   * *session-id* session id 
+ * *Response* cmgt
+ * *Description* edits a property. The properties that can be get and set are: 
+  * *dmcp.volume* volume
+  * *dacp.shufflestate* shuffle state
+  * *dacp.repeatstate* repeat state
+  * *dacp.playingtime* play head position in the track
+
+ * *Content*
+{{{
+
+}}}
