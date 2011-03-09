@@ -35,57 +35,20 @@ The type number is a reference to the types listed at the bottom of this page
  * *msas* dmap.authenticationschemes (type = 5)
  * *mslr* dmap.loginrequired (type = 1)
  * *mpro* dmap.protocolversion (type = 11)
+ * *msal* dmap.supportsautologout (type = 1)
+ * *msup* dmap.supportsupdate (type = 1)
+ * *mspi* dmap.supportspersistentids (type = 1)
+ * *msex* dmap.supportsextensions (type = 1)
+ * *msbr* dmap.supportsbrowse (type = 1)
+ * *msqy* dmap.supportsquery (type = 1)
+ * *msix* dmap.supportsindex (type = 1)
+ * *msrs* dmap.supportsresolve (type = 1)
+ * *mstm* dmap.timeoutinterval (type = 5)
+ * *msdc* dmap.databasescount (type = 5)
 
 
-        "mdcl[001285]" =         {
-            mcna = "dmap.supportsautologout";
-            mcnm = msal;
-            mcty = 1;
-        };
-        "mdcl[001346]" =         {
-            mcna = "dmap.supportsupdate";
-            mcnm = msup;
-            mcty = 1;
-        };
-        "mdcl[001403]" =         {
-            mcna = "dmap.supportspersistentids";
-            mcnm = mspi;
-            mcty = 1;
-        };
-        "mdcl[001467]" =         {
-            mcna = "dmap.supportsextensions";
-            mcnm = msex;
-            mcty = 1;
-        };
-        "mdcl[001528]" =         {
-            mcna = "dmap.supportsbrowse";
-            mcnm = msbr;
-            mcty = 1;
-        };
-        "mdcl[001585]" =         {
-            mcna = "dmap.supportsquery";
-            mcnm = msqy;
-            mcty = 1;
-        };
-        "mdcl[001641]" =         {
-            mcna = "dmap.supportsindex";
-            mcnm = msix;
-            mcty = 1;
-        };
-        "mdcl[001697]" =         {
-            mcna = "dmap.supportsresolve";
-            mcnm = msrs;
-            mcty = 1;
-        };
-        "mdcl[001755]" =         {
-            mcna = "dmap.timeoutinterval";
-            mcnm = mstm;
-            mcty = 5;
-        };
-        "mdcl[001813]" =         {
-            mcna = "dmap.databasescount";
-            mcnm = msdc;
-            mcty = 5;
+
+  
         };
         "mdcl[001870]" =         {
             mcna = "dmap.utctime";
