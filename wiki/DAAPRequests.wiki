@@ -80,7 +80,7 @@ avdb
 
 
 = playlist list =
- * *Request* daap://server/databases/<dbid>/containers
+ * *Request* daap://server/databases/[dbid]/containers
  * *Params*
   * *session-id* session id 
   * *meta* the DMAP and DAAP metadata you want to get as a list separated by commas
