@@ -12,6 +12,8 @@ The type number is a reference to the types listed at the bottom of this page
 
 = Details =
 
+== dmap codes ==
+
  * *miid* dmap.itemid (type = 5)
  * *minm* dmap.itemname (type = 9)
  * *mikd* dmap.itemkind (type = 7)
@@ -45,141 +47,37 @@ The type number is a reference to the types listed at the bottom of this page
  * *msrs* dmap.supportsresolve (type = 1)
  * *mstm* dmap.timeoutinterval (type = 5)
  * *msdc* dmap.databasescount (type = 5)
+ * *mstc* dmap.utctime (type = 10)
+ * *msto* dmap.utcoffset (type = 6)
+ * *mlog* dmap.loginresponse (type = 12)
+ * *mlid* dmap.sessionid (type = 5)
+ * *mupd* dmap.updateresponse (type = 12)
+ * *musr* dmap.serverrevision (type = 5)
+ * *muty* dmap.updatetype (type = 1)
+ * *mudl* dmap.deletedid (type = 12)
+ * *msdc* dmap.databasescount (type = 5)
+ * *mccr* dmap.contentcodesresponse (type = 12)
+ * *mcnm* dmap.contentcodesnumber (type = 5)
+ * *mcna* dmap.contentcodesname (type = 9)
+ * *mcty* dmap.contentcodestype (type = 3)
 
+== daap codes ==
 
-
+ * *ated* daap.supportsextradata (type = 3)
+ * *apro* daap.protocolversion (type = 11)
+ * *avdb* daap.serverdatabases (type = 12)
+ * *abro* daap.databasebrowse (type = 12)
+ * *adbs* daap.databasesongs (type = 12)
+ * *aply* daap.databaseplaylists (type = 12)
+ * *apso* daap.playlistsongs (type = 12)
+ * *arsv* daap.resolve (type = 12)
+ * *arif* daap.resolveinfo (type = 12)
+ * *abal* daap.browsealbumlisting (type = 12)
+ * *abar* daap.browseartistlisting (type = 12)
+ * *abcp* daap.browsecomposerlisting (type = 12)
+ * *abgn* daap.browsegenrelisting (type = 12)
+ * *aePP* com.apple.itunes.is-podcast-playlist (type = 1)
   
-        };
-        "mdcl[001870]" =         {
-            mcna = "dmap.utctime";
-            mcnm = mstc;
-            mcty = 10;
-        };
-        "mdcl[001920]" =         {
-            mcna = "dmap.utcoffset";
-            mcnm = msto;
-            mcty = 6;
-        };
-        "mdcl[001972]" =         {
-            mcna = "dmap.loginresponse";
-            mcnm = mlog;
-            mcty = 12;
-        };
-        "mdcl[002028]" =         {
-            mcna = "dmap.sessionid";
-            mcnm = mlid;
-            mcty = 5;
-        };
-        "mdcl[002080]" =         {
-            mcna = "dmap.updateresponse";
-            mcnm = mupd;
-            mcty = 12;
-        };
-        "mdcl[002137]" =         {
-            mcna = "dmap.serverrevision";
-            mcnm = musr;
-            mcty = 5;
-        };
-        "mdcl[002194]" =         {
-            mcna = "dmap.updatetype";
-            mcnm = muty;
-            mcty = 1;
-        };
-        "mdcl[002247]" =         {
-            mcna = "dmap.deletedid";
-            mcnm = mudl;
-            mcty = 12;
-        };
-        "mdcl[002306]" =         {
-            mcna = "dmap.contentcodesresponse";
-            mcnm = mccr;
-            mcty = 12;
-        };
-        "mdcl[002369]" =         {
-            mcna = "dmap.contentcodesnumber";
-            mcnm = mcnm;
-            mcty = 5;
-        };
-        "mdcl[002430]" =         {
-            mcna = "dmap.contentcodesname";
-            mcnm = mcna;
-            mcty = 9;
-        };
-        "mdcl[002489]" =         {
-            mcna = "dmap.contentcodestype";
-            mcnm = mcty;
-            mcty = 3;
-        };
-        "mdcl[002548]" =         {
-            mcna = "daap.supportsextradata";
-            mcnm = ated;
-            mcty = 3;
-        };
-        "mdcl[002608]" =         {
-            mcna = "daap.protocolversion";
-            mcnm = apro;
-            mcty = 11;
-        };
-        "mdcl[002666]" =         {
-            mcna = "daap.serverdatabases";
-            mcnm = avdb;
-            mcty = 12;
-        };
-        "mdcl[002724]" =         {
-            mcna = "daap.databasebrowse";
-            mcnm = abro;
-            mcty = 12;
-        };
-        "mdcl[002781]" =         {
-            mcna = "daap.databasesongs";
-            mcnm = adbs;
-            mcty = 12;
-        };
-        "mdcl[002837]" =         {
-            mcna = "daap.databaseplaylists";
-            mcnm = aply;
-            mcty = 12;
-        };
-        "mdcl[002897]" =         {
-            mcna = "daap.playlistsongs";
-            mcnm = apso;
-            mcty = 12;
-        };
-        "mdcl[002953]" =         {
-            mcna = "daap.resolve";
-            mcnm = arsv;
-            mcty = 12;
-        };
-        "mdcl[003003]" =         {
-            mcna = "daap.resolveinfo";
-            mcnm = arif;
-            mcty = 12;
-        };
-        "mdcl[003057]" =         {
-            mcna = "daap.browsealbumlisting";
-            mcnm = abal;
-            mcty = 12;
-        };
-        "mdcl[003118]" =         {
-            mcna = "daap.browseartistlisting";
-            mcnm = abar;
-            mcty = 12;
-        };
-        "mdcl[003180]" =         {
-            mcna = "daap.browsecomposerlisting";
-            mcnm = abcp;
-            mcty = 12;
-        };
-        "mdcl[003244]" =         {
-            mcna = "daap.browsegenrelisting";
-            mcnm = abgn;
-            mcty = 12;
-        };
-        "mdcl[003305]" =         {
-            mcna = "com.apple.itunes.is-podcast-playlist";
-            mcnm = aePP;
-            mcty = 1;
-        };
         "mdcl[003379]" =         {
             mcna = "daap.songalbum";
             mcnm = asal;
