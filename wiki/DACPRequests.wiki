@@ -6,10 +6,10 @@ All the requests take the form of http://server:3689/ctrl-int/1/command-name
 
 = playstatusupdate =
 
-* *Request* /playstatusUpdate
- * *Params*
-  * *revision-number* revision number 
-  * *session-id* session id 
+ * *Request* /playstatusUpdate
+   * *Params*
+     * *revision-number* revision number 
+     * *session-id* session id 
  * *Response* avdb
  * *Description* Jeff Sharkey says 
 
@@ -45,16 +45,16 @@ cmst
 
 = getproperty =
 
-* *Request* /getproperty
- * *Params*
-  * *properties* properties list separated by commas
-  * *session-id* session id 
+ * *Request* /getproperty
+  * *Params*
+   * *properties* properties list separated by commas
+   * *session-id* session id 
  * *Response* cmgt
  * *Description* edits a property. The properties that can be get and set are: 
-   * *dmcp.volume* volume
-   * *dacp.shufflestate* shuffle state
-   * *dacp.repeatstate* repeat state
-   * *dacp.playingtime* play head position in the track
+  * *dmcp.volume* volume
+  * *dacp.shufflestate* shuffle state
+  * *dacp.repeatstate* repeat state
+  * *dacp.playingtime* play head position in the track
 
  * *Content*
 {{{
