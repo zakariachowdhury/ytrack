@@ -20,6 +20,7 @@ The type number is a reference to the types listed at the bottom of this page
 
 == dmap codes ==
 
+||*tag name*||*full name*||*type*||
 ||miid||dmap.itemid||5||
 ||minm||dmap.itemname||9||
 ||mikd||dmap.itemkind||7||
@@ -71,6 +72,7 @@ The type number is a reference to the types listed at the bottom of this page
 
 == daap codes ==
 
+||*tag name*||*full name*||*type*||
 ||ated||daap.supportsextradata||3||
 ||apro||daap.protocolversion||11||
 ||avdb||daap.serverdatabases||12||
@@ -144,6 +146,7 @@ The type number is a reference to the types listed at the bottom of this page
 
 == iTunes specifics == 
 
+||*tag name*||*full name*||*type*||
 ||aeNV||com.apple.itunes.norm-volume||5||
 ||aeSP||com.apple.itunes.smart-playlist||1||
 ||aeSI||com.apple.itunes.itms-songid||5||
@@ -184,6 +187,7 @@ The type number is a reference to the types listed at the bottom of this page
 
 == jukebox specifics == 
 
+||*tag name*||*full name*||*type*||
 ||ceJV||com.apple.itunes.jukebox-vote||5||
 ||ceJC||com.apple.itunes.jukebox-client-vote||2||
 ||ceJS||com.apple.itunes.jukebox-score||4||
