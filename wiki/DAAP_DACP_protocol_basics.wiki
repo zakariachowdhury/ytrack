@@ -79,7 +79,14 @@ Viewer-Only-Client	1
 }}}
 
 
-* Additional notes:* 
+== Glossary ==
+
+ * *Container:* a container is a group of tracks. This group can be either a smart playlist, a user playlist, an album, ...
+ * *Database:* a database is physically the root, the database of your DAAP server.
+ * *Group:* a group may be a group of containers
+
+== Additional notes ==
+ 
  * daap://server can be interchanged with http://server:3689 for purposes of coding/using command line utilities such as curl/wget to poke at things
  * The parameters have to passed to the request using HTTP GET style: http://server:3689/request?param1=value1&param2=value2 
  * the mlcl tag is a list of items and contains items named mlit 
