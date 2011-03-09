@@ -4,10 +4,11 @@
 
 Here are the types and full names of the different metadata tags that are requested by the client and sent back by the server. 
 
-They can be distinguished in 3 categories:
+They can be distinguished in 4 categories:
  * dmap codes (that start with the letter 'm')
  * daap codes (that start with the letter 'a')
  * iTunes specific codes (that start with the letters 'ae' [e may stand for extended])
+ * iTunes jukebox specific codes (that start with the letters 'ce')
 
 For the remainder of the tag name, it's most of the time an abbreviation of the full name. 
 
@@ -155,176 +156,44 @@ The type number is a reference to the types listed at the bottom of this page
  * *aeGI* com.apple.itunes.itms-genreid (type = 5)
  * *aeSF* com.apple.itunes.itms-storefrontid (type = 5)
  * *aePC* com.apple.itunes.is-podcast (type = 1)
+ * *aeHV* com.apple.itunes.has-video (type = 1)
+ * *aeMK* com.apple.itunes.mediakind (type = 1)
+ * *aeSN* com.apple.itunes.series-name (type = 9)
+ * *aeNN* com.apple.itunes.network-name (type = 9)
+ * *aeEN* com.apple.itunes.episode-num-str (type = 9)
+ * *aeES* com.apple.itunes.episode-sort (type = 5)
+ * *aeSU* com.apple.itunes.season-num (type = 5)
+ * *aeGH* com.apple.itunes.gapless-heur (type = 5)
+ * *aeGD* com.apple.itunes.gapless-enc-dr (type = 5)
+ * *aeGU* com.apple.itunes.gapless-dur (type = 7)
+ * *aeGR* com.apple.itunes.gapless-resy (type = 7)
+ * *aeGE* com.apple.itunes.gapless-enc-del (type = 5)
+ * *????* com.apple.itunes.req-fplay (type = 1)
+ * *aePS* com.apple.itunes.special-playlist (type = 1)
+ * *aeCR* com.apple.itunes.content-rating (type = 9)
+ * *aeSG* com.apple.itunes.saved-genius (type = 1)
+ * *aeHD* com.apple.itunes.is-hd-video (type = 1)
+ * *aeSE* com.apple.itunes.store-pers-id (type = 7)
+ * *aeDR* com.apple.itunes.drm-user-id (type = 7)
+ * *aeND* com.apple.itunes.non-drm-user-id (type = 7)
+ * *aeK1* com.apple.itunes.drm-key1-id (type = 7)
+ * *aeK2* com.apple.itunes.drm-key2-id (type = 7)
+ * *aeDV* com.apple.itunes.drm-versions (type = 5)
+ * *aeDP* com.apple.itunes.drm-platform-id (type = 5)
+ * *aeXD* com.apple.itunes.xid (type = 9)
+ * *aeMk* com.apple.itunes.extended-media-kind (type = 5)
+ * *aeAD* com.apple.itunes.adam-ids-array (type = 12)
+ * *aeSV* com.apple.itunes.music-sharing-version (type = 5)
+
+== jukebox specifics == 
+
+ * *ceJV* com.apple.itunes.jukebox-vote (type = 5)
+ * *ceJC* com.apple.itunes.jukebox-client-vote (type = 2)
+ * *ceJS* com.apple.itunes.jukebox-score (type = 4)
+ * *ceJI* com.apple.itunes.jukebox-current (type = 5)
 
 
-     
-        "mdcl[006246]" =         {
-            mcna = "com.apple.itunes.has-video";
-            mcnm = aeHV;
-            mcty = 1;
-        };
-        "mdcl[006310]" =         {
-            mcna = "com.apple.itunes.mediakind";
-            mcnm = aeMK;
-            mcty = 1;
-        };
-        "mdcl[006374]" =         {
-            mcna = "com.apple.itunes.series-name";
-            mcnm = aeSN;
-            mcty = 9;
-        };
-        "mdcl[006440]" =         {
-            mcna = "com.apple.itunes.network-name";
-            mcnm = aeNN;
-            mcty = 9;
-        };
-        "mdcl[006507]" =         {
-            mcna = "com.apple.itunes.episode-num-str";
-            mcnm = aeEN;
-            mcty = 9;
-        };
-        "mdcl[006577]" =         {
-            mcna = "com.apple.itunes.episode-sort";
-            mcnm = aeES;
-            mcty = 5;
-        };
-        "mdcl[006644]" =         {
-            mcna = "com.apple.itunes.season-num";
-            mcnm = aeSU;
-            mcty = 5;
-        };
-        "mdcl[006709]" =         {
-            mcna = "com.apple.itunes.gapless-heur";
-            mcnm = aeGH;
-            mcty = 5;
-        };
- 
-        "mdcl[006834]" =         {
-            mcna = "com.apple.itunes.gapless-enc-dr";
-            mcnm = aeGD;
-            mcty = 5;
-        };
-        "mdcl[006903]" =         {
-            mcna = "com.apple.itunes.gapless-dur";
-            mcnm = aeGU;
-            mcty = 7;
-        };
-        "mdcl[006969]" =         {
-            mcna = "com.apple.itunes.gapless-resy";
-            mcnm = aeGR;
-            mcty = 7;
-        };
-        "mdcl[007036]" =         {
-            mcna = "com.apple.itunes.gapless-enc-del";
-            mcnm = aeGE;
-            mcty = 5;
-        };
-        "mdcl[007106]" =         {
-            mcna = "com.apple.itunes.req-fplay";
-            mcnm = "";
-            mcty = 1;
-        };
-
-        "mdcl[007224]" =         {
-            mcna = "com.apple.itunes.special-playlist";
-            mcnm = aePS;
-            mcty = 1;
-        };
- 
-        "mdcl[008023]" =         {
-            mcna = "com.apple.itunes.content-rating";
-            mcnm = aeCR;
-            mcty = 9;
-        };
-    
-        "mdcl[008201]" =         {
-            mcna = "com.apple.itunes.saved-genius";
-            mcnm = aeSG;
-            mcty = 1;
-        };
- 
-        "mdcl[008332]" =         {
-            mcna = "com.apple.itunes.is-hd-video";
-            mcnm = aeHD;
-            mcty = 1;
-        };
-        "mdcl[008398]" =         {
-            mcna = "com.apple.itunes.jukebox-vote";
-            mcnm = ceJV;
-            mcty = 5;
-        };
-        "mdcl[008465]" =         {
-            mcna = "com.apple.itunes.jukebox-client-vote";
-            mcnm = ceJC;
-            mcty = 2;
-        };
-        "mdcl[008539]" =         {
-            mcna = "com.apple.itunes.jukebox-score";
-            mcnm = ceJS;
-            mcty = 4;
-        };
-        "mdcl[008607]" =         {
-            mcna = "com.apple.itunes.jukebox-current";
-            mcnm = ceJI;
-            mcty = 5;
-        };
-        "mdcl[008677]" =         {
-            mcna = "com.apple.itunes.store-pers-id";
-            mcnm = aeSE;
-            mcty = 7;
-        };
-        "mdcl[008745]" =         {
-            mcna = "com.apple.itunes.drm-user-id";
-            mcnm = aeDR;
-            mcty = 7;
-        };
-        "mdcl[008811]" =         {
-            mcna = "com.apple.itunes.non-drm-user-id";
-            mcnm = aeND;
-            mcty = 7;
-        };
-        "mdcl[008881]" =         {
-            mcna = "com.apple.itunes.drm-key1-id";
-            mcnm = aeK1;
-            mcty = 7;
-        };
-        "mdcl[008947]" =         {
-            mcna = "com.apple.itunes.drm-key2-id";
-            mcnm = aeK2;
-            mcty = 7;
-        };
-        "mdcl[009013]" =         {
-            mcna = "com.apple.itunes.drm-versions";
-            mcnm = aeDV;
-            mcty = 5;
-        };
-        "mdcl[009080]" =         {
-            mcna = "com.apple.itunes.drm-platform-id";
-            mcnm = aeDP;
-            mcty = 5;
-        };
-        "mdcl[009150]" =         {
-            mcna = "com.apple.itunes.xid";
-            mcnm = aeXD;
-            mcty = 9;
-        };
-        "mdcl[009208]" =         {
-            mcna = "com.apple.itunes.extended-media-kind";
-            mcnm = aeMk;
-            mcty = 5;
-        };
-        "mdcl[009282]" =         {
-            mcna = "com.apple.itunes.adam-ids-array";
-            mcnm = aeAD;
-            mcty = 12;
-        };
-        "mdcl[009351]" =         {
-            mcna = "com.apple.itunes.music-sharing-version";
-            mcnm = aeSV;
-            mcty = 5;
-        };
-
-== types ==
+= types =
 || *type* || *name* || *description* ||
 ||1 ||char ||	1-byte value, can be used as a boolean (true if the value is present, false if not)||
 ||3 ||	short || 2-byte integer ||
