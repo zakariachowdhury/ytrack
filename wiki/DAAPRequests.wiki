@@ -13,9 +13,9 @@ where the base64 encoded password is the string: `username:password` base64 enco
 
  * *Content*
 {{{
-	mlog
-	  mstt	status
-	  mlid	session id (used in remaining requests below)
+mlog
+  mstt	status
+  mlid	session id (used in remaining requests below)
 }}}
 
 = logout =
@@ -26,11 +26,11 @@ where the base64 encoded password is the string: `username:password` base64 enco
  * *Content*
 {{{
 mccr
-  mstt		status
-  mdcl		dictionary entry (one for each type)
-    mcna	item name
-    mcnm	item number
-    mcty	item type
+  mstt(4)		status
+  mdcl(var)		dictionary entry (one for each type)
+    mcna(var)	item name
+    mcnm(4)	item number
+    mcty(2)	item type
 }}}
 = server-info =
  * *Request* daap://server/server-info (or http://server:3689/)
@@ -39,20 +39,40 @@ mccr
  * *Content* 
 {{{
 msrv
-  mstt - status
-  apro - daap protocol
-  msix - does the server support indexing?
-  msex - does the server support extensions?
-  msup - does the server support update?
-  msal - does the server support auto-logout?
+  mstt(4) - status
+  mpro(4) - dmap protocol version  
+  minm(var) - server name
+  apro(4) - daap protocol
+  aeSV(4) - music sharing version
+  ated(2) - does the server supports extradata?
+  asgr(2) - 
+  asse(8) - 
+  aeMQ(1) - 
+  aeFR(1) - 
+  aeTr(1)
+  aeSL(1)
+  aeFP (1)
+  aeSR(1)
+  aeSX(8)
+  msed(1)
+  ceWM(var) - welcome message
+  ceVO(1) - 
+  msml - 
+    msma - 
+  mslr(1) - is login required?
   mstm - timeout interval
-  mslr - is login required?
-  msqy - does the server support queries?
-  minm - server name
-  msrs - does the server support resolve?  (needs persistent ids)
-  msbr - does the server support browsing?
-  mspi - does the server support persistent ids?
-  mpro - dmap protocol version
+  msal(1) - does the server support auto-logout?
+  msas(1) - authentication scheme
+  msup(1) - does the server support update?
+  mspi(1) - does the server support persistent ids?
+  msex(1) - does the server support extensions?
+  msbr(1) - does the server support browsing?
+  msqy(1) - does the server support queries?
+  msix(1) - does the server support indexing?
+  msrs(1) - does the server support resolve?  (needs persistent ids)
+  msdc(4) - databases count
+  mstc(4) - utc time
+  msto(4) -   utc offset
 }}}
 
 = databases =
@@ -65,7 +85,7 @@ msrv
  * *Content*
 {{{
 avdb
-  mstt - status
+  mstt(4) - status
   muty - update type - always 0 for now
   mtco - total number of matching records
   mrco - total number of records returned
