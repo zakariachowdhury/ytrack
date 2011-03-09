@@ -77,117 +77,35 @@ The type number is a reference to the types listed at the bottom of this page
  * *abcp* daap.browsecomposerlisting (type = 12)
  * *abgn* daap.browsegenrelisting (type = 12)
  * *aePP* com.apple.itunes.is-podcast-playlist (type = 1)
-  
-        "mdcl[003379]" =         {
-            mcna = "daap.songalbum";
-            mcnm = asal;
-            mcty = 9;
-        };
-        "mdcl[003431]" =         {
-            mcna = "daap.songartist";
-            mcnm = asar;
-            mcty = 9;
-        };
-        "mdcl[003484]" =         {
-            mcna = "daap.songbitrate";
-            mcnm = asbr;
-            mcty = 3;
-        };
-        "mdcl[003538]" =         {
-            mcna = "daap.songcomment";
-            mcnm = ascm;
-            mcty = 9;
-        };
-        "mdcl[003592]" =         {
-            mcna = "daap.songcompilation";
-            mcnm = asco;
-            mcty = 1;
-        };
-        "mdcl[003650]" =         {
-            mcna = "daap.songcomposer";
-            mcnm = ascp;
-            mcty = 9;
-        };
-        "mdcl[003705]" =         {
-            mcna = "daap.songdateadded";
-            mcnm = asda;
-            mcty = 10;
-        };
-        "mdcl[003761]" =         {
-            mcna = "daap.songdatemodified";
-            mcnm = asdm;
-            mcty = 10;
-        };
-        "mdcl[003820]" =         {
-            mcna = "daap.songdisccount";
-            mcnm = asdc;
-            mcty = 3;
-        };
-        "mdcl[003876]" =         {
-            mcna = "daap.songdiscnumber";
-            mcnm = asdn;
-            mcty = 3;
-        };
-        "mdcl[003933]" =         {
-            mcna = "daap.songeqpreset";
-            mcnm = aseq;
-            mcty = 9;
-        };
-        "mdcl[003988]" =         {
-            mcna = "daap.songgenre";
-            mcnm = asgn;
-            mcty = 9;
-        };
-        "mdcl[004040]" =         {
-            mcna = "daap.songdescription";
-            mcnm = asdt;
-            mcty = 9;
-        };
-        "mdcl[004098]" =         {
-            mcna = "daap.songrelativevolume";
-            mcnm = asrv;
-            mcty = 2;
-        };
-        "mdcl[004159]" =         {
-            mcna = "daap.songsamplerate";
-            mcnm = assr;
-            mcty = 5;
-        };
-        "mdcl[004216]" =         {
-            mcna = "daap.songsize";
-            mcnm = assz;
-            mcty = 5;
-        };
-        "mdcl[004267]" =         {
-            mcna = "daap.songstarttime";
-            mcnm = asst;
-            mcty = 5;
-        };
-        "mdcl[004323]" =         {
-            mcna = "daap.songstoptime";
-            mcnm = assp;
-            mcty = 5;
-        };
-        "mdcl[004378]" =         {
-            mcna = "daap.songtime";
-            mcnm = astm;
-            mcty = 5;
-        };
-        "mdcl[004429]" =         {
-            mcna = "daap.songtrackcount";
-            mcnm = astc;
-            mcty = 3;
-        };
-        "mdcl[004486]" =         {
-            mcna = "daap.songtracknumber";
-            mcnm = astn;
-            mcty = 3;
-        };
-        "mdcl[004544]" =         {
-            mcna = "daap.songuserrating";
-            mcnm = asur;
-            mcty = 1;
-        };
+ * *asal* daap.songalbum (type = 9)
+ * *asar* daap.songartist (type = 9)
+ * *asbr* daap.songbitrate (type = 3)
+ * *ascm* daap.songcomment (type = 9)
+ * *asco* daap.songcompilation (type = 1)
+ * *ascp* daap.songcomposer (type = 9)
+ * *asda* daap.songdateadded (type = 10)
+ * *asdm* daap.songdatemodified (type = 10)
+ * *asdc* daap.songdisccount (type = 3)
+ * *asdn* daap.songdiscnumber (type = 3)
+ * *aseq* daap.songeqpreset (type = 9)
+ * *asgn* daap.songgenre (type = 9)
+ * *asdt* daap.songdescription (type = 9)
+
+ * *asrv* daap.songrelativevolume (type = 2)
+ * *assr* daap.songsamplerate (type = 5)
+ * *assz* daap.songsize (type = 5)
+ * *asst* daap.songstarttime (type = 5)
+ * *assp* daap.songstoptime (type = 5)
+ * *aastmsal* daap.songtime (type = 5)
+
+ * *astc* daap.songtrackcount (type = 3)
+ * *astn* daap.songtracknumber (type = 3)
+ * *asur* daap.songuserrating (type = 1)
+ * *asal* daap.songalbum (type = 9)
+ * *asal* daap.songalbum (type = 9)
+ * *asal* daap.songalbum (type = 9)
+ * *asal* daap.songalbum (type = 9)
+        
         "mdcl[004601]" =         {
             mcna = "daap.songyear";
             mcnm = asyr;
