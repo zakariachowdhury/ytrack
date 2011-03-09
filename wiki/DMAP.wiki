@@ -60,6 +60,7 @@ The type number is a reference to the types listed at the bottom of this page
  * *mcnm* dmap.contentcodesnumber (type = 5)
  * *mcna* dmap.contentcodesname (type = 9)
  * *mcty* dmap.contentcodestype (type = 3)
+ * *minm* dmap.itemname (type = 9)
 
 == daap codes ==
 
@@ -101,71 +102,30 @@ The type number is a reference to the types listed at the bottom of this page
  * *asur* daap.songuserrating (type = 1)
  * *asyr* daap.songyear (type = 3)
  * *asfm* daap.songformat (type = 9)
- * *minm* dmap.itemname (type = 9)
  * *asdb* daap.songdisabled (type = 1)
- * *aeNV* com.apple.itunes.norm-volume (type = 5)
- * *aeSP* com.apple.itunes.smart-playlist (type = 1)
  * *asdk* daap.songdatakind (type = 1)
  * *asul* daap.songdataurl (type = 9)
  * *asbt* daap.songbeatsperminute (type = 3)
  * *abpl* daap.baseplaylist (type = 1)
  * *agrp* daap.songgrouping (type = 9)
+ * *ascd* daap.songcodectype (type = 5)
+ * *ascs* daap.songcodecsubtype (type = 5)
+ * *apsm* daap.playlistshufflemode (type = 1)
+ * *aprm* daap.playlistrepeatmode (type = 1)
 
-        "mdcl[005226]" =         {
-            mcna = "com.apple.itunes.itms-songid";
-            mcnm = aeSI;
-            mcty = 5;
-        };
-        "mdcl[005292]" =         {
-            mcna = "com.apple.itunes.itms-artistid";
-            mcnm = aeAI;
-            mcty = 5;
-        };
-        "mdcl[005360]" =         {
-            mcna = "com.apple.itunes.itms-playlistid";
-            mcnm = aePI;
-            mcty = 5;
-        };
-        "mdcl[005430]" =         {
-            mcna = "com.apple.itunes.itms-composerid";
-            mcnm = aeCI;
-            mcty = 5;
-        };
-        "mdcl[005500]" =         {
-            mcna = "com.apple.itunes.itms-genreid";
-            mcnm = aeGI;
-            mcty = 5;
-        };
-        "mdcl[005567]" =         {
-            mcna = "daap.songcodectype";
-            mcnm = ascd;
-            mcty = 5;
-        };
-        "mdcl[005623]" =         {
-            mcna = "daap.songcodecsubtype";
-            mcnm = ascs;
-            mcty = 5;
-        };
-        "mdcl[005682]" =         {
-            mcna = "com.apple.itunes.itms-storefrontid";
-            mcnm = aeSF;
-            mcty = 5;
-        };
-        "mdcl[005754]" =         {
-            mcna = "daap.playlistshufflemode";
-            mcnm = apsm;
-            mcty = 1;
-        };
-        "mdcl[005816]" =         {
-            mcna = "daap.playlistrepeatmode";
-            mcnm = aprm;
-            mcty = 1;
-        };
-        "mdcl[005877]" =         {
-            mcna = "com.apple.itunes.is-podcast";
-            mcnm = aePC;
-            mcty = 1;
-        };
+== iTunes specifics == 
+
+ * *aeNV* com.apple.itunes.norm-volume (type = 5)
+ * *aeSP* com.apple.itunes.smart-playlist (type = 1)
+ * *aeSI* com.apple.itunes.itms-songid (type = 5)
+ * *aeAI* com.apple.itunes.itms-artistid (type = 5)
+ * *aePI* com.apple.itunes.itms-playlistid (type = 5)
+ * *aeCI* com.apple.itunes.itms-composerid (type = 5)
+ * *aeGI* com.apple.itunes.itms-genreid (type = 5)
+ * *aeSF* com.apple.itunes.itms-storefrontid (type = 5)
+ * *aePC* com.apple.itunes.is-podcast (type = 1)
+
+
         "mdcl[005942]" =         {
             mcna = "daap.songcategory";
             mcnm = asct;
