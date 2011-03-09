@@ -2,11 +2,7 @@
 
 All the requests take the form of http://server:3689/ctrl-int/1/command-name
 
-The properties that can be get and set are: 
- * *dmcp.volume* volume
- * *dacp.shufflestate* shuffle state
- * *dacp.repeatstate* repeat state
- * *dacp.playingtime* play head position in the track
+
 
 = playstatusupdate =
 
@@ -54,7 +50,11 @@ cmst
   * *properties* properties list separated by commas
   * *session-id* session id 
  * *Response* cmgt
- * *Description* 
+ * *Description* edits a property. The properties that can be get and set are: 
+   * *dmcp.volume* volume
+   * *dacp.shufflestate* shuffle state
+   * *dacp.repeatstate* repeat state
+   * *dacp.playingtime* play head position in the track
 
  * *Content*
 {{{
