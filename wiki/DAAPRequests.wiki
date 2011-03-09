@@ -100,17 +100,11 @@ aply
       mper - the playlist's persistent id
       minm - the playlist's name
       mimc - the number of items in the playlist 
-      abpl - if value is 1 (interpret it as true), this playlist is your music library (called Music in iTunes)
-      mpco - 
-      meds - 
-      mimc - item count (as per content codes)
-      mlit - 
-      miid - 
-      mper - 
-      minm - 
-      aeSP - boolean to indicate if this playlist is a 'Smart Playlist' 
-      mpco - 
-      aePS - type identifier for the playlist. this could be one of the following values:
+      abpl - if value is 1 (interpret it as true), this playlist is your base library (called Music in iTunes)
+      mpco - parent container id
+      meds - edit commands supported
+      aeSP (optional) - boolean to indicate if this playlist is a 'Smart Playlist' 
+      aePS (optional) - type identifier for the playlist. this could be one of the following values:
          1 podcast library
          2 iTunesDJ library
          4 Movies library
@@ -123,9 +117,5 @@ aply
          13 iTunesU library
          15 GeniusMixes library
          16 GenisMix library
-
-      meds - 
-      mimc - 
-
-      aeSP (optional) - is it a smart playlist
+        
 }}}
