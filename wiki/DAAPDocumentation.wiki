@@ -1,5 +1,5 @@
 #summary documentation of what the protocol is.
-
+<wiki:toc max_depth="1" />
 = Introduction =
 
 This is an attempt to document the process to connect to DAAP server (mainly iTunes) and control the playback. All the following information has been figured out using a network dump program; the iTunes binary has not be reverse-engineered in any way, and neither have any of the libraries that it links to. In addition, we (the contributors to the project) make no claims that the following information is valid, so use it at your own risk.
