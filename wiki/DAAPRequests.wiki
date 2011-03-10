@@ -145,3 +145,50 @@ aply
       ascn - song content description
         
 }}}
+
+= container =
+ * *Request* daap://server/databases/*_dbid_*/containers/*_container_id_*/items
+ * *Params*
+  * *session-id* session id 
+  * *meta* the DMAP and DAAP metadata you want to get as a list separated by commas
+  * *type* the type of items you request (e.g. music)
+  * *sort* the column on which you sort (e.g. album,name,releasedate)
+  * *query* query delimited by single quotes (e.g. 'daap.songalbumid:%qi') see [WritingQueries]
+ * *Response* 
+ * *Description* This provides a list of the tracks (or any other item if the container is anything else than a music playlist) with the requested metadata. Here is the list Remote asks for: dmap.itemname,dmap.itemid,daap.songartist,daap.songalbumid,daap.songalbum,daap.songartist,dmap.containeritemid,daap.songuserrating,daap.songtime,daap.songstoptime,daap.songtracknumber
+ * *Content*
+here the list corresponds to the items requested to the server but it could be longer (or shorter) if you requested more (or less) informations
+{{{
+aply
+  mstt - status
+  muty - update type(0)
+  mtco - matched items
+  mrco - items in response
+  mlcl
+    mlit - playlist entry (one per playlist)
+      miid - the playlist's itemid (plid below)
+      mper - the playlist's persistent id
+      minm - the playlist's name
+      mimc - the number of items in the playlist 
+      abpl - if value is 1 (interpret it as true), this playlist is your base library (called Music in iTunes)
+      mpco - parent container id
+      meds - edit commands supported
+      aeSP (optional) - boolean to indicate if this playlist is a 'Smart Playlist' 
+      aePS (optional) - type identifier for the playlist. this could be one of the following values:
+         1 podcast library
+         2 iTunesDJ library
+         4 Movies library
+         5 TVShows library
+         6 Music Library
+         7 Books Library
+         8 Purchased library
+         9 PurchasedOnDeviceLibrary
+         12 Genius library
+         13 iTunesU library
+         15 GeniusMixes library
+         16 GenisMix library
+      aeSG - saved Genius
+      ceJI - jukebox current
+      ascn - song content description
+        
+}}}
