@@ -1,7 +1,6 @@
 #summary Detailed descriptions of DAAP requests
 
 <wiki:toc max_depth="1" />
-#sidebar TableOfContents 
 
 = login =
  * *Request* daap://server/login
