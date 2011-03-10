@@ -159,36 +159,6 @@ aply
  * *Content*
 here the list corresponds to the items requested to the server but it could be longer (or shorter) if you requested more (or less) informations
 {{{
-aply
-  mstt - status
-  muty - update type(0)
-  mtco - matched items
-  mrco - items in response
-  mlcl
-    mlit - playlist entry (one per playlist)
-      miid - the playlist's itemid (plid below)
-      mper - the playlist's persistent id
-      minm - the playlist's name
-      mimc - the number of items in the playlist 
-      abpl - if value is 1 (interpret it as true), this playlist is your base library (called Music in iTunes)
-      mpco - parent container id
-      meds - edit commands supported
-      aeSP (optional) - boolean to indicate if this playlist is a 'Smart Playlist' 
-      aePS (optional) - type identifier for the playlist. this could be one of the following values:
-         1 podcast library
-         2 iTunesDJ library
-         4 Movies library
-         5 TVShows library
-         6 Music Library
-         7 Books Library
-         8 Purchased library
-         9 PurchasedOnDeviceLibrary
-         12 Genius library
-         13 iTunesU library
-         15 GeniusMixes library
-         16 GenisMix library
-      aeSG - saved Genius
-      ceJI - jukebox current
-      ascn - song content description
+
         
 }}}
