@@ -6,6 +6,10 @@ Queries are used in the DAAP protocol to narrow the informations you want to get
 
 = Details =
 
+My knowledge on this is rather incomplete. But here are the things that I noted:
+
+the general form of a query is 
+
 daap.songalbumid:%qi
 ('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')
 'com.apple.itunes.mediakind:8'
