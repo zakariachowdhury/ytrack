@@ -1,0 +1,14 @@
+#summary Description of how to create a query.
+
+= Introduction =
+
+Queries are used in the DAAP protocol to narrow the informations you want to get from the server. You can think of them as SQL queries.
+
+= Details =
+
+daap.songalbumid:%qi
+('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')
+'com.apple.itunes.mediakind:8'
+(('com.apple.itunes.mediakind:4','com.apple.itunes.mediakind:36','com.apple.itunes.mediakind:6')+'daap.songalbum!:')
+(('com.apple.itunes.mediakind:4','com.apple.itunes.mediakind:36','com.apple.itunes.mediakind:6')+'daap.songalbumid:%qi')
+(('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songartist:%@'+'daap.songalbum!:')
