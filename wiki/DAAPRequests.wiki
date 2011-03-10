@@ -1,5 +1,8 @@
 #summary Detailed descriptions of DAAP requests
 
+<wiki:toc max_depth="1" />
+#sidebar TableOfContents 
+
 = login =
  * *Request* daap://server/login
  * *Params*
@@ -100,7 +103,7 @@ avdb
 
 
 = playlist list =
- * *Request* daap://server/databases/[dbid]/containers
+ * *Request* daap://server/databases/_dbid_/containers
  * *Params*
   * *session-id* session id 
   * *meta* the DMAP and DAAP metadata you want to get as a list separated by commas
