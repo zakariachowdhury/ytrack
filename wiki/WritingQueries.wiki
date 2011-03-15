@@ -9,6 +9,9 @@ Queries are used in the DAAP protocol to narrow the informations you want to get
 My knowledge on this is rather incomplete. But here are the things that I noted:
 
 the general form of a query is 
+ 'key:value'
+
+query statements can be grouped by adding parenthesis
 
 daap.songalbumid:%qi
 ('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')
