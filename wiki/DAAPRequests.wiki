@@ -82,7 +82,7 @@ msrv
  * *Params*
   * *session-id* session id 
  * *Response* avdb
- * *Description* This provides a list of databases served up by the server.  At present, it appears that only one db per server is the norm, but it may be possible to have multiple servers.
+ * *Description* This provides a list of databases served up by the server.  At present, it appears that only one db per server is the norm, but it may be possible to have multiple servers. A database can then be queried to get either containers, groups or items grouped by a query (see [WritingQueries])
 
  * *Content*
 {{{
