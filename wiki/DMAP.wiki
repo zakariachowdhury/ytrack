@@ -67,7 +67,6 @@ The type number is a reference to the types listed at the bottom of this page
 ||mcnm||dmap.contentcodesnumber||5||
 ||mcna||dmap.contentcodesname||9||
 ||mcty||dmap.contentcodestype||3||
-||minm||dmap.itemname||9||
 ||meds||dmap.editcommandssupported||5||
 
 == daap codes ==
