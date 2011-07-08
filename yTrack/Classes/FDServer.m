@@ -109,6 +109,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize numericDoneTime;
 @synthesize numericTotalTime;
 @synthesize timer;
+@synthesize requestBuilder;
 
 
 - (id) init {
@@ -129,8 +130,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
 	
 	// we have to know the databaseId for further requests
-	NSString *databaseRequest = [NSString stringWithFormat:kRequestDatabases,self.host,self.port,sessionId];
-	DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:databaseRequest]];
+	DAAPResponseavdb * db = (DAAPResponseavdb *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[self.requestBuilder createDBRequest]];
 	if ([db isKindOfClass:[DAAPResponseerror class]]) {
 		DAAPResponseerror *err = (DAAPResponseerror *)db;
 		DDLogError(@"Failed to get database id : %@, %d",[err.error localizedDescription], err.error.code);
@@ -138,11 +138,25 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		return NO;
 	}
 	self.databaseId = [(NSNumber *)[(DAAPResponsemlit *)[db.listing.list  objectAtIndex:0] miid] intValue];
+    self.requestBuilder.databaseId = self.databaseId;
 	
 	// query playslists to get the Id of those we're interested in
-	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,sessionId];
-	DDLogVerbose(@"Playlists list Syncronous call : %@",requestUrl);
-	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
+    NSArray *metas = [NSArray arrayWithObjects:
+                      kDMAPitemName,
+                      kDMAPitemCount,
+                      kDMAPitemId,
+                      kDMAPpersistentId,
+                      kDAAPbasePlaylist,
+                      kITunesSpecialPlaylist,
+                      kITunesSmartPlaylist,
+                      kITunesSavedGenius,
+                      kDMAPparentContainerId,
+                      kDMAPeditCommandsSupported,
+                      kITunesJukeboxCurrent,
+                      kDAAPsongContentDescription, nil];
+    DDLogVerbose(@"Playlists list Syncronous call : %@", [[self.requestBuilder createContainerRequestWithMeta:metas] absoluteString]);
+    
+	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[self.requestBuilder createContainerRequestWithMeta:metas] ];
 	if (userPlaylists == nil) {
 		userPlaylists = [[[NSMutableArray alloc] init] retain];
 	} else {
@@ -254,12 +268,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DDLogVerbose(@"FDServer - resolved service : %@, %@, %@",service.name, self.host, self.port);
 	self.TXT = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 	[service release];
+    self.requestBuilder = [[DAAPRequestBuilder alloc] initWithHost:self.host port:self.port andSessionId:0];
 }
 
 - (BOOL) _login{
-	NSString *loginURL = [NSString stringWithFormat:kRequestLogin,self.host,self.port,self.pairingGUID];
-	DDLogVerbose(@"Login url : %@",loginURL);
-	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:loginURL]];
+    NSURL *req = [self.requestBuilder createLoginRequestWithPairingGUID:self.pairingGUID];
+    DDLogVerbose(@"Login url : %@", [req absoluteString]);
+	DAAPResponse * resp = (DAAPResponse *)[DAAPRequestReply onTheFlyRequestAndParseResponse:req];
 	if ([resp isKindOfClass:[DAAPResponseerror class]]) {
 		DAAPResponseerror *err = (DAAPResponseerror *)resp;
 		if (err.error != nil) {
@@ -294,6 +309,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	// we've got a sessionId, we're connected !
 	self.connected = YES;
+    self.requestBuilder.sessionId = sessionId;
 	return YES;
 }
 
@@ -303,8 +319,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		[self.daapReqRep cancelConnection];
 		self.daapReqRep = nil;
 	}
-	NSString *string = [NSString stringWithFormat:kRequestLogout,self.host,self.port,sessionId];
-	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	[DAAPRequestReply request:[requestBuilder createLogoutRequest]];
 
 	// here we do not check the status of the command
 	// TODO the request method should at least send back status just in case
@@ -510,7 +525,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:20];
+	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:4000];
 	self.daapReqRep = daapReq;
 	[daapReq release];
 	//[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(_renewConnection:) userInfo:nil repeats:NO];
@@ -588,7 +603,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:20];
+	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:4000];
 	self.daapReqRep = daapReq;
 	[daapReq release];
 	DDLogVerbose(@"FDServer leaving didFinishLoading");
@@ -851,10 +866,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void) getServerInfo{
 	DDLogInfo(@"FDServer-getServerInfo");
-	/*NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
+	NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
 	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
 	NSString* str2 = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
-	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];*/
+	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];
 }
 
 - (NSString *) _encodeString:(NSString *)string{
@@ -890,6 +905,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[self.doneTime release];
 	[self.remainingTime release];
 	[self.timer invalidate];
+    [self.requestBuilder release];
     [super dealloc];
 }
 

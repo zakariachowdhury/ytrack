@@ -40,9 +40,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
     
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
-														   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-													   timeoutInterval:10];
+//    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url
+//														   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+//													   timeoutInterval:10];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
 	[request setValue:@"1" forHTTPHeaderField:@"Viewer-Only-Client"];
 	[request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	NSURLConnection *conn =[[NSURLConnection alloc]

@@ -29,6 +29,7 @@
 #import "DAAPResponseagal.h"
 #import "AsyncImageLoader.h"
 #import "Reachability.h"
+#import "DAAPRequestBuilder.h"
 
 #define kLibraryServicenameKey @"servicename"
 #define kLibraryPairingGUIDKey @"pairingGUID"
@@ -109,6 +110,7 @@ typedef enum {
 	NSString *doneTime;
 	NSString *remainingTime;
 	NSTimer *timer;
+    DAAPRequestBuilder *requestBuilder;
 }
 
 @property (nonatomic, copy) NSString *host;
@@ -142,6 +144,7 @@ typedef enum {
 @property (nonatomic, retain) NSTimer *timer;
 
 @property (nonatomic, assign) id<FDServerDelegate> delegate;
+@property (nonatomic, retain) DAAPRequestBuilder *requestBuilder;
 
 - (id) initWithNetService:(NSNetService *)service pairingGUID:(NSString *)thePairingGUID;
 - (id) initWithDictionary:(NSDictionary *)dict;
