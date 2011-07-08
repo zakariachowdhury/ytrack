@@ -33,9 +33,9 @@
 
 - (id) initWithData:(NSData *)theData;
 
-- (BOOL) isString:(NSString *)command;
+- (BOOL) isString:(int)command;
 - (BOOL) isNumber:(int)length;
-- (BOOL) isBranch:(NSString *)command;
+- (BOOL) isBranch:(int)command;
 - (NSNumber *) parseNumber:(NSData *)data length:(int)length;
 - (NSString *) parseString:(NSData *)data;
 - (int) parseLength:(NSData *) data atPosition:(int)pos;
@@ -48,5 +48,6 @@
 - (void) parse;
 - (void) parse:(NSData *)theData;
 - (NSString *) getSelectorNameFromCommandName:(NSString *)command;
+
 
 @end

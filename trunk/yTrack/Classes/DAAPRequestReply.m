@@ -26,6 +26,7 @@
 #import "SessionManager.h"
 #import "DAAPResponseerror.h"
 #import "DDLog.h"
+#include <CommonCrypto/CommonDigest.h>
 
 #ifdef CONFIGURATION_DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -39,9 +40,25 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize delegate;
 @synthesize action;
 
+- (NSString *)MD5HashForString:(NSString *)input {
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    
+    // Convert NSString into C-string and generate MD5 Hash
+    CC_MD5([input UTF8String], [input length], result);
+    
+    // Convert C-string (the hash) into NSString
+    NSMutableString *hash = [NSMutableString string];
+    
+    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        [hash appendFormat:@"%02X", result[i]];
+    }
+    
+    return [hash lowercaseString];
+}
 
 - (void) asyncRequestAndParse:(NSURL *)url withTimeout:(int)timeoutInterval{
 	DDLogVerbose(@"DAAPRequestReply async requesting %@",url);
+    DDLogVerbose(@"hash = %@", [self MD5HashForString:[url absoluteString]]);
 	if(url == nil) 
 		url = [NSURL URLWithString:@"error"];
 	lastUrl = url;

@@ -261,7 +261,7 @@
 }
 
 - (void)didFinishWithNowPlaying{
-	[self dismissModalViewControllerAnimated:YES];
+	//[self dismissModalViewControllerAnimated:YES];
 	if (CurrentServer != nil && CurrentServer.connected)
 		[self _updateVolume];
 	nowPlayingDetailShown = NO;

@@ -22,7 +22,13 @@
 //
 
 #import "DAAPResponse.h"
+#import "DDLog.h"
 
+#ifdef CONFIGURATION_DEBUG
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 @implementation DAAPResponse
 
@@ -36,40 +42,56 @@
     return self;
 }
 
-- (BOOL) isString:(NSString *)command{
-	if ([command isEqualToString:@"minm"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cann"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cana"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cang"]) {
-		return YES;
-	} else if ([command isEqualToString:@"canl"]) {
-		return YES;
-	} else if ([command isEqualToString:@"asaa"]) {
-		return YES;
-	} else if ([command isEqualToString:@"asal"]) {
-		return YES;
-	} else if ([command isEqualToString:@"asar"]) {
-		return YES;
-	} else if ([command isEqualToString:@"ceWM"]) {
-		return YES;
-	} else if ([command isEqualToString:@"asdt"]) {
-		return YES;
-	} else if ([command isEqualToString:@"msts"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mcna"]) {
-		return YES;
-	} else if ([command isEqualToString:@"ascm"]) {
-		return YES;
-	} else if ([command isEqualToString:@"asfm"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mcnm"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mshc"]) {
-		return YES;
-	} 
+static int containerCodes[] = {
+    'cmst',
+    'mlog',
+    'agal',
+    'mlcl',
+    'mshl',
+    'abro',
+    'abar',
+    'apso',
+    'caci',
+    'avdb',
+    'cmgt',
+    'aply',
+    'adbs',
+    'msrv',
+    'casp',
+    'mdcl',
+    'mlit',
+    'mccr',
+    'glmc'
+};
+
+static int stringCodes[] = {
+    'minm',
+    'cann',
+    'cana',
+    'cang',
+    'canl',
+    'asaa',
+    'asal',
+    'asar',
+    'ceWM',
+    'asdt',
+    'msts',
+    'mcna',
+    'ascm',
+    'asfm',
+    'mcnm',
+    'mshc'
+};
+
+static int containerCodesSize = sizeof(containerCodes) / sizeof(int);
+static int stringCodesSize = sizeof(stringCodes) / sizeof(int);
+
+- (BOOL) isString:(int)commandCode{
+    for (int i = 0;i<stringCodesSize;i++) {
+        if (stringCodes[i] == commandCode) {
+            return YES;
+        }
+    }
 	return NO;
 }
 
@@ -77,48 +99,13 @@
 	return (length == 1 || length == 2 || length == 4 || length == 8);
 }
 
-- (BOOL) isBranch:(NSString *)command{
-	if ([command isEqualToString:@"cmst"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mlog"]) {
-		return YES;
-	} else if ([command isEqualToString:@"agal"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mlcl"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mshl"]) {
-		return YES;
-	} else if ([command isEqualToString:@"abro"]) {
-		return YES;
-	} else if ([command isEqualToString:@"abar"]) {
-		return YES;
-	} else if ([command isEqualToString:@"apso"]) {
-		return YES;
-	} else if ([command isEqualToString:@"caci"]) {
-		return YES;
-	} else if ([command isEqualToString:@"avdb"]) {
-		return YES;
-	} else if ([command isEqualToString:@"cmgt"]) {
-		return YES;
-	} else if ([command isEqualToString:@"aply"]) {
-		return YES;
-	} else if ([command isEqualToString:@"adbs"]) {
-		return YES;
-	} else if ([command isEqualToString:@"msrv"]) {
-		return YES;
-	} else if ([command isEqualToString:@"casp"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mdcl"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mlit"]) {
-		return YES;
-	} else if ([command isEqualToString:@"mccr"]) {
-		return YES;
-	} else if ([command isEqualToString:@"glmc"]) {
-		return YES;
-	} 
-				return NO;
-	//return [branches evaluateWithObject:command];
+- (BOOL) isBranch:(int)commandCode{
+    for (int i = 0;i<containerCodesSize;i++) {
+        if (containerCodes[i] == commandCode) {
+            return YES;
+        }
+    }
+	return NO;
 }
 
 - (NSString *) parseCommandName:(NSData *) theData atPosition:(int)position{
@@ -126,6 +113,12 @@
 	[theData getBytes:&command range:NSMakeRange(position,4)];
 	NSString * str = [[[NSString alloc] initWithBytes:&command length:4 encoding:NSISOLatin1StringEncoding] autorelease];
 	return str;
+}
+
+- (int) parseCommandCode:(NSData *) theData atPosition:(int)position{
+	int8_t * ptr = ((int8_t *)[theData bytes]+ position);
+    int swapped = CFSwapInt32(*(uint32_t *) ptr);
+    return swapped;
 }
 
 - (NSString *) getSelectorNameFromCommandName:(NSString *)command{
@@ -225,6 +218,7 @@
 	int handle = theData.length;
 	while (handle > 0) {
 		NSString *command = [self parseCommandName:theData atPosition:progress];
+        int commandCode = [self parseCommandCode:theData atPosition:progress];
 		NSString *commandSetter = [self getSelectorNameFromCommandName:command];
 		
 		int length = [self parseLength:theData atPosition:progress+4];
@@ -241,18 +235,22 @@
 		handle -= 8 + length;
 		NSData *block = [theData subdataWithRange:NSMakeRange(progress+8, length)];
 		
-		if ([self isBranch:command]) {
+		if ([self isBranch:commandCode]) {
 			NSString *clazz = [NSString stringWithFormat:@"DAAPResponse%@",command];
 			DAAPResponse *subCommand = (DAAPResponse *)[[NSClassFromString(clazz) alloc] initWithData:block];
 			[subCommand parse];
 			[self performSelector:NSSelectorFromString(commandSetter) withObject:subCommand];
 			[subCommand release];
-		} else if([self isString:command]){			
+		} else if([self isString:commandCode]){			
 			NSString *str = [self parseString:block];
 			//NSLog(@"string : %@",str);
 			[self performSelector:NSSelectorFromString(commandSetter) withObject:str];
 		} else if ([self isNumber:length]) {
-			[self performSelector:NSSelectorFromString(commandSetter) withObject:[self parseNumber:block length:length]];
+            NSNumber *num = [self parseNumber:block length:length];
+            if (commandCode == 'mstt') {
+                DDLogInfo(@"status code : %d",[num intValue]);
+            }
+			[self performSelector:NSSelectorFromString(commandSetter) withObject:num];
 		} 
 		//[block release];
 		progress += 8 + length;
