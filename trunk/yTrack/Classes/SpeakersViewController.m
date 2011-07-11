@@ -24,10 +24,17 @@
 #import "SpeakersViewController.h"
 #import "RemoteSpeaker.h"
 #import "DAAPResponsecasp.h"
+#import "SpeakerCustomCellView.h"
+#import "DAAPResponsecmgt.h"
+
+@interface SpeakersViewController(PrivateMethods)
+- (void) _updateVolume;
+@end
 
 @implementation SpeakersViewController
 @synthesize speakers;
-
+@synthesize popover;
+@synthesize masterVolume;
 
 #pragma mark -
 #pragma mark Initialization
@@ -54,6 +61,8 @@
 	FDServer *server = CurrentServer;
 	[server getSpeakers:self];
  
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9]];
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -63,7 +72,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	FDServer *server = CurrentServer;
+    [self _updateVolume];
 	[server getSpeakers:self];
+    [self.tableView setSeparatorColor:[UIColor darkGrayColor]];
+    [self.tableView setRowHeight:60];
 }
 
 /*
@@ -110,50 +122,65 @@
     
     static NSString *CellIdentifier = @"SpeakerCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SpeakerCustomCellView *cell = (SpeakerCustomCellView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[NSBundle mainBundle] loadNibNamed: @"SpeakerCustomCellView" owner: self options: nil] objectAtIndex: 0];
     }
     
     // Configure the cell...
 	RemoteSpeaker *sp = (RemoteSpeaker *)[self.speakers objectAtIndex:indexPath.row];
-	cell.textLabel.text = sp.speakerName;
-	UISwitch *sw = [[UISwitch alloc] init];
+	cell.spname.text = sp.speakerName;
+    cell.volume.value = (masterVolume*sp.volume)/100;
+
 	if (sp.on) {
-		sw.on = YES;
+        cell.stateButton.selected = YES;
+        cell.volume.enabled = YES;
 	} else {
-		sw.on = NO;
+        cell.stateButton.selected = NO;
+        cell.volume.enabled = NO;
 	}
-	sw.tag = 10+indexPath.row;
-	[sw addTarget:self action:@selector(didChangeSpeakerValue:) forControlEvents:UIControlEventValueChanged];
-	cell.accessoryView = sw;
-	[sw release];
+
+    [cell.volume addTarget:self action:@selector(didChangeVolumeForSpeaker:) forControlEvents:UIControlEventValueChanged];
+    [cell.stateButton addTarget:self action:@selector(didChangeSpeakerValue:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
 
-- (void)didChangeSpeakerValue:(id)sender{
-	NSMutableArray *spList = [[NSMutableArray alloc] init];
-	for (RemoteSpeaker *sp in self.speakers){
-		if (sp.on) {
-			[spList addObject:sp.spId];
-		}
-	}
-	UISwitch *sw = (UISwitch *)sender;
-	int rowNum = sw.tag - 10;
-	NSNumber * num = [[self.speakers objectAtIndex:rowNum] spId];
-	if (sw.on) {
-		[spList addObject:num];
-	}
-	else {
-		[spList removeObjectIdenticalTo:num];
-	}
-	[CurrentServer setSpeakers:spList];
-	[CurrentServer getSpeakers:self];
-	//[self.tableView reloadData];
+- (void)didChangeVolumeForSpeaker:(id)sender{
+    UISlider * slider = (UISlider *)sender;
+    NSIndexPath *path = [self.tableView indexPathForCell:(UITableViewCell *)[[slider superview] superview]];
+    double relativeVolume = slider.value*100/masterVolume;
+    if (slider.value < masterVolume) {
+        [CurrentServer setVolume:relativeVolume forSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
+    } else {
+        BOOL controlMaster = YES;
+        for (int i = 0 ; i < self.speakers.count ; i++) {
+            RemoteSpeaker *sp = (RemoteSpeaker *)[self.speakers objectAtIndex:i];
+            NSLog(@"slider : %f, speaker : %ld",slider.value,sp.volume);
+            double relativeVolume = (masterVolume*sp.volume)/100;
+            if (path.row != i && sp.on && slider.value <= relativeVolume) {
+                controlMaster = NO;
+                NSLog(@"NO");
+                break;
+            }
+        }
+        if (controlMaster)
+            [CurrentServer setMasterVolume:slider.value withSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
+        else [CurrentServer setVolume:relativeVolume forSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationVolumeChanged object:nil userInfo:nil];
+    [self.tableView reloadData];
 }
 
+- (void) _updateVolume{
+	FDServer *server = CurrentServer;
+	[server getVolume:self action:@selector(readVolume:)];
+}
 
+- (void) readVolume:(DAAPResponse *)resp{
+	DAAPResponsecmgt * response = (DAAPResponsecmgt *)resp;
+	masterVolume = [response.cmvo longValue];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -194,19 +221,58 @@
 }
 */
 
-
+- (void)didChangeSpeakerValue:(id)sender{
+    
+    NSMutableArray *spList = [[NSMutableArray alloc] init];
+	for (RemoteSpeaker *sp in self.speakers){
+		if (sp.on) {
+			[spList addObject:sp.spId];
+		}
+	}
+	UIButton *button = (UIButton *)sender;
+    
+    NSIndexPath *path = [self.tableView indexPathForCell:(UITableViewCell *)[[sender superview] superview]];
+    
+    NSNumber * num = [[self.speakers objectAtIndex:path.row] spId];
+    
+    if (!button.selected){
+        button.selected = YES;
+        [spList addObject:num];  
+    } else {
+        [spList removeObjectIdenticalTo:num];
+        button.selected = NO;
+    }
+    [[self.tableView cellForRowAtIndexPath:path] setSelected:NO animated:YES];
+    
+	[CurrentServer setSpeakers:spList];
+	[CurrentServer getSpeakers:self];
+    
+}
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+  /*  NSMutableArray *spList = [[NSMutableArray alloc] init];
+	for (RemoteSpeaker *sp in self.speakers){
+		if (sp.on) {
+			[spList addObject:sp.spId];
+		}
+	}
+	
+	 NSNumber * num = [[self.speakers objectAtIndex:indexPath.row] spId];
+    
+    UIButton *button = [(SpeakerCustomCellView *)[self.tableView cellForRowAtIndexPath:indexPath] stateButton];
+    if (!button.selected){
+        button.selected = YES;
+        [spList addObject:num];  
+    } else {
+        [spList removeObjectIdenticalTo:num];
+        button.selected = NO;
+    }
+    [[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
+    
+	[CurrentServer setSpeakers:spList];
+	[CurrentServer getSpeakers:self];*/
 }
 
 
@@ -214,6 +280,7 @@
 -(void)didFinishLoading:(DAAPResponse *)response{
 	//BOOL shouldAnimate = ((self.speakers == nil) && (self.speakers.count < 2));
 	DAAPResponsecasp *casp = (DAAPResponsecasp *)response;
+
 	
 	self.speakers = casp.speakers;
 	/*if (shouldAnimate){
@@ -223,7 +290,8 @@
 	 } else {*/
 	[self.tableView reloadData];
 	//}
-	
+
+    [self.popover setPopoverContentSize:CGSizeMake(250, [self.speakers count]*60)];
 }
 
 #pragma mark -

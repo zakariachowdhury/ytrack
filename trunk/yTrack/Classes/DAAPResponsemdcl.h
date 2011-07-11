@@ -26,12 +26,18 @@
 
 @interface DAAPResponsemdcl : DAAPResponse {
 	NSNumber *caia;
+    NSNumber *cavd;
+    NSNumber *caiv;
 	NSString *minm;
 	NSNumber *msma;
+    NSNumber *cmvo;
 }
 
 @property (nonatomic, retain) NSNumber *caia;
+@property (nonatomic, retain) NSNumber *cavd;
+@property (nonatomic, retain) NSNumber *caiv;
 @property (nonatomic, copy, getter=name) NSString *minm;
 @property (nonatomic, retain) NSNumber *msma;
+@property (nonatomic, retain) NSNumber *cmvo;
 
 @end

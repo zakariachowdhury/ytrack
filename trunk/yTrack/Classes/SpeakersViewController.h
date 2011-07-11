@@ -28,9 +28,14 @@
 @interface SpeakersViewController : UITableViewController <DAAPRequestDelegate>{
 	@private
 	NSArray *speakers;
+    long masterVolume;
+    UIPopoverController *popover;
 }
 
 @property (nonatomic, retain) NSArray *speakers;
+@property (nonatomic, assign) UIPopoverController *popover;
+@property (nonatomic) long masterVolume;
 
 - (void)didChangeSpeakerValue:(id)sender;
+- (void)didChangeVolumeForSpeaker:(id)sender;
 @end

@@ -51,6 +51,8 @@
 #define kRequestPlayStatusUpdate @"http://%@:%@/ctrl-int/1/playstatusUpdate?revision-number=%d&session-id=%d"
 #define kRequestPropertyVolume @"http://%@:%@/ctrl-int/1/getproperty?properties=dmcp.volume&session-id=%d"
 #define kRequestChangePropertyVolume @"http://%@:%@/ctrl-int/1/setproperty?dmcp.volume=%d&session-id=%d"
+#define kRequestChangePropertyVolumeForSpeaker @"http://%@:%@/ctrl-int/1/setproperty?speaker-id=%qi&dmcp.volume=%d&session-id=%d"
+#define kRequestChangePropertyMasterVolumeWithSpeaker @"http://%@:%@/ctrl-int/1/setproperty?dmcp.volume=%d&include-speaker-id=%qi&session-id=%d"
 #define kRequestChangePropertyShuffle @"http://%@:%@/ctrl-int/1/setproperty?dacp.shufflestate=%d&session-id=%d"
 #define kRequestChangePropertyRepeat @"http://%@:%@/ctrl-int/1/setproperty?dacp.repeatstate=%d&session-id=%d"
 #define kRequestGetSpeakers @"http://%@:%@/ctrl-int/1/getspeakers?session-id=%d"

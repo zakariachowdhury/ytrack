@@ -181,6 +181,8 @@ typedef enum {
 - (void) updateStatus;
 - (void) getVolume:(id<DAAPRequestDelegate>)aDelegate action:(SEL)action;
 - (void) setVolume:(long) volume;
+- (void) setVolume:(long) volume forSpeaker:(NSNumber *)speakerId;
+- (void) setMasterVolume:(long) volume withSpeaker:(NSNumber *)speakerId;
 - (void) toggleShuffle;
 - (void) toggleRepeatState;
 - (void) changePlayingTime:(int)position;

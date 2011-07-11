@@ -89,6 +89,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_displayError) name:kNotificationBrokenConnection object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityEvent:) name:kReachabilityChangedNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTime) name:kNotificationTimerTicks object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateVolume) name:kNotificationVolumeChanged object:nil];
 	
 	// load preferences file and try to connect to the last used server
 	[[PreferencesManager sharedPreferencesManager] loadPreferencesFromFile];
@@ -233,6 +234,7 @@
 		UIPopoverController* aPopover = [[UIPopoverController alloc]
 									 initWithContentViewController:content];
 		aPopover.delegate = self;
+        content.popover = aPopover;
 		aPopover.popoverContentSize = CGSizeMake(250, 150);
 		[content release];
 	
@@ -261,7 +263,7 @@
 }
 
 - (void)didFinishWithNowPlaying{
-	//[self dismissModalViewControllerAnimated:YES];
+	[self dismissModalViewControllerAnimated:YES];
 	if (CurrentServer != nil && CurrentServer.connected)
 		[self _updateVolume];
 	nowPlayingDetailShown = NO;

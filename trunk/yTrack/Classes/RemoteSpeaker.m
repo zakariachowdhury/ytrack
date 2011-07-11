@@ -28,6 +28,9 @@
 @synthesize speakerName;
 @synthesize on;
 @synthesize spId;
+@synthesize cavd;
+@synthesize caiv;
+@synthesize volume;
 
 - (void) dealloc {
 	[self.speakerName release];

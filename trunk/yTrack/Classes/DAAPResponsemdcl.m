@@ -29,6 +29,9 @@
 @synthesize caia;
 @synthesize minm;
 @synthesize msma;
+@synthesize cavd;
+@synthesize caiv;
+@synthesize cmvo;
 
 - (void) parse{
 	[self parse:self.data];
@@ -38,6 +41,9 @@
 	[self.caia release];
 	[self.minm release];
 	[self.msma release];
+    [self.cavd release];
+    [self.caiv release];
+    [self.cmvo release];     
 	[super dealloc];
 }
 
