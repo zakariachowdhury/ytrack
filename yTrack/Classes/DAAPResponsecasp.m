@@ -44,6 +44,7 @@
 		sp.on = NO;
 	}
 	sp.spId = mdcl.msma;
+    sp.volume = [mdcl.cmvo longValue];
 	[self.speakers addObject:sp];
 	[sp release];
 }

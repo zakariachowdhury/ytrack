@@ -675,6 +675,19 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string]];
 }
 
+- (void) setVolume:(long) volume forSpeaker:(NSNumber *)speakerId{
+	DDLogInfo(@"FDServer-setVolumeForSpeaker");
+	NSString *string = [NSString stringWithFormat:kRequestChangePropertyVolumeForSpeaker,self.host,self.port,[speakerId longLongValue ],volume,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+}
+
+- (void) setMasterVolume:(long) volume withSpeaker:(NSNumber *)speakerId{
+    DDLogInfo(@"FDServer-setMasterVolumeWithSpeaker");
+	NSString *string = [NSString stringWithFormat:kRequestChangePropertyMasterVolumeWithSpeaker,self.host,self.port,volume,[speakerId longLongValue],sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+
+}
+
 - (void) toggleShuffle{
 	NSString *string = [NSString stringWithFormat:kRequestChangePropertyShuffle,self.host,self.port,!shuffle,sessionId];
 	if ([DAAPRequestReply request:[NSURL URLWithString:string]]){

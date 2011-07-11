@@ -28,10 +28,16 @@
 	NSString *speakerName;
 	BOOL on;
 	NSNumber *spId;
+    BOOL cavd;
+    BOOL caiv;
+    long volume;
 }
 
 @property (nonatomic, copy) NSString *speakerName;
 @property (nonatomic) BOOL on;
+@property (nonatomic) BOOL cavd;
+@property (nonatomic) BOOL caiv;
+@property (nonatomic) long volume;
 @property (nonatomic, retain) NSNumber *spId;
 
 @end
