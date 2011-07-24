@@ -334,6 +334,11 @@
 	[self _switchedToDifferentView];
 }
 
+- (void)didSelectVideos{
+	segmentedControl.hidden = YES;
+	[self _switchedToDifferentView];
+}
+
 #pragma mark -
 #pragma mark private methods
 

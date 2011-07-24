@@ -11,11 +11,17 @@
 // COMMANDS
 extern NSString const * kDAAPLoginCommand;
 extern NSString const * kDAAPLogoutCommand;
+extern NSString const * kDAAPUpdateCommand;
 extern NSString const * kDAAPContentCodesCommand;
 extern NSString const * kDAAPServerInfoCommand;
 extern NSString const * kDAAPDatabasesCommand;
-extern NSString const * kDACPControlCommand;
 extern NSString const * kDAAPContainersSubCommand;
+extern NSString const * kDACPControlCommand;
+extern NSString const * kDACPStatusSubCommand;
+
+// COMMANDS PARAMS
+extern NSString const * kDAAPParamSessionId;
+extern NSString const * kDAAPParamRevisionNum;
 
 // METADATAS
 extern NSString const * kDMAPitemId;
@@ -201,6 +207,7 @@ extern NSString const * kITunesJukeboxCurrent;
 @property (nonatomic) int sessionId;
 @property (nonatomic) NSInteger databaseId;
 
+
 // designated initializer
 - (id)initWithHost:(NSString *)host port:(NSString *)port andSessionId:(int)theSessionId;
 
@@ -209,12 +216,17 @@ extern NSString const * kITunesJukeboxCurrent;
 // ---------------------------------
 - (NSURL *)createLoginRequestWithPairingGUID:(NSString *)GUID;
 - (NSURL *)createLogoutRequest;
+- (NSURL *)createServerInfoRequest;
+- (NSURL *)createContentCodesRequest;
 - (NSURL *)createDBRequest;
+
+
 // containers, groups and items are queried on the database
 - (NSURL *)createContainerRequestWithMeta:(NSArray *)metas;
-- (NSURL *)createGroupRequest;
-- (NSURL *)createItemsRequest;
-- (NSURL *)createUpdateRequest;
+- (NSURL *)createGroupRequestWithMeta:(NSArray *)metas;
+- (NSURL *)createItemsRequestWithMeta:(NSArray *)metas inContainer:(int)containerId;
+- (NSURL *)createUpdateRequestWithRevisionNumber:(int)updateRevisionNumber;
+- (NSURL *)createStatusRequestWithRevisionNumber:(int)statusRevisionNumber;
 
 // DACP commands
 - (NSURL *)createQuery;

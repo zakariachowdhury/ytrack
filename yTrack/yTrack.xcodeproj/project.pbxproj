@@ -80,6 +80,9 @@
 		6B7AE96F1204EB3000F18900 /* PodcastTracksDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7AE96E1204EB3000F18900 /* PodcastTracksDatasource.m */; };
 		6B7D940611A998C7002465AA /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D940511A998C7002465AA /* SessionManager.m */; };
 		6B7D954111A9D2A0002465AA /* DAAPResponseadbs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D954011A9D2A0002465AA /* DAAPResponseadbs.m */; };
+		6B9745F913CA8F20009F1686 /* SpeakerCustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B9745F613CA8F20009F1686 /* SpeakerCustomCellView.xib */; };
+		6B9745FA13CA8F20009F1686 /* SpeakerCustomCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9745F713CA8F20009F1686 /* SpeakerCustomCellView.m */; };
+		6B9745FD13CAF7ED009F1686 /* VideosDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9745FC13CAF7ED009F1686 /* VideosDatasource.m */; };
 		6B9D6D5812177C9E00D486DF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D6D5612177C9E00D486DF /* back.png */; };
 		6B9D6D5912177C9E00D486DF /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D6D5712177C9E00D486DF /* list.png */; };
 		6BA2F9FB11A4E63B00427C2F /* LibrariesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2F9F911A4E63B00427C2F /* LibrariesViewController.m */; };
@@ -144,8 +147,6 @@
 		6BEA820911ABD04500426E9E /* DAAPResponseapso.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEA820811ABD04500426E9E /* DAAPResponseapso.m */; };
 		6BEB94D413CA7D5D0071FB15 /* AirplaySpOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEB94D213CA7D5D0071FB15 /* AirplaySpOff.png */; };
 		6BEB94D513CA7D5D0071FB15 /* AirplaySpOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEB94D313CA7D5D0071FB15 /* AirplaySpOn.png */; };
-		6BEB94D913CA7D7F0071FB15 /* SpeakerCustomCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEB94D713CA7D7F0071FB15 /* SpeakerCustomCellView.m */; };
-		6BEB94DA13CA7D7F0071FB15 /* SpeakerCustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BEB94D813CA7D7F0071FB15 /* SpeakerCustomCellView.xib */; };
 		6BEE7388120AA95200B3B8D3 /* NowPlayingCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE7387120AA95200B3B8D3 /* NowPlayingCustomCell.xib */; };
 		6BEE738D120AB0A000B3B8D3 /* NowPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE738C120AB0A000B3B8D3 /* NowPlaying.png */; };
 		6BEE7392120AB14700B3B8D3 /* NowPlayingCustomCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEE7391120AB14700B3B8D3 /* NowPlayingCustomCellViewController.m */; };
@@ -288,6 +289,11 @@
 		6B7D940511A998C7002465AA /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionManager.m; sourceTree = "<group>"; };
 		6B7D953F11A9D2A0002465AA /* DAAPResponseadbs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAPResponseadbs.h; sourceTree = "<group>"; };
 		6B7D954011A9D2A0002465AA /* DAAPResponseadbs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAPResponseadbs.m; sourceTree = "<group>"; };
+		6B9745F613CA8F20009F1686 /* SpeakerCustomCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakerCustomCellView.xib; sourceTree = "<group>"; };
+		6B9745F713CA8F20009F1686 /* SpeakerCustomCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerCustomCellView.m; sourceTree = "<group>"; };
+		6B9745F813CA8F20009F1686 /* SpeakerCustomCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCustomCellView.h; sourceTree = "<group>"; };
+		6B9745FB13CAF7EC009F1686 /* VideosDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideosDatasource.h; sourceTree = "<group>"; };
+		6B9745FC13CAF7ED009F1686 /* VideosDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideosDatasource.m; sourceTree = "<group>"; };
 		6B9D6D5612177C9E00D486DF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		6B9D6D5712177C9E00D486DF /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		6BA2F9F811A4E63B00427C2F /* LibrariesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrariesViewController.h; sourceTree = "<group>"; };
@@ -376,9 +382,6 @@
 		6BEA820811ABD04500426E9E /* DAAPResponseapso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DAAPResponseapso.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6BEB94D213CA7D5D0071FB15 /* AirplaySpOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplaySpOff.png; sourceTree = "<group>"; };
 		6BEB94D313CA7D5D0071FB15 /* AirplaySpOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AirplaySpOn.png; sourceTree = "<group>"; };
-		6BEB94D613CA7D7F0071FB15 /* SpeakerCustomCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerCustomCellView.h; sourceTree = "<group>"; };
-		6BEB94D713CA7D7F0071FB15 /* SpeakerCustomCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakerCustomCellView.m; sourceTree = "<group>"; };
-		6BEB94D813CA7D7F0071FB15 /* SpeakerCustomCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakerCustomCellView.xib; sourceTree = "<group>"; };
 		6BEE7387120AA95200B3B8D3 /* NowPlayingCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NowPlayingCustomCell.xib; sourceTree = "<group>"; };
 		6BEE738C120AB0A000B3B8D3 /* NowPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NowPlaying.png; sourceTree = "<group>"; };
 		6BEE7390120AB14700B3B8D3 /* NowPlayingCustomCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingCustomCellViewController.h; sourceTree = "<group>"; };
@@ -426,42 +429,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6BB6AA9D123637E2001C9AD9 /* UIImage+Alpha.h */,
-				6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */,
-				6BB6AA9F123637E2001C9AD9 /* UIImage+RoundedCorner.h */,
-				6BB6AAA0123637E2001C9AD9 /* UIImage+RoundedCorner.m */,
-				6BB6AA9A123637CE001C9AD9 /* UIImage+Resize.h */,
-				6BB6AA9B123637CE001C9AD9 /* UIImage+Resize.m */,
-				6B6CD6F812174C5D001F3101 /* Reachability.h */,
-				6B6CD6F912174C5D001F3101 /* Reachability.m */,
-				6B301BA512158CAA00D11017 /* NowPlaying */,
+				6B97CD5713DBFF2C00A1C306 /* MainUI */,
+				6B97CD5613DBFEE400A1C306 /* Utils */,
 				6B505FC71213BD5D00FA05B0 /* Lumberjack */,
-				6BF29EA31207F11F004233D9 /* Libraries */,
 				6BA8F20811D39C2600A621C6 /* Datasources */,
-				6B43AD9411A95C6C00DBD74E /* SynthesizeSingleton.h */,
 				6B75F7ED11A408EE00B9D841 /* DAAP */,
 				1D3623240D0F684500981E51 /* RemoteHDAppDelegate.h */,
 				1D3623250D0F684500981E51 /* RemoteHDAppDelegate.m */,
-				28D7ACF60DDB3853001CB0EB /* RemoteHDViewController.h */,
-				28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */,
-				6B75F7AF11A4063300B9D841 /* MasterViewController.h */,
-				6B75F7B011A4063300B9D841 /* MasterViewController.m */,
-				6B75F7B211A406B500B9D841 /* DetailViewController.h */,
-				6B75F7B311A406B500B9D841 /* DetailViewController.m */,
 				6B43AD9511A95C8500DBD74E /* PreferencesManager.h */,
 				6B43AD9611A95C8500DBD74E /* PreferencesManager.m */,
-				6B7D940411A998C7002465AA /* SessionManager.h */,
-				6B7D940511A998C7002465AA /* SessionManager.m */,
-				6BE275EF11AB948600F1F600 /* FDServer.h */,
-				6BE275F011AB948600F1F600 /* FDServer.m */,
-				6B008C7011B31194008E2012 /* AsyncImageView.h */,
-				6B008C7111B31194008E2012 /* AsyncImageView.m */,
-				6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */,
-				6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */,
-				6BEA5B9A11CD7EFE00E419EC /* SpeakersViewController.h */,
-				6BEA5B9B11CD7EFE00E419EC /* SpeakersViewController.m */,
-				6BF29E3A12061BB6004233D9 /* AlbumCoverViewController.h */,
-				6BF29E3B12061BB6004233D9 /* AlbumCoverViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -604,9 +580,10 @@
 		6B75F7ED11A408EE00B9D841 /* DAAP */ = {
 			isa = PBXGroup;
 			children = (
-				6BEB94D613CA7D7F0071FB15 /* SpeakerCustomCellView.h */,
-				6BEB94D713CA7D7F0071FB15 /* SpeakerCustomCellView.m */,
-				6BEB94D813CA7D7F0071FB15 /* SpeakerCustomCellView.xib */,
+				6B7D940411A998C7002465AA /* SessionManager.h */,
+				6B7D940511A998C7002465AA /* SessionManager.m */,
+				6BE275EF11AB948600F1F600 /* FDServer.h */,
+				6BE275F011AB948600F1F600 /* FDServer.m */,
 				6B02900E13C704B10091DF0B /* DAAPQuery.m */,
 				6B02900F13C704B10091DF0B /* DAAPQuery.h */,
 				6B02900B13C704710091DF0B /* NSURL+parameters.m */,
@@ -616,8 +593,6 @@
 				6B75F7F811A4094100B9D841 /* DAAPRequestReply.m */,
 				6BA4C58F13BCDF5B001DCD3F /* DAAPRequestBuilder.h */,
 				6BA4C59013BCDF5B001DCD3F /* DAAPRequestBuilder.m */,
-				6B75F81611A4094100B9D841 /* HexDumpUtility.h */,
-				6B75F81711A4094100B9D841 /* HexDumpUtility.m */,
 				6B75F82211A4094100B9D841 /* RemoteSpeaker.h */,
 				6B75F82311A4094100B9D841 /* RemoteSpeaker.m */,
 				6B75F7EE11A4090200B9D841 /* HTTP */,
@@ -711,9 +686,11 @@
 			name = DAAPMessages;
 			sourceTree = "<group>";
 		};
-		6BA8F20811D39C2600A621C6 /* Datasources */ = {
+		6B97CD5313DBFE5600A1C306 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				6BC082A712015FC0005CC7A2 /* PlaylistDatasource.h */,
+				6BC082A812015FC0005CC7A2 /* PlaylistDatasource.m */,
 				6BF6614411D41B4C00B1E47B /* DetailedTrackCustomCellView.xib */,
 				6BF6613F11D41A5A00B1E47B /* DetailedTrackCustomCellClass.h */,
 				6BF6614011D41A5A00B1E47B /* DetailedTrackCustomCellClass.m */,
@@ -730,10 +707,13 @@
 				6BEA595011CD10FA00E419EC /* AlbumsDatasource.m */,
 				6BA8F12011D3418900A621C6 /* TracksDatasource.h */,
 				6BA8F12111D3418900A621C6 /* TracksDatasource.m */,
-				6BA8F13711D3818400A621C6 /* DAAPDatasource.h */,
-				6BA8F13811D3818400A621C6 /* DAAPDatasource.m */,
-				6BC082A712015FC0005CC7A2 /* PlaylistDatasource.h */,
-				6BC082A812015FC0005CC7A2 /* PlaylistDatasource.m */,
+			);
+			name = Music;
+			sourceTree = "<group>";
+		};
+		6B97CD5413DBFE8C00A1C306 /* BooksAndPodcasts */ = {
+			isa = PBXGroup;
+			children = (
 				6B7AE8FD1204DE3600F18900 /* PodcastsBooksDatasource.h */,
 				6B7AE8FE1204DE3600F18900 /* PodcastsBooksDatasource.m */,
 				6B7AE96D1204EB3000F18900 /* PodcastTracksDatasource.h */,
@@ -741,6 +721,79 @@
 				6BAFC22C123502F200E3F9A3 /* BooksAndPodcastsCell.xib */,
 				6BAFC23A1235039900E3F9A3 /* BooksAndPodcastsCustomCellView.h */,
 				6BAFC23B1235039900E3F9A3 /* BooksAndPodcastsCustomCellView.m */,
+			);
+			name = BooksAndPodcasts;
+			sourceTree = "<group>";
+		};
+		6B97CD5513DBFEB200A1C306 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				6B9745FB13CAF7EC009F1686 /* VideosDatasource.h */,
+				6B9745FC13CAF7ED009F1686 /* VideosDatasource.m */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
+		6B97CD5613DBFEE400A1C306 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6B75F81611A4094100B9D841 /* HexDumpUtility.h */,
+				6B75F81711A4094100B9D841 /* HexDumpUtility.m */,
+				6B43AD9411A95C6C00DBD74E /* SynthesizeSingleton.h */,
+				6B008C7011B31194008E2012 /* AsyncImageView.h */,
+				6B008C7111B31194008E2012 /* AsyncImageView.m */,
+				6BD18EAE11C4A80700612A33 /* AsyncImageLoader.h */,
+				6BD18EAF11C4A80700612A33 /* AsyncImageLoader.m */,
+				6BB6AA9D123637E2001C9AD9 /* UIImage+Alpha.h */,
+				6BB6AA9E123637E2001C9AD9 /* UIImage+Alpha.m */,
+				6BB6AA9F123637E2001C9AD9 /* UIImage+RoundedCorner.h */,
+				6BB6AAA0123637E2001C9AD9 /* UIImage+RoundedCorner.m */,
+				6BB6AA9A123637CE001C9AD9 /* UIImage+Resize.h */,
+				6BB6AA9B123637CE001C9AD9 /* UIImage+Resize.m */,
+				6B6CD6F812174C5D001F3101 /* Reachability.h */,
+				6B6CD6F912174C5D001F3101 /* Reachability.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6B97CD5713DBFF2C00A1C306 /* MainUI */ = {
+			isa = PBXGroup;
+			children = (
+				6B97CD5813DC000800A1C306 /* Speakers */,
+				6BF29EA31207F11F004233D9 /* Libraries */,
+				6B301BA512158CAA00D11017 /* NowPlaying */,
+				6BF29E3A12061BB6004233D9 /* AlbumCoverViewController.h */,
+				6BF29E3B12061BB6004233D9 /* AlbumCoverViewController.m */,
+				28D7ACF60DDB3853001CB0EB /* RemoteHDViewController.h */,
+				28D7ACF70DDB3853001CB0EB /* RemoteHDViewController.m */,
+				6B75F7AF11A4063300B9D841 /* MasterViewController.h */,
+				6B75F7B011A4063300B9D841 /* MasterViewController.m */,
+				6B75F7B211A406B500B9D841 /* DetailViewController.h */,
+				6B75F7B311A406B500B9D841 /* DetailViewController.m */,
+			);
+			name = MainUI;
+			sourceTree = "<group>";
+		};
+		6B97CD5813DC000800A1C306 /* Speakers */ = {
+			isa = PBXGroup;
+			children = (
+				6B9745F613CA8F20009F1686 /* SpeakerCustomCellView.xib */,
+				6B9745F713CA8F20009F1686 /* SpeakerCustomCellView.m */,
+				6B9745F813CA8F20009F1686 /* SpeakerCustomCellView.h */,
+				6BEA5B9A11CD7EFE00E419EC /* SpeakersViewController.h */,
+				6BEA5B9B11CD7EFE00E419EC /* SpeakersViewController.m */,
+			);
+			name = Speakers;
+			sourceTree = "<group>";
+		};
+		6BA8F20811D39C2600A621C6 /* Datasources */ = {
+			isa = PBXGroup;
+			children = (
+				6B97CD5513DBFEB200A1C306 /* Video */,
+				6B97CD5413DBFE8C00A1C306 /* BooksAndPodcasts */,
+				6B97CD5313DBFE5600A1C306 /* Music */,
+				6BA8F13711D3818400A621C6 /* DAAPDatasource.h */,
+				6BA8F13811D3818400A621C6 /* DAAPDatasource.m */,
 			);
 			name = Datasources;
 			sourceTree = "<group>";
@@ -928,7 +981,7 @@
 				6B371141131DBBDA00ED4E24 /* COPYING in Resources */,
 				6BEB94D413CA7D5D0071FB15 /* AirplaySpOff.png in Resources */,
 				6BEB94D513CA7D5D0071FB15 /* AirplaySpOn.png in Resources */,
-				6BEB94DA13CA7D7F0071FB15 /* SpeakerCustomCellView.xib in Resources */,
+				6B9745F913CA8F20009F1686 /* SpeakerCustomCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,7 +1066,8 @@
 				6BA4C59113BCDF5B001DCD3F /* DAAPRequestBuilder.m in Sources */,
 				6B02900D13C704710091DF0B /* NSURL+parameters.m in Sources */,
 				6B02901013C704B10091DF0B /* DAAPQuery.m in Sources */,
-				6BEB94D913CA7D7F0071FB15 /* SpeakerCustomCellView.m in Sources */,
+				6B9745FA13CA8F20009F1686 /* SpeakerCustomCellView.m in Sources */,
+				6B9745FD13CAF7ED009F1686 /* VideosDatasource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1090,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1045,7 +1100,8 @@
 				INFOPLIST_FILE = "RemoteHD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = yTrack;
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos4.3;
 			};
 			name = Debug;
 		};
@@ -1059,7 +1115,7 @@
 				INFOPLIST_FILE = "RemoteHD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = yTrack;
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1088,8 +1144,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Fabrice Dewasmes";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fabrice Dewasmes";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = yTrack_Prefix.pch;
@@ -1097,9 +1153,9 @@
 				INFOPLIST_FILE = "RemoteHD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = yTrack;
-				PROVISIONING_PROFILE = "25242E26-3EF6-4044-9BCC-1D527606808B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25242E26-3EF6-4044-9BCC-1D527606808B";
-				SDKROOT = iphoneos5.0;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;

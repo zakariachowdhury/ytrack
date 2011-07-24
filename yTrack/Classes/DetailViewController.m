@@ -49,6 +49,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize booksDatasource;
 @synthesize podcastsDatasource;
 @synthesize playlistDatasource;
+@synthesize videosDatasource;
 
 
 #pragma mark -
@@ -290,6 +291,21 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	self.tableView.delegate = self.podcastsDatasource;
 	
 	[CurrentServer getAllPodcasts:self.podcastsDatasource];
+}
+
+- (void) changeToVideoView{
+	[self.navigationController popToRootViewControllerAnimated:NO];
+	if (self.videosDatasource == nil) {
+		VideosDatasource *d = [[VideosDatasource alloc] init];
+		self.videosDatasource = d;
+		self.videosDatasource.navigationController = self.navigationController;
+		self.videosDatasource.delegate = self;
+		[d release];
+	}
+	self.tableView.dataSource = self.videosDatasource;
+	self.tableView.delegate = self.videosDatasource;
+	
+	[CurrentServer getAllVideos:self.videosDatasource];
 }
 
 - (void) cancelPendingConnections{
