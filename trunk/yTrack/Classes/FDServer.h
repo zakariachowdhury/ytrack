@@ -83,6 +83,8 @@ typedef enum {
 	long long podcastsPersistentId;
 	NSInteger booksLibraryId;
 	long long booksPersistentId;
+	NSInteger moviesLibraryId;
+	long long moviesPersistentId;
 	int musr;
 	long revNum;
 	BOOL connected;
@@ -125,6 +127,8 @@ typedef enum {
 @property (nonatomic) NSInteger booksLibraryId;
 @property (nonatomic, readonly) long long booksPersistentId;
 @property (nonatomic, readonly) long long podcastsPersistentId;
+@property (nonatomic) NSInteger moviesLibraryId;
+@property (nonatomic, readonly) long long moviesPersistentId;
 
 @property (nonatomic, retain) Reachability *r;
 
@@ -166,10 +170,12 @@ typedef enum {
 - (void) getAllTracks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllBooks:(id<DAAPRequestDelegate>)aDelegate;
 - (void) getAllPodcasts:(id<DAAPRequestDelegate>)aDelegate;
+- (void) getAllVideos:(id<DAAPRequestDelegate>)aDelegate;
 - (void) playSongInLibrary:(int)songId;
 - (void) playSongInPlaylist:(long long)containermper song:(long)songId;
 - (void) playPodcast:(long long)containermper song:(long)songId; 
 - (void) playPodcast2:(int)songIndex inAlbum:(NSNumber *)albumId;
+- (void) playVideo:(long)videoId;
 - (void) playBook2:(int)songIndex inAlbum:(NSNumber *)albumId;
 - (void) playBookInLibrary:(int)bookId;
 - (void) playSongIndex:(int)songIndex inAlbum:(NSNumber *)albumId;

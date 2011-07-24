@@ -229,7 +229,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 	
 	UIImageView* imageView = [[UIImageView alloc] initWithImage:shadowedImage];
 	imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth || UIViewAutoresizingFlexibleHeight );
+    imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight );
 	[imageView setNeedsDisplay];
 	return imageView;
 }

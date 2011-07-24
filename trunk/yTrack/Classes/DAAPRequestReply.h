@@ -25,13 +25,10 @@
 #import "DAAPResponse.h"
 #import "DAAPRequest.h"
 
-#define kRequestContentCodes @"http://%@:%@/content-codes"
-#define kRequestLogin @"http://%@:%@/login?pairing-guid=0x%@"
-#define kRequestLogout @"http://%@:%@/logout?session-id=%d"
-#define kRequestServerInfo @"http://%@:%@/server-info"
+
+
 #define kRequestUpdate @"http://%@:%@/update?session-id=%d&revision-number=%d"
-#define kRequestDatabases @"http://%@:%@/databases?session-id=%d"
-#define kRequestPlayLists @"http://%@:%@/databases/%d/containers?session-id=%d&meta=dmap.itemname,dmap.itemcount,dmap.itemid,dmap.persistentid,daap.baseplaylist,com.apple.itunes.special-playlist,com.apple.itunes.smart-playlist,com.apple.itunes.saved-genius,dmap.parentcontainerid,dmap.editcommandssupported,com.apple.itunes.jukeboxcurrent,daap.songcontentdescription"
+
 #define kRequestTracksForAlbum @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbumid,daap.songalbum,daap.songartist,dmap.containeritemid,daap.songuserrating,daap.songtime,daap.songstoptime,daap.songtracknumber&type=music&sort=album&query='daap.songalbumid:%qi'"
 #define kRequestAllTracks @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid,daap.songtime&type=music&sort=name&include-sort-headers=1&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')"
 #define kRequestAllBooks @"http://%@:%@/databases/%d/groups?session-id=%d&meta=dmap.itemname,dmap.itemid,dmap.persistentid,daap.songartist,daap.songalbum,daap.songtime&type=music&group-type=albums&sort=album&include-sort-headers=1&query='com.apple.itunes.mediakind:8'"
@@ -46,9 +43,9 @@
 #define kRequestTrackArtwork @"http://%@:%@/databases/%d/items/%d/extra_data/artwork?session-id=%d&mw=%d&mh=%d"
 #define kRequestTracksForPlaylist @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid,daap.songtime&query=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')"
 #define kRequestGenres @"http://%@:%@/databases/%d/browse/genres?session-id=%d&include-sort-headers=1&filter=('com.apple.itunes.mediakind:1','com.apple.itunes.mediakind:32')+'daap.songgenre!:'"
+#define kRequestMovies @"http://%@:%@/databases/%d/containers/%d/items?session-id=%d&meta=dmap.itemname,dmap.itemid,daap.songartist,daap.songalbum,dmap.containeritemid,com.apple.itunes.has-video,daap.songdisabled,com.apple.itunes.mediakind,daap.songhasbeenplayed,daap.songtime,com.apple.itunes.content-rating&type=music&sort=name&include-sort-headers=1&query='com.apple.itunes.mediakind:2'"
 
-#define kRequestControl @"http://%@:%@/crtl-int"
-#define kRequestPlayStatusUpdate @"http://%@:%@/ctrl-int/1/playstatusUpdate?revision-number=%d&session-id=%d"
+
 #define kRequestPropertyVolume @"http://%@:%@/ctrl-int/1/getproperty?properties=dmcp.volume&session-id=%d"
 #define kRequestChangePropertyVolume @"http://%@:%@/ctrl-int/1/setproperty?dmcp.volume=%d&session-id=%d"
 #define kRequestChangePropertyVolumeForSpeaker @"http://%@:%@/ctrl-int/1/setproperty?speaker-id=%qi&dmcp.volume=%d&session-id=%d"

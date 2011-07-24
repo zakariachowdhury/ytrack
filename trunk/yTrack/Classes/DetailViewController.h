@@ -30,6 +30,7 @@
 #import "PodcastsBooksDatasource.h"
 #import "AlbumsDatasource.h"
 #import "PlaylistDatasource.h"
+#import "VideosDatasource.h"
 
 @protocol DetailDelegate
 
@@ -50,6 +51,7 @@
 	PodcastsBooksDatasource *podcastsDatasource;
 	AlbumsDatasource *albumsDatasource;
 	PlaylistDatasource *playlistDatasource;
+    VideosDatasource *videosDatasource;
 	id<DetailDelegate> delegate;
 }
 
@@ -62,6 +64,7 @@
 @property (nonatomic, retain) PodcastsBooksDatasource *booksDatasource;
 @property (nonatomic, retain) PodcastsBooksDatasource *podcastsDatasource;
 @property (nonatomic, retain) PlaylistDatasource *playlistDatasource;
+@property (nonatomic, retain) VideosDatasource *videosDatasource;
 
 - (void) display;
 - (void) didFinishLoading:(DAAPResponse *)response;
@@ -70,6 +73,7 @@
 - (void) changeToTrackView;
 - (void) changeToBookView;
 - (void) changeToPodcastView;
+- (void) changeToVideoView;
 - (void) didChangeLibrary;
 - (void) changeToPlaylistView:(int)playlistId persistentId:(long long)persistentId;
 - (void) cancelPendingConnections;

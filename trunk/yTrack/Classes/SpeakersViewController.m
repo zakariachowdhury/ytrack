@@ -29,6 +29,7 @@
 
 @interface SpeakersViewController(PrivateMethods)
 - (void) _updateVolume;
+- (void) _reload;
 @end
 
 @implementation SpeakersViewController
@@ -75,7 +76,7 @@
     [self _updateVolume];
 	[server getSpeakers:self];
     [self.tableView setSeparatorColor:[UIColor darkGrayColor]];
-    [self.tableView setRowHeight:60];
+    [self.tableView setRowHeight:70];
 }
 
 /*
@@ -130,14 +131,18 @@
     // Configure the cell...
 	RemoteSpeaker *sp = (RemoteSpeaker *)[self.speakers objectAtIndex:indexPath.row];
 	cell.spname.text = sp.speakerName;
-    cell.volume.value = (masterVolume*sp.volume)/100;
+    
+    double relativeVolume = (masterVolume*sp.volume)/100;
+    NSLog(@"spVol %ld master %ld relative %f",sp.volume, masterVolume, relativeVolume);
+    if (sp.volume == masterVolume) cell.volume.value = sp.volume;
+    else cell.volume.value = relativeVolume;
 
 	if (sp.on) {
         cell.stateButton.selected = YES;
-        cell.volume.enabled = YES;
+        cell.stateButton.userInteractionEnabled = YES;
 	} else {
-        cell.stateButton.selected = NO;
-        cell.volume.enabled = NO;
+        cell.stateButton.userInteractionEnabled = NO;
+        cell.userInteractionEnabled = YES;
 	}
 
     [cell.volume addTarget:self action:@selector(didChangeVolumeForSpeaker:) forControlEvents:UIControlEventValueChanged];
@@ -164,12 +169,13 @@
                 break;
             }
         }
-        if (controlMaster)
+        if (controlMaster){
+            [CurrentServer setVolume:slider.value];
             [CurrentServer setMasterVolume:slider.value withSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
-        else [CurrentServer setVolume:relativeVolume forSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationVolumeChanged object:nil userInfo:nil];
+            [self _updateVolume];
+        } else [CurrentServer setVolume:relativeVolume forSpeaker:[(RemoteSpeaker *)[speakers objectAtIndex:path.row] spId]];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationVolumeChanged object:nil userInfo:nil];
-    [self.tableView reloadData];
 }
 
 - (void) _updateVolume{
@@ -252,7 +258,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  /*  NSMutableArray *spList = [[NSMutableArray alloc] init];
+    NSMutableArray *spList = [[NSMutableArray alloc] init];
 	for (RemoteSpeaker *sp in self.speakers){
 		if (sp.on) {
 			[spList addObject:sp.spId];
@@ -264,7 +270,7 @@
     UIButton *button = [(SpeakerCustomCellView *)[self.tableView cellForRowAtIndexPath:indexPath] stateButton];
     if (!button.selected){
         button.selected = YES;
-        [spList addObject:num];  
+        [spList addObject:num]; 
     } else {
         [spList removeObjectIdenticalTo:num];
         button.selected = NO;
@@ -272,10 +278,13 @@
     [[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
     
 	[CurrentServer setSpeakers:spList];
-	[CurrentServer getSpeakers:self];*/
+	[CurrentServer getSpeakers:self];
 }
 
-
+- (void) _reload{
+    FDServer *server = CurrentServer;
+    [server getSpeakers:self];
+}
 // get speaker list
 -(void)didFinishLoading:(DAAPResponse *)response{
 	//BOOL shouldAnimate = ((self.speakers == nil) && (self.speakers.count < 2));
@@ -291,7 +300,7 @@
 	[self.tableView reloadData];
 	//}
 
-    [self.popover setPopoverContentSize:CGSizeMake(250, [self.speakers count]*60)];
+    [self.popover setPopoverContentSize:CGSizeMake(250, [self.speakers count]*70)];
 }
 
 #pragma mark -

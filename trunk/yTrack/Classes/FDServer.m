@@ -87,6 +87,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize musicLibraryId;
 @synthesize booksLibraryId;
 @synthesize podcastsLibraryId;
+@synthesize moviesLibraryId;
 @synthesize connected;
 @synthesize currentTrack;
 @synthesize currentAlbum;
@@ -99,6 +100,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize daapReqRep;
 @synthesize booksPersistentId;
 @synthesize podcastsPersistentId;
+@synthesize moviesPersistentId;
 @synthesize r;
 @synthesize currentResolve = _currentResolve;
 @synthesize domain = _domain;
@@ -115,6 +117,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (id) init {
 	if ((self = [super init])) {
         //[self getServerInfo];
+
     }
     return self;
 }
@@ -177,13 +180,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		} else if ([pl.aePS shortValue] == kServerBooksLibraryAEPS){
 			booksPersistentId = [pl.persistentId longLongValue];
 			self.booksLibraryId = [pl.miid intValue];
+		} else if ([pl.aePS shortValue] == kServerMoviesLibraryAEPS){
+			moviesPersistentId = [pl.persistentId longLongValue];
+			self.moviesLibraryId = [pl.miid intValue];
 		}
 	}
 	
 	[userPlaylists removeObjectAtIndex:0];
 	
 	//[self getServerInfo];
-	
+    revNum = 1;
 	// initiate server monitoring to receive action events
 	[self monitorPlayStatus];
 	
@@ -369,12 +375,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (NSArray *) getPlayLists{
 	DDLogInfo(@"FDServer-getPlayLists");
-	/*NSString *requestUrl = [NSString stringWithFormat:kRequestPlayLists,self.host,self.port,databaseId,sessionId];
-	NSLog(@"%@",requestUrl);
-	DAAPResponseaply * response = (DAAPResponseaply *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:requestUrl] ];
-	NSArray *list = [NSArray arrayWithArray:response.listing.list];
-	
-	return list;*/
 	return [NSArray arrayWithArray:userPlaylists];
 }
 
@@ -511,21 +511,27 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[daapreq release];
 }
 
+- (void) getAllVideos:(id<DAAPRequestDelegate>)aDelegate{
+    DDLogInfo(@"FDServer-getAllVideos with delegate");
+	NSString *requestUrl = [NSString stringWithFormat:kRequestMovies,self.host,self.port,databaseId,moviesLibraryId,sessionId];
+	DAAPRequestReply *daapreq = [[DAAPRequestReply alloc] init];
+	[daapreq setDelegate:aDelegate];
+	[daapreq asyncRequestAndParse:[NSURL URLWithString:requestUrl]];
+	[daapreq release];
+}
+
 #pragma mark -
 #pragma mark server monitoring
 
 - (void) monitorPlayStatus{
 	DDLogInfo(@"FDServer-monitorPlayStatus");
 	
-	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,1,sessionId];
-	if (revNum > 1) {
-		requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,revNum,sessionId];
-	}
+    NSURL *requestUrl = [requestBuilder createStatusRequestWithRevisionNumber:revNum];
 
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:4000];
+	[daapReq asyncRequestAndParse:requestUrl withTimeout:4000];
 	self.daapReqRep = daapReq;
 	[daapReq release];
 	//[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(_renewConnection:) userInfo:nil repeats:NO];
@@ -598,12 +604,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	if (revNum < 1) {
 		revNum = 1;
 	}
-	NSString *requestUrl = [NSString stringWithFormat:kRequestPlayStatusUpdate,self.host,self.port,revNum,sessionId];
-	DDLogVerbose(@"FDServer %@",requestUrl);
+	NSURL *requestUrl = [requestBuilder createStatusRequestWithRevisionNumber:revNum];
+	DDLogVerbose(@"FDServer %@",[requestUrl absoluteString]);
 	DAAPRequestReply *daapReq = [[DAAPRequestReply alloc] init];
 	
 	[daapReq setDelegate:self];
-	[daapReq asyncRequestAndParse:[NSURL URLWithString:requestUrl] withTimeout:4000];
+	[daapReq asyncRequestAndParse:requestUrl withTimeout:4000];
 	self.daapReqRep = daapReq;
 	[daapReq release];
 	DDLogVerbose(@"FDServer leaving didFinishLoading");
@@ -760,6 +766,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DAAPRequestReply request:[NSURL URLWithString:string2]];
 }
 
+- (void) playVideo:(long)videoId{
+    DDLogInfo(@"FDServer-playVideo");
+	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
+	[DAAPRequestReply request:[NSURL URLWithString:string]];
+	
+	NSString *string2 = [NSString stringWithFormat:kRequestPlayPodcast,self.host,self.port,databasePersistentId,moviesPersistentId,videoId,sessionId];
+	DDLogVerbose(@"%@",string2);
+	[DAAPRequestReply request:[NSURL URLWithString:string2]];
+}
+
 - (void) playBookInLibrary:(int)bookId{
 	DDLogInfo(@"FDServer-playBookInLibrary");
 	NSString *string = [NSString stringWithFormat:kRequestStopPlaying,self.host,self.port,sessionId];
@@ -879,10 +895,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void) getServerInfo{
 	DDLogInfo(@"FDServer-getServerInfo");
-	NSString* str = [NSString stringWithFormat:kRequestServerInfo,self.host,self.port];
-	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str]];
-	NSString* str2 = [[NSString alloc] initWithFormat:kRequestContentCodes,host,port];
-	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[NSURL URLWithString:str2]];
+	DAAPResponsemsrv *msrv = (DAAPResponsemsrv *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[requestBuilder createServerInfoRequest]];
+	DAAPResponsemccr * resp = (DAAPResponsemccr *)[DAAPRequestReply onTheFlyRequestAndParseResponse:[requestBuilder createContentCodesRequest]];
 }
 
 - (NSString *) _encodeString:(NSString *)string{

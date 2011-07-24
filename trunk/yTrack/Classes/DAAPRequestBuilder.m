@@ -13,6 +13,8 @@
 - (NSURL *)_createBaseURL;
 - (NSURL *)_createControlRequest;
 - (NSURL *)_createDAAPCommand:(NSString const *)command;
+- (NSURL *)_createDACPSubCommand:(NSString const *)subCommand;
+- (NSURL *)_createDAAPContainerRequest:(int) containerId;
 
 @property (nonatomic, copy, readwrite) NSString *host;
 @property (nonatomic, copy, readwrite) NSString *port;
@@ -24,11 +26,17 @@
 // COMMANDS
 NSString const * kDAAPLoginCommand = @"login";
 NSString const * kDAAPLogoutCommand = @"logout";
+NSString const * kDAAPUpdateCommand = @"update";
 NSString const * kDAAPContentCodesCommand = @"content-codes";
 NSString const * kDAAPServerInfoCommand = @"server-info";
 NSString const * kDAAPDatabasesCommand = @"databases";
-NSString const * kDACPControlCommand = @"crtl-int";
 NSString const * kDAAPContainersSubCommand = @"containers";
+NSString const * kDACPControlCommand = @"crtl-int";
+NSString const * kDACPStatusSubCommand = @"playstatusUpdate";
+
+// COMMANDS PARAMS
+NSString const * kDAAPParamSessionId = @"session-id";
+NSString const * kDAAPParamRevisionNum = @"revision-number";
 
 // METADATAS
 NSString const * kDMAPitemId = @"dmap.itemid";
@@ -541,29 +549,63 @@ NSString const * kITunesJukeboxCurrent = @"com.apple.itunes.jukebox-current";
 - (NSURL *)createLogoutRequest{
     return [self _createDAAPCommand:kDAAPLogoutCommand];
 }
+- (NSURL *)createServerInfoRequest{
+    return [self _createDAAPCommand:kDAAPServerInfoCommand];
+}
+
+- (NSURL *)createContentCodesRequest{
+    return [self _createDAAPCommand:kDAAPContentCodesCommand];
+}
+
 - (NSURL *)createDBRequest{
-    NSDictionary *params = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", self.sessionId] forKey:@"session-id"];
+    NSDictionary *params = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", self.sessionId] forKey:kDAAPParamSessionId];
     NSURL *url = [[self _createDAAPCommand:kDAAPDatabasesCommand] appendQuery:params];
     return url;
 }
 // containers, groups and items are queried on the database
 - (NSURL *)createContainerRequestWithMeta:(NSArray *)metas{
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d", self.sessionId],@"session-id",[metas componentsJoinedByString:@","],@"meta",nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%d", self.sessionId],kDAAPParamSessionId,
+                            [metas componentsJoinedByString:@","],@"meta",
+                            nil];
 
+    return [[self _createDAAPContainerRequest:0] appendQuery:params];
+}
+- (NSURL *)createGroupRequestWithMeta:(NSArray *)metas{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%d", self.sessionId],kDAAPParamSessionId,
+                            [metas componentsJoinedByString:@","],@"meta",
+                            nil];
     NSURL *baseURL = [self _createDAAPCommand:kDAAPDatabasesCommand];
-    NSURL *finalURL = [[baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d",databaseId]] URLByAppendingPathComponent:kDAAPContainersSubCommand];
-    
-    NSURL *url = [finalURL appendQuery:params];
+    NSURL *finalURL = [[[baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d",databaseId]]  URLByAppendingPathComponent:@"groups"] appendQuery:params];
+    return finalURL;
+}
+- (NSURL *)createItemsRequestWithMeta:(NSArray *)metas inContainer:(int)containerId{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%d", self.sessionId],kDAAPParamSessionId,
+                            [metas componentsJoinedByString:@","],@"meta",
+                            nil];
+    return [[[self _createDAAPContainerRequest:containerId] URLByAppendingPathComponent:@"items"] appendQuery:params];
+}
+
+- (NSURL *)createUpdateRequestWithRevisionNumber:(int)updateRevisionNumber{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%d", self.sessionId],kDAAPParamSessionId,
+                            [NSString stringWithFormat:@"%d", updateRevisionNumber],kDAAPParamRevisionNum,
+                            nil];
+
+    NSURL *url = [[self _createDAAPCommand:kDAAPUpdateCommand] appendQuery:params];
     return url;
 }
-- (NSURL *)createGroupRequest{
-    return nil;
-}
-- (NSURL *)createItemsRequest{
-    return nil;
-}
-- (NSURL *)createUpdateRequest{
-    return nil;
+
+- (NSURL *)createStatusRequestWithRevisionNumber:(int)statusRevisionNumber{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%d", self.sessionId],kDAAPParamSessionId,
+                            [NSString stringWithFormat:@"%d", statusRevisionNumber],kDAAPParamRevisionNum,
+                            nil];
+    
+    NSURL *url = [[self _createDACPSubCommand:kDACPStatusSubCommand] appendQuery:params];
+    return url;
 }
 
 // DACP commands
@@ -576,10 +618,25 @@ NSString const * kITunesJukeboxCurrent = @"com.apple.itunes.jukebox-current";
 }
 
 - (NSURL *)_createControlRequest{
-    return [NSURL URLWithString:kDACPControlCommand relativeToURL:[self _createBaseURL]];
+    return [NSURL URLWithString:@"1" relativeToURL:
+            [NSURL URLWithString:kDACPControlCommand relativeToURL:
+             [self _createBaseURL]]];
 }
 
 - (NSURL *)_createDAAPCommand:(NSString const *)command{
     return [NSURL URLWithString:command relativeToURL:[self _createBaseURL]];
+}
+
+- (NSURL *)_createDACPSubCommand:(NSString const *)subCommand{
+    return [NSURL URLWithString:subCommand relativeToURL:[self _createControlRequest]];
+}
+     
+- (NSURL *)_createDAAPContainerRequest:(int) containerId{
+    NSURL *baseURL = [self _createDAAPCommand:kDAAPDatabasesCommand];
+    NSURL *finalURL = [[baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d",databaseId]] URLByAppendingPathComponent:kDAAPContainersSubCommand];
+    if (containerId > 0) 
+        return [finalURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%d",containerId]];
+    else return finalURL;
+    
 }
 @end

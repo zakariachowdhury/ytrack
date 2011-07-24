@@ -30,6 +30,7 @@
 - (void)didSelectPlaylist;
 - (void)didSelectLibrary;
 - (void)didSelectBooksOrPodcasts;
+- (void)didSelectVideos;
 
 @end
 

@@ -95,7 +95,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) return 3;
+	if (section == 0) return 4;
 	else return [self.results count];
     //return [self.results count];
 	//return 1;
@@ -133,6 +133,10 @@
 			cell.imageView.image = [UIImage imageNamed:@"audiobooks.png"];
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = NSLocalizedString(@"podcasts", @"Podcasts");
+			cell.imageView.highlightedImage = [UIImage imageNamed:@"podcast-inv.png"];
+			cell.imageView.image = [UIImage imageNamed:@"podcast.png"];
+		} else if (indexPath.row == 3) {
+			cell.textLabel.text = NSLocalizedString(@"videos", @"Videos");
 			cell.imageView.highlightedImage = [UIImage imageNamed:@"podcast-inv.png"];
 			cell.imageView.image = [UIImage imageNamed:@"podcast.png"];
 		}
@@ -181,6 +185,9 @@
 		else if (indexPath.row == 2) {
 			[detailViewController changeToPodcastView];
 			[self.delegate didSelectBooksOrPodcasts];
+		} else if (indexPath.row == 3) {
+			[detailViewController changeToVideoView];
+			[self.delegate didSelectVideos];
 		}
 	} else if (indexPath.section == 1){
 		DAAPResponsemlit *playlist = [self.results objectAtIndex:indexPath.row];
